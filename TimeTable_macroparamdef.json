@@ -1,0 +1,116 @@
+{
+    "Bfp_Breite": {
+        "ParName": "Bfp_width",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_width",
+        "Min": "0",
+        "Max": "9999",
+        "Default": "2000",
+        "Input Text": "Breite",
+        "Hint": "Breite des Bildfahrplans in Pixel"
+    },
+    "Bfp_Hoehe": {
+        "ParName": "Bfp_height",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_height",
+        "Min": "0",
+        "Max": "9999",
+        "Default": "1000",
+        "Input Text": "Höhe",
+        "Hint": "Hoehe des Bildfahrplans in Pixel"
+    },
+    "Bfp_filename": {
+        "ParName": "Bfp_filename",
+        "Cnt": "1",
+        "Type": "ChooseFileName",
+        "ConfigName": "Bfp_filename",
+        "FileTypes" : "Zusi-Master-Fahrplan, .fpn ,all files, *.*",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "ParamDescription": "ZUSI Fahrplandatei auswaehlen",
+        "ParamLabelWidth": "30",
+        "ParamEntryWidth": "100",
+        "Input Text": "ZUSI Fahrplandatei",
+        "Hint": "ZUSI Fahrplandatei auswaehlen"
+    },
+    "Bfp_Startzeit": {
+        "ParName": "Bfp_Startzeit",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_start",
+        "Min": "0",
+        "Max": "23",
+        "Default": "08",
+        "Input Text": "Startstunde",
+        "Hint": "Startstunde des Bildfahrplans"
+    },
+    "Bfp_Dauer": {
+        "ParName": "Bfp_Dauer",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_duration",
+        "Min": "0",
+        "Max": "23",
+        "Default": "08",
+        "Input Text": "Stundenanzahl",
+        "Hint": "Anzahl der Stunden, die im Bildfahrplans angezeigt werden sollen"
+    },
+    "Bfp_trainfilename": {
+        "ParName": "Bfp_trainfilename",
+        "Cnt": "1",
+        "Type": "ChooseFileName",
+        "ConfigName": "Bfp_trainfilename",
+        "FileTypes" : "Zusi-Buchfahrplan, .xml ,all files, *.*",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "ParamDescription": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen",
+        "ParamLabelWidth": "30",
+        "ParamEntryWidth": "100",
+        "Input Text": "ZUSI Buchfahrplan",
+        "Hint": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen"
+    },
+    
+    
+    "Bfp_TreeView": {
+        "ParName": "Bfp_TreeView",
+        "Cnt": "1",
+        "Type": "Generic",
+        "ConfigName": "Bfp_TreeView",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "GenericMethod": "TreeView",
+        "ParamDescription": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen",
+        "ParamLabelWidth": "30",
+        "ParamEntryWidth": "100",
+        "Input Text": "ZUSI Buchfahrplan",
+        "Hint": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen"
+    },    
+    
+    "Startseite": {
+        "ParName": "Startseite",
+        "Cnt": "1",
+        "Type": "Combo",
+        "Values": [
+            "TimetablePage",
+            "StartPage"
+        ],
+        "ValuesText": [
+            "Bildfahrplan",
+            "Startseite"
+        ],
+        "ConfigName": [
+            "startpage",
+            "startpagename"
+        ],
+        "Min": "0",
+        "Max": "255",
+        "Default": "4",
+        "Input Text": "Startseite",
+        "Hint": "Seite auswählen, die als Startseite gezeigt werden soll"
+    }
+}

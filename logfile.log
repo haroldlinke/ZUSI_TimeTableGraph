@@ -1,0 +1,24 @@
+19:21:41: MLL Proggenerator started V02.89 30.11.2020
+19:21:41:  Platform: Windows-10-10.0.19041-SP0
+19:21:41: Installationfolder D:\data\Development\python\bildfahrplan\timetablegraph
+19:21:41: readConfigData
+19:21:41: ReadConfig: {'Bfp_width': 2000, 'Bfp_height': 1000, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\E2943A.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 1, 'startpagename': 'StartPage'}
+19:21:41: running in a normal Python process
+19:21:41: ReadConfig: {'Bfp_width': 2000, 'Bfp_height': 1000, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\E2943A.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 1, 'startpagename': 'StartPage'}
+19:21:42: Screenwidth: 2560 Screenheight: 1440
+19:21:42: StationsConfigurationPage - Generic
+19:21:54: SaveConfig: Bahnhof-Einstellungen - {'Bfp_width': 2000, 'Bfp_height': 1000, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\E2943A.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 1, 'startpagename': 'StartPage'}
+19:21:54: Tabselected: Start
+19:21:54: Start
+19:21:54: TabChanged  - .!notebook.!startpage
+19:22:01: Tabunselected: Start
+19:22:01: Tabselected: Bahnhof-Einstellungen
+19:22:01: TabChanged .!notebook.!startpage - .!notebook.!stationsconfigurationpage
+19:22:08: Tabunselected: Bahnhof-Einstellungen
+19:22:08: Tabselected: Bildfahrplan
+19:22:08: Bildfahrplan
+19:22:23: Cancel
+19:22:23: Cancel_without_save
+19:22:23: Cancel_without_save2
+19:22:23: Close_notification
+19:22:23: SaveConfigData
