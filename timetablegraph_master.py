@@ -85,6 +85,7 @@ class TimeTableGraphMain(tk.Tk):
         self.tooltip_var_dict = {}
         self.platform=platform.platform().upper()
         self.buttonlist= []
+        self.timetable_main=None
 
         self.fontlabel = self.get_font("FontLabel")
         self.fontspinbox = self.get_font("FontSpinbox")
@@ -106,21 +107,21 @@ class TimeTableGraphMain(tk.Tk):
         screen_height = self.winfo_screenheight()
         logging.debug("Screenwidth: %s Screenheight: %s",screen_width,screen_height)
         
-        if screen_width<1280:
-            SIZEFACTOR_width = screen_width/1280
-            window_width=screen_width
+        if screen_width<1500:
+            SIZEFACTOR_width = screen_width/1500
+            self.window_width=screen_width*0.8
         else:
-            window_width = 1280
+            self.window_width = screen_width*0.8 # 1500
         
-        if screen_height < 900:
-            window_height=screen_height
+        if screen_height < 1080:
+            self.window_height=screen_height*0.8
         else:
-            window_height=900
+            self.window_height=screen_height*0.8 #1080
         
         if self.getConfigData("pos_x") < screen_width and self.getConfigData("pos_y") < screen_height:
-            self.geometry('%dx%d+%d+%d' % (window_width,window_height,self.getConfigData("pos_x"), self.getConfigData("pos_y")))
+            self.geometry('%dx%d+%d+%d' % (self.window_width,self.window_height,self.getConfigData("pos_x"), self.getConfigData("pos_y")))
         else:
-            self.geometry("%dx%d+0+0" % (window_width,window_height))
+            self.geometry("%dx%d+0+0" % (self.window_width,self.window_height))
 
         tk.Tk.wm_title(self, "TimetableGraph " + PROG_VERSION)
 
@@ -211,16 +212,20 @@ class TimeTableGraphMain(tk.Tk):
         
         filedir = self.mainfile_dir # os.path.dirname(os.path.realpath(__file__))
         
-        #self.statusmessage = tk.Label(self, text='', fg="black",bd=1, relief="sunken", anchor="w")
-        #self.statusmessage.grid(row=1,column=1,sticky="ew")
+        self.statusmessage = tk.Label(self, text='', fg="black",bd=1, relief="sunken", anchor="w")
+        self.statusmessage.grid(row=1,column=0,sticky="ew")
         #self.statusmessage.pack(side="bottom", fill="x")
-        #self.ToolTip(self.statusmessage, text="Zeigt Meldungen und Fehler an")
+        self.ToolTip(self.statusmessage, text="Zeigt Meldungen und Fehler an")
         
         self.focus_set()
         #self.wait_visibility()
 
         self.lift()
         self.grab_set()
+        
+    def set_statusmessage(self,status_text,fg="black"):
+        logging.debug("set_statusmessage: %s",status_text)
+        self.statusmessage.configure(text=status_text,fg=fg)
 
     def get_font(self,fontname):
         font_size = self.getConfigData(fontname)
@@ -471,7 +476,6 @@ class TimeTableGraphMain(tk.Tk):
         webbrowser.open_new_tab(helppageurl)
 
     def getConfigData(self, key):
-        newkey = key
         return self.ConfigData.data.get(key,DEFAULT_CONFIG.get(key,""))
     
     def getConfigData_multiple(self, configdatakey,paramkey,index):
@@ -488,16 +492,9 @@ class TimeTableGraphMain(tk.Tk):
     def readConfigData(self):
         logging.debug("readConfigData")
         filedir = self.mainfile_dir # os.path.dirname(os.path.realpath(__file__))
-        
-        #self.ParamData = ConfigFile(DEFAULT_PARAM, PARAM_FILENAME,filedir=filedir)
-        #logging.debug("Read Paramdata: %s",repr(self.ParamData.data))
-                
         parent_filedir = os.path.dirname(filedir) # get the parent dirname
-        # configfile in parent dir
-        #self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=parent_filedir)
         self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=filedir)
         self.ConfigData.data.update(COMMAND_LINE_ARG_DICT) # overwrite configdata mit commandline args
-
         
         logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
         
@@ -532,16 +529,12 @@ class TimeTableGraphMain(tk.Tk):
                 
             except BaseException as e:
                 logging.debug("PyInstaller handling Error %s",e)
-        
         else:
             logging.debug('running in a normal Python process')        
-        
         try:
             self.MacroDef = ConfigFile({},MACRODEF_FILENAME,filedir=filedir)
-            #logging.info(self.MacroDef.data)
             self.MacroParamDef = ConfigFile({},MACROPARAMDEF_FILENAME,filedir=filedir)
             logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
-            #logging.info(self.MacroParamDef.data)
         except BaseException as e:
             logging.debug("PyInstaller handling Error %s",e)            
         
@@ -675,7 +668,7 @@ class TimeTableGraphMain(tk.Tk):
                 valuedict[param_configname_list[0]] = value
             if param_configname_list[1] != "":
                 valuedict[param_configname_list[1]] = current_index
-        elif param_type in ["Entry","BigEntry","ChooseFileName"]:
+        elif param_type in ["Entry","BigEntry","ChooseFileName","ChooseColor","String"]:
             value = var.get()
             param_configname = paramconfig_dict.get("ConfigName",var.key)
             valuedict[param_configname] = value
@@ -1003,7 +996,7 @@ class TimeTableGraphMain(tk.Tk):
                     label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,font=self.fontlabel)
                     label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
-                    paramvar = tk.Entry(parent_frame,width=PARAMENTRWIDTH*3,font=self.fontentry)
+                    paramvar = tk.Entry(parent_frame,width=param_entry_width*3,font=self.fontentry)
                     
                     if param_value_change_event:
                         paramvar.bind("<Return>",self._key_return)
@@ -1213,20 +1206,25 @@ class TimeTableGraphMain(tk.Tk):
                             column = 0
                             row=row+1
                     
-                elif param_type == "Color": # Color value param
+                elif param_type == "ChooseColor": # Color value param
                     
-                    self.colorlabel = tk.Button(parent_frame, text=param_title, width=PARAMLABELWIDTH, height=2, wraplength=PARAMLABELWRAPL,relief="raised", background=param_default,borderwidth=1,command=self.choosecolor,font=self.fontbutton)
+                    self.colorlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=2, padx=2, pady=2, wraplength=PARAMLABELWRAPL,relief="raised", background=param_default,borderwidth=1,font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosecolor(macrokey=macrokey,paramkey=paramkey))
                     #label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,bg=param_default,borderwidth=1)
                     self.colorlabel.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(self.colorlabel, text=param_tooltip)
                     
-                    paramvar = tk.Entry(parent_frame,width=PARAMENTRWIDTH,font=self.fontentry)
+                    paramvar_strvar = tk.StringVar()
+                    paramvar_strvar.set("")                    
+                    paramvar = tk.Entry(parent_frame,width=PARAMENTRWIDTH,font=self.fontentry,textvariable=paramvar_strvar)
                     paramvar.delete(0, 'end')
                     paramvar.insert(0, param_default)
                     paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
-                    paramvar.key = paramkey
+                    paramvar_strvar.key = paramkey
+                    paramvar_strvar.macro = macro
+                    paramvar_strvar.button = self.colorlabel
+                    paramvar_strvar.trace_add("write", lambda nm, indx, mode,macrokey=macro,paramkey=paramkey: self.colorvar_changed(nm,indx,mode,macrokey=macrokey,paramkey=paramkey)) #self.colorvar_changed)
                 
-                    self.set_macroparam_var(macro, paramkey, paramvar)                
+                    self.set_macroparam_var(macro, paramkey, paramvar_strvar)                
         
                     column = column + deltacolumn
                     if column > maxcolumns:
@@ -1235,7 +1233,7 @@ class TimeTableGraphMain(tk.Tk):
                         
                 elif param_type == "ChooseFileName": # parameter AskFileName
                     
-                    self.filechooserlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=2, padx=2, pady=2, wraplength=PARAMLABELWRAPL,font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosefilename(macrokey=macrokey,paramkey=paramkey))
+                    self.filechooserlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=2, padx=2, pady=2, wraplength=PARAMLABELWRAPL, font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosefilename(macrokey=macrokey,paramkey=paramkey))
                     #label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,bg=param_default,borderwidth=1)
                     self.filechooserlabel.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=10, pady=10)
                     self.ToolTip(self.filechooserlabel, text=param_tooltip)
@@ -1328,11 +1326,14 @@ class TimeTableGraphMain(tk.Tk):
                     if column > maxcolumns:
                         column = 0
                         row=row+deltarow
+                        
                 elif param_type == "Generic": # call generic function
                     logging.info ("%s - %s",macro,param_type)
                                         
                     generic_widget_frame = ttk.Frame(parent_frame)
                     generic_widget_frame.grid(row=row,column=column ,columnspan=6,sticky='nesw', padx=0, pady=0)
+                    generic_widget_frame.columnconfigure(0,weight=1)
+                    generic_widget_frame.rowconfigure(0,weight=1)
                     
                     generic_method_name = paramconfig_dict.get("GenericMethod","")
                     
@@ -1357,7 +1358,6 @@ class TimeTableGraphMain(tk.Tk):
             if maxcolumns > 6:        
                 seplabel=tk.Label(parent_frame, text="",width=90,height=1)
                 seplabel.grid(row=row+2, column=0, columnspan=10,sticky='ew', padx=2, pady=2)
-    
     
     def create_macroparam_frame(self,parent_frame, macro, extratitleline=False,maxcolumns=5, startrow=0, minrow=4,style="MACROPage",generic_methods={}):
         
@@ -1451,23 +1451,40 @@ class TimeTableGraphMain(tk.Tk):
         
         (r, g, b) = (hex_str[1:3], hex_str[3:5], hex_str[5:])
         return '#000000' if 1 - (int(r, 16) * 0.299 + int(g, 16) * 0.587 + int(b, 16) * 0.114) / 255 < 0.5 else '#ffffff'        
-   
     
-    def setgroupcolor(self,color):
+    def setbuttoncolor(self,color):
         color_fg = self.determine_fg_color(color)
         self.colorlabel.config(bg=color,fg=color_fg)
         paramvar = self.macroparams_var["Group"]["Group_Colour"]
         paramvar.delete(0, 'end')
         paramvar.insert(0, color)    
     
-    def choosecolor(self):
-        paramvar = self.macroparams_var["Group"]["Group_Colour"]
+    def choosecolor(self,paramkey="",macrokey=""):
+        paramvar = self.macroparams_var[macrokey][paramkey]
         old_color=paramvar.get()        
         color = colorchooser.askcolor(color=old_color)
         
         if color:
             colorhex = color[1]
-            self.setgroupcolor(colorhex)    
+            color_fg = self.determine_fg_color(colorhex)
+            paramvar.button.config(bg=colorhex,fg=color_fg)
+            paramvar = self.macroparams_var[macrokey][paramkey]
+            paramvar.set(colorhex)
+            #paramvar.delete(0, 'end')
+            #paramvar.insert(0, colorhex) 
+    
+    def colorvar_changed(self,var,indx,mode,macrokey="",paramkey=""):
+        #print("colorvar_changed",var,indx,mode)
+        paramvar = self.macroparams_var[macrokey][paramkey]
+        color = paramvar.get()
+        buttonlabel=paramvar.button
+        if color == "":
+            color="black"
+        try:
+            buttonlabel.configure(background=color)
+        except:
+            buttonlabel.configure(background="black")
+
 
     def choosefilename(self,paramkey="",macrokey=""):
         paramvar_strvar = self.macroparams_var[macrokey][paramkey]

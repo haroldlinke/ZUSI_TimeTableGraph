@@ -134,8 +134,8 @@ class ConfigurationPage(tk.Frame):
         self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
         self.update_button.pack(side="right", padx=10)
         
-        self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
-        self.update_tree_button.pack(side="left", padx=10)        
+        #self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
+        #self.update_tree_button.pack(side="left", padx=10)        
         
         self.tree_frame = ttk.Frame(self.main_frame)
 
@@ -185,6 +185,7 @@ class ConfigurationPage(tk.Frame):
         #self.controller.currentTabClass = self.tabClassName
         #self.ledmaxcount.set(self.controller.get_maxLEDcnt())
         logging.debug("Tabselected: %s",self.tabname)
+        self.controller.set_statusmessage("")
         self.store_old_config()
     
     def tabunselected(self):
@@ -251,12 +252,10 @@ class ConfigurationPage(tk.Frame):
             curItem_value = {}
             
         selectedtrain=curItem_value.get("text","")
-        
-        
         param_values_dict = self.get_macroparam_var_values(self.tabClassName)
 
         self.setConfigDataDict(param_values_dict)
-        
+
         self.store_old_config()
         self.controller.SaveConfigData()
 

@@ -176,18 +176,46 @@ class TimeTablePage(tk.Frame):
         except: 
             print("Error while generating png-file- Ghostscript not found")
             pass
+        
+    def create_train_type_to_color_dict(self):
+        self.train_type_to_color_dict = {}
+        config_traintype_to_color_dict = self.getConfigData("Bfp_TrainTypeColors")
+        
+        for i,value_dict in config_traintype_to_color_dict.items():
+            print(repr(value_dict))
+            traintype = value_dict.get("Bfp_TrainType","")
+            traintypecolor = value_dict.get("Bfp_TrainTypeColor","black")
+            if traintype != "":
+                self.train_type_to_color_dict[traintype]=traintypecolor
+        
 
     def tabselected(self):
         logging.debug("Tabselected: %s",self.tabname)
         #self.controller.currentTabClass = self.tabClassName
         logging.info(self.tabname)
+        self.controller.set_statusmessage("Bildfahrplanerstellung gestartet - bitte etwas Geduld")
+        self.controller.update()
         self.canvas_width = self.getConfigData("Bfp_width")
         self.canvas_height = self.getConfigData("Bfp_height")
-        
         fpl_filename = self.getConfigData("Bfp_filename")
         xml_filename = self.getConfigData("Bfp_trainfilename")
         starthour = self.getConfigData("Bfp_start")
         duration = self.getConfigData("Bfp_duration")
+        self.create_train_type_to_color_dict()
+        self.timetable_main.set_zuggattung_to_color(self.train_type_to_color_dict)
+        
+        if fpl_filename == "":
+            self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
+            return
+        if xml_filename == "":
+            self.controller.set_statusmessage("Kein ZUSI Buchfahrplann eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
+            return
+        if starthour == "":
+            self.controller.set_statusmessage("Keine Startzeit für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
+            return
+        if duration == "":
+            self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
+            return        
         
         self.timetable_main.create_zusi_zug_liste(fpl_filename)
         
@@ -201,8 +229,8 @@ class TimeTablePage(tk.Frame):
             old_height =self.canvas.winfo_reqheight()
             old_width = self.canvas.winfo_reqwidth()
             
-            if (old_height-4 != self.canvas_height) or (old_width-4 != self.canvas_width):
-                self.timetable_main.resize_canvas(self.canvas_width,self.canvas_height)
+            #if (old_height-4 != self.canvas_height) or (old_width-4 != self.canvas_width):
+            self.timetable_main.resize_canvas(self.canvas_width,self.canvas_height,starthour,duration)
     
     def tabunselected(self):
         logging.debug("Tabunselected: %s",self.tabname)

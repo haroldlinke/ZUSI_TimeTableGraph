@@ -1,4 +1,36 @@
 {
+    "Bfp_CanvasSize": {
+        "ParName": "Bfp_CanvasSize",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Größe des Bildfahrplans",
+        "Hint": "Größe des Bildfahrplans",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_Breite",
+            "Bfp_Hoehe"
+        ]
+    },
+    "Bfp_TimeRange": {
+        "ParName": "Bfp_TimeRange",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Bildfahrplan-\nzeitraum",
+        "Hint": "Zeitraum, den der Bildfahrplan abdeckt",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_Startzeit",
+            "Bfp_Dauer"
+        ]
+    },
     "Bfp_Breite": {
         "ParName": "Bfp_width",
         "Cnt": "1",
@@ -55,7 +87,7 @@
         "Min": "0",
         "Max": "23",
         "Default": "08",
-        "Input Text": "Stundenanzahl",
+        "Input Text": "Dauer in Stunden",
         "Hint": "Anzahl der Stunden, die im Bildfahrplans angezeigt werden sollen"
     },
     "Bfp_trainfilename": {
@@ -73,8 +105,6 @@
         "Input Text": "ZUSI Buchfahrplan",
         "Hint": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen"
     },
-    
-    
     "Bfp_TreeView": {
         "ParName": "Bfp_TreeView",
         "Cnt": "1",
@@ -89,7 +119,64 @@
         "ParamEntryWidth": "100",
         "Input Text": "ZUSI Buchfahrplan",
         "Hint": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen"
-    },    
+    },
+    "Bfp_TrainTypeColors": {
+        "ParName": "Bfp_TrainTypeColors",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "10",
+        "Input Text": "Farbeinstellungen für Zuggattungen",
+        "Hint": "Farbeinstellungen für Zuggattungen",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_TrainType",
+            "Bfp_TrainTypeColor"
+        ]
+    },
+    "Bfp_TrainType": {
+        "ParName": "Bfp_TrainType",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "3",
+        "Input Text": "Zuggattung",
+        "ParamEntryWidth": "3",
+        "Hint": "Bezeichnung der Zuggattung, für die die Farbe verwendet werden soll",
+        "Implementation comment": ""
+    },
+    "Bfp_TrainTypeColor": {
+        "ParName": "Bfp_TrainTypeColor",
+        "Cnt": "1",
+        "Type": "ChooseColor",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "black",
+        "ParamEntryWidth": "3",
+        "Values": ["Keine",
+            "red",
+            "green",
+            "blue",
+            "black",
+            "yellow",
+            "grey"
+        ],
+        "ValuesText": [
+            "Keine",
+            "red",
+            "green",
+            "blue",
+            "black",
+            "yellow",
+            "grey"
+            ],
+        "Input Text": "Farbe",
+        "Hint": "Farbe, die für die Zuggattung verwendet werden soll",
+        "Implementation comment": ""
+    },
     
     "Startseite": {
         "ParName": "Startseite",

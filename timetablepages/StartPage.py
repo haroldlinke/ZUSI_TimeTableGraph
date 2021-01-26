@@ -107,10 +107,20 @@ class StartPage(tk.Frame):
         label = ttk.Label(title_frame, text=self.title, font=LARGE_FONT)
         label.pack(padx=5,pady=(5,5))
 
-        config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=4,startrow =1,style="CONFIGPage")        
+        #config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=4,startrow=1,style="CONFIGPage")        
 
         text_frame = ttk.Frame(self.main_frame,relief="ridge", borderwidth=2)
         #text = macrodata.get("Ausführliche Beschreibung","")
+        
+        photo_filename = macrodata.get("Photo","")
+                
+        if photo_filename != "":
+            filedir = os.path.dirname(os.path.realpath(__file__))
+            self.photofilepath = os.path.join(filedir, photo_filename)
+            text1 = tk.Text(text_frame, bg=self.cget('bg'),relief="flat",width=200)
+            self.photo=tk.PhotoImage(file=self.photofilepath)
+            text1.insert(tk.END,'\n')
+            text1.image_create(tk.END, image=self.photo)        
 
         content = macrodata.get("Content",{})
         
@@ -137,7 +147,7 @@ class StartPage(tk.Frame):
         # scroll_main_frame => scroll_main_frame.interior => main_frame
         self.scroll_main_frame.grid(row=0,column=0,sticky="nesw")
         self.scroll_main_frame.grid_columnconfigure(0,weight=1)
-        self.scroll_main_frame.grid_rowconfigure(0,weight=1)
+        self.scroll_main_frame.grid_rowconfigure(1,weight=1)
         
         self.scroll_main_frame.interior.grid_rowconfigure(0,weight=1)
         self.scroll_main_frame.interior.grid_columnconfigure(0,weight=1)
@@ -145,20 +155,20 @@ class StartPage(tk.Frame):
         # main_frame => title_frame, config_frame, text_frame
         self.main_frame.grid(row=0,column=0,sticky="nesw")
         self.main_frame.grid_columnconfigure(0,weight=1)
-        self.main_frame.grid_rowconfigure(2,weight=1)         
+        self.main_frame.grid_rowconfigure(1,weight=1)         
         # place frames in main_frame
         title_frame.grid(row=0, column=0, pady=10, padx=10)
-        config_frame.grid(row=1, column=0, pady=10, padx=10)
+        #config_frame.grid(row=1, column=0, pady=10, padx=10)
         text_frame.grid(row=2,column=0,padx=10, pady=0,sticky="nesw")
         text_frame.grid_columnconfigure(1,weight=1)
-        text_frame.grid_rowconfigure(0,weight=1)
+        text_frame.grid_rowconfigure(1,weight=1)
         # place widgets in text_frame => text1,text:widget, text_scroll
         #text1.pack(side=tk.LEFT,expand=0)
         #text_widget.pack(side=tk.LEFT,fill=tk.BOTH,padx=10,pady=(10,0))
         #text_scroll.pack(side=tk.LEFT,fill=tk.Y)
-        #text1.grid(row=0,column=0,sticky="ns")
-        text_widget.grid(row=0,column=1,sticky=("nesw"),padx=10,pady=10)
-        text_scroll.grid(row=0,column=2,sticky=("ns"))                
+        text1.grid(row=0,column=0,sticky="nesw")
+        text_widget.grid(row=1,column=0,sticky=("nesw"),padx=10,pady=10)
+        text_scroll.grid(row=1,column=1,sticky=("ns"))                
 
 
        
