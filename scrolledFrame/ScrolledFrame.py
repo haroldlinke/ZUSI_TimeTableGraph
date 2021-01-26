@@ -148,18 +148,13 @@ class ScrolledFrame(Frame):
 
         # create a canvas object and a vertical scrollbar for scrolling it
         vscrollbar = Scrollbar(self, orient=VERTICAL)
-        #vscrollbar.pack(fill=Y, side=RIGHT, expand=FALSE)
         vscrollbar.grid(row=0,column=1,sticky="ns")
-        hscrollbar = Scrollbar(self, orient=HORIZONTAL)
-        #hscrollbar.pack(fill=X, side=BOTTOM, expand=FALSE)        
+        hscrollbar = Scrollbar(self, orient=HORIZONTAL) 
         hscrollbar.grid(row=1,column=0,sticky="ew")        
         self.canvas = Canvas(self, bd=0, highlightthickness=0,yscrollcommand=vscrollbar.set,xscrollcommand=hscrollbar.set )
-        #self.canvas.pack(side=LEFT, fill=BOTH, expand=TRUE)
-        #self.canvas.pack(side=TOP,fill=BOTH, expand=TRUE)
         self.canvas.grid(row=0,column=0,sticky="nesw")
         self.grid_columnconfigure(0,weight=1)
         self.grid_rowconfigure(0,weight=1)
-
         vscrollbar.config(command=self.canvas.yview)
         hscrollbar.config(command=self.canvas.xview)
         self.focused = False
@@ -186,18 +181,14 @@ class ScrolledFrame(Frame):
         # also updating the scrollbar
     def _configure_interior(self,event):
         # update the scrollbars to match the size of the inner frame
-        
         size = (self.interior.winfo_reqwidth(), self.interior.winfo_reqheight())
-        #logging.debug("Configure_interior: %s",size)
         self.canvas.config(scrollregion="0 0 %s %s" % size)
         if self.interior.winfo_reqwidth() != self.canvas.winfo_width():
             # update the canvas's width to fit the inner frame
-            #logging.debug("Configure_Interior: set canvas width= %s",self.interior.winfo_reqwidth())
             self.canvas.config(width=self.interior.winfo_reqwidth())
         
         if self.interior.winfo_reqheight() != self.canvas.winfo_height():
             # update the canvas's width to fit the inner frame
-            #logging.debug("Configure_Interior: set canvas height= %s",self.interior.winfo_reqheight())
             self.canvas.config(height=self.interior.winfo_reqheight())
         pass
     
@@ -222,32 +213,3 @@ class ScrolledFrame(Frame):
     
     def _on_enter(self,event): 
         self.focused = True
-    
-
-if __name__ == "__main__":
-
-    class SampleApp(Tk):
-        def __init__(self, *args, **kwargs):
-            root = Tk.__init__(self, *args, **kwargs)
-
-
-            self.frame = ScrolledFrame(root)
-            self.frame.grid(row=0,column=0)
-            self.frame.grid_columnconfigure(0,weight=1)
-            self.frame.grid_rowconfigure(0,weight=1)
-            self.grid_columnconfigure(0,weight=1)
-            self.grid_rowconfigure(0,weight=1)            
-            
-            self.label = Label(text="Shrink the window to activate the scrollbar.")
-            self.label.grid(row=1,column=0)
-            buttons = []
-            for i in range(100):
-                buttons.append(Button(self.frame.interior, text="Button                                                                                   " + str(i)))
-                buttons[-1].pack()
-                
-    format = "%(asctime)s: %(message)s"
-
-    logging.basicConfig(format=format, level=logging.DEBUG,datefmt="%H:%M:%S")
-
-    app = SampleApp()
-    app.mainloop()

@@ -115,8 +115,7 @@ class TimeTableGraphCommon():
         def __init__(self, controller, showTrainTimes, height, width):
                 self.controller = controller
                 self.showTrainTimes = showTrainTimes
-                self.ZugGattung_to_Color = { "D" : "red",
-                                             "E" : "blue"}
+                self.ZugGattung_to_Color = {}
                 self.trainTypeList = [] #["D","E"]
                 
                 # init timetable with dummy data
@@ -228,6 +227,10 @@ class TimeTableGraphCommon():
 
                 self.sizeMinute = 0.0
                 self.throttleX = 0.0
+                
+        def set_zuggattung_to_color(self,traintype_to_color_dict):
+
+                self.ZugGattung_to_Color = traintype_to_color_dict.copy()
 
         def doPaint (self,canvas,starthour=12,duration=7):
                 self.tt_canvas = canvas
@@ -284,7 +287,10 @@ class TimeTableGraphCommon():
 
         def drawHours(self):
                 currentHour = self.startHour
-                hourWidth = self.graphWidth / (self.duration)
+                try:
+                        hourWidth = self.graphWidth / (self.duration)
+                except:
+                        print("error")
                 self.hourOffset = 0 #hourWidth / 2
                 self.hourgrid = []
                 
@@ -321,10 +327,12 @@ class TimeTableGraphCommon():
 #     * in the segment, it is included.  Most trains only use a single segment.
 
         def drawTrains(self):
-                self.baseTime = self.startHour * 60;
-                self.sizeMinute = self.graphWidth / ((self.duration) * 60);
-                self.throttleX = 0;
+                self.baseTime = self.startHour * 60
+                self.sizeMinute = self.graphWidth / ((self.duration) * 60)
+                self.throttleX = 0
+                self.default_trainColor = self.ZugGattung_to_Color.get("*","black")
                 for trainidx in self.trains:
+                        self.tt_canvas.update()
                         train = self.trains.get(trainidx,{})
                         self.trainType = train.get("TrainType","X-Deko")
                         self.trainName = self.trainType + train.get("TrainName","0000")
@@ -332,13 +340,16 @@ class TimeTableGraphCommon():
                         self.trainEngine = train.get("TrainEngine","")
                         if (self.trainTypeList != [] and not self.trainType in self.trainTypeList):
                                 break
-                        self.trainColor = train.get("Color","black")
+                        self.trainColor = self.ZugGattung_to_Color.get(self.trainType,self.default_trainColor)
+                        if self.trainColor == "": 
+                                continue
                         self.trainLine = []
                         self.stops = train.get("Stops",{});
                         self.stopCnt = len(self.stops);
                         self.firstStop = True;
                         self.lastStop = False;
                         self.prevStop = None
+                        self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan für Zug - "+self.trainName) 
             
                         for self.stopIdx,stop_dict in self.stops.items():
                                 self.arriveTime = stop_dict.get("ArriveTime",0)
@@ -358,8 +369,9 @@ class TimeTableGraphCommon():
                                 self.drawLine(self.stopStation);
                                 if (self.lastStop):
                                                 #// At the end, do the end process
-                                                self.setEnd(self.stopStation, False);
-                                                break;
+                                                self.setEnd(self.stopStation, False)
+                                                break
+                self.controller.set_statusmessage("") 
 
 #    /**
 #        * Draw a train name on the graph.
@@ -889,12 +901,10 @@ class Timetable_main(Frame):
                 self.canvas = canvas
                 self.canvas_width = self.controller.getConfigData("Bfp_width")
                 self.canvas_height = self.controller.getConfigData("Bfp_height")
-        
                 self.fpl_filename = self.controller.getConfigData("Bfp_filename")
                 self.xml_filename = self.controller.getConfigData("Bfp_trainfilename")
                 self.starthour = self.controller.getConfigData("Bfp_start")
-                self.duration = self.controller.getConfigData("Bfp_duration")                
-        
+                self.duration = self.controller.getConfigData("Bfp_duration")
                 self.initUI()
                 
         def open_zusi_trn_file(self, trn_filepathname):
@@ -926,7 +936,8 @@ class Timetable_main(Frame):
         def open_zusi_master_schedule(self,fpl_filename=""):
                 #fpl_filename = r"D:\Zusi3\_ZusiData\Timetables\Deutschland\Ruhrtalbahn\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn"
                 #fpl_filename = filedialog.askopenfilename(title="Select Zusi Master Schedule",filetypes=(("Zusi-Master-Fahrplan","*.fpn"),("all files","*.*")))
-                                
+                self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpl_filename)
+                self.controller.update()
                 if fpl_filename == "": return
                 
                 fpl_path, fpl_file = os.path.split(fpl_filename)
@@ -944,7 +955,8 @@ class Timetable_main(Frame):
                         trn_filename = datei_dict.get("@Dateiname")
                         trn_filename_comp = trn_filename.split("\\")
                         trn_file_and_path = os.path.join(fpl_path,trn_filename_comp[-2],trn_filename_comp[-1])
-                        
+                        self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+trn_file_and_path)
+                        self.controller.update()
                         self.open_zusi_trn_file(trn_file_and_path)
         
         def get_station_list(self,trn_zug_dict):
@@ -1039,70 +1051,45 @@ class Timetable_main(Frame):
                 zusi_zug_list_main_dict={}
                 zusi_zug_list_main_dict["Trainlist"]=self.zusi_zuglist_dict
                 zusi_zug_list_main_dict["XML_Filenamelist"]=self.zusi_zuglist_xmlfilename_dict
-
+                #self.timetable.set_zuggattung_to_color(self.traintype_to_color_dict)
                 return zusi_zug_list_main_dict
                 
                 
-        def resize_canvas(self,width,height):
+        def resize_canvas(self,width,height,starthour,duration):
                 self.canvas.delete("all")
+                self.canvas.update()
                 self.canvas.config(width=width,height=height,scrollregion=(0,0,width,height))
-                self.timetable.doPaint(self.canvas)
+                self.timetable.set_zuggattung_to_color(self.traintype_to_color_dict)
+                self.timetable.doPaint(self.canvas,starthour=starthour,duration=duration)
+               
                 
         def redo_fpl_and_canvas(self,width,height, starthour=8, duration=9,fpl_filename="", xml_filename = ""):
                 if fpl_filename == "":
                         fpl_filename=r"D:\Zusi3\_ZusiData\Timetables\Deutschland\Ruhrtalbahn\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn"
                 if xml_filename == "":
                         xml_filename = r"D:\Zusi3\_ZusiData\Timetables\Deutschland\Ruhrtalbahn\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\D843.timetable.xml"
-                
                 self.canvas.delete("all")
                 self.canvas.config(width=width,height=height,scrollregion=(0,0,width,height))
                 self.canvas.update()
+                self.controller.set_statusmessage("Erzeuge Bahnhofsliste - "+xml_filename)
+                self.controller.update()
                 print('Input File master train timetable, %s.' % xml_filename)
                 with open(xml_filename,mode="r",encoding="utf-8") as fd:
                         xml_text = fd.read()
                         zusi_timetable_dict = parse(xml_text)
 
                 self.timetable = TimeTableGraphCommon(self.controller, True, height, width)
+                self.timetable.set_zuggattung_to_color(self.traintype_to_color_dict)
                 #define stops via selected train-timetable
                 self.timetable.convert_zusi_tt_to_timetable_train_x(zusi_timetable_dict,define_stations=True)
                 self.open_zusi_master_schedule(fpl_filename=fpl_filename)
                 self.timetable.doPaint(self.canvas,starthour=starthour,duration=duration)                
 
-    
+        def set_zuggattung_to_color(self,traintype_to_color_dict):
+                self.traintype_to_color_dict = traintype_to_color_dict
+                
         def initUI(self):
-    
-                #self.master.title("Timetable")
-                #self.pack(fill=BOTH, expand=1)
-        
-                #canvas = Canvas(self)
-                #canvas.create_line(15, 25, 200, 25)
-                #canvas.create_line(300, 35, 300, 200, dash=(4, 2))
-                #canvas.create_line(55, 85, 155, 85, 105, 180, 55, 85)
                 showTrainTimes = True
                 height =self.canvas.winfo_reqheight()
                 width = self.canvas.winfo_reqwidth()
-                
-                #self.redo_fpl_and_canvas(width, height)
-                
 
-                #xml_filename = r"D:\Zusi3\_ZusiData\Timetables\Deutschland\Ruhrtalbahn\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\D843.timetable.xml"
-                #xml_filename = filedialog.askopenfilename(title="ZUSI Zugfahrplan",filetypes=(("Timetable","*.xml"),("all files","*.*")))
-                                
-                #if xml_filename == "": return
-        
-                #print('Input File master train timetable, %s.' % xml_filename)
-                #with open(xml_filename,mode="r",encoding="utf-8") as fd:
-                #        xml_text = fd.read()
-                #        zusi_timetable_dict = parse(xml_text)
-
-                #self.timetable = TimeTableGraphCommon(self.controller, showTrainTimes, height, width)
-                #define stops via selected train-timetable
-                #self.timetable.convert_zusi_tt_to_timetable_train_x(zusi_timetable_dict,define_stations=True)
-                
-                #self.open_zusi_master_schedule()
-
-                #self.timetable.doPaint(self.canvas)
-                
-                #self.timetable.save_as_png(canvas, xml_filename)
-        
-                #canvas.pack(fill=BOTH, expand=1)

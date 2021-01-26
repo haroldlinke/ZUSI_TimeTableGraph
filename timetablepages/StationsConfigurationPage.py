@@ -187,6 +187,7 @@ class StationsConfigurationPage(tk.Frame):
         #self.controller.currentTabClass = self.tabClassName
         #self.ledmaxcount.set(self.controller.get_maxLEDcnt())
         logging.debug("Tabselected: %s",self.tabname)
+        self.controller.set_statusmessage("")
         self.store_old_config()
     
     def tabunselected(self):
@@ -340,13 +341,6 @@ class StationsConfigurationPage(tk.Frame):
             self.max_key_width = 0
             fpl_filename = self.get_macroparam_var_val("Bfp_filename")
             #self.getConfigData("Bfp_filename")
-            if fpl_filename == "":
-                return
-            Data_main =self.controller.timetable_main.create_zusi_zug_liste(fpl_filename)
-            self.Bfp_xmlfilenamelist = Data_main.get("XML_Filenamelist",{})
-            Data = Data_main.get("Trainlist",{})
-            Data_sorted = dict(sorted(Data.items()))
-
             # Setup the Frames
             TreeFrame = ttk.Frame(parent, padding="3")
             TreeFrame.grid(row=0, column=0, sticky=tk.NSEW)
@@ -359,7 +353,16 @@ class StationsConfigurationPage(tk.Frame):
             self.tree.heading("value", text="Strecken-Bahnhöfe", anchor="w")
             #tree.column("#0", width=200, stretch=False)
             #tree.column("value", minwidth=2500, width=1000, stretch=True)
-            self.tree.grid(padx=8, pady=(8,0),sticky="nesw")            
+            self.tree.grid(padx=8, pady=(8,0),sticky="nesw")
+            
+            if fpl_filename == "":
+                return            
+            if self.controller.timetable_main:
+                Data_main =self.controller.timetable_main.create_zusi_zug_liste(fpl_filename)
+            self.Bfp_xmlfilenamelist = Data_main.get("XML_Filenamelist",{})
+            Data = Data_main.get("Trainlist",{})
+            Data_sorted = dict(sorted(Data.items()))            
+            
             self.JSONTree(self.tree, '', Data_sorted)
             TreeFrame.grid_columnconfigure(0,weight=1)
             TreeFrame.grid_rowconfigure(0,weight=1)
