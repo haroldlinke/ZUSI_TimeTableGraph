@@ -12,52 +12,28 @@
 # ***************************************************************************
 
 import tkinter as tk
-from tkinter import ttk,messagebox,filedialog, colorchooser, scrolledtext
+from tkinter import ttk,filedialog, colorchooser
 from timetablepages.configfile import ConfigFile
-from timetablepages.dictFile import readDictFromFile, saveDicttoFile
-
+from timetablepages.dictFile import saveDicttoFile
 from timetablepages.ConfigurationPage import ConfigurationPage
 from timetablepages.StationsConfigurationPage import StationsConfigurationPage
 from timetablepages.TimetablePage import TimeTablePage
 from timetablepages.StartPage import StartPage
-
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
-from timetablepages.DefaultConstants import DEFAULT_CONFIG, DEFAULT_PARAM, LARGE_FONT, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
+from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
 PARAM_FILENAME, CONFIG_FILENAME, TOOLTIPLIST, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,ScrolledFrame,HorizontalScrolledFrame
 from tkcolorpicker.limitvar import LimitVar
 from tkcolorpicker.spinbox import Spinbox
 import platform
-
-#from PIL import Image, ImageGrab
-
-from locale import getdefaultlocale
 import os
 import sys
-import time
+#import time
 import logging
 import webbrowser
 import argparse
-from datetime import datetime
+#from datetime import datetime
 
-# --- Translation - not used
-EN = {}
-FR = {}
-DE = {}
-
-try:
-    TR = DE
-    #if getdefaultlocale()[0][:2] == 'fr':
-    #    TR = FR
-    #else:
-    #    if getdefaultlocale()[0][:2] == 'en':
-    #        TR = EN
-except ValueError:
-    TR = DE
-
-def _(text):
-    """Translate text."""
-    return TR.get(text, text)
 
 # ------------------------------
 
@@ -880,6 +856,7 @@ class TimeTableGraphMain(tk.Tk):
                 param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
                 param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))
                 param_description = paramconfig_dict.get("ParamDescription","")
+                param_descLines  = int(paramconfig_dict.get("ParamDescLines","0"))
                 
                 if param_persistent:
                     configData = self.getConfigData(paramkey)
@@ -892,7 +869,8 @@ class TimeTableGraphMain(tk.Tk):
                     param_title = paramkey
                     
                 if param_description != "":
-                    paramdescriptionlabel = tk.Text(parent_frame, wrap='word', bg=self.cget('bg'), height=0, font=self.fontlabel)
+                    
+                    paramdescriptionlabel = tk.Text(parent_frame, wrap='word', height=param_descLines, bg=self.cget('bg'), font=self.fontlabel)
                     paramdescriptionlabel.delete("1.0", "end")
                     paramdescriptionlabel.insert("end", param_description)
                     paramdescriptionlabel.yview("1.0")
@@ -901,7 +879,7 @@ class TimeTableGraphMain(tk.Tk):
                     column = column + deltacolumn
                     if column > maxcolumns:
                         column = 0
-                        row=row+deltarow                    
+                        row=row+deltarow
                     
                     
                 if param_type == "": # number value param
@@ -1383,10 +1361,11 @@ class TimeTableGraphMain(tk.Tk):
         
         Macrolongdescription = macrodata.get("Ausführliche Beschreibung","")
         Macrodescription = macrodata.get("Kurzbeschreibung","")
+        Macrodescriptionlines = int(macrodata.get("MacroDescLines","5"))
         
         if Macrolongdescription =="":
             Macrolongdescription = Macrodescription
-        macroldlabel = tk.Text(macroparam_frame, wrap='word', bg=self.cget('bg'), borderwidth=2,relief="ridge",width=108,height=5,font=self.fontlabel)
+        macroldlabel = tk.Text(macroparam_frame, wrap='word', bg=self.cget('bg'), borderwidth=2,relief="ridge",width=108,height=Macrodescriptionlines,font=self.fontlabel)
         
         macroldlabel.delete("1.0", "end")
         macroldlabel.insert("end", Macrolongdescription)

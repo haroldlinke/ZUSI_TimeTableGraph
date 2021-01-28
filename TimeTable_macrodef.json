@@ -10,6 +10,7 @@
         "Kurzbeschreibung": "Einstellungsparameter",
         "Ausführliche Beschreibung": "Bildfahrplan Einstellungen\n\r\n\rHier können Sie die Grundeinstellungen für das Programm an Ihre Wünsche anpassen.",
         "Params": [
+            "TLDirection",
             "Bfp_CanvasSize",
             "Bfp_TimeRange",
             "Bfp_TrainTypeColors"
@@ -24,19 +25,19 @@
         "Photo": "../images/Bildfahrplan1.png",
         "Ausführliche Beschreibung": "",
         "Content": {
-            "ZUSI Bildfahrplan": "Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung einse Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Bahnhof-Einstellungen> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des fahrplan, kann die Anzeige etwas dauern.\n"
+            "ZUSI Bildfahrplan": "Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n"
         }
     },
     "StationsConfigurationPage": {
         "Typ": "StationsConfigurationPage",
         "Name": "StationsConfigurationPage",
-        "MTabName": "Bahnhof-Einstellungen",
-        "Title": "Bahnhof-Einstellungen",
+        "MTabName": "Fahrplan und Strecke",
+        "Title": "Fahrplan und Strecke",
         "Button_1": "Geänderte Einstellungen übernehmen",
         "Button_2": "n",
         "Button_3": "",
-        "Kurzbeschreibung": "Bahnhofsliste erstellen",
-        "Ausführliche Beschreibung": "Bildfahrplan Bahnhofsliste erstellen\n\r\n\rHier können Sie die Bahnhofsliste für den Bildfahrplan erstellen.",
+        "Ausführliche Beschreibung": "Fahrplan und Strecke festlegen\n\r\n\rAuf dieser Seite kann der ZUSI Fahrplan und die Strecke ausgewähkt werden, die im den Bildfahrplan angezeigt werden soll.\n\nAls erstes wird der ZUSI Fahrplan ausgewählt.\nDurch Klicken auf den Button <ZUSI Fahrplandatei>, kann eine ZUSI Fahrplandatei ausgewählt werden. Der Name und Pfad dieser Datei wird in dem Textfeld rechts angezeigt. Das Textfeld kann auch direkt beschrieben werden.\n\nFür die Definiton der Strecke, die im Bildfahrplan angezeigt werden soll, werden die ZUSI-Buchfahrpläne herangezogen. Diese enthalten alle notwendigne Angaben für eine Streckenbeschreibung.\n\nSobald ein ZUSI-Fahrplan ausgewählt wurde, werden alle Strecken, die in diesem Fahrplan genutzt werden, in der Strecken-Liste angezeigt. Die Liste entspricht der Zugauswahlliste in ZUSI. Allerdings wird für jede Strecke nur ein Beispielzug angezeigt. Hinter jedem Zugnamen werden alle Stationen aufgelistet, die auf dieser Strecke angefahren werden.\nDurch Doppelklicken, wird der Buchfahrplan für die ausgewählte Strecke, übernommen und in das Feld <ZUSI-Buchfahrplan> eingetragen.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan auch direkt von der Harddisc ausgewählt werden.\n\nNachdem Änderungen vorgenommen wurden, müssen diese duch Klick auf den Button <Geänderte Einstellungen übernehmen> gespeichert werden.\nSollte man das vergessen, wird beim Verlassen der Seite noch einmal nachgefragt.",        "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
+        "MacroDescLines": "17",
         "Params": [
             "Bfp_filename",
             "Bfp_TreeView",

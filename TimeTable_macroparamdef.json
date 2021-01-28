@@ -62,7 +62,9 @@
         "Min": "",
         "Max": "",
         "Default": "",
-        "ParamDescription": "ZUSI Fahrplandatei auswaehlen",
+        "ParamDescription": "Fahrplan festlegen\n\r\n\rZUSI Fahrplan auswählen.\nDurch Klicken auf den Button <ZUSI Fahrplandatei>, kann eine ZUSI Fahrplandatei ausgewählt werden. Der Name und Pfad dieser Datei wird in dem Textfeld rechts angezeigt. Das Textfeld kann auch direkt beschrieben werden.",
+        "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
+        "ParamDescLines": "6",
         "ParamLabelWidth": "30",
         "ParamEntryWidth": "100",
         "Input Text": "ZUSI Fahrplandatei",
@@ -87,8 +89,8 @@
         "Min": "0",
         "Max": "23",
         "Default": "08",
-        "Input Text": "Dauer in Stunden",
-        "Hint": "Anzahl der Stunden, die im Bildfahrplans angezeigt werden sollen"
+        "Input Text": "Zeitraum in Stunden",
+        "Hint": "Zeitraum in Stunden, der im Bildfahrplans angezeigt werden sollen"
     },
     "Bfp_trainfilename": {
         "ParName": "Bfp_trainfilename",
@@ -99,7 +101,9 @@
         "Min": "",
         "Max": "",
         "Default": "",
-        "ParamDescription": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen",
+        "ParamDescription": "Definiton der Strecke, die im Bildfahrplan angezeigt werden soll.\n\nSobald ein ZUSI-Fahrplan ausgewählt wurde, werden alle Strecken, die in diesem Fahrplan genutzt werden, in der Strecken-Liste angezeigt. Die Liste entspricht der Zugauswahlliste in ZUSI. Allerdings wird für jede Strecke nur ein Beispielzug angezeigt. Hinter jedem Zugnamen werden alle Stationen aufgelistet, die auf dieser Strecke angefahren werden.\nDurch Doppelklicken, wird der Buchfahrplan für die ausgewählte Strecke, übernommen und in das Feld <ZUSI-Buchfahrplan> eingetragen.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan auch direkt von der Harddisc ausgewählt werden.",
+        "ParamDescLines": "6",
+        "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
         "ParamLabelWidth": "30",
         "ParamEntryWidth": "100",
         "Input Text": "ZUSI Buchfahrplan",
@@ -114,7 +118,8 @@
         "Max": "",
         "Default": "",
         "GenericMethod": "TreeView",
-        "ParamDescription": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen",
+        "ParamDescription": "Direkte Auswahl der Strecke, die im Bildfahrplan angezeigt werden soll.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan direkt von der Harddisc ausgewählt werden.",
+        "ParamDescLines": "3",
         "ParamLabelWidth": "30",
         "ParamEntryWidth": "100",
         "Input Text": "ZUSI Buchfahrplan",
@@ -128,6 +133,8 @@
         "Max": "",
         "Default": "",
         "Repeat": "10",
+        "ParamDescription": "Linienfarben für Zuggattungen festlegen\nEs können beliebige Zuggattungsbezeichnungen angegeben werden.\nDie Zuggattung <*> bedeutet alle übrigen Züge und legt die Linienfarbe für alle nicht angegebenen Zuggattungen fest.\nDurch Klick auf den Farb-Button kann eine Farbe ausgewählt werden.",
+        "ParamDescLines": "4",
         "Input Text": "Farbeinstellungen für Zuggattungen",
         "Hint": "Farbeinstellungen für Zuggattungen",
         "Implementation comment": "",
@@ -156,48 +163,30 @@
         "Max": "1000",
         "Default": "black",
         "ParamEntryWidth": "3",
-        "Values": ["Keine",
-            "red",
-            "green",
-            "blue",
-            "black",
-            "yellow",
-            "grey"
-        ],
-        "ValuesText": [
-            "Keine",
-            "red",
-            "green",
-            "blue",
-            "black",
-            "yellow",
-            "grey"
-            ],
         "Input Text": "Farbe",
         "Hint": "Farbe, die für die Zuggattung verwendet werden soll",
         "Implementation comment": ""
     },
-    
-    "Startseite": {
-        "ParName": "Startseite",
+    "TLDirection": {
+        "ParName": "TLDirection",
         "Cnt": "1",
         "Type": "Combo",
         "Values": [
-            "TimetablePage",
-            "StartPage"
+            "horizontal",
+            "vertical"
         ],
         "ValuesText": [
-            "Bildfahrplan",
-            "Startseite"
+            "horizontal",
+            "vertical"
         ],
         "ConfigName": [
-            "startpage",
-            "startpagename"
+            "TLDirection",
+            "TLDirection_No"
         ],
         "Min": "0",
         "Max": "255",
-        "Default": "4",
-        "Input Text": "Startseite",
-        "Hint": "Seite auswählen, die als Startseite gezeigt werden soll"
+        "Default": "0",
+        "Input Text": "Ausrichtung der Strecke",
+        "Hint": "Horizontale oder vertikale Ausrichtung der Strecke"
     }
 }
