@@ -42,6 +42,7 @@ BUTTONLABELWIDTH = 10
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         self.tabClassName = "StartPage"
+        logging.debug("Init Page %s ",self.tabClassName)
         self.controller = controller
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
@@ -70,17 +71,24 @@ class StartPage(tk.Frame):
         photo_filename = macrodata.get("Photo","")
                 
         if photo_filename != "":
-            filedir = os.path.dirname(os.path.realpath(__file__))
-            self.photofilepath = os.path.join(filedir, photo_filename)
-            text1 = tk.Text(text_frame, bg=self.cget('bg'),relief="flat",width=200)
-            self.photo=tk.PhotoImage(file=self.photofilepath)
-            text1.insert(tk.END,'\n')
-            text1.image_create(tk.END, image=self.photo)
+            try:
+                logging.debug("Open Photo1 %s ",photo_filename)
+                filedir = os.path.dirname(os.path.realpath(__file__))
+                self.photofilepath = os.path.join(filedir, photo_filename)
+                text1 = tk.Text(text_frame, bg=self.cget('bg'),relief="flat",width=200)
+                logging.debug("Open Photo2 %s ",self.photofilepath)
+                self.photo=tk.PhotoImage(file=self.photofilepath)
+                text1.insert(tk.END,'\n')
+                text1.image_create(tk.END, image=self.photo)
+                logging.debug("Open Photo %s ",self.photofilepath)
+            except BaseException as e:
+                logging.debug("Photo-Error",self.photofilepath,e)
+                 
         else:
             text1 = tk.Text(text_frame, bg=self.cget('bg'),relief="flat",width=200)
 
         content = macrodata.get("Content",{})
-        
+        logging.debug("Open Content %s ",content)
         if content != {}:
             text_widget = tk.Text(text_frame,wrap=tk.WORD,bg=self.cget('bg'),relief="flat")
             text_scroll = tk.Scrollbar(text_frame, command=text_widget.yview)

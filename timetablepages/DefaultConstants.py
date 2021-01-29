@@ -36,7 +36,7 @@ MAIN_PROG_NAME = "TimeTable"
 
 LOG_FILENAME = 'logfile.log'
 PARAM_FILENAME = MAIN_PROG_NAME + '_param.json'
-CONFIG_FILENAME = '..\\' + MAIN_PROG_NAME + '_config.json'
+CONFIG_FILENAME = MAIN_PROG_NAME + '_config.json'
 MACRODEF_FILENAME = MAIN_PROG_NAME + '_macrodef.json'
 MACROPARAMDEF_FILENAME = MAIN_PROG_NAME + '_macroparamdef.json'
 DISCONNECT_FILENAME = MAIN_PROG_NAME + '_disconnect.txt'
@@ -69,14 +69,6 @@ TOOLTIPLIST = {
                    "Aktuelle Farbe": "Aktuelle Farbe",
                    "ColorWheel":"Farbton und Sättigung auswählen durch Mausklick"
                    }
-                   
-
-BLINKFRQ     = 2 # Blinkfrequenz in Hz
-
-ARDUINO_WAITTIME = 0.02  # Wartezeit zwischen 2 Kommandos in Sekunden 
-ARDUINO_LONG_WAITTIME = 0.5
-
-
 
 
 
