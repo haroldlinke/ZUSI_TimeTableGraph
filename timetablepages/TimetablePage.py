@@ -18,7 +18,7 @@ from tkinter import ttk
 
 #import re
 #import math
-#import os
+import os
 #import sys
 #import threading
 #import queue
@@ -30,6 +30,7 @@ import logging
 #from datetime import datetime
 #import json
 import timetablepages.TimetablegraphCanvas
+from PIL import Image, EpsImagePlugin
 
 VERSION ="V01.17 - 25.12.2019"
 LARGE_FONT= ("Verdana", 12)
@@ -78,18 +79,40 @@ class TimeTablePage(tk.Frame):
     def scrollcanvas(self, event):
         self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
 
-    def save_as_png(self, fileName):
+    def save_as_pdf(self, fileName):
         # save postscipt image 
         self.canvas.update()
-        self.canvas.postscript(file = fileName + '.eps',colormode='color',width=self.canvas_width,height=self.canvas_height) 
-        # use PIL to convert to PNG 
-        img = Image.open(fileName + '.eps')
+        self.canvas.postscript(file = fileName + 'tmp.eps',colormode='color',width=self.canvas_width,height=self.canvas_height) 
+        EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
+        img = Image.open(fileName + 'tmp.eps')
+        img.load(scale=8)
+        size = img.size
         try:
-
-            img.save(fileName + '.png', 'png')
-        except: 
-            print("Error while generating png-file- Ghostscript not found")
+            #img.save(fileName + '.png', 'png')
+            img.save(fileName,"pdf",resolution=300)
+        except BaseException as e:
+            print("Error while generating pdf-file\n %s",e)
             pass
+        
+    def save_as_eps(self, fileName):
+        # save postscipt image 
+        self.canvas.update()
+        self.canvas.postscript(file = fileName,colormode='color',width=self.canvas_width,height=self.canvas_height)
+        
+    def save_as_image(self, fileName):
+        # save postscipt image 
+        self.canvas.update()
+        tmp_filename = fileName + '.tmp.eps'
+        self.canvas.postscript(file = tmp_filename,colormode='color',width=self.canvas_width,height=self.canvas_height) 
+        EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
+        img = Image.open(tmp_filename)
+        img.load(scale=8)
+        size = img.size
+        try:
+            img.save(fileName)
+        except BaseException as e:
+            print("Error while generating png-file\n %s",e)
+            pass    
         
     def create_train_type_to_color_dict(self):
         self.train_type_to_color_dict = {}

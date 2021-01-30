@@ -1,14 +1,14 @@
 {
     "Bfp_width": 2400,
     "Bfp_height": 1200,
-    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
-    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D843.timetable.xml",
-    "pos_x": -8,
-    "pos_y": -8,
+    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr.fpn",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\D17441.timetable.xml",
+    "pos_x": 1,
+    "pos_y": 23,
     "startpage": "StartPage",
     "startpagename": "StartPage",
-    "Bfp_start": 11,
-    "Bfp_duration": 10,
+    "Bfp_start": 4,
+    "Bfp_duration": 7,
     "Bfp_TrainTypeColors": {
         "0": {
             "Bfp_TrainType": "D",
@@ -54,5 +54,7 @@
     "horizontal": "Horizontal",
     "vertical": 0,
     "TLDirection": "horizontal",
-    "TLDirection_No": 0
+    "TLDirection_No": 0,
+    "TLFileType": ".timetable.xml",
+    "TLFileType_No": 1
 }
