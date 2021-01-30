@@ -72,6 +72,13 @@ class TimeTableGraphMain(tk.Tk):
         
         self.canvas_width = self.getConfigData("Bfp_width")
         self.canvas_height = self.getConfigData("Bfp_height")
+        
+        self.ghostscript_path_rel = self.getConfigData("GhostScriptPath")
+        
+        if self.ghostscript_path_rel == "":
+            self.ghostscript_path_rel = r"gs9.53.3\bin\gswin32c.exe"
+            
+        self.ghostscript_path = os.path.join(self.mainfile_dir,self.ghostscript_path_rel)
 
         macrodata = self.MacroDef.data.get("StartPage",{})
         
@@ -110,14 +117,14 @@ class TimeTableGraphMain(tk.Tk):
                   bordercolor=[('focus', "#4D4D4D")])
         self.configure(background=style.lookup("TFrame", "background"))
          
-        #menu = tk.Menu(self)
-        #self.config(menu=menu)
-        #filemenu = tk.Menu(menu)
-        #menu.add_cascade(label="Datei", menu=filemenu)
-#        filemenu.add_command(label="Farbpalette von Datei lesen", command=self.OpenFile)
-#        filemenu.add_command(label="Farbpalette speichern als ...", command=self.SaveFileas)
-#        filemenu.add_separator()
-        #filemenu.add_command(label="LED Liste von Datei lesen", command=self.OpenFileLEDTab)
+        menu = tk.Menu(self)
+        self.config(menu=menu)
+        filemenu = tk.Menu(menu)
+        menu.add_cascade(label="Bildfahrplan speichern", menu=filemenu)
+        filemenu.add_command(label="als EPS", command=self.Save_Bfp_as_EPS)
+        filemenu.add_command(label="als PDF", command=self.Save_Bfp_as_PDF)
+        #filemenu.add_separator()
+        filemenu.add_command(label="als Bild", command=self.Save_Bfp_as_Image)
         #filemenu.add_command(label="LED Liste speichern als", command=self.SaveFileLEDTab)
         #filemenu.add_separator()
         #filemenu.add_command(label="Beenden und Daten speichern", command=self.ExitProg_with_save)
@@ -133,10 +140,10 @@ class TimeTableGraphMain(tk.Tk):
         #colormenu.add_command(label="auf Standard zurücksetzen", command=self.ResetColorPalette)
 
         
-        #helpmenu = tk.Menu(menu)
-        #menu.add_cascade(label="Hilfe", menu=helpmenu)
-        #helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
-        #helpmenu.add_command(label="Über...", command=self.About)
+        helpmenu = tk.Menu(menu)
+        menu.add_cascade(label="Hilfe", menu=helpmenu)
+        helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
+        helpmenu.add_command(label="Über...", command=self.About)
 
         # --- define container for tabs
         self.shutdown_frame = tk.Frame(self)
@@ -168,6 +175,8 @@ class TimeTableGraphMain(tk.Tk):
         self.grid_rowconfigure(0,weight=1)
         self.grid_columnconfigure(0, weight=1)
         
+        self.statusmessage = tk.Label(self, text='', fg="black",bd=1, relief="sunken", anchor="w")
+        
         self.container.grid(row=0,column=0,columnspan=2,sticky="nesw")
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
@@ -189,8 +198,7 @@ class TimeTableGraphMain(tk.Tk):
         self.showFramebyName(startpagename)
         
         filedir = self.mainfile_dir # os.path.dirname(os.path.realpath(__file__))
-        
-        self.statusmessage = tk.Label(self, text='', fg="black",bd=1, relief="sunken", anchor="w")
+
         self.statusmessage.grid(row=1,column=0,sticky="ew")
         #self.statusmessage.pack(side="bottom", fill="x")
         self.ToolTip(self.statusmessage, text="Zeigt Meldungen und Fehler an")
@@ -212,41 +220,29 @@ class TimeTableGraphMain(tk.Tk):
         else:
             return ("Verdana", int(font_size))
 
-    def SaveFileas(self):
-        filepath = filedialog.asksaveasfilename(filetypes=[("Color Palette files","*.clr.json")],defaultextension=".clr.json")
+    def Save_Bfp_as_PDF(self):
+        filepath = filedialog.asksaveasfilename(filetypes=[("PDF files","*.pdf")],defaultextension=".pdf")
         if filepath:
-            frame = self.tabdict["ColorCheckPage"]
-            frame.savePalettetoFile(filepath) 
+            frame = self.tabdict["Bildfahrplan"]
+            # save postscipt image
+            frame.save_as_pdf(filepath)        
 
-    def SaveFile(self):
-        filepath = PARAM_FILENAME
-        if filepath:
-            frame = self.tabdict["ColorCheckPage"]
-            frame.savePalettetoFile(filepath) 
-
-    def OpenFile(self):
-        filepath = filedialog.askopenfilename(filetypes=[("Color Palette files","*.clr.json"),("All JSON files","*.json")],defaultextension=".clr.json")
-        if filepath:
-            frame = self.tabdict["ColorCheckPage"]
-            frame.readPalettefromFile(filepath)         
-
-    def SaveFileLEDTab(self):
+    def Save_Bfp_as_EPS(self):
         filepath = filedialog.asksaveasfilename(filetypes=[("EPS files","*.eps")],defaultextension=".eps")
         if filepath:
-            frame = self.tabdict["SerialMonitorPage"]
+            frame = self.tabdict["Bildfahrplan"]
             # save postscipt image
-            frame.save_as_png(filepath)
+            frame.save_as_eps(filepath)    
 
-
-        
-
-    def OpenFileLEDTab(self):
-        filepath = filedialog.askopenfilename(filetypes=[("LED List files","*.led.json"),("All JSON files","*.json")],defaultextension=".led.json")
+    def Save_Bfp_as_Image(self):
+        filepath = filedialog.asksaveasfilename(filetypes=[("png","*.png"),("jpg","*.jpg"),("tiff","*.tiff")],defaultextension=".jpg")
         if filepath:
-            self.readLEDTabfromFile(filepath)     
+            frame = self.tabdict["Bildfahrplan"]
+            # save postscipt image
+            frame.save_as_image(filepath)
 
     def About(self):
-        tk.messagebox("MobaCheckColor by Harold Linke")
+        tk.messagebox.showinfo("ZUSI Timetablegraph by Harold Linke")
 
     def OpenHelp(self):
         self.call_helppage()
@@ -437,7 +433,6 @@ class TimeTableGraphMain(tk.Tk):
     # getTabNameList
     # ----------------------------------------------------------------
     def getTabNameList (self):
-
         return list(tabClassName2Name.values())
     
     # ----------------------------------------------------------------
@@ -447,11 +442,12 @@ class TimeTableGraphMain(tk.Tk):
         return tabIndex2ClassName.get(str(combolist_index),defaultStartPage)
 
     def call_helppage(self,event=None):
-        #filedir = os.path.dirname(os.path.realpath(__file__))
-        #helpfilename = filedir + "//" + HELPPAGE_FILENAME
         macrodata = self.MacroDef.data.get("HelpPage",{})
-        helppageurl = macrodata.get("HelpPageURL",)
-        webbrowser.open_new_tab(helppageurl)
+        helppageurl = macrodata.get("HelpPageURL","")
+        if helppageurl == "":
+            tk.messagebox.showinfo("ZUSI Timetablegraph by Harold Linke\nHelp not available yet")
+        else:
+            webbrowser.open_new_tab(helppageurl)
 
     def getConfigData(self, key):
         logging.debug("GetConfigData Key: %s",key)

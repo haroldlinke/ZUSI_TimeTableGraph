@@ -13,6 +13,7 @@
             "TLDirection",
             "Bfp_CanvasSize",
             "Bfp_TimeRange",
+            "TLFileType",
             "Bfp_TrainTypeColors"
         ]
     },

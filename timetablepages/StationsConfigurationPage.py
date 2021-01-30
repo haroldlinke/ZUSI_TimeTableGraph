@@ -229,6 +229,8 @@ class StationsConfigurationPage(tk.Frame):
                 
                 if xml_filename != "":
                     self.controller.set_string_variable(xml_filename,paramkey="Bfp_trainfilename", macrokey=self.tabClassName)
+                else:
+                    self.controller.set_statusmessage("No <.timetable.xml> file found for "+trainname)
     
     def create_zusi_zug_treeframe(self,parent):
         # Setup Data

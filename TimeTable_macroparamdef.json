@@ -62,13 +62,13 @@
         "Min": "",
         "Max": "",
         "Default": "",
-        "ParamDescription": "Fahrplan festlegen\n\r\n\rZUSI Fahrplan auswählen.\nDurch Klicken auf den Button <ZUSI Fahrplandatei>, kann eine ZUSI Fahrplandatei ausgewählt werden. Der Name und Pfad dieser Datei wird in dem Textfeld rechts angezeigt. Das Textfeld kann auch direkt beschrieben werden.",
+        "ParamDescription": "Fahrplan festlegen.",
         "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
-        "ParamDescLines": "6",
+        "ParamDescLines": "2",
         "ParamLabelWidth": "30",
         "ParamEntryWidth": "100",
         "Input Text": "ZUSI Fahrplandatei",
-        "Hint": "ZUSI Fahrplandatei auswaehlen"
+        "Hint": "Fahrplan festlegen\n\r\n\rZUSI Fahrplan auswählen.\nDurch Klicken auf den Button <ZUSI Fahrplandatei>, kann eine ZUSI Fahrplandatei ausgewählt werden. Der Name und Pfad dieser Datei wird in dem Textfeld rechts angezeigt. Das Textfeld kann auch direkt beschrieben werden."
     },
     "Bfp_Startzeit": {
         "ParName": "Bfp_Startzeit",
@@ -101,13 +101,13 @@
         "Min": "",
         "Max": "",
         "Default": "",
-        "ParamDescription": "Direkte Auswahl der Strecke, die im Bildfahrplan angezeigt werden soll.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan direkt von der Harddisc ausgewählt werden.",
+        "ParamDescription": "Direkte Auswahl der Strecke, die im Bildfahrplan angezeigt werden soll.",
         "ParamDescLines": "2",
         "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
         "ParamLabelWidth": "30",
         "ParamEntryWidth": "100",
         "Input Text": "ZUSI Buchfahrplan",
-        "Hint": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen"
+        "Hint": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen\nMit dem Button <ZUSI Buchfahrplan> kann ein Buchfahrplan direkt von der Harddisc ausgewählt werden."
     },
     "Bfp_TreeView": {
         "ParName": "Bfp_TreeView",
@@ -118,12 +118,12 @@
         "Max": "",
         "Default": "",
         "GenericMethod": "TreeView",
-        "ParamDescription": "Definiton der Strecke, die im Bildfahrplan angezeigt werden soll.\n\nSobald ein ZUSI-Fahrplan ausgewählt wurde, werden alle Strecken, die in diesem Fahrplan genutzt werden, in der Strecken-Liste angezeigt. Die Liste entspricht der Zugauswahlliste in ZUSI. Allerdings wird für jede Strecke nur ein Beispielzug angezeigt. Hinter jedem Zugnamen werden alle Stationen aufgelistet, die auf dieser Strecke angefahren werden.\nDurch Doppelklicken, wird der Buchfahrplan für die ausgewählte Strecke, übernommen und in das Feld <ZUSI-Buchfahrplan> eingetragen.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan auch direkt von der Harddisc ausgewählt werden.",
-        "ParamDescLines": "5",
+        "ParamDescription": "Definiton der Strecke, die im Bildfahrplan angezeigt werden soll.",
+        "ParamDescLines": "2",
         "ParamLabelWidth": "30",
         "ParamEntryWidth": "100",
         "Input Text": "ZUSI Buchfahrplan",
-        "Hint": "ZUSI Buchfahrplandatei auswaehlen. Dieser Buchfahrplan bestimmt die Strecke und Stationen"
+        "Hint": "Definiton der Strecke, die im Bildfahrplan angezeigt werden soll.\n\nSobald ein ZUSI-Fahrplan ausgewählt wurde, werden alle Strecken, die in diesem Fahrplan genutzt werden, in der Strecken-Liste angezeigt. Die Liste entspricht der Zugauswahlliste in ZUSI. Allerdings wird für jede Strecke nur ein Beispielzug angezeigt. Hinter jedem Zugnamen werden alle Stationen aufgelistet, die auf dieser Strecke angefahren werden.\nDurch Doppelklicken, wird der Buchfahrplan für die ausgewählte Strecke, übernommen und in das Feld <ZUSI-Buchfahrplan> eingetragen.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan auch direkt von der Harddisc ausgewählt werden."
     },
     "Bfp_TrainTypeColors": {
         "ParName": "Bfp_TrainTypeColors",
@@ -188,5 +188,27 @@
         "Default": "0",
         "Input Text": "Ausrichtung der Strecke",
         "Hint": "Horizontale oder vertikale Ausrichtung der Strecke"
+    },
+    "TLFileType": {
+        "ParName": "TLFileType",
+        "Cnt": "1",
+        "Type": "Combo",
+        "Values": [
+            ".trn",
+            ".timetable.xml"
+        ],
+        "ValuesText": [
+            ".trn",
+            ".timetable.xml"
+        ],
+        "ConfigName": [
+            "TLFileType",
+            "TLFileType_No"
+        ],
+        "Min": "0",
+        "Max": "255",
+        "Default": "0",
+        "Input Text": "FileType für Zugfahrplan",
+        "Hint": "FileType, der für den Zugfahrplan verwendet werden soll"
     }
 }
