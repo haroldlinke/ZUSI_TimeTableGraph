@@ -972,25 +972,36 @@ class Timetable_main(Frame):
         self.duration = self.controller.getConfigData("Bfp_duration")
         self.initUI()
         
-    def open_zusi_trn_zug_dict(self,trn_zug_dict,fpn_filepathname):
+    def open_zusi_trn_zug_dict(self,trn_zug_dict,fpn_filepathname,trn_filepathname=""):
         
         TLFileType = self.controller.getConfigData("TLFileType")
         if TLFileType == ".timetable.xml":
+            fahrplan_gruppe = trn_zug_dict.get("@FahrplanGruppe","")
+            zugGattung = trn_zug_dict.get("@Gattung","")
+            zugNummer = trn_zug_dict.get("@Nummer","")
+            zugLauf = trn_zug_dict.get("@Zuglauf","")            
             Buchfahrplan_dict = trn_zug_dict.get("BuchfahrplanRohDatei",{})
+            Bfpl_Dateiname = Buchfahrplan_dict.get("@Dateiname","")
+            trn_filepath, trn_filename = os.path.split(fpn_filepathname)
             if Buchfahrplan_dict != {}:
                 timetable_filepathname = Buchfahrplan_dict.get("@Dateiname")
-                trn_filepath, trn_filename = os.path.split(fpn_filepathname)
-                #timetable_filepath, timetable_filename = os.path.split(timetable_filepathname)
                 timetable_filecomp = timetable_filepathname.split("\\")
-                Bfpl_filepathname = os.path.join(trn_filepath,timetable_filecomp[-2],timetable_filecomp[-1])                
-                
-                #Bfpl_filepathname = os.path.join(trn_filepath,Bfpl_file_name)
-                
-                with open(Bfpl_filepathname,mode="r",encoding="utf-8") as fd:
-                    xml_text = fd.read()
-                    Bfpl_timetable_dict = parse(xml_text)
-                    #enter train-timetable
-                    result_ok = self.timetable.convert_zusi_fpn_dict_to_timetable_train_x(Bfpl_timetable_dict) 
+                Bfpl_filepathname = os.path.join(trn_filepath,timetable_filecomp[-2],timetable_filecomp[-1])
+            else:
+                trn_filecomp = trn_filepathname.split("\\")
+                Bfpl_filepathname = os.path.join(trn_filepath,trn_filecomp[-2],zugGattung+zugNummer+".timetable.xml")                
+                if not os.path.exists(Bfpl_filepathname):
+                    logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
+                    self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
+                    return             
+               
+            with open(Bfpl_filepathname,mode="r",encoding="utf-8") as fd:
+                xml_text = fd.read()
+                Bfpl_timetable_dict = parse(xml_text)
+                #enter train-timetable
+                result_ok = self.timetable.convert_zusi_fpn_dict_to_timetable_train_x(Bfpl_timetable_dict)
+           
+            
         else:
             self.timetable.convert_zusi_trn_to_timetable_train_x(trn_zug_dict)        
 
@@ -1001,7 +1012,7 @@ class Timetable_main(Frame):
             trn_dict = parse(xml_text)
         trn_zusi_dict = trn_dict.get("Zusi",{})
         trn_zug_dict = trn_zusi_dict.get("Zug",{})        
-        self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filepathname)
+        self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filepathname,trn_filepathname=trn_filepathname)
 
     def open_zusi_master_schedule(self,fpn_filename=""):
         self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
@@ -1064,17 +1075,17 @@ class Timetable_main(Frame):
         zugGattung = trn_zug_dict.get("@Gattung","")
         zugNummer = trn_zug_dict.get("@Nummer","")
         zugLauf = trn_zug_dict.get("@Zuglauf","")
-
         Buchfahrplan_dict = trn_zug_dict.get("BuchfahrplanRohDatei",{})
         Bfpl_Dateiname = Buchfahrplan_dict.get("@Dateiname","")
         if Bfpl_Dateiname != "":
             Bfpl_file_path, Bfpl_file_name = os.path.split(Bfpl_Dateiname)
             Bfpl_filepathname = os.path.join(trn_filepath,Bfpl_file_name)
         else:
-            Bfpl_filepathname = ""
-            logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
-            self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
-            return
+            Bfpl_filepathname = os.path.join(trn_filepath,zugGattung+zugNummer+".timetable.xml")                
+            if not os.path.exists(Bfpl_filepathname):
+                logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
+                self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
+                return              
 
         station_list = self.get_station_list(trn_zug_dict)
         zusi_fahrplan_gruppe_dict = self.zusi_zuglist_dict.get(fahrplan_gruppe,{})
