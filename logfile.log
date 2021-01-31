@@ -1,0 +1,972 @@
+16:12:17: MLL Proggenerator started V00.05 31.01.2021
+16:12:17:  Platform: Windows-10-10.0.19041-SP0
+16:12:17: Installationfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph
+16:12:17: readConfigData
+16:12:17: ReadConfig: {'Bfp_width': 2400, 'Bfp_height': 1200, 'Bfp_filename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn', 'Bfp_trainfilename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S8161.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 'StartPage', 'startpagename': 'StartPage', 'Bfp_start': 4, 'Bfp_duration': 12, 'Bfp_TrainTypeColors': {'0': {'Bfp_TrainType': 'D', 'Bfp_TrainTypeColor': '#ff8080'}, '1': {'Bfp_TrainType': 'E', 'Bfp_TrainTypeColor': '#00ff00'}, '2': {'Bfp_TrainType': 'IC', 'Bfp_TrainTypeColor': '#ff8040'}, '3': {'Bfp_TrainType': 'N', 'Bfp_TrainTypeColor': '#004000'}, '4': {'Bfp_TrainType': 'Ng', 'Bfp_TrainTypeColor': '#0000ff'}, '5': {'Bfp_TrainType': 'ExprE', 'Bfp_TrainTypeColor': '#0000a0'}, '6': {'Bfp_TrainType': 'ICE', 'Bfp_TrainTypeColor': '#ff0000'}, '7': {'Bfp_TrainType': '*', 'Bfp_TrainTypeColor': '#000000'}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}}, 'horizontal': 'Horizontal', 'vertical': 0, 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1}
+16:12:17: running in a normal Python process
+16:12:17: ReadConfig: {'Bfp_width': 2400, 'Bfp_height': 1200, 'Bfp_filename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn', 'Bfp_trainfilename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S8161.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 'StartPage', 'startpagename': 'StartPage', 'Bfp_start': 4, 'Bfp_duration': 12, 'Bfp_TrainTypeColors': {'0': {'Bfp_TrainType': 'D', 'Bfp_TrainTypeColor': '#ff8080'}, '1': {'Bfp_TrainType': 'E', 'Bfp_TrainTypeColor': '#00ff00'}, '2': {'Bfp_TrainType': 'IC', 'Bfp_TrainTypeColor': '#ff8040'}, '3': {'Bfp_TrainType': 'N', 'Bfp_TrainTypeColor': '#004000'}, '4': {'Bfp_TrainType': 'Ng', 'Bfp_TrainTypeColor': '#0000ff'}, '5': {'Bfp_TrainType': 'ExprE', 'Bfp_TrainTypeColor': '#0000a0'}, '6': {'Bfp_TrainType': 'ICE', 'Bfp_TrainTypeColor': '#ff0000'}, '7': {'Bfp_TrainType': '*', 'Bfp_TrainTypeColor': '#000000'}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}}, 'horizontal': 'Horizontal', 'vertical': 0, 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1}
+16:12:17: GetConfigData Key: FontLabel
+16:12:17: GetConfigData Key: FontSpinbox
+16:12:17: GetConfigData Key: FontText
+16:12:17: GetConfigData Key: FontLabel
+16:12:17: GetConfigData Key: FontLabel
+16:12:17: GetConfigData Key: FontText
+16:12:17: GetConfigData Key: Bfp_width
+16:12:17: GetConfigData Key: Bfp_height
+16:12:17: GetConfigData Key: GhostScriptPath
+16:12:17: Screenwidth: 2560 Screenheight: 1440
+16:12:17: GetConfigData Key: pos_x
+16:12:17: GetConfigData Key: pos_y
+16:12:17: GetConfigData Key: pos_x
+16:12:17: GetConfigData Key: pos_y
+16:12:17: TabClass: <class 'timetablepages.StartPage.StartPage'> 
+16:12:17: Init Page StartPage 
+16:12:17: Open Photo1 Bildfahrplan1.png 
+16:12:17: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+16:12:17: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+16:12:17: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
+16:12:17: Create Tab: StartPage
+16:12:17: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
+16:12:17: GetConfigData Key: Bfp_width
+16:12:17: GetConfigData Key: Bfp_height
+16:12:17: GetConfigData Key: Bfp_filename
+16:12:17: GetConfigData Key: Bfp_trainfilename
+16:12:17: GetConfigData Key: Bfp_start
+16:12:17: GetConfigData Key: Bfp_duration
+16:12:17: Create Tab: Bildfahrplan
+16:12:17: TabClass: <class 'timetablepages.StationsConfigurationPage.StationsConfigurationPage'> 
+16:12:17: StationsConfigurationPage - Generic
+16:12:17: GetConfigData Key: Bfp_filename
+16:12:17: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:17: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:17: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:17: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:18: SaveConfig: Fahrplan und Strecke - {'Bfp_width': 2400, 'Bfp_height': 1200, 'Bfp_filename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn', 'Bfp_trainfilename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S8161.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 'StartPage', 'startpagename': 'StartPage', 'Bfp_start': 4, 'Bfp_duration': 12, 'Bfp_TrainTypeColors': {'0': {'Bfp_TrainType': 'D', 'Bfp_TrainTypeColor': '#ff8080'}, '1': {'Bfp_TrainType': 'E', 'Bfp_TrainTypeColor': '#00ff00'}, '2': {'Bfp_TrainType': 'IC', 'Bfp_TrainTypeColor': '#ff8040'}, '3': {'Bfp_TrainType': 'N', 'Bfp_TrainTypeColor': '#004000'}, '4': {'Bfp_TrainType': 'Ng', 'Bfp_TrainTypeColor': '#0000ff'}, '5': {'Bfp_TrainType': 'ExprE', 'Bfp_TrainTypeColor': '#0000a0'}, '6': {'Bfp_TrainType': 'ICE', 'Bfp_TrainTypeColor': '#ff0000'}, '7': {'Bfp_TrainType': '*', 'Bfp_TrainTypeColor': '#000000'}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}}, 'horizontal': 'Horizontal', 'vertical': 0, 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1}
+16:12:18: GetConfigData Key: Bfp_TreeView
+16:12:18: GetConfigData Key: Bfp_trainfilename
+16:12:18: Create Tab: StationsConfigurationPage
+16:12:18: TabClass: <class 'timetablepages.ConfigurationPage.ConfigurationPage'> 
+16:12:18: ConfigurationPage - Multipleparams
+16:12:18: ConfigurationPage - Multipleparams
+16:12:18: ConfigurationPage - Multipleparams
+16:12:18: GetConfigData Key: TLDirection_No
+16:12:18: GetConfigData Key: Bfp_width
+16:12:18: GetConfigData Key: Bfp_height
+16:12:18: GetConfigData Key: Bfp_start
+16:12:18: GetConfigData Key: Bfp_duration
+16:12:18: GetConfigData Key: TLFileType_No
+16:12:18: Create Tab: ConfigurationPage
+16:12:18: Tabselected: Start
+16:12:18: Start
+16:12:18: TabChanged  - .!notebook.!startpage
+16:12:19: Tabunselected: Start
+16:12:19: Tabselected: Bildfahrplan
+16:12:19: Bildfahrplan
+16:12:19: GetConfigData Key: Bfp_width
+16:12:19: GetConfigData Key: Bfp_height
+16:12:19: GetConfigData Key: Bfp_filename
+16:12:19: GetConfigData Key: Bfp_trainfilename
+16:12:19: GetConfigData Key: Bfp_start
+16:12:19: GetConfigData Key: Bfp_duration
+16:12:19: GetConfigData Key: Bfp_TrainTypeColors
+16:12:19: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:19: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:19: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:19: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:12:20: GetConfigData Key: TLDirection
+16:12:20: Input File, D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn.
+16:12:20: GetConfigData Key: TLFileType
+16:12:34: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:12:36: GetConfigData Key: TLFileType
+16:12:36: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:37: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:38: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: GetConfigData Key: TLDirection
+16:12:39: GetConfigData Key: TLFileType
+16:12:39: TabChanged .!notebook.!startpage - .!notebook.!timetablepage
+16:12:59: Tabunselected: Bildfahrplan
+16:12:59: Tabselected: Ansicht-Einstellungen
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:12:59: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:12:59: TabChanged .!notebook.!timetablepage - .!notebook.!configurationpage
+16:13:06: Tabunselected: Ansicht-Einstellungen
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:06: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:08: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:08: SaveConfigData
+16:13:08: SaveConfig: Ansicht-Einstellungen - {'Bfp_width': 2400, 'Bfp_height': 1200, 'Bfp_filename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn', 'Bfp_trainfilename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S8161.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 'StartPage', 'startpagename': 'StartPage', 'Bfp_start': 4, 'Bfp_duration': 18, 'Bfp_TrainTypeColors': {'0': {'Bfp_TrainType': 'D', 'Bfp_TrainTypeColor': '#ff8080'}, '1': {'Bfp_TrainType': 'E', 'Bfp_TrainTypeColor': '#00ff00'}, '2': {'Bfp_TrainType': 'IC', 'Bfp_TrainTypeColor': '#ff8040'}, '3': {'Bfp_TrainType': 'N', 'Bfp_TrainTypeColor': '#004000'}, '4': {'Bfp_TrainType': 'Ng', 'Bfp_TrainTypeColor': '#0000ff'}, '5': {'Bfp_TrainType': 'ExprE', 'Bfp_TrainTypeColor': '#0000a0'}, '6': {'Bfp_TrainType': 'ICE', 'Bfp_TrainTypeColor': '#ff0000'}, '7': {'Bfp_TrainType': '*', 'Bfp_TrainTypeColor': '#000000'}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}}, 'horizontal': 'Horizontal', 'vertical': 0, 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1}
+16:13:08: Tabselected: Bildfahrplan
+16:13:08: Bildfahrplan
+16:13:08: GetConfigData Key: Bfp_width
+16:13:08: GetConfigData Key: Bfp_height
+16:13:08: GetConfigData Key: Bfp_filename
+16:13:08: GetConfigData Key: Bfp_trainfilename
+16:13:08: GetConfigData Key: Bfp_start
+16:13:08: GetConfigData Key: Bfp_duration
+16:13:08: GetConfigData Key: Bfp_TrainTypeColors
+16:13:08: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:08: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:08: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:08: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:08: GetConfigData Key: TLDirection
+16:13:08: Input File, D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn.
+16:13:08: GetConfigData Key: TLFileType
+16:13:08: GetConfigData Key: TLFileType
+16:13:08: GetConfigData Key: TLFileType
+16:13:08: GetConfigData Key: TLFileType
+16:13:08: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:09: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:10: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:11: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: GetConfigData Key: TLDirection
+16:13:12: GetConfigData Key: TLFileType
+16:13:12: TabChanged .!notebook.!configurationpage - .!notebook.!timetablepage
+16:13:19: Tabunselected: Bildfahrplan
+16:13:19: Tabselected: Ansicht-Einstellungen
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:19: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:19: TabChanged .!notebook.!timetablepage - .!notebook.!configurationpage
+16:13:29: Tabunselected: Ansicht-Einstellungen
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:29: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:31: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:31: SaveConfigData
+16:13:31: SaveConfig: Ansicht-Einstellungen - {'Bfp_width': 2400, 'Bfp_height': 1200, 'Bfp_filename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn', 'Bfp_trainfilename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S8161.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 'StartPage', 'startpagename': 'StartPage', 'Bfp_start': 12, 'Bfp_duration': 4, 'Bfp_TrainTypeColors': {'0': {'Bfp_TrainType': 'D', 'Bfp_TrainTypeColor': '#ff8080'}, '1': {'Bfp_TrainType': 'E', 'Bfp_TrainTypeColor': '#00ff00'}, '2': {'Bfp_TrainType': 'IC', 'Bfp_TrainTypeColor': '#ff8040'}, '3': {'Bfp_TrainType': 'N', 'Bfp_TrainTypeColor': '#004000'}, '4': {'Bfp_TrainType': 'Ng', 'Bfp_TrainTypeColor': '#0000ff'}, '5': {'Bfp_TrainType': 'ExprE', 'Bfp_TrainTypeColor': '#0000a0'}, '6': {'Bfp_TrainType': 'ICE', 'Bfp_TrainTypeColor': '#ff0000'}, '7': {'Bfp_TrainType': '*', 'Bfp_TrainTypeColor': '#000000'}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}}, 'horizontal': 'Horizontal', 'vertical': 0, 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1}
+16:13:31: Tabselected: Bildfahrplan
+16:13:31: Bildfahrplan
+16:13:31: GetConfigData Key: Bfp_width
+16:13:31: GetConfigData Key: Bfp_height
+16:13:31: GetConfigData Key: Bfp_filename
+16:13:31: GetConfigData Key: Bfp_trainfilename
+16:13:31: GetConfigData Key: Bfp_start
+16:13:31: GetConfigData Key: Bfp_duration
+16:13:31: GetConfigData Key: Bfp_TrainTypeColors
+16:13:31: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:31: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:31: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:31: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:31: GetConfigData Key: TLDirection
+16:13:31: Input File, D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn.
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:31: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:32: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:33: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:34: GetConfigData Key: TLFileType
+16:13:35: GetConfigData Key: TLDirection
+16:13:35: GetConfigData Key: TLFileType
+16:13:35: TabChanged .!notebook.!configurationpage - .!notebook.!timetablepage
+16:13:40: Tabunselected: Bildfahrplan
+16:13:40: Tabselected: Ansicht-Einstellungen
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:40: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:40: TabChanged .!notebook.!timetablepage - .!notebook.!configurationpage
+16:13:42: Tabunselected: Ansicht-Einstellungen
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '0']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '1']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '2']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '3']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '4']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '5']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '6']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '7']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '8']
+16:13:42: ['ConfigurationPage', 'Bfp_TrainTypeColors', '9']
+16:13:42: Tabselected: Fahrplan und Strecke
+16:13:42: TabChanged .!notebook.!configurationpage - .!notebook.!stationsconfigurationpage
+16:13:54: Tabunselected: Fahrplan und Strecke
+16:13:54: Tabselected: Bildfahrplan
+16:13:54: Bildfahrplan
+16:13:54: GetConfigData Key: Bfp_width
+16:13:54: GetConfigData Key: Bfp_height
+16:13:54: GetConfigData Key: Bfp_filename
+16:13:54: GetConfigData Key: Bfp_trainfilename
+16:13:54: GetConfigData Key: Bfp_start
+16:13:54: GetConfigData Key: Bfp_duration
+16:13:54: GetConfigData Key: Bfp_TrainTypeColors
+16:13:54: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:54: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:54: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:54: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:13:54: GetConfigData Key: TLDirection
+16:13:54: GetConfigData Key: TLFileType
+16:13:54: TabChanged .!notebook.!stationsconfigurationpage - .!notebook.!timetablepage
+16:14:05: Tabunselected: Bildfahrplan
+16:14:05: Tabselected: Fahrplan und Strecke
+16:14:05: TabChanged .!notebook.!timetablepage - .!notebook.!stationsconfigurationpage
+16:14:12: Tabunselected: Fahrplan und Strecke
+16:14:13: SaveConfigData
+16:14:13: SaveConfig: Fahrplan und Strecke - {'Bfp_width': 2400, 'Bfp_height': 1200, 'Bfp_filename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn', 'Bfp_trainfilename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S8162.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 'StartPage', 'startpagename': 'StartPage', 'Bfp_start': 12, 'Bfp_duration': 4, 'Bfp_TrainTypeColors': {'0': {'Bfp_TrainType': 'D', 'Bfp_TrainTypeColor': '#ff8080'}, '1': {'Bfp_TrainType': 'E', 'Bfp_TrainTypeColor': '#00ff00'}, '2': {'Bfp_TrainType': 'IC', 'Bfp_TrainTypeColor': '#ff8040'}, '3': {'Bfp_TrainType': 'N', 'Bfp_TrainTypeColor': '#004000'}, '4': {'Bfp_TrainType': 'Ng', 'Bfp_TrainTypeColor': '#0000ff'}, '5': {'Bfp_TrainType': 'ExprE', 'Bfp_TrainTypeColor': '#0000a0'}, '6': {'Bfp_TrainType': 'ICE', 'Bfp_TrainTypeColor': '#ff0000'}, '7': {'Bfp_TrainType': '*', 'Bfp_TrainTypeColor': '#000000'}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}}, 'horizontal': 'Horizontal', 'vertical': 0, 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1}
+16:14:13: Tabselected: Bildfahrplan
+16:14:13: Bildfahrplan
+16:14:14: GetConfigData Key: Bfp_width
+16:14:14: GetConfigData Key: Bfp_height
+16:14:14: GetConfigData Key: Bfp_filename
+16:14:14: GetConfigData Key: Bfp_trainfilename
+16:14:14: GetConfigData Key: Bfp_start
+16:14:14: GetConfigData Key: Bfp_duration
+16:14:14: GetConfigData Key: Bfp_TrainTypeColors
+16:14:14: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:14: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:14: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:14: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:14: GetConfigData Key: TLDirection
+16:14:14: Input File, D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn.
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:14: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:15: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:16: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: GetConfigData Key: TLDirection
+16:14:17: GetConfigData Key: TLFileType
+16:14:17: TabChanged .!notebook.!stationsconfigurationpage - .!notebook.!timetablepage
+16:14:21: Tabunselected: Bildfahrplan
+16:14:21: Tabselected: Fahrplan und Strecke
+16:14:21: TabChanged .!notebook.!timetablepage - .!notebook.!stationsconfigurationpage
+16:14:34: Tabunselected: Fahrplan und Strecke
+16:14:35: SaveConfigData
+16:14:35: SaveConfig: Fahrplan und Strecke - {'Bfp_width': 2400, 'Bfp_height': 1200, 'Bfp_filename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn', 'Bfp_trainfilename': 'D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S6759.timetable.xml', 'pos_x': 1, 'pos_y': 23, 'startpage': 'StartPage', 'startpagename': 'StartPage', 'Bfp_start': 12, 'Bfp_duration': 4, 'Bfp_TrainTypeColors': {'0': {'Bfp_TrainType': 'D', 'Bfp_TrainTypeColor': '#ff8080'}, '1': {'Bfp_TrainType': 'E', 'Bfp_TrainTypeColor': '#00ff00'}, '2': {'Bfp_TrainType': 'IC', 'Bfp_TrainTypeColor': '#ff8040'}, '3': {'Bfp_TrainType': 'N', 'Bfp_TrainTypeColor': '#004000'}, '4': {'Bfp_TrainType': 'Ng', 'Bfp_TrainTypeColor': '#0000ff'}, '5': {'Bfp_TrainType': 'ExprE', 'Bfp_TrainTypeColor': '#0000a0'}, '6': {'Bfp_TrainType': 'ICE', 'Bfp_TrainTypeColor': '#ff0000'}, '7': {'Bfp_TrainType': '*', 'Bfp_TrainTypeColor': '#000000'}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': ''}}, 'horizontal': 'Horizontal', 'vertical': 0, 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1}
+16:14:35: Tabselected: Bildfahrplan
+16:14:35: Bildfahrplan
+16:14:35: GetConfigData Key: Bfp_width
+16:14:35: GetConfigData Key: Bfp_height
+16:14:35: GetConfigData Key: Bfp_filename
+16:14:35: GetConfigData Key: Bfp_trainfilename
+16:14:35: GetConfigData Key: Bfp_start
+16:14:35: GetConfigData Key: Bfp_duration
+16:14:35: GetConfigData Key: Bfp_TrainTypeColors
+16:14:35: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:35: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:35: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:35: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\S7_Gesamtstrecke_Diesel
+16:14:36: GetConfigData Key: TLDirection
+16:14:36: Input File, D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn.
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: Kein BuchfahrplanRohDatei Element gefunden Üg68591 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: Kein BuchfahrplanRohDatei Element gefunden Üg68592 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: Kein BuchfahrplanRohDatei Element gefunden Üg68594 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: Kein BuchfahrplanRohDatei Element gefunden Üg68596 D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:36: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:37: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:38: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLFileType
+16:14:39: GetConfigData Key: TLDirection
+16:14:39: GetConfigData Key: TLFileType
+16:14:41: TabChanged .!notebook.!stationsconfigurationpage - .!notebook.!timetablepage
+16:15:00: Tabunselected: Bildfahrplan
+16:15:00: Tabselected: Fahrplan und Strecke
+16:15:00: TabChanged .!notebook.!timetablepage - .!notebook.!stationsconfigurationpage
+16:15:08: Cancel
+16:15:08: Cancel_without_save
+16:15:08: Cancel_without_save2
+16:15:08: Close_notification
+16:15:08: SaveConfigData

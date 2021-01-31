@@ -226,7 +226,6 @@ class StationsConfigurationPage(tk.Frame):
             if value != "": # station list selected
                 trainname = selectedItem_dict.get("text","")
                 xml_filename = self.Bfp_xmlfilenamelist.get(trainname)
-                
                 if xml_filename != "":
                     self.controller.set_string_variable(xml_filename,paramkey="Bfp_trainfilename", macrokey=self.tabClassName)
                 else:
