@@ -381,6 +381,8 @@ class TimeTableGraphCommon():
             self.trainName = self.trainType + train.get("TrainName","0000")
             self.trainLineName = train.get("TrainLine","")
             self.trainEngine = train.get("TrainEngine","")
+            self.outgoing_station = train.get("Outgoing_Station","")
+            self.incoming_station = train.get("Incoming_Station","") 
             if (self.trainTypeList != [] and not self.trainType in self.trainTypeList):
                 break
             self.trainColor = self.ZugGattung_to_Color.get(self.trainType,self.default_trainColor)
@@ -685,10 +687,33 @@ class TimeTableGraphCommon():
                 self.trainLine.extend([x, y])
                 train_line_objid = self.tt_canvas.create_line(self.trainLine,fill=self.trainColor,width=4,activewidth=8)
                 self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
-        except BaseException as e:
+                if self.outgoing_station!="": # draw outgoing arrow
+                    if self.direction == "down":
+                        arrow_delta = 10
+                    else:
+                        arrow_delta = -10
+                    if self.draw_stations_vertical:
+                        train_line_out_objid = self.tt_canvas.create_line([x,y,x,y+arrow_delta],fill=self.trainColor,width=4,activewidth=8,arrow="last",arrowshape=(10,10,4))
+                    else:
+                        train_line_out_objid = self.tt_canvas.create_line([x,y,x+arrow_delta,y],fill=self.trainColor,width=4,activewidth=8,arrow="last",arrowshape=(10,10,4))
+                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_out_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nNach "+self.outgoing_station, key=self.trainName,button_1=True)
+                    
+                if self.incoming_station!="": # draw outgoing arrow
+                    if self.direction == "down":
+                        arrow_delta = 10
+                    else:
+                        arrow_delta = -10
+                    x = self.trainLine[0]
+                    y = self.trainLine[1]                    
+                    if self.draw_stations_vertical:
+                        train_line_in_objid = self.tt_canvas.create_line([x,y,x,y-arrow_delta],fill=self.trainColor,width=4,activewidth=8,arrow="first",arrowshape=(10,10,4))
+                    else:
+                        train_line_in_objid = self.tt_canvas.create_line([x,y,x-arrow_delta,y],fill=self.trainColor,width=4,activewidth=8,arrow="first",arrowshape=(10,10,4))
+                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_in_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nVon "+self.incoming_station, key=self.trainName,button_1=True)                
+        except BaseException as e                    :
+                    
             logging.debug("SetEnd Error %s %s",self.trainType+self.trainName+"-"+repr(self.trainLine),e)
             return  
-
 #            
 #                * Convert the time value, 0 - 1439 to the x graph position.
 #                * @param time The time value.
@@ -758,10 +783,20 @@ class TimeTableGraphCommon():
         arriveTime = FplAnk_min
         departTime = FplAbf_min
         trainstops[trainstop_idx] = {"StationIdx" : station_idx,
-                                             "ArriveTime" : arriveTime,
-                                             "DepartTime" : departTime
+                                     "ArriveTime" : arriveTime,
+                                     "DepartTime" : departTime
                                              }
         return trainstop_idx + 1
+    
+    def enter_train_incoming_station(self, train_idx, FplName):
+        train_dict = self.trains.get(train_idx)
+        train_dict["Incoming_Station"] = FplName
+        return
+    
+    def enter_train_outgoing_station(self, train_idx, FplName):
+        train_dict = self.trains.get(train_idx)
+        train_dict["Outgoing_Station"] = FplName
+        return
 
     def get_fplZeile_entry(self, FplZeile_dict, main_key, key, default=""):
         try:
@@ -892,6 +927,7 @@ class TimeTableGraphCommon():
             FplZeile_list = zusi_trn_zug_dict.get("FahrplanEintrag",{})
             if FplZeile_list=={}:
                 return
+            Fpl_Zeile_cnt_max = len(FplZeile_list)
             for FplZeile_dict in FplZeile_list:
                 FplAbf = FplZeile_dict.get("@Abf","")
                 if FplAbf == "":
@@ -908,6 +944,14 @@ class TimeTableGraphCommon():
                 station_idx = self.search_station(FplName)
                 if station_idx != -1:
                     train_stop_idx = self.enter_train_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min)
+                else:
+                    if train_stop_idx == 0:
+                        # train is comming from another station
+                        self.enter_train_incoming_station(train_idx, FplName)
+            if station_idx == -1:
+                #last station is unknown
+                self.enter_train_outgoing_station(train_idx, FplName)
+                
         except BaseException as e:
             logging.debug("FplZeile conversion Error %s %s",ZugGattung+ZugNummer+"-"+repr(FplZeile_dict),e)
                                              
