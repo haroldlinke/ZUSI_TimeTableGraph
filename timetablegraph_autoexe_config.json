@@ -92,6 +92,10 @@
   {
    "optionDest": "datas",
    "value": "D:/data/doc/GitHub/ZUSI_TimeTableGraph/TimeTable_config.json;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/data/doc/GitHub/ZUSI_TimeTableGraph/gs9.53.3;gs9.53.3/"
   }
  ],
  "nonPyinstallerOptions": {

@@ -1072,6 +1072,9 @@ class Timetable_main(Frame):
             Bfpl_filepathname = os.path.join(trn_filepath,Bfpl_file_name)
         else:
             Bfpl_filepathname = ""
+            logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
+            self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
+            return
 
         station_list = self.get_station_list(trn_zug_dict)
         zusi_fahrplan_gruppe_dict = self.zusi_zuglist_dict.get(fahrplan_gruppe,{})
