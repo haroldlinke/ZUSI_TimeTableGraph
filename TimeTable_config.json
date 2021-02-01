@@ -1,8 +1,8 @@
 {
     "Bfp_width": 2400,
     "Bfp_height": 1200,
-    "Bfp_filename": "D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen/S7_Gesamtstrecke_Diesel.fpn",
-    "Bfp_trainfilename": "D:/data/Zusi3/_ZusiData/Timetables/test/S7_Wolfratshausen\\S7_Gesamtstrecke_Diesel\\S6759.timetable.xml",
+    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D247.timetable.xml",
     "pos_x": -8,
     "pos_y": -8,
     "startpage": "StartPage",
@@ -55,6 +55,6 @@
     "vertical": 0,
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
-    "TLFileType": ".timetable.xml",
-    "TLFileType_No": 1
+    "TLFileType": ".trn",
+    "TLFileType_No": 0
 }

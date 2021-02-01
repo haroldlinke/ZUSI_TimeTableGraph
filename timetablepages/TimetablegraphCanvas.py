@@ -688,6 +688,7 @@ class TimeTableGraphCommon():
                 train_line_objid = self.tt_canvas.create_line(self.trainLine,fill=self.trainColor,width=4,activewidth=8)
                 self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
                 if self.outgoing_station!="": # draw outgoing arrow
+                    logging.debug("Print Outgoing-Station: %s %s",self.trainType+self.trainName,self.outgoing_station)
                     if self.direction == "down":
                         arrow_delta = 10
                     else:
@@ -699,6 +700,7 @@ class TimeTableGraphCommon():
                     self.controller.ToolTip_canvas(self.tt_canvas, train_line_out_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nNach "+self.outgoing_station, key=self.trainName,button_1=True)
                     
                 if self.incoming_station!="": # draw outgoing arrow
+                    logging.debug("Print Incoming-Station: %s %s",self.trainType+self.trainName,self.incoming_station)
                     if self.direction == "down":
                         arrow_delta = 10
                     else:
@@ -789,11 +791,13 @@ class TimeTableGraphCommon():
         return trainstop_idx + 1
     
     def enter_train_incoming_station(self, train_idx, FplName):
+        logging.debug("Save Incoming-Station: %s %s",train_idx, FplName)
         train_dict = self.trains.get(train_idx)
         train_dict["Incoming_Station"] = FplName
         return
     
     def enter_train_outgoing_station(self, train_idx, FplName):
+        logging.debug("Save Outgoing-Station: %s %s",train_idx, FplName)
         train_dict = self.trains.get(train_idx)
         train_dict["Outgoing_Station"] = FplName
         return

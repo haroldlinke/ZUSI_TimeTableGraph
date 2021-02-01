@@ -1,3 +1,4 @@
 
 *.pyc
 logfile.log
+*.log
