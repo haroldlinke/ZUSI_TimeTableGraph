@@ -118,15 +118,17 @@ class ConfigurationPage(tk.Frame):
                     for mparamkey in mparamlist:
                         configdatakey = self.controller.getConfigDatakey(mparamkey)
                         value = self.getConfigData(configdatakey)
-                        self.controller.set_macroparam_val(self.tabClassName, mparamkey, value)
+                        if value != None:
+                            self.controller.set_macroparam_val(self.tabClassName, mparamkey, value)
                 else:
                     # get the repeated multipleparams rep_mparamkey=macro.mparamkey.index (e.g. ConfigDataPage.Z21Data.0
                     for i in range(int(mp_repeat)):
                         for mparamkey in mparamlist:
                             configdatakey = self.controller.getConfigDatakey(mparamkey)
                             value = self.controller.getConfigData_multiple(configdatakey,paramkey,i)
-                            mp_macro = self.tabClassName+"." + paramkey + "." + str(i)
-                            self.controller.set_macroparam_val(mp_macro, mparamkey, value)
+                            if value != None:
+                                mp_macro = self.tabClassName+"." + paramkey + "." + str(i)
+                                self.controller.set_macroparam_val(mp_macro, mparamkey, value)
             else:
                 configdatakey = self.controller.getConfigDatakey(paramkey)
                 value = self.getConfigData(configdatakey)

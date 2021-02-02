@@ -115,15 +115,28 @@ class TimeTablePage(tk.Frame):
             pass    
         
     def create_train_type_to_color_dict(self):
-        self.train_type_to_color_dict = {}
-        config_traintype_to_color_dict = self.getConfigData("Bfp_TrainTypeColors")
-        
-        for i,value_dict in config_traintype_to_color_dict.items():
+        self.train_type_prop_dict = {}
+        self.train_type_to_width_dict = {}
+        config_traintype_prop_dict = self.getConfigData("Bfp_TrainTypeProp")
+        if config_traintype_prop_dict == None:
+            config_traintype_prop_dict = {"*":{
+                                                "Bfp_TrainType": "*",
+                                                "Bfp_TrainTypeColor": "black",
+                                                "Bfp_TrainTypeWidth": 4,
+                                                "Bfp_TrainTypeLabel": "Alle Segmente",
+                                                "Bfp_TrainTypeLabel_No": 0,
+                                                "Bfp_TrainTypeLabelSize": 10
+                                             }
+                                         }
+                
+            return
+        for i,value_dict in config_traintype_prop_dict.items():
             print(repr(value_dict))
             traintype = value_dict.get("Bfp_TrainType","")
-            traintypecolor = value_dict.get("Bfp_TrainTypeColor","black")
+            #traintypecolor = value_dict.get("Bfp_TrainTypeColor","black")
+            #traintypewidth = value_dict.get("Bfp_TrainTypeWidth","4")
             if traintype != "":
-                self.train_type_to_color_dict[traintype]=traintypecolor
+                self.train_type_prop_dict[traintype]=value_dict
         
 
     def tabselected(self):
@@ -139,7 +152,8 @@ class TimeTablePage(tk.Frame):
         starthour = self.getConfigData("Bfp_start")
         duration = self.getConfigData("Bfp_duration")
         self.create_train_type_to_color_dict()
-        self.timetable_main.set_zuggattung_to_color(self.train_type_to_color_dict)
+        self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
+
         
         if fpl_filename == "":
             self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
@@ -147,16 +161,16 @@ class TimeTablePage(tk.Frame):
         if xml_filename == "":
             self.controller.set_statusmessage("Kein ZUSI Buchfahrplann eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
             return
-        if starthour == "":
+        if starthour == "" or starthour==None:
             self.controller.set_statusmessage("Keine Startzeit für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
             return
-        if duration == "":
+        if duration == "" or duration==None:
             self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
             return        
         
         self.timetable_main.create_zusi_zug_liste(fpl_filename)
         
-        if (fpl_filename != self.fpl_filename) or (self.xml_filename != xml_filename) or (self.starthour != starthour) or (self.duration != duration):
+        if True: # (fpl_filename != self.fpl_filename) or (self.xml_filename != xml_filename) or (self.starthour != starthour) or (self.duration != duration):
             self.xml_filename = xml_filename
             self.fpl_filename = fpl_filename
             self.starthour = starthour

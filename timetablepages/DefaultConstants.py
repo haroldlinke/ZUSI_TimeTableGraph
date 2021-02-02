@@ -11,7 +11,7 @@
 # *
 # ***************************************************************************
 
-PROG_VERSION ="V00.05 31.01.2021"
+PROG_VERSION ="V00.07 01.02.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -69,6 +69,5 @@ TOOLTIPLIST = {
                    "Aktuelle Farbe": "Aktuelle Farbe",
                    "ColorWheel":"Farbton und Sättigung auswählen durch Mausklick"
                    }
-
 
 

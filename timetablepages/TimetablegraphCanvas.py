@@ -95,7 +95,8 @@ class TimeTableGraphCommon():
         self.controller = controller
         self.xml_filename = xml_filename
         self.showTrainTimes = showTrainTimes
-        self.ZugGattung_to_Color = {}
+        self.canvas_traintype_prop_dict = {}
+        self.ZugGattung_to_Width = {}
         self.trainTypeList = [] #["D","E"]
         # init timetable with dummy data
         self.timetable_dict = {"Schedule":
@@ -187,7 +188,8 @@ class TimeTableGraphCommon():
         #   Train
         self.trainName = ""
         self.trainThrottle = 0
-        self.trainColor = 0 
+        self.trainProp = 0
+        self.trainWidth = 4
         self.trainLine = []
         #  Stop
         self.stopCnt = 0
@@ -203,8 +205,35 @@ class TimeTableGraphCommon():
         self.sizeMinute = 0.0
         self.throttleX = 0.0
 
-    def set_zuggattung_to_color(self,traintype_to_color_dict):
-        self.ZugGattung_to_Color = traintype_to_color_dict.copy()
+    def set_tt_traintype_prop(self,traintype_prop_dict):
+        self.canvas_traintype_prop_dict = traintype_prop_dict.copy()
+        
+    def determine_headersize(self):
+        
+        if self.draw_stations_vertical: 
+            return 140
+        stationNameLengthMax=0
+        s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize")
+        s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No")
+        self.s_font = font.Font(family="SANS_SERIF", size=int(s_labelsize))             
+        for stationIdx in self.stations:
+            station = self.stations.get(stationIdx,{})
+            stationName = station.get("StationName","")
+            stationNameLength = self.s_font.measure(stationName)
+            stationNameLengthMax = max(stationNameLength,stationNameLengthMax)
+        if s_labeldir==0:
+            return 140
+        elif s_labeldir==1:
+            return stationNameLengthMax+100
+        else:
+            return int(stationNameLengthMax/1.4)+100
+            
+        
+        return stationNameLengthMax
+            
+        
+        self.graphHeadersize = 140
+        
 
     def doPaint (self,canvas,starthour=12,duration=7):
         TLDirection = self.controller.getConfigData("TLDirection")
@@ -218,11 +247,15 @@ class TimeTableGraphCommon():
         self.stationGrid  = {} 
         self.hourGrid     = []
         self.textLocation = []
+        self.graphHeadersize = self.determine_headersize()
         self.graphTop = self.graphHeadersize
         self.graphHeight = self.dimHeight - self.graphTop - self.graphBottomsize
         self.graphBottom = self.graphTop + self.graphHeight
         self.graphLeft = self.graphLeftbordersize
         self.graphWidth = self.dimWidth - self.graphLeft - self.graphRightbordersize
+        self.TrainMinuteSize = self.controller.getConfigData("Bfp_TrainMinuteSize")
+        self.TrainMinuteFont = font.Font(family="SANS_SERIF", size=int(self.TrainMinuteSize))
+        self.showTrainTimes = self.TrainMinuteSize > 0
         # Draw the left column components
         self.drawInfoSection()
         self.drawStationSection()
@@ -230,6 +263,11 @@ class TimeTableGraphCommon():
         if self.draw_stations_vertical:
             self.graphLeft = self.infoColWidth + 50.0
             self.graphWidth = self.dimWidth - self.infoColWidth - 65.0
+        else:
+            self.graphTop = self.graphHeadersize + 10
+            self.graphHeight = self.dimHeight - self.graphTop - self.graphBottomsize
+            self.graphBottom = self.graphTop + self.graphHeight            
+        
         self.graphRight = self.graphLeft + self.graphWidth
         self.drawHours()
         self.drawGraphGrid()
@@ -245,41 +283,62 @@ class TimeTableGraphCommon():
         return x,y
 
     def determine_station_xy_point(self, stationName, distance):
-        self.infoColWidth = max(self.infoColWidth, self.stdFont.measure(stationName) + 5)
+        self.infoColWidth = max(self.infoColWidth, self.s_font.measure(stationName) + 5)
         if self.draw_stations_vertical:
             y = ((self.graphHeight - 50) / self.maxDistance) * distance + self.graphTop + 30  #// calculate the Y offset                
             x = 15.0
         else:
             x = ((self.graphWidth - 50) / self.maxDistance) * distance + self.graphLeft + 30  #// calculate the Y offset                
-            y = self.graphTop - 20                        
+            y = self.graphTop - 10                        
         return x,y
 
     def print_station(self, stationIdx, stationName, distance, stationkm):
+        #s_color=self.controller.getConfigData("Bfp_S_LineColor")
+        s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize")
+        s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No")
+        self.s_font = font.Font(family="SANS_SERIF", size=int(s_labelsize))
         x, y=self.determine_station_xy_point(stationName, distance)
-        textwidth = self.stdFont.measure(stationName)
+        textwidth = self.s_font.measure(stationName)
         textheight = 12
         if self.draw_stations_vertical:
             self.stationGrid[stationIdx] = y
             stationName = stationName + " (km "+str(f"{stationkm:.1f}")+")"
-            self.tt_canvas.create_text(x, y, text=stationName, font=self.stdFont, anchor="w")
+            s_obj=self.tt_canvas.create_text(x, y, text=stationName, anchor="w",font=self.s_font)
         else:
             self.stationGrid[stationIdx] = x
-            yName = y - 15 * (stationIdx%2)
-            self.tt_canvas.create_rectangle(x-textwidth/2, yName-textheight/2, x+textwidth/2, yName+textheight/2, fill="white",width=0,outline="white")
-            self.tt_canvas.create_text(x, yName, text=stationName, font=self.stdFont, anchor="center")
+            if s_labeldir==0:
+                yName = y - 15 * (stationIdx%2)
+                self.tt_canvas.create_rectangle(x-textwidth/2, yName-textheight/2, x+textwidth/2, yName+textheight/2, fill="white",width=0,outline="white")
+                s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="center",font=self.s_font)
+            elif s_labeldir==1:
+                s_labelangle=90
+                yName = y - 15
+                #self.tt_canvas.create_rectangle(x, yName-textheight/2, x, yName+textheight/2, fill="white",width=0,outline="white")
+                s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="w",font=self.s_font)                
+                self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)
+            elif s_labeldir==2:
+                yName = y - 15
+                #self.tt_canvas.create_rectangle(x, yName-textheight/2, x, yName+textheight/2, fill="white",width=0,outline="white")
+                s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="w",font=self.s_font)                
+                s_labelangle=45
+                self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)            
             yKm = y + 12
-            self.tt_canvas.create_text(x, yKm, text=str(f"{stationkm:.1f}"), font=self.stdFont, anchor="center")
+            self.tt_canvas.create_text(x, yKm, text=str(f"{stationkm:.1f}"), anchor="center",font=self.s_font)
 
     def print_hour(self, i, currentHour):
+        th_color=self.controller.getConfigData("Bfp_TH_LineColor")
+        th_labelsize=self.controller.getConfigData("Bfp_TH_LineLabelSize")
+        #th_labeldir=self.controller.getConfigData("Bfp_TH_LineLabelDir_No")
+        th_font = font.Font(family="SANS_SERIF", size=int(th_labelsize))
         hourString = str(currentHour)+":00"
         hOffset = self.stdFont.measure(hourString) / 2 # hOffset = self.g2.getFontMetrics().stringWidth(hourString) / 2;
         if self.draw_stations_vertical:
             hourXY = (self.hourWidth * i) + self.hourOffset + self.graphLeft
-            self.tt_canvas.create_text(hourXY - hOffset, self.graphBottom + 20, text = hourString, anchor="w")
-            self.tt_canvas.create_text(hourXY - hOffset, self.graphTop - 8, text = hourString, anchor="w")
+            self.tt_canvas.create_text(hourXY - hOffset, self.graphBottom + 20, text = hourString, anchor="w",fill="black",font=th_font)
+            self.tt_canvas.create_text(hourXY - hOffset, self.graphTop - 8, text = hourString, anchor="w",fill="black",font=th_font)
         else:
             hourXY = (self.hourWidth * i) + self.hourOffset + self.graphTop
-            self.tt_canvas.create_text(self.graphLeft-10,hourXY, text = hourString, anchor="e")
+            self.tt_canvas.create_text(self.graphLeft-10,hourXY, text = hourString, anchor="e",fill="black",font=th_font)
         self.hourMap[currentHour] = hourXY
         self.hourGrid.append(hourXY);
         if (i == 0):
@@ -349,16 +408,21 @@ class TimeTableGraphCommon():
         # Print the graph box
         self.tt_canvas.create_rectangle(self.graphLeft, self.graphTop, self.graphLeft+self.graphWidth, self.graphTop + self.graphHeight)
         # Print the grid lines
+        
+        s_color=self.controller.getConfigData("Bfp_S_LineColor")
+        s_width=self.controller.getConfigData("Bfp_S_LineWidth")
+        th_color=self.controller.getConfigData("Bfp_TH_LineColor")
+        th_width=self.controller.getConfigData("Bfp_TH_LineWidth")        
         if self.draw_stations_vertical:
             for y in self.stationGrid.values():
-                self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=2, fill="gray")
+                self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color)
             for x in self.hourGrid:
-                self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=2, fill="gray")
+                self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color)
         else:
             for y in self.hourGrid:
-                self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=2, fill="gray")
+                self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color)
             for x in self.stationGrid.values():
-                self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=2, fill="gray")                        
+                self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color)                        
 
 #     * Create the train line for each train with labels.  Include times if
 #     * selected.
@@ -373,7 +437,15 @@ class TimeTableGraphCommon():
         else:
             self.sizeMinute = self.graphHeight / ((self.duration) * 60)
         self.throttleX = 0
-        self.default_trainColor = self.ZugGattung_to_Color.get("*","black")
+        const_default_trainprop = {
+            "Bfp_TrainType": "*",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        }
+        self.default_trainprop = self.canvas_traintype_prop_dict.get("*",const_default_trainprop)
         for trainidx in self.trains:
             self.tt_canvas.update()
             train = self.trains.get(trainidx,{})
@@ -385,8 +457,13 @@ class TimeTableGraphCommon():
             self.incoming_station = train.get("Incoming_Station","") 
             if (self.trainTypeList != [] and not self.trainType in self.trainTypeList):
                 break
-            self.trainColor = self.ZugGattung_to_Color.get(self.trainType,self.default_trainColor)
-            if self.trainColor == "": 
+            self.trainProp = self.canvas_traintype_prop_dict.get(self.trainType,self.default_trainprop)
+            self.trainColor = self.trainProp.get("Bfp_TrainTypeColor","Black")
+            self.trainWidth = int(self.trainProp.get("Bfp_TrainTypeWidth","2"))
+            self.TrainLabelPos = self.trainProp.get("Bfp_TrainTypeLabel_No","")
+            self.TrainLabelSize = self.trainProp.get("Bfp_TrainTypeLabelSize","10")
+            self.TrainLabelFont = font.Font(family="SANS_SERIF", size=int(self.TrainLabelSize))
+            if self.trainColor == "" or self.trainWidth == 0:
                 continue
             self.trainLine = []
             self.stops = train.get("Stops",{});
@@ -394,7 +471,9 @@ class TimeTableGraphCommon():
             self.firstStop = True;
             self.lastStop = False;
             self.prevStop = None
-            self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan für Zug - "+self.trainName) 
+            self.drawTrainNameFlag = self.TrainLabelPos in [0,1,2,3]
+            self.stopMiddleIdx=int(self.stopCnt/2)-1
+            self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan für Zug - "+self.trainName)
             for self.stopIdx,stop_dict in self.stops.items():
                 self.arriveTime = stop_dict.get("ArriveTime",0)
                 self.departTime = stop_dict.get("DepartTime",0)
@@ -476,7 +555,7 @@ class TimeTableGraphCommon():
             return                
         minutes = "{:02d}".format(time % 60) 
         hours = "{:02d}".format(int(time/60))   
-        textbox_x = self.stdFont.measure(minutes)
+        textbox_x = self.TrainMinuteFont.measure(minutes)
         if self.draw_stations_vertical:
             if mode ==  "begin" :
                 mode_txt = "Start"
@@ -554,7 +633,7 @@ class TimeTableGraphCommon():
         #                10
         #       )
 
-        trainTime_objid = self.tt_canvas.create_text(x , y, text = minutes, anchor="center",activefill="red")
+        trainTime_objid = self.tt_canvas.create_text(x , y, text = minutes, anchor="center",activefill="red",font=self.TrainMinuteFont)
         if self.trainLineName == None:
             self.trainLineName = ""
         self.controller.ToolTip_canvas(self.tt_canvas, trainTime_objid, text=hours+":"+minutes+"\nZug: "+self.trainName+" - "+mode_txt+"\n"+self.trainLineName, key=self.trainName,button_1=True)
@@ -650,7 +729,7 @@ class TimeTableGraphCommon():
         self.trainLine.extend([x, y])
         self.drawTrainTime(self.arriveTime, "arrive", x, y);  #
         if len(self.trainLine)>3:
-            self.draw_trainName_parallel(self.trainName, self.trainLine[-4],self.trainLine[-3],x, y)                
+            self.draw_trainName_parallel(self.trainName, self.trainLine[-4],self.trainLine[-3],x, y)
         self.setDirection();
         # Check for duration after arrive
         if (self.departTime - self.arriveTime) > 0 :
@@ -685,20 +764,26 @@ class TimeTableGraphCommon():
                     logging.debug("SetEnd Error: %s %s",self.trainType+self.trainName,repr(stop))
                     return
                 self.trainLine.extend([x, y])
-                train_line_objid = self.tt_canvas.create_line(self.trainLine,fill=self.trainColor,width=4,activewidth=8)
+                train_line_objid = self.tt_canvas.create_line(self.trainLine,fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2)
                 self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
                 if self.outgoing_station!="": # draw outgoing arrow
+                    logging.debug("Print Outgoing-Station: %s %s",self.trainType+self.trainName,self.outgoing_station)
+                    arrowwidth = self.trainWidth
+                    if arrowwidth<4:
+                        arrowwidth=4
+                    
                     if self.direction == "down":
                         arrow_delta = 10
                     else:
                         arrow_delta = -10
                     if self.draw_stations_vertical:
-                        train_line_out_objid = self.tt_canvas.create_line([x,y,x,y+arrow_delta],fill=self.trainColor,width=4,activewidth=8,arrow="last",arrowshape=(10,10,4))
+                        train_line_out_objid = self.tt_canvas.create_line([x,y,x,y+arrow_delta],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
                     else:
-                        train_line_out_objid = self.tt_canvas.create_line([x,y,x+arrow_delta,y],fill=self.trainColor,width=4,activewidth=8,arrow="last",arrowshape=(10,10,4))
+                        train_line_out_objid = self.tt_canvas.create_line([x,y,x+arrow_delta,y],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
                     self.controller.ToolTip_canvas(self.tt_canvas, train_line_out_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nNach "+self.outgoing_station, key=self.trainName,button_1=True)
                     
                 if self.incoming_station!="": # draw outgoing arrow
+                    logging.debug("Print Incoming-Station: %s %s",self.trainType+self.trainName,self.incoming_station)
                     if self.direction == "down":
                         arrow_delta = 10
                     else:
@@ -706,9 +791,9 @@ class TimeTableGraphCommon():
                     x = self.trainLine[0]
                     y = self.trainLine[1]                    
                     if self.draw_stations_vertical:
-                        train_line_in_objid = self.tt_canvas.create_line([x,y,x,y-arrow_delta],fill=self.trainColor,width=4,activewidth=8,arrow="first",arrowshape=(10,10,4))
+                        train_line_in_objid = self.tt_canvas.create_line([x,y,x,y-arrow_delta],fill=self.trainColorProp,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
                     else:
-                        train_line_in_objid = self.tt_canvas.create_line([x,y,x-arrow_delta,y],fill=self.trainColor,width=4,activewidth=8,arrow="first",arrowshape=(10,10,4))
+                        train_line_in_objid = self.tt_canvas.create_line([x,y,x-arrow_delta,y],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
                     self.controller.ToolTip_canvas(self.tt_canvas, train_line_in_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nVon "+self.incoming_station, key=self.trainName,button_1=True)                
         except BaseException as e                    :
                     
@@ -721,24 +806,32 @@ class TimeTableGraphCommon():
 #                
 
     def draw_trainName_parallel(self,trainName,x0,y0,x1,y1):
+        if self.TrainLabelSize==0:
+            return
+        if self.stopIdx == self.stopMiddleIdx and self.TrainLabelPos in [1,4]:  # draw middle label
+            self.drawTrainNameFlag=True
+        if self.stopIdx == self.stopCnt-1 and self.TrainLabelPos in [1,2,5]: # draw End label
+            self.drawTrainNameFlag=True            
         p0=Point(x0,y0)
         p1=Point(x1,y1)
         segment = p1 - p0
         mid_point = segment.scale(0.5) + p0
-        offset = segment.perp().scale(10)
-        trainName_len = self.stdFont.measure(self.trainName)
+        offset = segment.perp().scale(self.trainWidth+4)
+        trainName_len = self.TrainLabelFont.measure(self.trainName)
         segment_len = segment.norm()
         if segment_len > trainName_len+15:
-            txt = self.tt_canvas.create_text(*(offset + mid_point), text=trainName,activefill="red")
-            self.controller.ToolTip_canvas(self.tt_canvas, txt, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
-            if y0 != y1:
-                angle = segment.angle()
-                if angle>90:
-                    angle -= 180
-                if angle<-90:
-                    angle+=180
-
-                self.tt_canvas.itemconfig(txt, angle=angle)                
+            if self.drawTrainNameFlag:
+                txt = self.tt_canvas.create_text(*(offset + mid_point), text=trainName,activefill="red",font=self.TrainLabelFont)
+                self.controller.ToolTip_canvas(self.tt_canvas, txt, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
+                if self.TrainLabelPos!=0: # if not draw at all segments, no trainname anymore
+                    self.drawTrainNameFlag=False
+                if y0 != y1:
+                    angle = segment.angle()
+                    if angle>90:
+                        angle -= 180
+                    if angle<-90:
+                        angle+=180
+                    self.tt_canvas.itemconfig(txt, angle=angle)                
 
     def enter_station(self,stationName, distance, stationKm):
         if stationKm == None:
@@ -749,19 +842,30 @@ class TimeTableGraphCommon():
             station_data = self.stations.get(stationIdx,0)
             if station_data.get("StationName","") == stationName:
                 return stationIdx
+        if not self.addStation:
+            # check if currentStation = Startstation
+            if stationName == self.StartStation:
+                self.addStation = True
+            else:
+                return -1
+        # check if currentStation = Endstation
+        if stationName == self.EndStation:
+            self.addStation = False            
         self.stations[self.stationIdx_max] = {"StationName": stationName, 
-                                                      "Distance": distance,
-                                                      "StationKm": stationKm}
+                                              "Distance": distance,
+                                              "StationKm": stationKm}
         self.stationIdx_max +=1
         return self.stationIdx_max - 1
 
     def enter_train_data(self,ZugNummer,ZugGattung,ZugLauf,ZugLok):
-        color = self.ZugGattung_to_Color.get(ZugGattung,"black")
+        color = self.canvas_traintype_prop_dict.get(ZugGattung,"black")
+        width = self.ZugGattung_to_Width.get(ZugGattung,"4")
         self.trains[self.trainIdx_max] = {"TrainName": ZugNummer,
                                                   "TrainType": ZugGattung,
                                                   "TrainLine": ZugLauf,
                                                   "TrainEngine" : ZugLok,
                                                   "Color"    : color,
+                                                  "Width"    : width,
                                                   "Stops"    : {}
                                                   }
         self.trainIdx_max += 1
@@ -789,11 +893,13 @@ class TimeTableGraphCommon():
         return trainstop_idx + 1
     
     def enter_train_incoming_station(self, train_idx, FplName):
+        logging.debug("Save Incoming-Station: %s %s",train_idx, FplName)
         train_dict = self.trains.get(train_idx)
         train_dict["Incoming_Station"] = FplName
         return
     
     def enter_train_outgoing_station(self, train_idx, FplName):
+        logging.debug("Save Outgoing-Station: %s %s",train_idx, FplName)
         train_dict = self.trains.get(train_idx)
         train_dict["Outgoing_Station"] = FplName
         return
@@ -836,7 +942,6 @@ class TimeTableGraphCommon():
         if Datei_trn_dict == {}:
             return False
         trn_dateiname = Datei_trn_dict.get("@Dateiname","")
-        
         self.schedule_dict["Name"] = fpn_dateiname
         train_idx = self.enter_train_data(ZugNummer,ZugGattung,Zuglauf,ZugLok)
         train_stop_idx = 0
@@ -845,6 +950,11 @@ class TimeTableGraphCommon():
         stationdistance = 0
         last_km = 0
         station_idx = 0
+        self.addStation = False
+        self.StartStation = self.controller.getConfigData("StartStation")
+        self.StartStation = self.StartStation.replace("_"," ")
+        self.EndStation = self.controller.getConfigData("EndStation")
+        self.EndStation = self.EndStation.replace("_"," ")
         if FplZeile_list=={}:
             logging.info("timetable.xml file error: %s",trn_dateiname )
             self.controller.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+trn_dateiname)            
@@ -902,9 +1012,17 @@ class TimeTableGraphCommon():
                     station_idx = self.search_station(FplName)
                     if station_idx != -1:
                         train_stop_idx = self.enter_train_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min)
+                    else:
+                        if train_stop_idx == 0:
+                            # train is comming from another station
+                            self.enter_train_incoming_station(train_idx, FplName)
+                                 
             except BaseException as e:
                 logging.debug("FplZeile conversion Error %s %s",ZugGattung+ZugNummer+"-"+repr(FplZeile_dict),e)
-                continue # entry format wrong                                                
+                continue # entry format wrong
+        if station_idx == -1:
+            #last station is unknown
+            self.enter_train_outgoing_station(train_idx, FplName)             
         return True
     
     def convert_zusi_trn_to_timetable_train_x(self, zusi_trn_zug_dict):
@@ -1190,7 +1308,7 @@ class Timetable_main(Frame):
         self.canvas.delete("all")
         self.canvas.update()
         self.canvas.config(width=width,height=height,scrollregion=(0,0,width,height))
-        self.timetable.set_zuggattung_to_color(self.traintype_to_color_dict)
+        self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
         
         self.timetable.doPaint(self.canvas,starthour=starthour,duration=duration)
 
@@ -1210,7 +1328,7 @@ class Timetable_main(Frame):
             xml_text = fd.read()
             zusi_timetable_dict = parse(xml_text)
         self.timetable = TimeTableGraphCommon(self.controller, True, height, width,xml_filename=xml_filename)
-        self.timetable.set_zuggattung_to_color(self.traintype_to_color_dict)
+        self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
         #define stops via selected train-timetable
         result_ok = self.timetable.convert_zusi_fpn_dict_to_timetable_train_x(zusi_timetable_dict,define_stations=True)
         if  not result_ok:
@@ -1220,8 +1338,8 @@ class Timetable_main(Frame):
             return
         self.timetable.doPaint(self.canvas,starthour=starthour,duration=duration)                
 
-    def set_zuggattung_to_color(self,traintype_to_color_dict):
-        self.traintype_to_color_dict = traintype_to_color_dict
+    def set_traintype_prop(self,traintype_prop_dict):
+        self.main_traintype_prop_dict = traintype_prop_dict
 
     def initUI(self):
         showTrainTimes = True

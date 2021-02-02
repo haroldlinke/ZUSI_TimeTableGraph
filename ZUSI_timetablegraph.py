@@ -75,7 +75,7 @@ class TimeTableGraphMain(tk.Tk):
         
         self.ghostscript_path_rel = self.getConfigData("GhostScriptPath")
         
-        if self.ghostscript_path_rel == "":
+        if self.ghostscript_path_rel == None:
             self.ghostscript_path_rel = r"gs9.53.3\bin\gswin32c.exe"
             
         self.ghostscript_path = os.path.join(self.mainfile_dir,self.ghostscript_path_rel)
@@ -215,7 +215,7 @@ class TimeTableGraphMain(tk.Tk):
 
     def get_font(self,fontname):
         font_size = self.getConfigData(fontname)
-        if str(font_size) == "":
+        if font_size == None:
             return SMALL_FONT
         else:
             return ("Verdana", int(font_size))
@@ -451,16 +451,16 @@ class TimeTableGraphMain(tk.Tk):
 
     def getConfigData(self, key):
         logging.debug("GetConfigData Key: %s",key)
-        return self.ConfigData.data.get(key,DEFAULT_CONFIG.get(key,""))
+        return self.ConfigData.data.get(key,DEFAULT_CONFIG.get(key,None))
     
     def getConfigData_multiple(self, configdatakey,paramkey,index):
-        value = ""
+        value = None
         index_str = str(index)
         paramkey_dict = self.ConfigData.data.get(paramkey,{})
         if paramkey_dict != {}:
             configdatakey_dict = paramkey_dict.get(index_str,{})
             if configdatakey_dict != {}:
-                value = configdatakey_dict.get(configdatakey,"")
+                value = configdatakey_dict.get(configdatakey,None)
         return value
 
             
@@ -536,7 +536,7 @@ class TimeTableGraphMain(tk.Tk):
         if text:
             tooltiptext = text
         else:
-            tooltiptext = _(TOOLTIPLIST.get(key,key))
+            tooltiptext = TOOLTIPLIST.get(key,key)
         tooltip_var = None
         try:
             tooltip_var = widget.tooltip
@@ -1167,7 +1167,7 @@ class TimeTableGraphMain(tk.Tk):
                     else:
                         repeat_number_int = int(repeat_number)
                         
-                        repeat_max_columns = 6
+                        repeat_max_columns = 10
                         
                         for i in range(repeat_number_int):
                             repeat_macro=macro+"."+paramkey+"."+str(i)
