@@ -1,60 +1,108 @@
 {
-    "Bfp_width": 2400,
-    "Bfp_height": 1200,
-    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
-    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D247.timetable.xml",
-    "pos_x": -8,
-    "pos_y": -8,
-    "startpage": "StartPage",
     "startpagename": "StartPage",
-    "Bfp_start": 12,
-    "Bfp_duration": 4,
-    "Bfp_TrainTypeColors": {
+    "pos_x": 1,
+    "pos_y": 23,
+    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D843.timetable.xml",
+    "StartStation": "Hagen_Hbf",
+    "EndStation": "Kassel_Hbf",
+    "TLDirection": "horizontal",
+    "TLDirection_No": 0,
+    "Bfp_width": 2000,
+    "Bfp_height": 1000,
+    "Bfp_start": 8,
+    "Bfp_duration": 8,
+    "TLFileType": ".trn",
+    "TLFileType_No": 0,
+    "Bfp_TrainMinuteSize": 10,
+    "Bfp_S_LineColor": "black",
+    "Bfp_S_LineWidth": 2,
+    "Bfp_S_LineLabelDir": "Waagerecht",
+    "Bfp_S_LineLabelDir_No": 0,
+    "Bfp_S_LineLabelSize": 10,
+    "Bfp_TH_LineColor": "black",
+    "Bfp_TH_LineWidth": 2,
+    "Bfp_TH_LineLabelSize": 8,
+    "Bfp_TrainTypeProp": {
         "0": {
-            "Bfp_TrainType": "D",
-            "Bfp_TrainTypeColor": "#ff8080"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "1": {
-            "Bfp_TrainType": "E",
-            "Bfp_TrainTypeColor": "#00ff00"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "2": {
-            "Bfp_TrainType": "IC",
-            "Bfp_TrainTypeColor": "#ff8040"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "3": {
-            "Bfp_TrainType": "N",
-            "Bfp_TrainTypeColor": "#004000"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "4": {
-            "Bfp_TrainType": "Ng",
-            "Bfp_TrainTypeColor": "#0000ff"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "5": {
-            "Bfp_TrainType": "ExprE",
-            "Bfp_TrainTypeColor": "#0000a0"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "6": {
-            "Bfp_TrainType": "ICE",
-            "Bfp_TrainTypeColor": "#ff0000"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "7": {
-            "Bfp_TrainType": "*",
-            "Bfp_TrainTypeColor": "#000000"
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "8": {
             "Bfp_TrainType": "",
-            "Bfp_TrainTypeColor": ""
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "9": {
             "Bfp_TrainType": "",
-            "Bfp_TrainTypeColor": ""
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         }
-    },
-    "horizontal": "Horizontal",
-    "vertical": 0,
-    "TLDirection": "horizontal",
-    "TLDirection_No": 0,
-    "TLFileType": ".trn",
-    "TLFileType_No": 0
+    }
 }

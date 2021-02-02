@@ -58,29 +58,15 @@ class ConfigFile():
                 jsondata = {}
             
         try:
-            self.data = default_config.copy()
-            if self.data == {}:
-                self.data.update(jsondata)
-            else:
-                if True: #all(elem in self.data.keys() for elem in jsondata.keys()):
-                    self.data.update(jsondata)
-                else:
-                    print("Default:", self.data.keys())
-                    print(self.filepath,"-",jsondata.keys())
-                    logging.error ("ERROR: JSON Error in Config File %s - wrong key in config-file",self.filepath)
-                    logging.error(jsondata)
-                    jsondata = {}                
+            #self.data = default_config.copy()
+            self.data = {}
+            self.data.update(jsondata)
 
         except:
             logging.error ("Error in Config File %s",self.filepath)
             logging.error(self.data)
-            self.data = default_config.copy()
-        
-        create_sorted=False
-        if create_sorted:
-            sorted_dict = dict(sorted(self.data.items()))
-            with open(self.filepath+"sort", 'w', encoding='utf8') as outfile:
-                json.dump(sorted_dict, outfile, ensure_ascii=False, indent=4)            
+            self.data={}
+            #self.data = default_config.copy()
 
     def save(self):
 

@@ -14,7 +14,10 @@
             "Bfp_CanvasSize",
             "Bfp_TimeRange",
             "TLFileType",
-            "Bfp_TrainTypeColors"
+            "Bfp_TrainMinuteSize",
+            "Bfp_S_LineProp",
+            "Bfp_TH_LineProp",
+            "Bfp_TrainTypeProp"
         ]
     },
     "StartPage": {
@@ -37,12 +40,15 @@
         "Button_1": "Geänderte Einstellungen übernehmen",
         "Button_2": "n",
         "Button_3": "",
-        "Ausführliche Beschreibung": "Fahrplan und Strecke festlegen\n\r\n\rAuf dieser Seite kann der ZUSI Fahrplan und die Strecke ausgewähkt werden, die im den Bildfahrplan angezeigt werden soll.\n\nAls erstes wird der ZUSI Fahrplan ausgewählt.\nDurch Klicken auf den Button <ZUSI Fahrplandatei>, kann eine ZUSI Fahrplandatei ausgewählt werden. Der Name und Pfad dieser Datei wird in dem Textfeld rechts angezeigt. Das Textfeld kann auch direkt beschrieben werden.\n\nFür die Definiton der Strecke, die im Bildfahrplan angezeigt werden soll, werden die ZUSI-Buchfahrpläne herangezogen. Diese enthalten alle notwendigne Angaben für eine Streckenbeschreibung.\n\nSobald ein ZUSI-Fahrplan ausgewählt wurde, werden alle Strecken, die in diesem Fahrplan genutzt werden, in der Strecken-Liste angezeigt. Die Liste entspricht der Zugauswahlliste in ZUSI. Allerdings wird für jede Strecke nur ein Beispielzug angezeigt. Hinter jedem Zugnamen werden alle Stationen aufgelistet, die auf dieser Strecke angefahren werden.\nDurch Doppelklicken, wird der Buchfahrplan für die ausgewählte Strecke, übernommen und in das Feld <ZUSI-Buchfahrplan> eingetragen.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan auch direkt von der Harddisc ausgewählt werden.\n\nNachdem Änderungen vorgenommen wurden, müssen diese duch Klick auf den Button <Geänderte Einstellungen übernehmen> gespeichert werden.\nSollte man das vergessen, wird beim Verlassen der Seite noch einmal nachgefragt.",        "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
-        "MacroDescLines": "17",
+        "Ausführliche Beschreibung": "Fahrplan und Strecke festlegen\n\r\n\rAuf dieser Seite kann der ZUSI Fahrplan und die Strecke ausgewähkt werden, die im den Bildfahrplan angezeigt werden soll.",
+        "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
+        "MacroDescLines": "2",
         "Params": [
             "Bfp_filename",
             "Bfp_TreeView",
-            "Bfp_trainfilename"
+            "Bfp_trainfilename",
+            "StartStation",
+            "EndStation"
         ]
     }
 }

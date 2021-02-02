@@ -222,14 +222,23 @@ class StationsConfigurationPage(tk.Frame):
         curItem = self.tree.focus()
         selectedItem_dict = self.tree.item(curItem)
         if selectedItem_dict != {}:
-            value=selectedItem_dict.get("values","")
-            if value != "": # station list selected
+            stationlist=selectedItem_dict.get("values","")
+            if stationlist != "": # station list selected
                 trainname = selectedItem_dict.get("text","")
                 xml_filename = self.Bfp_xmlfilenamelist.get(trainname)
                 if xml_filename != "":
                     self.controller.set_string_variable(xml_filename,paramkey="Bfp_trainfilename", macrokey=self.tabClassName)
+                    startStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["StartStation"]
+                    stationlist_list=stationlist[0].split(",")
+                    #stationlist_list.insert(0,"Keine")
+                    startStationparamvar["value"]=stationlist_list
+                    startStationparamvar.set(stationlist_list[0])
+                    endStationparamvar =self.controller.macroparams_var["StationsConfigurationPage"]["EndStation"]
+                    endStationparamvar["value"]=stationlist_list
+                    endStationparamvar.set(stationlist_list[len(stationlist_list)-1])
                 else:
                     self.controller.set_statusmessage("No <.timetable.xml> file found for "+trainname)
+                
     
     def create_zusi_zug_treeframe(self,parent):
         # Setup Data
