@@ -47,8 +47,7 @@
             "Bfp_filename",
             "Bfp_TreeView",
             "Bfp_trainfilename",
-            "StartStation",
-            "EndStation"
+            "Teilstrecke"
         ]
     }
 }

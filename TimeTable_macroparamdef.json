@@ -284,6 +284,34 @@
         "Input Text": "FileType für Zugfahrplan",
         "Hint": "FileType, der für den Zugfahrplan verwendet werden soll"
     },
+    "Teilstrecke": {
+        "ParName": "Teilstrecke",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Nur Teilstrecke anzeigen",
+        "Hint": "Diese Option ermöglicht es nur eine Teilstrecke anzuzeigen",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "TeilStreckeCheckButton",
+            "StartStation",
+            "EndStation"
+        ]
+    },
+    "TeilStreckeCheckButton": {
+        "ParName": "TeilStreckeCheckButton",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "TeilStreckeCheckButton",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Nur Teilstrecke anzeigen",
+        "Hint": "Diese Option ermöglicht es nur eine Teilstrecke anzuzeigen"
+    },
     "EndStation": {
         "ParName": "EndStation",
         "Cnt": "1",

@@ -233,7 +233,7 @@ class StationsConfigurationPage(tk.Frame):
                     #stationlist_list.insert(0,"Keine")
                     startStationparamvar["value"]=stationlist_list
                     startStationparamvar.set(stationlist_list[0])
-                    endStationparamvar =self.controller.macroparams_var["StationsConfigurationPage"]["EndStation"]
+                    endStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["EndStation"]
                     endStationparamvar["value"]=stationlist_list
                     endStationparamvar.set(stationlist_list[len(stationlist_list)-1])
                 else:

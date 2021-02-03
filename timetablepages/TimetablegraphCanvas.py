@@ -766,37 +766,35 @@ class TimeTableGraphCommon():
                 self.trainLine.extend([x, y])
                 train_line_objid = self.tt_canvas.create_line(self.trainLine,fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2)
                 self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
-                if self.outgoing_station!="": # draw outgoing arrow
-                    logging.debug("Print Outgoing-Station: %s %s",self.trainType+self.trainName,self.outgoing_station)
-                    arrowwidth = self.trainWidth
-                    if arrowwidth<4:
-                        arrowwidth=4
-                    
-                    if self.direction == "down":
-                        arrow_delta = 10
-                    else:
-                        arrow_delta = -10
-                    if self.draw_stations_vertical:
-                        train_line_out_objid = self.tt_canvas.create_line([x,y,x,y+arrow_delta],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
-                    else:
-                        train_line_out_objid = self.tt_canvas.create_line([x,y,x+arrow_delta,y],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
-                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_out_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nNach "+self.outgoing_station, key=self.trainName,button_1=True)
-                    
-                if self.incoming_station!="": # draw outgoing arrow
-                    logging.debug("Print Incoming-Station: %s %s",self.trainType+self.trainName,self.incoming_station)
-                    if self.direction == "down":
-                        arrow_delta = 10
-                    else:
-                        arrow_delta = -10
-                    x = self.trainLine[0]
-                    y = self.trainLine[1]                    
-                    if self.draw_stations_vertical:
-                        train_line_in_objid = self.tt_canvas.create_line([x,y,x,y-arrow_delta],fill=self.trainColorProp,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
-                    else:
-                        train_line_in_objid = self.tt_canvas.create_line([x,y,x-arrow_delta,y],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
-                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_in_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nVon "+self.incoming_station, key=self.trainName,button_1=True)                
-        except BaseException as e                    :
-                    
+            arrowwidth = self.trainWidth
+            if arrowwidth<4:
+                arrowwidth=4
+            if self.outgoing_station!="": # draw outgoing arrow
+                logging.debug("Print Outgoing-Station: %s %s",self.trainType+self.trainName,self.outgoing_station)
+                if self.direction == "down":
+                    arrow_delta = 10
+                else:
+                    arrow_delta = -10
+                if self.draw_stations_vertical:
+                    train_line_out_objid = self.tt_canvas.create_line([x,y,x,y+arrow_delta],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
+                else:
+                    train_line_out_objid = self.tt_canvas.create_line([x,y,x+arrow_delta,y],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
+                self.controller.ToolTip_canvas(self.tt_canvas, train_line_out_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nNach "+self.outgoing_station, key=self.trainName,button_1=True)
+                
+            if self.incoming_station!="": # draw outgoing arrow
+                logging.debug("Print Incoming-Station: %s %s",self.trainType+self.trainName,self.incoming_station)
+                if self.direction == "down":
+                    arrow_delta = 10
+                else:
+                    arrow_delta = -10
+                x = self.trainLine[0]
+                y = self.trainLine[1]                    
+                if self.draw_stations_vertical:
+                    train_line_in_objid = self.tt_canvas.create_line([x,y,x,y-arrow_delta],fill=self.trainColorProp,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
+                else:
+                    train_line_in_objid = self.tt_canvas.create_line([x,y,x-arrow_delta,y],fill=self.trainColor,width=self.trainWidth,activewidth=self.trainWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
+                self.controller.ToolTip_canvas(self.tt_canvas, train_line_in_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nVon "+self.incoming_station, key=self.trainName,button_1=True)                
+        except BaseException as e:
             logging.debug("SetEnd Error %s %s",self.trainType+self.trainName+"-"+repr(self.trainLine),e)
             return  
 #            
@@ -849,7 +847,7 @@ class TimeTableGraphCommon():
             else:
                 return -1
         # check if currentStation = Endstation
-        if stationName == self.EndStation:
+        if stationName == self.EndStation and self.teilstrecke_flag:
             self.addStation = False            
         self.stations[self.stationIdx_max] = {"StationName": stationName, 
                                               "Distance": distance,
@@ -937,7 +935,6 @@ class TimeTableGraphCommon():
         if Datei_fpn_dict == {}:
             return False
         fpn_dateiname = Datei_fpn_dict.get("@Dateiname","")
-
         Datei_trn_dict = Buchfahrplan_dict.get("Datei_trn",{})
         if Datei_trn_dict == {}:
             return False
@@ -950,7 +947,9 @@ class TimeTableGraphCommon():
         stationdistance = 0
         last_km = 0
         station_idx = 0
-        self.addStation = False
+        
+        self.teilstrecke_flag = self.controller.getConfigData("TeilStreckeCheckButton")
+        self.addStation = not self.teilstrecke_flag
         self.StartStation = self.controller.getConfigData("StartStation")
         self.StartStation = self.StartStation.replace("_"," ")
         self.EndStation = self.controller.getConfigData("EndStation")
@@ -1269,9 +1268,6 @@ class Timetable_main(Frame):
         self.zusi_zuglist_xmlfilename_dict ={}
         if zug_list == {}:
             # integrate fpl file
-            #self.controller.set_statusmessage("Integrierte Fahrpläne werden nicht unterstützt - "+fpl_filename)
-            #return {}
-        
             for trn_zug_dict in fahrplan_dict.get("trn",{}):
                 file_name, file_extension = os.path.splitext(fpn_filename)
                 trn_filepath = os.path.join(fpl_path,file_name)
