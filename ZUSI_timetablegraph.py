@@ -32,6 +32,7 @@ import sys
 import logging
 import webbrowser
 import argparse
+from tools.xmltodict import parse
 #from datetime import datetime
 
 
@@ -1030,7 +1031,8 @@ class TimeTableGraphMain(tk.Tk):
                     label.grid(row=row+valuerow, column=column, columnspan=2,sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)                
                 
-                    self.set_macroparam_var(macro, paramkey, paramvar)                
+                    self.set_macroparam_var(macro, paramkey, paramvar)
+                    paramvar.trace_add("write", lambda nm, indx, mode,macrokey=macro,paramkey=paramkey: self.checkbuttonvar_changed(nm,indx,mode,macrokey=macrokey,paramkey=paramkey))
         
                     column = column + deltacolumn
                     if column > maxcolumns:
@@ -1224,6 +1226,7 @@ class TimeTableGraphMain(tk.Tk):
                     paramvar_strvar.key = paramkey
                     paramvar_strvar.filetypes = paramconfig_dict.get("FileTypes","*")
                     paramvar_strvar.text = param_title
+                    paramvar_strvar.trace_add("write", lambda nm, indx, mode,macrokey=macro,paramkey=paramkey: self.filenamevar_changed(nm,indx,mode,macrokey=macrokey,paramkey=paramkey)) #self.colorvar_changed)
                 
                     self.set_macroparam_var(macro, paramkey, paramvar_strvar)                
         
@@ -1481,8 +1484,33 @@ class TimeTableGraphMain(tk.Tk):
         filename = filedialog.askopenfilename(title=paramvar_strvar.text,initialfile=old_filename,filetypes=filetype_list) # ("Zusi-Master-Fahrplan","*.fpn"),("all files","*.*")
         if filename != "":
             paramvar_strvar.set(filename)
-            #paramvar.delete(0, 'end')
-            #paramvar.insert(0, filename)
+            
+    def checkbuttonvar_changed(self,var,indx,mode,macrokey="",paramkey=""):
+        #print("colorvar_changed",var,indx,mode)
+        paramvar = self.macroparams_var[macrokey][paramkey]
+        value = paramvar.get()
+        if value==1:
+            if macrokey == "StationsConfigurationPage" and paramkey == "TeilStreckeCheckButton":
+                stationlist = self.get_stationlist_from_tt_xml(self.xml_filename)
+                if stationlist == []:
+                    return
+                startStationparamvar = self.macroparams_var["StationsConfigurationPage"]["StartStation"]
+                startStation = startStationparamvar.get()
+                startStationparamvar["value"]=stationlist
+                if not (startStation in stationlist):
+                    startStationparamvar.set(stationlist[0])
+                endStationparamvar = self.macroparams_var["StationsConfigurationPage"]["EndStation"]
+                endStation = endStationparamvar.get()
+                endStationparamvar["value"]=stationlist
+                if not(endStation in stationlist):
+                    endStationparamvar.set(stationlist[len(stationlist)-1])                
+        
+    def filenamevar_changed(self,var,indx,mode,macrokey="",paramkey=""):
+        paramvar = self.macroparams_var[macrokey][paramkey]
+        filename = paramvar.get()
+        
+        if macrokey == "StationsConfigurationPage" and paramkey =="Bfp_trainfilename":
+            self.xml_filename = filename
             
     def set_string_variable(self,inputtext, paramkey="", macrokey=""):
         paramvar = self.macroparams_var[macrokey][paramkey]
@@ -1490,7 +1518,6 @@ class TimeTableGraphMain(tk.Tk):
             paramvar.set(inputtext)
 
     def _key_return(self,event=None):
-        
         param = event.widget
         self._update_value(param.macro,param.key)
 
@@ -1499,6 +1526,53 @@ class TimeTableGraphMain(tk.Tk):
         tabframe=self.getFramebyName(macro)
         if tabframe!=None:
             tabframe._update_value(paramkey)
+            
+    def get_fplZeile_entry(self, FplZeile_dict, main_key, key, default=""):
+        try:
+            Fpl_dict_list = FplZeile_dict.get(main_key)
+        except:
+            Fpl_dict_list = None
+        if Fpl_dict_list:
+            try:
+                result = Fpl_dict_list.get(key,default)
+            except:
+                Fpl_dict = Fpl_dict_list[0]
+                if Fpl_dict == None:
+                    Fpl_dict = Fpl_dict_list[1]
+                result = Fpl_dict.get(key,default)
+        else: 
+            result = default
+        return result    
+            
+    def get_stationlist_from_tt_xml(self, tt_xml_filename):
+        try:
+            with open(tt_xml_filename,mode="r",encoding="utf-8") as fd:
+                xml_text = fd.read()
+                zusi_fpn_dict = parse(xml_text)
+        except BaseException as e:
+            logging.debug("Error: get_stationlist - Open xml-file %s %s",tt_xml_filename,e)
+            return {}
+        Zusi_dict = zusi_fpn_dict.get("Zusi")
+        Buchfahrplan_dict = Zusi_dict.get("Buchfahrplan",{})
+        if Buchfahrplan_dict=={}:
+            return {}
+        FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
+        if FplZeile_list=={}:
+            logging.info("timetable.xml file error: %s",trn_dateiname )
+            self.controller.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+trn_dateiname)            
+            return {}
+        stationlist = []
+        for FplZeile_dict in FplZeile_list:
+            try:
+                FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
+                if FplAbf == "":
+                    continue # only use station with "Abf"-Entry                
+                FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="---")
+                stationlist.append(FplName)
+            except BaseException as e:
+                logging.debug("Error: get_stationlist - FplZeile %s %s",repr(FplZeile_dict),e)
+                continue # entry format wrong
+        return stationlist    
 
 def img_resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """

@@ -125,6 +125,33 @@
         "Input Text": "ZUSI Buchfahrplan",
         "Hint": "Definiton der Strecke, die im Bildfahrplan angezeigt werden soll.\n\nSobald ein ZUSI-Fahrplan ausgewählt wurde, werden alle Strecken, die in diesem Fahrplan genutzt werden, in der Strecken-Liste angezeigt. Die Liste entspricht der Zugauswahlliste in ZUSI. Allerdings wird für jede Strecke nur ein Beispielzug angezeigt. Hinter jedem Zugnamen werden alle Stationen aufgelistet, die auf dieser Strecke angefahren werden.\nDurch Doppelklicken, wird der Buchfahrplan für die ausgewählte Strecke, übernommen und in das Feld <ZUSI-Buchfahrplan> eingetragen.\nMit dem Button<ZUSI Buchfahrplan> kann ein Buchfahrplan auch direkt von der Harddisc ausgewählt werden."
     },
+    "Bfp_TrainTypePropDefault": {
+        "ParName": "Bfp_TrainTypePropDefault",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": {
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+            },
+        "Repeat": "1",
+        "ParamDescription": "Standard Linieneigenschaften für alle Zuggattungen festlegen",
+        "ParamDescLines": "2",
+        "Input Text": " ",
+        "Hint": "Standard Einstellungen für alle Zuggattungen",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "!Bfp_TrainType",
+            "Bfp_TrainTypeColor",
+            "Bfp_TrainTypeWidth",
+            "Bfp_TrainTypeLabel",
+            "Bfp_TrainTypeLabelSize"
+        ]
+    },
     "Bfp_TrainTypeProp": {
         "ParName": "Bfp_TrainTypeProp",
         "Cnt": "",
@@ -134,12 +161,12 @@
         "Default": {
             "Bfp_TrainType": "",
             "Bfp_TrainTypeColor": "black",
-            "Bfp_TrainTypeWidth": 4,
+            "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
             "Bfp_TrainTypeLabelSize": 10
             },
-        "Repeat": "10",
+        "Repeat": "15",
         "ParamDescription": "Linieneigenschaften für Zuggattungen festlegen. z.B. <D> oder <IC>. <*> steht für alle Zuggattungen",
         "ParamDescLines": "2",
         "Input Text": "Einstellungen für Zuggattungen",
@@ -184,7 +211,7 @@
         "ConfigName": "Bfp_TrainTypeWidth",
         "Min": "0",
         "Max": "20",
-        "Default": "4",
+        "Default": "1",
         "Input Text": "Linienbreite",
         "Hint": "Breite der Linien für die Zuggattung"
     },
@@ -360,7 +387,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Stationslinien",
+        "Input Text": "Eigenschaften Stationen",
         "Hint": "Einstellungen für die Stationslinien",
         "Implementation comment": "",
         "MultipleParams": [
@@ -428,6 +455,58 @@
         "Input Text": "Beschriftung Schriftgröße",
         "Hint": "Größe der Beschriftung in Punkt"
     },
+    "Bfp_ZFS_LineProp": {
+        "ParName": "Bfp_ZFS_LineProp",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Eigenschaften Zugfolgestation",
+        "Hint": "Einstellungen für die Zugfolgestationslinien",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_ZFS_LineColor",
+            "Bfp_ZFS_LineWidth",
+            "Bfp_ZFS_Id"
+        ]
+    },
+    "Bfp_ZFS_LineColor": {
+        "ParName": "Bfp_ZFS_LineColor",
+        "Cnt": "1",
+        "Type": "ChooseColor",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "black",
+        "ParamEntryWidth": "3",
+        "Input Text": "Farbe",
+        "Hint": "Farbe, die für die Zugfolgestationen-Linie verwendet werden soll",
+        "Implementation comment": ""
+    },
+    "Bfp_ZFS_LineWidth": {
+        "ParName": "Bfp_ZFS_LineWidth",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_ZFS_LineWidth",
+        "Min": "0",
+        "Max": "20",
+        "Default": "2",
+        "Input Text": "Linienbreite",
+        "Hint": "Breite der Linien"
+    },
+    "Bfp_ZFS_Id": {
+        "ParName": "Bfp_ZFS_Id",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "",
+        "Input Text": "Bezeichner Liste",
+        "ParamEntryWidth": "20",
+        "Hint": "Liste von Bezeichnern für Zugfolgestationen",
+        "Implementation comment": ""
+    },
     "Bfp_TH_LineProp": {
         "ParName": "Bfp_TH_LineProp",
         "Cnt": "",
@@ -436,7 +515,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Stundenlinien",
+        "Input Text": "Eigenschaften Stunden",
         "Hint": "Einstellungen für die Stationslinien",
         "Implementation comment": "",
         "MultipleParams": [
