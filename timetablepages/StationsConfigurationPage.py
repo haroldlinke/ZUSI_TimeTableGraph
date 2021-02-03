@@ -100,6 +100,8 @@ class StationsConfigurationPage(tk.Frame):
                 configdatakey = self.controller.getConfigDatakey(paramkey)
                 value = self.getConfigData(configdatakey)
                 self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
+                
+        self.save_config()
 
         # ----------------------------------------------------------------
         # Standardprocedures for every tabpage
@@ -166,7 +168,6 @@ class StationsConfigurationPage(tk.Frame):
         self.setConfigDataDict(param_values_dict)
         self.store_old_config()
         self.controller.SaveConfigData()
-
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
         
     def bfpl_filename_updated(self, *args):

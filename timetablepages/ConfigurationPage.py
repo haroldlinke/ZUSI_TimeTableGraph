@@ -133,6 +133,8 @@ class ConfigurationPage(tk.Frame):
                 configdatakey = self.controller.getConfigDatakey(paramkey)
                 value = self.getConfigData(configdatakey)
                 self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
+                
+        self.save_config()
 
         # ----------------------------------------------------------------
         # Standardprocedures for every tabpage
