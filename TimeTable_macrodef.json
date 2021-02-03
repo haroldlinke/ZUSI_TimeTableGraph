@@ -16,7 +16,9 @@
             "TLFileType",
             "Bfp_TrainMinuteSize",
             "Bfp_S_LineProp",
+            "Bfp_ZFS_LineProp",
             "Bfp_TH_LineProp",
+            "Bfp_TrainTypePropDefault",
             "Bfp_TrainTypeProp"
         ]
     },
@@ -47,8 +49,7 @@
             "Bfp_filename",
             "Bfp_TreeView",
             "Bfp_trainfilename",
-            "StartStation",
-            "EndStation"
+            "Teilstrecke"
         ]
     }
 }

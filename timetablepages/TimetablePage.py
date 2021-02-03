@@ -118,26 +118,22 @@ class TimeTablePage(tk.Frame):
         self.train_type_prop_dict = {}
         self.train_type_to_width_dict = {}
         config_traintype_prop_dict = self.getConfigData("Bfp_TrainTypeProp")
+        config_traintype_prop_default_dict = self.getConfigData("Bfp_TrainTypePropDefault")
+        config_traintype_prop_default_dict["0"]["Bfp_TrainType"]="*"
         if config_traintype_prop_dict == None:
-            config_traintype_prop_dict = {"*":{
-                                                "Bfp_TrainType": "*",
-                                                "Bfp_TrainTypeColor": "black",
-                                                "Bfp_TrainTypeWidth": 4,
-                                                "Bfp_TrainTypeLabel": "Alle Segmente",
-                                                "Bfp_TrainTypeLabel_No": 0,
-                                                "Bfp_TrainTypeLabelSize": 10
-                                             }
-                                         }
-                
-            return
+            config_traintype_prop_dict = config_traintype_prop_default_dict
+        else:
+            config_traintype_prop_dict[999]=config_traintype_prop_default_dict["0"]
         for i,value_dict in config_traintype_prop_dict.items():
             print(repr(value_dict))
             traintype = value_dict.get("Bfp_TrainType","")
             #traintypecolor = value_dict.get("Bfp_TrainTypeColor","black")
             #traintypewidth = value_dict.get("Bfp_TrainTypeWidth","4")
             if traintype != "":
-                self.train_type_prop_dict[traintype]=value_dict
-        
+                traintype=traintype.replace(" ","")
+                traintypelist = traintype.split(",")
+                for traintype in traintypelist:
+                    self.train_type_prop_dict[traintype]=value_dict
 
     def tabselected(self):
         logging.debug("Tabselected: %s",self.tabname)
