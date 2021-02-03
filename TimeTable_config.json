@@ -1,11 +1,11 @@
 {
     "startpagename": "StartPage",
-    "pos_x": 1,
-    "pos_y": 23,
+    "pos_x": -8,
+    "pos_y": -8,
     "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
-    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D843.timetable.xml",
-    "StartStation": "Hagen_Hbf",
-    "EndStation": "Kassel_Hbf",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D842.timetable.xml",
+    "StartStation": "Grebenstein",
+    "EndStation": "Marsberg",
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
     "Bfp_width": 3000,
@@ -28,24 +28,24 @@
             "Bfp_TrainType": "*",
             "Bfp_TrainTypeColor": "black",
             "Bfp_TrainTypeWidth": 1,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
             "Bfp_TrainTypeLabelSize": 7
         },
         "1": {
             "Bfp_TrainType": "D",
             "Bfp_TrainTypeColor": "#ff0000",
             "Bfp_TrainTypeWidth": 2,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
             "Bfp_TrainTypeLabelSize": 8
         },
         "2": {
             "Bfp_TrainType": "Dt",
             "Bfp_TrainTypeColor": "#ff0000",
             "Bfp_TrainTypeWidth": 2,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
             "Bfp_TrainTypeLabelSize": 8
         },
         "3": {
@@ -105,5 +105,5 @@
             "Bfp_TrainTypeLabelSize": 10
         }
     },
-    "TeilStreckeCheckButton": true
+    "TeilStreckeCheckButton": false
 }
