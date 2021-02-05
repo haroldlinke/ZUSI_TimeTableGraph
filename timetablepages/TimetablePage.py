@@ -1,14 +1,35 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#         TimetableGraph
-#
-# * Version: 0.01
+# ********************************************************************
+# *        TimetableGraph
+# *
+# * provides a timetable graph for ZUSI schedules
+# * Informatzion about ZUSI can be found here: https://www.zusi.de/
+# *
+# *
+# * Version: 0.08
 # * Author: Harold Linke
-# * Date: January 12th, 2021
-# * Copyright: Harold Linke 2021
+# * Date: February 5th, 2021
+# * 
+# * Copyright (C) 2021  Harold Linke
+# *
+# * Soucre code and Programm can be downloaded from GitHub
+# * https://github.com/haroldlinke/ZUSI_TimeTableGraph
 # *
 # *
+# * This program is free software: you can redistribute it and/or modify
+# * it under the terms of the GNU Affero General Public License as
+# * published by the Free Software Foundation, either version 3 of the
+# * License, or (at your option) any later version.
+# *
+# * This program is distributed in the hope that it will be useful,
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# * GNU Affero General Public License for more details.
+# *
+# * You should have received a copy of the GNU Affero General Public License
+# * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
 import tkinter as tk
@@ -73,11 +94,111 @@ class TimeTablePage(tk.Frame):
         self.canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
         self.canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
         self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas)
-        self.canvas.bind("<MouseWheel>", self.scrollcanvas)
+        self.scalefactorunit = 0.75
+        self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
         
-    def scrollcanvas(self, event):
+    def move_from(self, event):
+        ''' Remember previous coordinates for scrolling with the mouse '''
+        self.canvas.scan_mark(event.x, event.y)
+
+    def move_to(self, event):
+        ''' Drag (move) canvas to the new position '''
+        self.canvas.scan_dragto(event.x, event.y, gain=1)
+        
+    def onCtrlMouseWheel(self, event):
+        scale = 1.0
+        if event.delta == -120:
+            scale *= self.scalefactorunit
+        if event.delta == 120:
+            scale /= self.scalefactorunit
+        self.resize(event, scale)
+        #x = self.canvas.canvasx(event.x)
+        #y = self.canvas.canvasy(event.y)
+        #self.canvas.scale('all', x, y, scale, scale)
+        #self.canvas.configure(scrollregion=self.canvas.bbox('all'))
+    
+    def onAltMouseWheel(self, event):
+        pass
+    
+    def onMouseWheel(self, event):
         self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+    
+    def onArrowUp(self, event):
+        if event.keysym == "Up":
+            self.canvas.yview_scroll(-1, "units")
+        else:
+            self.canvas.yview_scroll(-1, "pages")
+    
+    def onArrowDown(self, event):
+        if event.keysym == "Down":
+            self.canvas.yview_scroll(1, "units")
+        else:
+            self.canvas.yview_scroll(1, "pages")
+    
+    def onCTRLArrowDown(self, event):
+        scale = self.scalefactorunit
+        self.resize(event, scale)
+        #x = self.canvas.canvasx(event.x)
+        #y = self.canvas.canvasy(event.y)
+        #self.canvas.scale('all', x, y, scale, scale)
+        #self.canvas.configure(scrollregion=self.canvas.bbox('all'))        
+    
+    def onCTRLArrowUp(self, event):
+        scale = 1.0/self.scalefactorunit
+        self.resize(event, scale)
+        #x = self.canvas.canvasx(event.x)
+        #y = self.canvas.canvasy(event.y)
+        #self.canvas.scale('all', x, y, scale, scale)
+        #self.canvas.configure(scrollregion=self.canvas.bbox('all'))        
+    
+    def onArrowLeft(self, event):
+        self.canvas.xview_scroll(-1, "units")
+    
+    def onArrowRight(self, event):
+        #print(event.keysym)
+        self.canvas.xview_scroll(1, "units")
+    
+    def onPrior(self, event):
+        self.canvas.xview_scroll(1, "pages")
+    
+    def onNext(self, event):
+        #print(event.keysym)
+        self.canvas.xview_scroll(-1, "pages")
+    
+    def onShiftMouseWheel(self, event):
+        self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
+    
+    def fit_canvas(self, event):
+        #print(event.keysym)
+        pass
+        
+    def resize(self, event, scale):
+        x = self.canvas.canvasx(event.x)
+        y = self.canvas.canvasy(event.y)
+        self.canvas.scale('all', x, y, scale, scale)
+        self.canvas.configure(scrollregion=self.canvas.bbox('all'))           
+        
+    def canvas_bindings(self):
+        self.canvas.bind('<ButtonPress-1>', self.move_from)
+        self.canvas.bind('<B1-Motion>',     self.move_to)
+        self.canvas.bind("<Control-MouseWheel>", self.onCtrlMouseWheel)
+        self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel)
+        self.canvas.bind("<MouseWheel>", self.onMouseWheel)
+        self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel)
+        self.bind("f", self.fit_canvas)
+        self.bind("<Home>", self.fit_canvas)
+        self.frame.bind("<Up>", self.onArrowUp)
+        self.frame.bind("<Down>", self.onArrowDown)
+        self.frame.bind("<Left>", self.onArrowLeft)
+        self.frame.bind("<Right>", self.onArrowRight)
+        self.frame.bind("<Control-Up>", self.onCTRLArrowUp)
+        self.frame.bind("<Control-Down>", self.onCTRLArrowDown)        
+        self.frame.bind("<Prior>", self.onArrowUp)
+        self.frame.bind("<Next>", self.onArrowDown)
+        self.frame.bind("<Shift-Prior>", self.onPrior)
+        self.frame.bind("<Shift-Next>", self.onNext) 
+     
 
     def save_as_pdf(self, fileName):
         # save postscipt image 
