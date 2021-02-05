@@ -95,6 +95,7 @@ class TimeTablePage(tk.Frame):
         self.canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
         self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas)
         self.scalefactorunit = 0.75
+        self.total_scalefactor = 1
         self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
         
@@ -170,10 +171,24 @@ class TimeTablePage(tk.Frame):
         self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
     
     def fit_canvas(self, event):
-        #print(event.keysym)
-        pass
+        scale = 1/self.total_scalefactor
+        self.resize(event, scale)
+        #width = self.canvas.winfo_width()
+        #height = self.canvas.winfo_height()
+        #x1, y1 = self.canvas.coords('all')
+        #xratio = float(width) / x1
+        #yratio = float(height) / y1
+    
+        #if xratio < yratio:
+        #    self.scale_objects(xratio)
+        #else:
+        #    self.scale_objects(yratio)
+    
+    def scale_objects(self, scale):
+        self.canvas.scale('all', 0, 0, scale, scale)        
         
     def resize(self, event, scale):
+        self.total_scalefactor *= scale
         x = self.canvas.canvasx(event.x)
         y = self.canvas.canvasy(event.y)
         self.canvas.scale('all', x, y, scale, scale)
@@ -186,8 +201,8 @@ class TimeTablePage(tk.Frame):
         self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel)
         self.canvas.bind("<MouseWheel>", self.onMouseWheel)
         self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel)
-        self.bind("f", self.fit_canvas)
-        self.bind("<Home>", self.fit_canvas)
+        self.frame.bind("f", self.fit_canvas)
+        self.frame.bind("<Home>", self.fit_canvas)
         self.frame.bind("<Up>", self.onArrowUp)
         self.frame.bind("<Down>", self.onArrowDown)
         self.frame.bind("<Left>", self.onArrowLeft)
