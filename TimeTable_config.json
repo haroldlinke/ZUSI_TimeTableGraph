@@ -15,7 +15,7 @@
     "Bfp_duration": 9,
     "TLFileType": ".timetable.xml",
     "TLFileType_No": 1,
-    "Bfp_TrainMinuteSize": 6,
+    "Bfp_TrainMinuteSize": 7,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineLabelDir": "Diagonal",
@@ -30,7 +30,7 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
             "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 6,
+            "Bfp_TrainTypeLabelSize": 7,
             "Bfp_TrainType": "*"
         }
     },
@@ -41,7 +41,7 @@
             "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
             "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 6
+            "Bfp_TrainTypeLabelSize": 7
         },
         "1": {
             "Bfp_TrainType": "IC,ICE",
@@ -49,7 +49,7 @@
             "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
             "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 6
+            "Bfp_TrainTypeLabelSize": 7
         },
         "2": {
             "Bfp_TrainType": "N",
@@ -57,7 +57,7 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
             "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 6
+            "Bfp_TrainTypeLabelSize": 7
         },
         "3": {
             "Bfp_TrainType": "E",
@@ -65,7 +65,7 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
             "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 6
+            "Bfp_TrainTypeLabelSize": 7
         },
         "4": {
             "Bfp_TrainType": "",
@@ -160,14 +160,14 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
             "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 6,
+            "Bfp_TrainTypeLabelSize": 7,
             "Bfp_TrainType": "*"
         }
     },
-    "Bfp_ZFS_Id": "Abzw,Sbk",
+    "Bfp_ZFS_Id": "",
     "Bfp_ZFS_LineColor": "#ffc6aa",
-    "Bfp_ZFS_LineWidth": 2,
-    "InOutBoundTrainsShow": false,
+    "Bfp_ZFS_LineWidth": 1,
+    "InOutBoundTrainsShow": true,
     "InOutBoundTrainsNoOneStop": false,
     "InOutBoundTrainsNoStartStation": false,
     "InOutBoundTrainsNoEndStation": false,
