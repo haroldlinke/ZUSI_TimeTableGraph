@@ -17,6 +17,7 @@
             "Bfp_TrainMinuteSize",
             "Bfp_S_LineProp",
             "Bfp_TH_LineProp",
+            "Bfp_TM_LineProp",
             "Bfp_TrainTypePropDefault",
             "Bfp_TrainTypeProp"
         ]

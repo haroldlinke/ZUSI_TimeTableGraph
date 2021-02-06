@@ -515,8 +515,8 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften Stunden",
-        "Hint": "Einstellungen für die Stationslinien",
+        "Input Text": "Eigenschaften Stundenlinien",
+        "Hint": "Einstellungen für die Stundenlinien",
         "Implementation comment": "",
         "MultipleParams": [
             "Bfp_TH_LineColor",
@@ -547,30 +547,6 @@
         "Input Text": "Linienbreite",
         "Hint": "Breite der Linien"
     },
-    "Bfp_TH_LineLabelDir": {
-        "ParName": "Bfp_TH_LineLabelDir",
-        "Cnt": "1",
-        "Type": "Combo",
-        "Values": [
-            "Waagerecht",
-            "Senkrecht",
-            "Diagonal"
-        ],
-        "ValuesText": [
-            "Waagerecht",
-            "Senkrecht",
-            "Diagonal"
-        ],
-        "ConfigName": [
-            "Bfp_TH_LineLabelDir",
-            "Bfp_TH_LineLabelDir_No"
-        ],
-        "Min": "0",
-        "Max": "255",
-        "Default": "0",
-        "Input Text": "Richtung der Beschriftung",
-        "Hint": "Richtung der Beschriftung"
-    },
     "Bfp_TH_LineLabelSize": {
         "ParName": "Bfp_TH_LineLabelSize",
         "Cnt": "1",
@@ -581,6 +557,57 @@
         "Default": "8",
         "Input Text": "Beschriftung Schriftgröße",
         "Hint": "Größe der Beschriftung in Punkt"
+    },
+    "Bfp_TM_LineProp": {
+        "ParName": "Bfp_TM_LineProp",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Eigenschaften der Minutenlinien",
+        "Hint": "Einstellungen für die Minutenlinien",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_TM_LineColor",
+            "Bfp_TM_LineWidth",
+            "Bfp_TM_LineDistance"
+        ]
+    },
+    "Bfp_TM_LineColor": {
+        "ParName": "Bfp_TM_LineColor",
+        "Cnt": "1",
+        "Type": "ChooseColor",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "black",
+        "ParamEntryWidth": "3",
+        "Input Text": "Farbe",
+        "Hint": "Farbe, die für die Linie verwendet werden soll",
+        "Implementation comment": ""
+    },
+    "Bfp_TM_LineWidth": {
+        "ParName": "Bfp_TM_LineWidth",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_TM_LineWidth",
+        "Min": "0",
+        "Max": "20",
+        "Default": "2",
+        "Input Text": "Linienbreite",
+        "Hint": "Breite der Linien"
+    },
+    "Bfp_TM_LineDistance": {
+        "ParName": "Bfp_TM_LineDistance",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_TM_LineDistance",
+        "Min": "0",
+        "Max": "20",
+        "Default": "8",
+        "Input Text": "Abstand in Minuten",
+        "Hint": "Abstand zwischen den Minutenlinien in Minuten"
     },
     "InOutBoundTrainsProp": {
         "ParName": "InOutBoundTrainsProp",
@@ -597,8 +624,7 @@
             "InOutBoundTrainsShow",
             "InOutBoundTrainsNoOneStop",
             "InOutBoundTrainsNoStartStation",
-            "InOutBoundTrainsNoEndStation",
-            "InOutBoundTrainsShowMinutes"
+            "InOutBoundTrainsNoEndStation"
         ]
     },
     "InOutBoundTrainsShow": {
@@ -650,6 +676,7 @@
         "Cnt": "1",
         "Type": "Checkbutton",
         "ConfigName": "InOutBoundTrainsShowMinutes",
+        "Hide": "True",
         "Min": "0",
         "Max": "255",
         "Default": "",

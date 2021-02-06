@@ -96,6 +96,7 @@ class TimeTablePage(tk.Frame):
         self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas)
         self.scalefactorunit = 0.75
         self.total_scalefactor = 1
+        self.old_scalefactor = 1
         self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
         
@@ -114,10 +115,6 @@ class TimeTablePage(tk.Frame):
         if event.delta == 120:
             scale /= self.scalefactorunit
         self.resize(event, scale)
-        #x = self.canvas.canvasx(event.x)
-        #y = self.canvas.canvasy(event.y)
-        #self.canvas.scale('all', x, y, scale, scale)
-        #self.canvas.configure(scrollregion=self.canvas.bbox('all'))
     
     def onAltMouseWheel(self, event):
         pass
@@ -140,57 +137,54 @@ class TimeTablePage(tk.Frame):
     def onCTRLArrowDown(self, event):
         scale = self.scalefactorunit
         self.resize(event, scale)
-        #x = self.canvas.canvasx(event.x)
-        #y = self.canvas.canvasy(event.y)
-        #self.canvas.scale('all', x, y, scale, scale)
-        #self.canvas.configure(scrollregion=self.canvas.bbox('all'))        
     
     def onCTRLArrowUp(self, event):
         scale = 1.0/self.scalefactorunit
         self.resize(event, scale)
-        #x = self.canvas.canvasx(event.x)
-        #y = self.canvas.canvasy(event.y)
-        #self.canvas.scale('all', x, y, scale, scale)
-        #self.canvas.configure(scrollregion=self.canvas.bbox('all'))        
     
     def onArrowLeft(self, event):
         self.canvas.xview_scroll(-1, "units")
     
     def onArrowRight(self, event):
-        #print(event.keysym)
         self.canvas.xview_scroll(1, "units")
     
     def onPrior(self, event):
         self.canvas.xview_scroll(1, "pages")
     
     def onNext(self, event):
-        #print(event.keysym)
         self.canvas.xview_scroll(-1, "pages")
     
     def onShiftMouseWheel(self, event):
         self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
     
-    def fit_canvas(self, event):
-        scale = 1/self.total_scalefactor
-        self.resize(event, scale)
-        #width = self.canvas.winfo_width()
-        #height = self.canvas.winfo_height()
-        #x1, y1 = self.canvas.coords('all')
-        #xratio = float(width) / x1
-        #yratio = float(height) / y1
-    
-        #if xratio < yratio:
-        #    self.scale_objects(xratio)
-        #else:
-        #    self.scale_objects(yratio)
-    
+    def onHome(self, event):
+        if round(self.total_scalefactor,4)!=1:
+            self.old_scalefactor = self.total_scalefactor
+            #self.canvas_old_x, self.canavs_old_y = self.canvas.coords("all")
+            #print(self.canvas_old_x, self.canavs_old_y)
+            #self.canvas_old_x, self.canavs_old_y, x2, y2 = self.canvas.bbox("all")
+            #print(self.canvas_old_x, self.canavs_old_y)
+            self.resize(event, 1/self.total_scalefactor)
+            self.total_scalefactor = 1
+        else:
+            self.resize(event, self.old_scalefactor)
+            self.old_scalefactor = 1
+            #self.canvas.move("all",self.canvas_old_x, self.canavs_old_y)
+            #self.canvas.configure(scrollregion=self.canvas.bbox('all'))
+        #self.resize(event, 1/self.total_scalefactor)
+        #self.total_scalefactor = 1
+   
     def scale_objects(self, scale):
         self.canvas.scale('all', 0, 0, scale, scale)        
         
     def resize(self, event, scale):
         self.total_scalefactor *= scale
-        x = self.canvas.canvasx(event.x)
-        y = self.canvas.canvasy(event.y)
+        if event == None:
+            x=0
+            y=0
+        else:
+            x = self.canvas.canvasx(event.x)
+            y = self.canvas.canvasy(event.y)
         self.canvas.scale('all', x, y, scale, scale)
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))           
         
@@ -201,16 +195,15 @@ class TimeTablePage(tk.Frame):
         self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel)
         self.canvas.bind("<MouseWheel>", self.onMouseWheel)
         self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel)
-        self.frame.bind("f", self.fit_canvas)
-        self.frame.bind("<Home>", self.fit_canvas)
+        self.frame.bind("<Home>", self.onHome)
         self.frame.bind("<Up>", self.onArrowUp)
         self.frame.bind("<Down>", self.onArrowDown)
         self.frame.bind("<Left>", self.onArrowLeft)
         self.frame.bind("<Right>", self.onArrowRight)
         self.frame.bind("<Control-Up>", self.onCTRLArrowUp)
         self.frame.bind("<Control-Down>", self.onCTRLArrowDown)        
-        self.frame.bind("<Prior>", self.onArrowUp)
-        self.frame.bind("<Next>", self.onArrowDown)
+        self.frame.bind("<Prior>", self.onPrior)
+        self.frame.bind("<Next>", self.onNext)
         self.frame.bind("<Shift-Prior>", self.onPrior)
         self.frame.bind("<Shift-Next>", self.onNext) 
      
@@ -221,14 +214,14 @@ class TimeTablePage(tk.Frame):
         self.canvas.postscript(file = fileName + 'tmp.eps',colormode='color',width=self.canvas_width,height=self.canvas_height) 
         EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
         img = Image.open(fileName + 'tmp.eps')
-        img.load(scale=8)
-        size = img.size
         try:
+            img.load(scale=8)
+            size = img.size
             #img.save(fileName + '.png', 'png')
             img.save(fileName,"pdf",resolution=300)
         except BaseException as e:
-            print("Error while generating pdf-file\n %s",e)
-            pass
+            logging.debug("Error while generating pdf-file\n %s",e)
+            self.controller.set_statusmessage("Error while generating pdf-file\n" + str(e))
         
     def save_as_eps(self, fileName):
         # save postscipt image 
@@ -239,15 +232,20 @@ class TimeTablePage(tk.Frame):
         # save postscipt image 
         self.canvas.update()
         tmp_filename = fileName + '.tmp.eps'
-        self.canvas.postscript(file = tmp_filename,colormode='color',width=self.canvas_width,height=self.canvas_height) 
+        self.canvas.postscript(file = tmp_filename,colormode='color',width=self.canvas_width,height=self.canvas_height)
         EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
         img = Image.open(tmp_filename)
-        img.load(scale=8)
-        size = img.size
         try:
+            #max_size = 178956970
+            #imagesize = self.canvas_width * self.canvas_height*32
+            #if imagesize > max_size:
+            #    print("Error")
+            img.load(scale=8)
+            size = img.size
             img.save(fileName)
         except BaseException as e:
-            print("Error while generating png-file\n %s",e)
+            logging.debug("Error while generating image-file\n %s",e)
+            self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
             pass    
         
     def create_train_type_to_color_dict(self):
