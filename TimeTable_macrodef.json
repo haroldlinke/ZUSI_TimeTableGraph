@@ -16,10 +16,25 @@
             "TLFileType",
             "Bfp_TrainMinuteSize",
             "Bfp_S_LineProp",
-            "Bfp_ZFS_LineProp",
             "Bfp_TH_LineProp",
+            "Bfp_TM_LineProp",
             "Bfp_TrainTypePropDefault",
             "Bfp_TrainTypeProp"
+        ]
+    },
+    "SpecialConfigurationPage": {
+        "Typ": "SpecialConfigurationPage",
+        "Name": "SpecialConfigurationPage",
+        "MTabName": "Extra Einstellungen",
+        "Title": "Extra Einstellungen",
+        "Button_1": "Geänderte Einstellungen übernehmen",
+        "Button_2": "n",
+        "Button_3": "",
+        "Kurzbeschreibung": "Einstellungsparameter",
+        "Ausführliche Beschreibung": "Extra Bildfahrplan Einstellungen\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
+        "Params": [
+            "Bfp_ZFS_LineProp",
+            "InOutBoundTrainsProp"
         ]
     },
     "StartPage": {
@@ -28,6 +43,7 @@
         "MTabName": "Start",
         "Title": "Start Seite",
         "Kurzbeschreibung": "Start Seite",
+        "HelpPageURL": "https://www.hlinke.de/dokuwiki/doku.php?id=de:zusi_sw",
         "Photo": "Bildfahrplan1.png",
         "Ausführliche Beschreibung": "",
         "Content": {

@@ -1,14 +1,35 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#         TimetableGraph
-#
-# * Version: 0.01
+# ********************************************************************
+# *        TimetableGraph
+# *
+# * provides a timetable graph for ZUSI schedules
+# * Informatzion about ZUSI can be found here: https://www.zusi.de/
+# *
+# *
+# * Version: 0.08
 # * Author: Harold Linke
-# * Date: January 12th, 2021
-# * Copyright: Harold Linke 2021
+# * Date: February 5th, 2021
+# * 
+# * Copyright (C) 2021  Harold Linke
+# *
+# * Soucre code and Programm can be downloaded from GitHub
+# * https://github.com/haroldlinke/ZUSI_TimeTableGraph
 # *
 # *
+# * This program is free software: you can redistribute it and/or modify
+# * it under the terms of the GNU Affero General Public License as
+# * published by the Free Software Foundation, either version 3 of the
+# * License, or (at your option) any later version.
+# *
+# * This program is distributed in the hope that it will be useful,
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# * GNU Affero General Public License for more details.
+# *
+# * You should have received a copy of the GNU Affero General Public License
+# * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
 import tkinter as tk
@@ -73,11 +94,119 @@ class TimeTablePage(tk.Frame):
         self.canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
         self.canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
         self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas)
-        self.canvas.bind("<MouseWheel>", self.scrollcanvas)
+        self.scalefactorunit = 0.75
+        self.total_scalefactor = 1
+        self.old_scalefactor = 1
+        self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
         
-    def scrollcanvas(self, event):
+    def move_from(self, event):
+        ''' Remember previous coordinates for scrolling with the mouse '''
+        self.canvas.scan_mark(event.x, event.y)
+
+    def move_to(self, event):
+        ''' Drag (move) canvas to the new position '''
+        self.canvas.scan_dragto(event.x, event.y, gain=1)
+        
+    def onCtrlMouseWheel(self, event):
+        scale = 1.0
+        if event.delta == -120:
+            scale *= self.scalefactorunit
+        if event.delta == 120:
+            scale /= self.scalefactorunit
+        self.resize(event, scale)
+    
+    def onAltMouseWheel(self, event):
+        pass
+    
+    def onMouseWheel(self, event):
         self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+    
+    def onArrowUp(self, event):
+        if event.keysym == "Up":
+            self.canvas.yview_scroll(-1, "units")
+        else:
+            self.canvas.yview_scroll(-1, "pages")
+    
+    def onArrowDown(self, event):
+        if event.keysym == "Down":
+            self.canvas.yview_scroll(1, "units")
+        else:
+            self.canvas.yview_scroll(1, "pages")
+    
+    def onCTRLArrowDown(self, event):
+        scale = self.scalefactorunit
+        self.resize(event, scale)
+    
+    def onCTRLArrowUp(self, event):
+        scale = 1.0/self.scalefactorunit
+        self.resize(event, scale)
+    
+    def onArrowLeft(self, event):
+        self.canvas.xview_scroll(-1, "units")
+    
+    def onArrowRight(self, event):
+        self.canvas.xview_scroll(1, "units")
+    
+    def onPrior(self, event):
+        self.canvas.xview_scroll(1, "pages")
+    
+    def onNext(self, event):
+        self.canvas.xview_scroll(-1, "pages")
+    
+    def onShiftMouseWheel(self, event):
+        self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
+    
+    def onHome(self, event):
+        if round(self.total_scalefactor,4)!=1:
+            self.old_scalefactor = self.total_scalefactor
+            #self.canvas_old_x, self.canavs_old_y = self.canvas.coords("all")
+            #print(self.canvas_old_x, self.canavs_old_y)
+            #self.canvas_old_x, self.canavs_old_y, x2, y2 = self.canvas.bbox("all")
+            #print(self.canvas_old_x, self.canavs_old_y)
+            self.resize(event, 1/self.total_scalefactor)
+            self.total_scalefactor = 1
+        else:
+            self.resize(event, self.old_scalefactor)
+            self.old_scalefactor = 1
+            #self.canvas.move("all",self.canvas_old_x, self.canavs_old_y)
+            #self.canvas.configure(scrollregion=self.canvas.bbox('all'))
+        #self.resize(event, 1/self.total_scalefactor)
+        #self.total_scalefactor = 1
+   
+    def scale_objects(self, scale):
+        self.canvas.scale('all', 0, 0, scale, scale)        
+        
+    def resize(self, event, scale):
+        self.total_scalefactor *= scale
+        if event == None:
+            x=0
+            y=0
+        else:
+            x = self.canvas.canvasx(event.x)
+            y = self.canvas.canvasy(event.y)
+        self.canvas.scale('all', x, y, scale, scale)
+        self.canvas.configure(scrollregion=self.canvas.bbox('all'))           
+        
+    def canvas_bindings(self):
+        self.canvas.bind('<ButtonPress-1>', self.move_from)
+        self.canvas.bind('<B1-Motion>',     self.move_to)
+        self.canvas.bind("<Control-MouseWheel>", self.onCtrlMouseWheel)
+        self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel)
+        self.canvas.bind("<MouseWheel>", self.onMouseWheel)
+        self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel)
+        self.frame.bind("<Home>", self.onHome)
+        self.frame.bind("<Up>", self.onArrowUp)
+        self.frame.bind("<Down>", self.onArrowDown)
+        self.frame.bind("<Left>", self.onArrowLeft)
+        self.frame.bind("<Right>", self.onArrowRight)
+        self.frame.bind("<Control-Up>", self.onCTRLArrowUp)
+        self.frame.bind("<Control-Down>", self.onCTRLArrowDown)        
+        self.frame.bind("<Prior>", self.onPrior)
+        self.frame.bind("<Next>", self.onNext)
+        self.frame.bind("<Shift-Prior>", self.onPrior)
+        self.frame.bind("<Shift-Next>", self.onNext) 
+     
 
     def save_as_pdf(self, fileName):
         # save postscipt image 
@@ -85,14 +214,14 @@ class TimeTablePage(tk.Frame):
         self.canvas.postscript(file = fileName + 'tmp.eps',colormode='color',width=self.canvas_width,height=self.canvas_height) 
         EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
         img = Image.open(fileName + 'tmp.eps')
-        img.load(scale=8)
-        size = img.size
         try:
+            img.load(scale=8)
+            size = img.size
             #img.save(fileName + '.png', 'png')
             img.save(fileName,"pdf",resolution=300)
         except BaseException as e:
-            print("Error while generating pdf-file\n %s",e)
-            pass
+            logging.debug("Error while generating pdf-file\n %s",e)
+            self.controller.set_statusmessage("Error while generating pdf-file\n" + str(e))
         
     def save_as_eps(self, fileName):
         # save postscipt image 
@@ -103,15 +232,20 @@ class TimeTablePage(tk.Frame):
         # save postscipt image 
         self.canvas.update()
         tmp_filename = fileName + '.tmp.eps'
-        self.canvas.postscript(file = tmp_filename,colormode='color',width=self.canvas_width,height=self.canvas_height) 
+        self.canvas.postscript(file = tmp_filename,colormode='color',width=self.canvas_width,height=self.canvas_height)
         EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
         img = Image.open(tmp_filename)
-        img.load(scale=8)
-        size = img.size
         try:
+            #max_size = 178956970
+            #imagesize = self.canvas_width * self.canvas_height*32
+            #if imagesize > max_size:
+            #    print("Error")
+            img.load(scale=8)
+            size = img.size
             img.save(fileName)
         except BaseException as e:
-            print("Error while generating png-file\n %s",e)
+            logging.debug("Error while generating image-file\n %s",e)
+            self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
             pass    
         
     def create_train_type_to_color_dict(self):

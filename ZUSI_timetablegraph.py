@@ -1,14 +1,35 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#         TimetableGraph
-#
-# * Version: 0.01
+# ********************************************************************
+# *        TimetableGraph
+# *
+# * provides a timetable graph for ZUSI schedules
+# * Informatzion about ZUSI can be found here: https://www.zusi.de/
+# *
+# *
+# * Version: 0.08
 # * Author: Harold Linke
-# * Date: January 12th, 2021
-# * Copyright: Harold Linke 2021
+# * Date: February 5th, 2021
+# * 
+# * Copyright (C) 2021  Harold Linke
+# *
+# * Soucre code and Programm can be downloaded from GitHub
+# * https://github.com/haroldlinke/ZUSI_TimeTableGraph
 # *
 # *
+# * This program is free software: you can redistribute it and/or modify
+# * it under the terms of the GNU Affero General Public License as
+# * published by the Free Software Foundation, either version 3 of the
+# * License, or (at your option) any later version.
+# *
+# * This program is distributed in the hope that it will be useful,
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# * GNU Affero General Public License for more details.
+# *
+# * You should have received a copy of the GNU Affero General Public License
+# * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
 import tkinter as tk
@@ -19,6 +40,7 @@ from timetablepages.ConfigurationPage import ConfigurationPage
 from timetablepages.StationsConfigurationPage import StationsConfigurationPage
 from timetablepages.TimetablePage import TimeTablePage
 from timetablepages.StartPage import StartPage
+from timetablepages.SpecialConfigurationPage import SpecialConfigurationPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
 from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
 PARAM_FILENAME, CONFIG_FILENAME, TOOLTIPLIST, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME
@@ -38,7 +60,7 @@ from tools.xmltodict import parse
 
 # ------------------------------
 
-tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage)
+tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,SpecialConfigurationPage)
 
 defaultStartPage = "StartPage"
 
@@ -443,7 +465,7 @@ class TimeTableGraphMain(tk.Tk):
         return tabIndex2ClassName.get(str(combolist_index),defaultStartPage)
 
     def call_helppage(self,event=None):
-        macrodata = self.MacroDef.data.get("HelpPage",{})
+        macrodata = self.MacroDef.data.get("StartPage",{})
         helppageurl = macrodata.get("HelpPageURL","")
         if helppageurl == "":
             tk.messagebox.showinfo("ZUSI Timetablegraph by Harold Linke\nHelp not available yet")
@@ -784,7 +806,7 @@ class TimeTableGraphMain(tk.Tk):
     def checkcolor(self,_event=None):
         self.showFramebyName("ColorCheckPage")    
     
-    def create_macroparam_content(self,parent_frame, macro, macroparams,extratitleline=False,maxcolumns=5, startrow=0, minrow=4, style="MACROPage",generic_methods={}):
+    def create_macroparam_content(self,parent_frame, macro, macroparams,extratitleline=False,maxcolumns=11, startrow=0, minrow=4, style="MACROPage",generic_methods={}):
         
         if style =="MACROPage":
         
@@ -1142,13 +1164,13 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                     
                     label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
-                    label.grid(row=row+titlerow, column=column+titlecolumn, rowspan=2, sticky=STICKY, padx=2, pady=2)
+                    #label.grid(row=row+titlerow, column=column+titlecolumn, rowspan=2, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
                     
                     repeat_number = paramconfig_dict.get("Repeat","")
                     
                     if repeat_number == "":
-                    
+                        
                         multipleparam_frame = ttk.Frame(parent_frame)
                         multipleparam_frame.grid(row=row,column=column+1 ,columnspan=6,sticky='nesw', padx=0, pady=0)
                         
@@ -1156,13 +1178,13 @@ class TimeTableGraphMain(tk.Tk):
                         
                         if multipleparams != []:
                             if style != "CONFIGPage":
+                                label.grid(row=row+titlerow, column=column+titlecolumn, rowspan=2, sticky=STICKY, padx=2, pady=2)
                                 self.create_macroparam_content(multipleparam_frame,macro, multipleparams,extratitleline=extratitleline,maxcolumns=maxcolumns-1,minrow=0,style=style,generic_methods=generic_methods)
                                 separator = ttk.Separator (parent_frame, orient = tk.HORIZONTAL)
                                 separator.grid (row = row+2, column = 0, columnspan= 10, padx=2, pady=2, sticky = "ew")
                             else:
-                                self.create_macroparam_content(multipleparam_frame,macro, multipleparams,extratitleline=extratitleline,maxcolumns=6,minrow=0,style=style,generic_methods=generic_methods)
-                                
-               
+                                label.grid(row=row+titlerow, column=column+titlecolumn, sticky="nw", padx=2, pady=2)
+                                self.create_macroparam_content(multipleparam_frame,macro, multipleparams,extratitleline=extratitleline,maxcolumns=10,minrow=0,style=style,generic_methods=generic_methods)
                         column = 0
                         row=row+3
                         
@@ -1627,7 +1649,7 @@ if args.loglevel:
 else:
     logging.basicConfig(format=format, filename=logfilename,filemode="w",level=logging.DEBUG,datefmt="%H:%M:%S")
 
-logging.info("MLL Proggenerator started %s", PROG_VERSION)
+logging.info("ZUSI-TimetableGraph started %s", PROG_VERSION)
 logging.info(" Platform: %s",platform.platform())
 logging.debug("Installationfolder %s",filedir)
 

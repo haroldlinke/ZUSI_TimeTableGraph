@@ -1,59 +1,34 @@
 # -*- coding: utf-8 -*-
 #
-#         MobaLedCheckColors: Color checker for WS2812 and WS2811 based MobaLedLib
-#
-#         DefaultData
-#
-# * Version: 1.25
+# ********************************************************************
+# *        TimetableGraph
+# *
+# * provides a timetable graph for ZUSI schedules
+# * Informatzion about ZUSI can be found here: https://www.zusi.de/
+# *
+# *
+# * Version: 0.08
 # * Author: Harold Linke
-# * Date: January 04th, 2020
-# * Copyright: Harold Linke 2020
+# * Date: February 5th, 2021
+# * 
+# * Copyright (C) 2021  Harold Linke
+# *
+# * Soucre code and Programm can be downloaded from GitHub
+# * https://github.com/haroldlinke/ZUSI_TimeTableGraph
 # *
 # *
-# * MobaLedCheckColors on Github: https://github.com/haroldlinke/MobaLedCheckColors
+# * This program is free software: you can redistribute it and/or modify
+# * it under the terms of the GNU Affero General Public License as
+# * published by the Free Software Foundation, either version 3 of the
+# * License, or (at your option) any later version.
 # *
-# *
-# * History of Change
-# * V1.00 25.12.2019 - Harold Linke - first release
-# *
-# *
-# * MobaLedCheckColors supports the MobaLedLib by Hardi Stengelin
-# * https://github.com/Hardi-St/MobaLedLib
-# *
-# * MobaLedCheckColors is free software: you can redistribute it and/or modify
-# * it under the terms of the GNU General Public License as published by
-# * the Free Software Foundation, either version 3 of the License, or
-# * (at your option) any later version.
-# *
-# * MobaLedCheckColors is distributed in the hope that it will be useful,
+# * This program is distributed in the hope that it will be useful,
 # * but WITHOUT ANY WARRANTY; without even the implied warranty of
 # * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# * GNU General Public License for more details.
+# * GNU Affero General Public License for more details.
 # *
-# * You should have received a copy of the GNU General Public License
-# * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# *
-# * MobaLedCheckColors is based on tkColorPicker by Juliette Monsel
-# * https://sourceforge.net/projects/tkcolorpicker/
-# *
-# * tkcolorpicker - Alternative to colorchooser for Tkinter.
-# * Copyright 2017 Juliette Monsel <j_4321@protonmail.com>
-# *
-# * tkcolorpicker is free software: you can redistribute it and/or modify
-# * it under the terms of the GNU General Public License as published by
-# * the Free Software Foundation, either version 3 of the License, or
-# * (at your option) any later version.
-# *
-# * tkcolorpicker is distributed in the hope that it will be useful,
-# * but WITHOUT ANY WARRANTY; without even the implied warranty of
-# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# * GNU General Public License for more details.
-# *
-# * You should have received a copy of the GNU General Public License
-# * along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# *
-# * The code for changing pages was derived from: http://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter
-# * License: http://creativecommons.org/licenses/by-sa/3.0/
+# * You should have received a copy of the GNU Affero General Public License
+# * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
 def set_macroparam_var(self, macro, paramkey,variable):

@@ -63,13 +63,13 @@ Parm_STK_SW_MINOR = b'\x82'
 # Class ConfigurationPage
 # ----------------------------------------------------------------
 
-class ConfigurationPage(tk.Frame):
+class SpecialConfigurationPage(tk.Frame):
 
     def __init__(self, parent, controller):
         self.controller = controller
         self.arduino_portlist = {}
         tk.Frame.__init__(self,parent)
-        self.tabClassName = "ConfigurationPage"
+        self.tabClassName = "SpecialConfigurationPage"
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
         self.title = macrodata.get("Title",self.tabClassName)
@@ -109,11 +109,6 @@ class ConfigurationPage(tk.Frame):
         
         self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
         self.update_button.pack(side="right", padx=10)
-        
-        #self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
-        #self.update_tree_button.pack(side="left", padx=10)        
-        
-        self.tree_frame = ttk.Frame(self.main_frame)
 
         # --- placement
         # Tabframe
@@ -125,10 +120,7 @@ class ConfigurationPage(tk.Frame):
         title_frame.grid(row=0, column=0, pady=10, padx=10)
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
-        self.tree_frame.grid(row=3, column=0, pady=10, padx=10, sticky="nesw")
-
         macroparams = macrodata.get("Params",[])
-        
         for paramkey in macroparams:
             paramconfig_dict = self.controller.MacroParamDef.data.get(paramkey,{})
             param_type = paramconfig_dict.get("Type","")
@@ -208,13 +200,6 @@ class ConfigurationPage(tk.Frame):
     def MenuRedo(self,_event=None):
         logging.debug("MenuRedo: %s",self.tabname)
         pass
-    
-    def connect (self):
-        pass
-    
-    def disconnect (self):
-        pass    
-    
 
     # ----------------------------------------------------------------
     # ConfigurationPage save_config
@@ -222,70 +207,17 @@ class ConfigurationPage(tk.Frame):
     def save_config(self):
         self.setConfigData("pos_x",self.winfo_x())
         self.setConfigData("pos_y",self.winfo_y())
-        try:
-            curItem = self.tree.focus()
-            curItem_value = self.tree.item(curItem)
-            #tree_selection = self.tree.selection()
-        except:
-            
-            #tree_selection = ""
-            curItem_value = {}
-            
-        selectedtrain=curItem_value.get("text","")
         param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-
         self.setConfigDataDict(param_values_dict)
-
         self.store_old_config()
         self.controller.SaveConfigData()
-
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
-        
-    def update_tree(self):
-        self.save_config()
-        self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
-        logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
-        
 
     def store_old_config(self):
         self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
     
     def check_if_config_data_changed(self):
-        
         param_values_dict = self.get_macroparam_var_values(self.tabClassName)
         if self.old_param_values_dict != param_values_dict:
             return True
         return False
-
-    def JSONTree(self, Tree, Parent, Dictionary):
-        for key in Dictionary :
-            uid = uuid.uuid4()
-            if isinstance(Dictionary[key], dict):
-                Tree.insert(Parent, 'end', uid, text=key)
-                self.JSONTree(Tree, uid, Dictionary[key])
-            elif isinstance(Dictionary[key], list):
-                Tree.insert(Parent, 'end', uid, text=key + '[]')
-                self.JSONTree(Tree,uid,dict([(i, x) for i, x in enumerate(Dictionary[key])]))
-            else:
-                value = Dictionary[key]
-                if isinstance(value, str):
-                    value = value.replace(' ', '_')
-                Tree.insert(Parent, 'end', uid, text=key, value=value)
-    
-    def create_zusi_zug_treeframe(self,parent):
-
-            # Setup Data
-            fpl_filename = self.getConfigData("Bfp_filename")
-            Data = self.controller.timetable_main.create_zusi_zug_liste(fpl_filename)
-
-            # Setup the Frames
-            TreeFrame = ttk.Frame(parent, padding="3")
-            TreeFrame.grid(row=0, column=0, sticky=tk.NSEW)
-    
-            # Setup the Tree
-            tree = ttk.Treeview(TreeFrame, columns=('Values'))
-            tree.column('Values', width=300, anchor='center')
-            tree.heading('Values', text='Zuglauf')
-            self.JSONTree(tree, '', Data)
-            tree.pack(fill=tk.BOTH, expand=1)
-            return tree

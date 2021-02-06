@@ -167,7 +167,7 @@
             "Bfp_TrainTypeLabelSize": 10
             },
         "Repeat": "15",
-        "ParamDescription": "Linieneigenschaften für Zuggattungen festlegen. z.B. <D> oder <IC>. <*> steht für alle Zuggattungen",
+        "ParamDescription": "Linieneigenschaften für eine oder mehrere Zuggattungen festlegen. z.B. <D> oder <IC>. <*> steht für alle Zuggattungen",
         "ParamDescLines": "2",
         "Input Text": "Einstellungen für Zuggattungen",
         "Hint": "Einstellungen für Zuggattungen\nEs können beliebige Zuggattungsbezeichnungen angegeben werden.\nDie Zuggattung <*> bedeutet alle übrigen Züge und legt die Linienfarbe für alle nicht angegebenen Zuggattungen fest.\nDurch Klick auf den Farb-Button kann eine Farbe ausgewählt werden.",
@@ -467,9 +467,9 @@
         "Hint": "Einstellungen für die Zugfolgestationslinien",
         "Implementation comment": "",
         "MultipleParams": [
+            "Bfp_ZFS_Id",
             "Bfp_ZFS_LineColor",
-            "Bfp_ZFS_LineWidth",
-            "Bfp_ZFS_Id"
+            "Bfp_ZFS_LineWidth"
         ]
     },
     "Bfp_ZFS_LineColor": {
@@ -515,8 +515,8 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften Stunden",
-        "Hint": "Einstellungen für die Stationslinien",
+        "Input Text": "Eigenschaften Stundenlinien",
+        "Hint": "Einstellungen für die Stundenlinien",
         "Implementation comment": "",
         "MultipleParams": [
             "Bfp_TH_LineColor",
@@ -547,30 +547,6 @@
         "Input Text": "Linienbreite",
         "Hint": "Breite der Linien"
     },
-    "Bfp_TH_LineLabelDir": {
-        "ParName": "Bfp_TH_LineLabelDir",
-        "Cnt": "1",
-        "Type": "Combo",
-        "Values": [
-            "Waagerecht",
-            "Senkrecht",
-            "Diagonal"
-        ],
-        "ValuesText": [
-            "Waagerecht",
-            "Senkrecht",
-            "Diagonal"
-        ],
-        "ConfigName": [
-            "Bfp_TH_LineLabelDir",
-            "Bfp_TH_LineLabelDir_No"
-        ],
-        "Min": "0",
-        "Max": "255",
-        "Default": "0",
-        "Input Text": "Richtung der Beschriftung",
-        "Hint": "Richtung der Beschriftung"
-    },
     "Bfp_TH_LineLabelSize": {
         "ParName": "Bfp_TH_LineLabelSize",
         "Cnt": "1",
@@ -581,5 +557,130 @@
         "Default": "8",
         "Input Text": "Beschriftung Schriftgröße",
         "Hint": "Größe der Beschriftung in Punkt"
+    },
+    "Bfp_TM_LineProp": {
+        "ParName": "Bfp_TM_LineProp",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Eigenschaften der Minutenlinien",
+        "Hint": "Einstellungen für die Minutenlinien",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_TM_LineColor",
+            "Bfp_TM_LineWidth",
+            "Bfp_TM_LineDistance"
+        ]
+    },
+    "Bfp_TM_LineColor": {
+        "ParName": "Bfp_TM_LineColor",
+        "Cnt": "1",
+        "Type": "ChooseColor",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "black",
+        "ParamEntryWidth": "3",
+        "Input Text": "Farbe",
+        "Hint": "Farbe, die für die Linie verwendet werden soll",
+        "Implementation comment": ""
+    },
+    "Bfp_TM_LineWidth": {
+        "ParName": "Bfp_TM_LineWidth",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_TM_LineWidth",
+        "Min": "0",
+        "Max": "20",
+        "Default": "2",
+        "Input Text": "Linienbreite",
+        "Hint": "Breite der Linien"
+    },
+    "Bfp_TM_LineDistance": {
+        "ParName": "Bfp_TM_LineDistance",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_TM_LineDistance",
+        "Min": "0",
+        "Max": "20",
+        "Default": "8",
+        "Input Text": "Abstand in Minuten",
+        "Hint": "Abstand zwischen den Minutenlinien in Minuten"
+    },
+    "InOutBoundTrainsProp": {
+        "ParName": "InOutBoundTrainsProp",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Ein/aus- brechende Züge",
+        "Hint": "Einstellungen für die Anzeige von ein- und ausbrechenden Zügen",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "InOutBoundTrainsShow",
+            "InOutBoundTrainsNoOneStop",
+            "InOutBoundTrainsNoStartStation",
+            "InOutBoundTrainsNoEndStation"
+        ]
+    },
+    "InOutBoundTrainsShow": {
+        "ParName": "InOutBoundTrainsShow",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "InOutBoundTrainsShow",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Anzeigen",
+        "Hint": "Ein- und ausbrechenden Zügen mit Pfeil anzeigen"
+    },
+    "InOutBoundTrainsNoOneStop": {
+        "ParName": "InOutBoundTrainsNoOneStop",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "InOutBoundTrainsNoOneStop",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Keine nur kreuzenden Züge",
+        "Hint": "Keine nur kreuzenden Züge anzeigen (treffen nur in einem Bahnhof auf die Strecke)"
+    },
+    "InOutBoundTrainsNoStartStation": {
+        "ParName": "InOutBoundTrainsNoStartStation",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "InOutBoundTrainsNoStartStation",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Nicht in Startstation",
+        "Hint": "Keine ein- und ausbrechenden Zügen in der Startstation der Strecke anzeigen"
+    },
+    "InOutBoundTrainsNoEndStation": {
+        "ParName": "InOutBoundTrainsNoEndStation",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "InOutBoundTrainsNoEndStation",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Nicht in Endstation",
+        "Hint": "Keine ein- und ausbrechenden Zügen in der Endstation der Strecke anzeigen"
+    },
+    "InOutBoundTrainsShowMinutes": {
+        "ParName": "InOutBoundTrainsShowMinutes",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "InOutBoundTrainsShowMinutes",
+        "Hide": "True",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Minuten anzeigen",
+        "Hint": "Die Ankufts- und Abfahrtsminuten auch bei ein- und ausbrechenden Zügen anzeigen"
     }
 }
