@@ -218,7 +218,8 @@ class TimeTableGraphCommon():
             self.InOutBoundTrainsShowMinutes = self.controller.getConfigData("InOutBoundTrainsShowMinutes")
             self.startstationName = self.schedule_stations_dict[0]["StationName"]
             self.stationsCntMax = len(self.schedule_stations_dict)-1
-            self.endstationName = self.schedule_stations_dict[self.stationsCntMax]["StationName"]        
+            self.endstationName = self.schedule_stations_dict[self.stationsCntMax]["StationName"]
+
             # Draw the left column components
             self.drawInfoSection()
             self.drawStationSection()
@@ -881,7 +882,12 @@ class TimeTableGraphCommon():
         trn_dateiname = Datei_trn_dict.get("@Dateiname","")
         train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok)
         train_stop_idx = 0
-        FplRglGgl_default = 2
+        FplRglGgl_str = self.controller.getConfigData("FplRglGgl")
+        showstationonly = not self.controller.getConfigData("ExtraShowAlleZFS")
+        if FplRglGgl_str !="":
+            self.FplRglGgl = FplRglGgl_str.split(",")
+        else:
+            self.FplRglGgl = []
         FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
         stationdistance = 0
         last_km = 0
@@ -899,20 +905,20 @@ class TimeTableGraphCommon():
             return False
         for FplZeile_dict in FplZeile_list:
             try:
-                FplRglGgl=int(FplZeile_dict.get("@FplRglGgl",FplRglGgl_default))
+                FplRglGgl=FplZeile_dict.get("@FplRglGgl","")
             except:
                 print("Error:",ZugGattung,ZugNummer," ",repr(FplZeile_dict))
-                FplRglGgl = FplRglGgl_default
-
-            if FplRglGgl != FplRglGgl_default:
-                continue # keine Umwege über Gegengleis
+                FplRglGgl = ""
+            if FplRglGgl != "":
+                if not (FplRglGgl in self.FplRglGgl):
+                    continue # keine Umwege über Gegengleis
+                
             #determine distance between station - detect KmSprung
             try:
-
                 FplSprung = self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplSprung",default="")
                 Fplkm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@km",default=0))
 
-                if Fplkm == 0:
+                if (Fplkm == 0):
                     continue # kein km Eintrag, nicht bearbeiten
                 if last_km == 0:
                         # first entry
@@ -929,18 +935,24 @@ class TimeTableGraphCommon():
                         last_km = Neukm
 
                 FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
-                if FplAbf == "":
+               
+                if FplAbf == "" and showstationonly:
                     continue # only use station with "Abf"-Entry
 
-                FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
-                FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute
+                if FplAbf != "":
+                    FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
+                    FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute
+                else:
+                    FplAbf_min = 0
                 FplAnk = self.get_fplZeile_entry(FplZeile_dict, "FplAnk","@Ank")
                 if FplAnk!="":
                     FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute
                 else:
                     FplAnk_min = 0
-                FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="---")
+                FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
+                if FplName == "" and not showstationonly:
+                    continue
                 if self.schedule_stationIdx_write_next == 0:
                     stationdistance = 0
                 Fpldistance = stationdistance # abs(kmStart - Fplkm)
@@ -1044,8 +1056,9 @@ class Timetable_main(Frame):
                 timetable_filecomp = timetable_filepathname.split("\\")
                 Bfpl_filepathname = os.path.join(trn_filepath,timetable_filecomp[-2],timetable_filecomp[-1])
             else:
+                asc_zugGattung = zugGattung.replace("Ü","Ue").replace("ü","ue").replace("Ä","Ae").replace("ä","ae").replace("Ö","Oe").replace("ö","oe")
                 trn_filecomp = trn_filepathname.split("\\")
-                Bfpl_filepathname = os.path.join(trn_filepath,trn_filecomp[-2],zugGattung+zugNummer+".timetable.xml")                
+                Bfpl_filepathname = os.path.join(trn_filepath,trn_filecomp[-2],asc_zugGattung+zugNummer+".timetable.xml")                
                 if not os.path.exists(Bfpl_filepathname):
                     logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
                     self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
@@ -1137,7 +1150,9 @@ class Timetable_main(Frame):
             Bfpl_file_path, Bfpl_file_name = os.path.split(Bfpl_Dateiname)
             Bfpl_filepathname = os.path.join(trn_filepath,Bfpl_file_name)
         else:
-            Bfpl_filepathname = os.path.join(trn_filepath,zugGattung+zugNummer+".timetable.xml")                
+            asc_zugGattung = zugGattung.replace("Ü","Ue").replace("ü","ue").replace("Ä","Ae").replace("ä","ae").replace("Ö","Oe").replace("ö","oe")
+            
+            Bfpl_filepathname = os.path.join(trn_filepath,asc_zugGattung+zugNummer+".timetable.xml")                
             if not os.path.exists(Bfpl_filepathname):
                 logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
                 self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
