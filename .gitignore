@@ -1,5 +1,4 @@
-
 *.pyc
-logfile.log
 *.log
-logfile.log
+*.pyo
+ZUSI_timetablegraph.zip
