@@ -267,6 +267,18 @@
         "Input Text": "Minuten Schriftgröße",
         "Hint": "Größe der Minuten Beschriftung in Punkt"
     },
+    "FplRglGgl": {
+        "ParName": "FplRglGgl",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "",
+        "Input Text": "FplRglGgl",
+        "ParamEntryWidth": "3",
+        "Hint": "Liste der FplRglGgl, die angezeigt werden sollen",
+        "Implementation comment": ""
+    },
     "TLDirection": {
         "ParName": "TLDirection",
         "Cnt": "1",
@@ -603,9 +615,9 @@
         "Cnt": "1",
         "Type": "",
         "ConfigName": "Bfp_TM_LineDistance",
-        "Min": "0",
-        "Max": "20",
-        "Default": "8",
+        "Min": "5",
+        "Max": "30",
+        "Default": "15",
         "Input Text": "Abstand in Minuten",
         "Hint": "Abstand zwischen den Minutenlinien in Minuten"
     },
@@ -682,5 +694,17 @@
         "Default": "",
         "Input Text": "Minuten anzeigen",
         "Hint": "Die Ankufts- und Abfahrtsminuten auch bei ein- und ausbrechenden Zügen anzeigen"
+    },
+    "ExtraShowAlleZFS": {
+        "ParName": "ExtraShowAlleZFS",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "ExtraShowAlleZFS",
+        "Hide": "",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Zeige alle ZFS",
+        "Hint": "Alle ZFS (auch ohne Abfahrtszeiten) anzeigen"
     }
 }

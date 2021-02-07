@@ -1,12 +1,12 @@
 {
     "startpagename": "StartPage",
-    "pos_x": -8,
-    "pos_y": -8,
+    "pos_x": 0,
+    "pos_y": 0,
     "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
     "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D843.timetable.xml",
     "TeilStreckeCheckButton": false,
-    "StartStation": "Schwerte",
-    "EndStation": "Obervellmar",
+    "StartStation": "Hagen_Hbf",
+    "EndStation": "Kassel_Hbf",
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
     "Bfp_width": 2000,
@@ -174,5 +174,7 @@
     "InOutBoundTrainsShowMinutes": false,
     "Bfp_TM_LineColor": "#ffcfb9",
     "Bfp_TM_LineWidth": 1,
-    "Bfp_TM_LineDistance": 15
+    "Bfp_TM_LineDistance": 15,
+    "FplRglGgl": "1,2",
+    "ExtraShowAlleZFS": true
 }

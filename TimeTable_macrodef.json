@@ -34,7 +34,9 @@
         "Ausführliche Beschreibung": "Extra Bildfahrplan Einstellungen\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
         "Params": [
             "Bfp_ZFS_LineProp",
-            "InOutBoundTrainsProp"
+            "InOutBoundTrainsProp",
+            "FplRglGgl",
+            "ExtraShowAlleZFS"
         ]
     },
     "StartPage": {
