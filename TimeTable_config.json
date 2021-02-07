@@ -30,8 +30,7 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
             "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 7,
-            "Bfp_TrainType": "*"
+            "Bfp_TrainTypeLabelSize": 7
         }
     },
     "Bfp_TrainTypeProp": {
@@ -154,14 +153,6 @@
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
             "Bfp_TrainTypeLabelSize": 10
-        },
-        "999": {
-            "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 1,
-            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
-            "Bfp_TrainTypeLabel_No": 1,
-            "Bfp_TrainTypeLabelSize": 7,
-            "Bfp_TrainType": "*"
         }
     },
     "Bfp_ZFS_Id": "",
