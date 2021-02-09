@@ -102,13 +102,13 @@ class ConfigurationPage(tk.Frame):
         config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage")  
         # --- Buttons
         self.button_frame = ttk.Frame(self.main_frame)
-#
         button1_text = macrodata.get("Button_1",self.tabClassName)
-        button2_text = macrodata.get("Button_2",self.tabClassName)
-        button3_text = macrodata.get("Button_3",self.tabClassName)
-        
         self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
         self.update_button.pack(side="right", padx=10)
+        
+        self.button_frame2 = ttk.Frame(self.main_frame)
+        self.update_button2 = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
+        self.update_button2.pack(side="right", padx=10)        
         
         #self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
         #self.update_tree_button.pack(side="left", padx=10)        
@@ -126,6 +126,7 @@ class ConfigurationPage(tk.Frame):
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
         self.tree_frame.grid(row=3, column=0, pady=10, padx=10, sticky="nesw")
+        self.button_frame2.grid(row=4, column=0,pady=10, padx=10)
 
         macroparams = macrodata.get("Params",[])
         
@@ -150,6 +151,10 @@ class ConfigurationPage(tk.Frame):
                             if value != None:
                                 mp_macro = self.tabClassName+"." + paramkey + "." + str(i)
                                 self.controller.set_macroparam_val(mp_macro, mparamkey, value)
+            elif param_type == "List":
+                configdatakey = self.controller.getConfigDatakey(paramkey)
+                value = self.getConfigData(configdatakey)
+                self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
             else:
                 configdatakey = self.controller.getConfigDatakey(paramkey)
                 value = self.getConfigData(configdatakey)

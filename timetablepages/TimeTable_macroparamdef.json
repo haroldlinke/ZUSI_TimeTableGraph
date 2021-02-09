@@ -137,7 +137,8 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
-            "Bfp_TrainTypeLabelSize": 10
+            "Bfp_TrainTypeLabelSize": 10,
+            "Bfp_TrainTypeLineDashed": ""
             },
         "Repeat": "1",
         "ParamDescription": "Standard Linieneigenschaften für alle Zuggattungen festlegen",
@@ -150,7 +151,8 @@
             "Bfp_TrainTypeColor",
             "Bfp_TrainTypeWidth",
             "Bfp_TrainTypeLabel",
-            "Bfp_TrainTypeLabelSize"
+            "Bfp_TrainTypeLabelSize",
+            "Bfp_TrainTypeLineDashed"
         ]
     },
     "Bfp_TrainTypeProp": {
@@ -165,7 +167,8 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
-            "Bfp_TrainTypeLabelSize": 10
+            "Bfp_TrainTypeLabelSize": 10,
+            "Bfp_TrainTypeLineDashed": ""
             },
         "Repeat": "15",
         "ParamDescription": "Linieneigenschaften für eine oder mehrere Zuggattungen festlegen. z.B. <D> oder <IC>. <*> steht für alle Zuggattungen",
@@ -178,7 +181,8 @@
             "Bfp_TrainTypeColor",
             "Bfp_TrainTypeWidth",
             "Bfp_TrainTypeLabel",
-            "Bfp_TrainTypeLabelSize"
+            "Bfp_TrainTypeLabelSize",
+            "Bfp_TrainTypeLineDashed"
         ]
     },
     "Bfp_TrainType": {
@@ -256,6 +260,17 @@
         "Default": "10",
         "Input Text": "Beschriftung Schriftgröße",
         "Hint": "Größe der Beschriftung in Punkt"
+    },
+    "Bfp_TrainTypeLineDashed": {
+        "ParName": "Bfp_TrainTypeLineDashed",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "Bfp_TrainTypeLineDashed",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Linie gestrichelt",
+        "Hint": "Gestrichelte Linie zeichnen"
     },
     "Bfp_TrainMinuteSize": {
         "ParName": "Bfp_TrainMinuteSize",
@@ -407,7 +422,8 @@
             "Bfp_S_LineColor",
             "Bfp_S_LineWidth",
             "Bfp_S_LineLabelDir",
-            "Bfp_S_LineLabelSize"
+            "Bfp_S_LineLabelSize",
+            "Bfp_S_LineDashed"
         ]
     },
     "Bfp_S_LineColor": {
@@ -468,6 +484,17 @@
         "Input Text": "Beschriftung Schriftgröße",
         "Hint": "Größe der Beschriftung in Punkt"
     },
+    "Bfp_S_LineDashed": {
+        "ParName": "Bfp_S_LineDashed",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "Bfp_S_LineDashed",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Linie gestrichelt",
+        "Hint": "Gestrichelte Linie zeichnen"
+    },
     "Bfp_ZFS_LineProp": {
         "ParName": "Bfp_ZFS_LineProp",
         "Cnt": "",
@@ -482,7 +509,8 @@
         "MultipleParams": [
             "Bfp_ZFS_Id",
             "Bfp_ZFS_LineColor",
-            "Bfp_ZFS_LineWidth"
+            "Bfp_ZFS_LineWidth",
+            "Bfp_ZFS_LineDashed"
         ]
     },
     "Bfp_ZFS_LineColor": {
@@ -520,6 +548,17 @@
         "Hint": "Liste von Bezeichnern für Zugfolgestationen",
         "Implementation comment": ""
     },
+    "Bfp_ZFS_LineDashed": {
+        "ParName": "Bfp_ZFS_LineDashed",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "Bfp_ZFS_LineDashed",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Linie gestrichelt",
+        "Hint": "Gestrichelte Linie zeichnen"
+    },
     "Bfp_TH_LineProp": {
         "ParName": "Bfp_TH_LineProp",
         "Cnt": "",
@@ -534,7 +573,8 @@
         "MultipleParams": [
             "Bfp_TH_LineColor",
             "Bfp_TH_LineWidth",
-            "Bfp_TH_LineLabelSize"
+            "Bfp_TH_LineLabelSize",
+            "Bfp_TH_LineDashed"
         ]
     },
     "Bfp_TH_LineColor": {
@@ -570,6 +610,17 @@
         "Default": "8",
         "Input Text": "Beschriftung Schriftgröße",
         "Hint": "Größe der Beschriftung in Punkt"
+    },    
+    "Bfp_TH_LineDashed": {
+        "ParName": "Bfp_TH_LineDashed",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "Bfp_TH_LineDashed",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Linie gestrichelt",
+        "Hint": "Gestrichelte Linie zeichnen"
     },
     "Bfp_TM_LineProp": {
         "ParName": "Bfp_TM_LineProp",
@@ -585,7 +636,8 @@
         "MultipleParams": [
             "Bfp_TM_LineColor",
             "Bfp_TM_LineWidth",
-            "Bfp_TM_LineDistance"
+            "Bfp_TM_LineDistance",
+            "Bfp_TM_LineDashed"
         ]
     },
     "Bfp_TM_LineColor": {
@@ -621,6 +673,17 @@
         "Default": "15",
         "Input Text": "Abstand in Minuten",
         "Hint": "Abstand zwischen den Minutenlinien in Minuten"
+    },
+    "Bfp_TM_LineDashed": {
+        "ParName": "Bfp_TM_LineDashed",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "Bfp_TM_LineDashed",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Linie gestrichelt",
+        "Hint": "Gestrichelte Linie zeichnen"
     },
     "InOutBoundTrainsProp": {
         "ParName": "InOutBoundTrainsProp",

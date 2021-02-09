@@ -219,6 +219,7 @@ class TimeTableGraphCommon():
             self.startstationName = self.schedule_stations_dict[0]["StationName"]
             self.stationsCntMax = len(self.schedule_stations_dict)-1
             self.endstationName = self.schedule_stations_dict[self.stationsCntMax]["StationName"]
+            self.dashline_pattern = "-"
 
             # Draw the left column components
             self.drawInfoSection()
@@ -392,41 +393,69 @@ class TimeTableGraphCommon():
         # Print the grid lines
         s_color=self.controller.getConfigData("Bfp_S_LineColor")
         s_width=self.controller.getConfigData("Bfp_S_LineWidth")
+        s_linedashed=self.controller.getConfigData("Bfp_S_LineDashed")
         zfs_color=self.controller.getConfigData("Bfp_ZFS_LineColor")
         zfs_width=self.controller.getConfigData("Bfp_ZFS_LineWidth")
+        zfs_linedashed=self.controller.getConfigData("Bfp_ZFS_LineDashed")
         th_color=self.controller.getConfigData("Bfp_TH_LineColor")
         th_width=self.controller.getConfigData("Bfp_TH_LineWidth")
+        th_linedashed=self.controller.getConfigData("Bfp_TH_LineDashed")
         tm_color=self.controller.getConfigData("Bfp_TM_LineColor")
         tm_width=self.controller.getConfigData("Bfp_TM_LineWidth")
+        tm_linedashed=self.controller.getConfigData("Bfp_TM_LineDashed")
         tm_distance=int(self.controller.getConfigData("Bfp_TM_LineDistance"))
         if self.draw_stations_vertical:
             for stationidx,y in self.stationGrid.items():
                 if self.stationTypeZFS_list[stationidx]:
-                    objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=zfs_width, fill=zfs_color)
+                    if not zfs_linedashed:
+                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=zfs_width, fill=zfs_color)
+                    else:
+                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=zfs_width, fill=zfs_color,dash=self.dashline_pattern)
                 else:
-                    objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color)
+                    if not s_linedashed:
+                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color)
+                    else:
+                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color,dash=self.dashline_pattern)
                 self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx), key="",button_1=True)
             for x in self.hourGrid:
-                self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color)
+                if not th_linedashed:
+                    self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color)
+                else:
+                    self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color,dash=self.dashline_pattern)
                 if tm_width > 0 and x != self.hourGrid[-1]:
                     number_of_min_lines = int(60/tm_distance)-1
                     distance_per_line = tm_distance * self.hourWidth/60
                     for min_line in range(0,number_of_min_lines):
-                        self.tt_canvas.create_line(x+distance_per_line*(min_line+1), self.graphTop, x+distance_per_line*(min_line+1), self.graphBottom, width=tm_width, fill=tm_color)
+                        if not tm_linedashed:
+                            self.tt_canvas.create_line(x+distance_per_line*(min_line+1), self.graphTop, x+distance_per_line*(min_line+1), self.graphBottom, width=tm_width, fill=tm_color)
+                        else:
+                            self.tt_canvas.create_line(x+distance_per_line*(min_line+1), self.graphTop, x+distance_per_line*(min_line+1), self.graphBottom, width=tm_width, fill=tm_color,dash=self.dashline_pattern)
         else:
             for y in self.hourGrid:
-                self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=th_width, fill=th_color)
+                if not th_linedashed:
+                    self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=th_width, fill=th_color)
+                else:
+                    self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=th_width, fill=th_color,dash=self.dashline_pattern)
                 if tm_width > 0 and y != self.hourGrid[-1]:
                     number_of_min_lines = int(60/tm_distance)-1
                     distance_per_line = tm_distance * self.hourWidth/60
                     for min_line in range(0,number_of_min_lines):
-                        self.tt_canvas.create_line(self.graphLeft, y+distance_per_line*(min_line+1), self.graphRight, y+distance_per_line*(min_line+1), width=tm_width, fill=tm_color)
+                        if not tm_linedashed:
+                            self.tt_canvas.create_line(self.graphLeft, y+distance_per_line*(min_line+1), self.graphRight, y+distance_per_line*(min_line+1), width=tm_width, fill=tm_color)
+                        else:
+                            self.tt_canvas.create_line(self.graphLeft, y+distance_per_line*(min_line+1), self.graphRight, y+distance_per_line*(min_line+1), width=tm_width, fill=tm_color,dash=self.dashline_pattern)
                         
             for stationidx,x in self.stationGrid.items():
                 if self.stationTypeZFS_list[stationidx]:
-                    objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=zfs_color)
+                    if not zfs_linedashed:
+                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=zfs_color)
+                    else:
+                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=zfs_color,dash=self.dashline_pattern)
                 else:
-                    objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=s_color)                        
+                    if not s_linedashed:
+                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=s_color)
+                    else:
+                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=s_color,dash=self.dashline_pattern)
                     self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx), key="",button_1=True)
 
 #     * Create the train line for each train with labels.  Include times if
@@ -469,6 +498,7 @@ class TimeTableGraphCommon():
         self.trainLineWidth = int(self.trainLineProp.get("Bfp_TrainTypeWidth","2"))
         self.TrainLabelPos = self.trainLineProp.get("Bfp_TrainTypeLabel_No","")
         self.TrainLabelSize = self.trainLineProp.get("Bfp_TrainTypeLabelSize","10")
+        self.TrainLineDashed = self.trainLineProp.get("Bfp_TrainTypeLineDashed",False)
         self.TrainLabelFont = font.Font(family="SANS_SERIF", size=int(self.TrainLabelSize))
         if self.trainColor == "" or self.trainLineWidth == 0:
             return
@@ -696,7 +726,10 @@ class TimeTableGraphCommon():
                     logging.debug("SetEnd Error: %s %s",self.trainType+self.trainName,repr(stop))
                     return
                 self.trainLine_dict.extend([x, y])
-                train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2)
+                if self.TrainLineDashed:
+                    train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,dash=self.dashline_pattern)
+                else:
+                    train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2)
                 self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
 
             arrowwidth = self.trainLineWidth

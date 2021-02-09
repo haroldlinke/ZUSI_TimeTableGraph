@@ -32,7 +32,7 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-PROG_VERSION ="V00.10 06.02.2021"
+PROG_VERSION ="V00.11 09.02.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -55,7 +55,7 @@ INVERT_WHEEL = True
 # all filenames are relativ to the location of the main program pyProg_generator_MobaLedLib.py
 MAIN_PROG_NAME = "TimeTable"
 
-LOG_FILENAME = 'logfile.log'
+LOG_FILENAME = '..\\logfile.log'
 PARAM_FILENAME = MAIN_PROG_NAME + '_param.json'
 CONFIG_FILENAME = MAIN_PROG_NAME + '_config.json'
 MACRODEF_FILENAME = MAIN_PROG_NAME + '_macrodef.json'
@@ -73,6 +73,7 @@ DEFAULT_CONFIG = {
                     "pos_y": 100,
                     "startpage": 1,
                     "startpagename" : "StartPage",
+                    "StationChooser": "Stationx"
                 }
 
 DEFAULT_PARAM = {}

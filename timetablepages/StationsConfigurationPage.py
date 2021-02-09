@@ -82,9 +82,15 @@ class StationsConfigurationPage(tk.Frame):
         
         self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
         self.update_button.pack(side="right", padx=10)
+        
+        self.button_frame2 = ttk.Frame(self.main_frame)
+        self.update_button2 = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
+        self.update_button2.pack(side="right", padx=10)        
         #update treeview, when value in FPL-filename changed
         paramvar = self.controller.macroparams_var[self.tabClassName]["Bfp_filename"]
-        paramvar.trace('w',self.bfpl_filename_updated)        
+        paramvar.trace('w',self.bfpl_filename_updated)
+        paramvar = self.controller.macroparams_var[self.tabClassName]["Bfp_trainfilename"]
+        paramvar.trace('w',self.xml_filename_updated)            
         # --- placement
         # Tabframe
         self.frame.grid(row=0,column=0)
@@ -95,6 +101,7 @@ class StationsConfigurationPage(tk.Frame):
         title_frame.grid(row=0, column=0, pady=10, padx=10)
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
+        self.button_frame2.grid(row=3, column=0,pady=10, padx=10)
 
         macroparams = macrodata.get("Params",[])
         
@@ -192,11 +199,16 @@ class StationsConfigurationPage(tk.Frame):
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
         
     def bfpl_filename_updated(self, *args):
-        self.update_tree()        
+        self.update_tree()
+        
+    def xml_filename_updated(self, *args):
+        self.update_tree()  
     
     def update_tree(self):
         self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
+        station_list = []
+        self.controller.set_macroparam_val(StationsConfigurationPage, "StationChooser", station_list)
 
     def treeview(self,parent_frame, marco,macroparams):
         #self.save_config()
