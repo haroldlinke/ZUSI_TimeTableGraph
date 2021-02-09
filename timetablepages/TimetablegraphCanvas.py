@@ -32,9 +32,9 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-from tkinter import Tk, Canvas, Frame, BOTH, font, filedialog
-import uuid
-from tkinter import ttk
+from tkinter import Tk, Canvas, Frame, BOTH, font
+#import uuid
+#from tkinter import ttk
 from tools.xmltodict import parse
 #from collections import OrderedDict
 from datetime import datetime
@@ -1071,10 +1071,8 @@ class Timetable_main(Frame):
         self.xml_filename = self.controller.getConfigData("Bfp_trainfilename")
         self.starthour = self.controller.getConfigData("Bfp_start")
         self.duration = self.controller.getConfigData("Bfp_duration")
-        self.initUI()
         
     def open_zusi_trn_zug_dict(self,trn_zug_dict,fpn_filepathname,trn_filepathname=""):
-        
         TLFileType = self.controller.getConfigData("TLFileType")
         if TLFileType == ".timetable.xml":
             fahrplan_gruppe = trn_zug_dict.get("@FahrplanGruppe","")
@@ -1096,19 +1094,15 @@ class Timetable_main(Frame):
                     logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
                     self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
                     return             
-               
             with open(Bfpl_filepathname,mode="r",encoding="utf-8") as fd:
                 xml_text = fd.read()
                 Bfpl_timetable_dict = parse(xml_text)
                 #enter train-timetable
                 result_ok = self.timetable.convert_zusi_fpn_dict_to_schedule_dict(Bfpl_timetable_dict)
-           
-            
         else:
             self.timetable.convert_zusi_trn_to_timetable_train_x(trn_zug_dict)        
 
     def open_zusi_trn_file(self, trn_filepathname,fpn_filepathname):
-
         with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
             xml_text = fd.read()
             trn_dict = parse(xml_text)
@@ -1125,19 +1119,16 @@ class Timetable_main(Frame):
         with open(fpn_filename,mode="r",encoding="utf-8") as fd:
             xml_text = fd.read()
             self.zusi_master_timetable_dict = parse(xml_text)
-
         zusi_dict = self.zusi_master_timetable_dict.get("Zusi",{})
         if zusi_dict == {}:
             logging.info("ZUSI Entry not found")
             self.controller.set_statusmessage("Error: ZUSI entry not found in file: "+fpn_filename)
             return False
-            
         fahrplan_dict = zusi_dict.get("Fahrplan",{})
         if fahrplan_dict == {}:
             logging.info("Fahrplan Entry not found")
             self.controller.set_statusmessage("Error: Fahrplan entry not found in fpl-file: "+fpn_filename)
             return False
-        
         zug_list = fahrplan_dict.get("Zug",{})
         if zug_list == {}:
             # integrate fpl file
@@ -1169,7 +1160,6 @@ class Timetable_main(Frame):
             if betrst != "":
                 if not (betrst in station_list):
                     station_list.append(betrst)
-
         return station_list
     
     def create_zusi_trn_list_from_zug_dict(self,trn_zug_dict, trn_filepath):
@@ -1184,13 +1174,11 @@ class Timetable_main(Frame):
             Bfpl_filepathname = os.path.join(trn_filepath,Bfpl_file_name)
         else:
             asc_zugGattung = zugGattung.replace("Ü","Ue").replace("ü","ue").replace("Ä","Ae").replace("ä","ae").replace("Ö","Oe").replace("ö","oe")
-            
             Bfpl_filepathname = os.path.join(trn_filepath,asc_zugGattung+zugNummer+".timetable.xml")                
             if not os.path.exists(Bfpl_filepathname):
                 logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
                 self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
                 return              
-
         station_list = self.get_station_list(trn_zug_dict)
         zusi_fahrplan_gruppe_dict = self.zusi_zuglist_dict.get(fahrplan_gruppe,{})
         station_list_str = repr(station_list)
@@ -1205,34 +1193,25 @@ class Timetable_main(Frame):
             if not station_found:
                 self.zusi_zuglist_dict[fahrplan_gruppe][zugGattung+zugNummer] = station_list_str
         self.zusi_zuglist_xmlfilename_dict[zugGattung+zugNummer]=Bfpl_filepathname
-        
         return
 
     def create_zusi_trn_list(self, trn_filepathname):
-
         with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
             xml_text = fd.read()
             trn_dict = parse(xml_text)
-
         trn_filepath, trn_filename = os.path.split(trn_filepathname)
-
         trn_zusi_dict = trn_dict.get("Zusi")
         if trn_zusi_dict == {}:
             logging.info("ZUSI Entry not found")
             self.controller.set_statusmessage("Error: ZUSI entry not found in trn-file: "+trn_filepathname)
             return
-        
         trn_zug_dict = trn_zusi_dict.get("Zug")
-        
         self.create_zusi_trn_list_from_zug_dict(trn_zug_dict, trn_filepath)
-        
         return
 
     def create_zusi_zug_liste(self, fpn_filename=""):
         if fpn_filename == "": return
-
         fpl_path, fpl_file = os.path.split(fpn_filename)
-
         print('Input File, %s.' % fpn_filename)
         with open(fpn_filename,mode="r",encoding="utf-8") as fd:
             xml_text = fd.read()
@@ -1242,15 +1221,12 @@ class Timetable_main(Frame):
             logging.info("ZUSI Entry not found")
             self.controller.set_statusmessage("Error: ZUSI entry not found in fpn-file: "+fpn_filename)
             return {}
-        
         fahrplan_dict = zusi_dict.get("Fahrplan")
-        
         zug_list = fahrplan_dict.get("Zug",{})
         if fahrplan_dict == {}:
             logging.info("Fahrplan Entry not found")
             self.controller.set_statusmessage("Error: Fahrplan entry not found in fpn-file: "+fpn_filename)
             return {}
-        
         self.zusi_zuglist_dict = {}
         self.zusi_zuglist_xmlfilename_dict ={}
         if zug_list == {}:
@@ -1260,7 +1236,6 @@ class Timetable_main(Frame):
                 trn_filepath = os.path.join(fpl_path,file_name)
                 self.create_zusi_trn_list_from_zug_dict(trn_zug_dict, trn_filepath)
                 self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)            
-            
         else:
             for zug in zug_list:
                 datei_dict = zug.get("Datei")
@@ -1268,7 +1243,6 @@ class Timetable_main(Frame):
                 trn_filename_comp = trn_filename.split("\\")
                 trn_file_and_path = os.path.join(fpl_path,trn_filename_comp[-2],trn_filename_comp[-1])
                 self.create_zusi_trn_list(trn_file_and_path)
-
         # sort entries
         for train_line in self.zusi_zuglist_dict:
             train_line_dict = self.zusi_zuglist_dict.get(train_line, {})
@@ -1276,10 +1250,7 @@ class Timetable_main(Frame):
             self.zusi_zuglist_dict[train_line] = {}
             for key,value in train_line_sorted_keys:
                 self.zusi_zuglist_dict[train_line][key] = value
-
-
-        print(repr(self.zusi_zuglist_dict))
-
+        #print(repr(self.zusi_zuglist_dict))
         zusi_zug_list_main_dict={}
         zusi_zug_list_main_dict["Trainlist"]=self.zusi_zuglist_dict
         zusi_zug_list_main_dict["XML_Filenamelist"]=self.zusi_zuglist_xmlfilename_dict
@@ -1292,9 +1263,7 @@ class Timetable_main(Frame):
         self.canvas.update()
         self.canvas.config(width=width,height=height,scrollregion=(0,0,width,height))
         self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
-        
         self.timetable.doPaint(self.canvas,starthour=starthour,duration=duration)
-
 
     def redo_fpl_and_canvas(self,width,height, starthour=8, duration=9,fpl_filename="", xml_filename = ""):
         if fpl_filename == "":
@@ -1323,9 +1292,3 @@ class Timetable_main(Frame):
 
     def set_traintype_prop(self,traintype_prop_dict):
         self.main_traintype_prop_dict = traintype_prop_dict
-
-    def initUI(self):
-        showTrainTimes = True
-        height =self.canvas.winfo_reqheight()
-        width = self.canvas.winfo_reqwidth()
-

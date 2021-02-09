@@ -103,7 +103,7 @@ class TimeTableGraphMain(tk.Tk):
             
         self.ghostscript_path = os.path.join(self.mainfile_dir,self.ghostscript_path_rel)
 
-        macrodata = self.MacroDef.data.get("StartPage",{})
+        #macrodata = self.MacroDef.data.get("StartPage",{})
         
         self.currentTabClass = ""
         self.paramDataChanged = False
@@ -114,7 +114,7 @@ class TimeTableGraphMain(tk.Tk):
         logging.debug("Screenwidth: %s Screenheight: %s",screen_width,screen_height)
         
         if screen_width<1500:
-            SIZEFACTOR_width = screen_width/1500
+            #SIZEFACTOR_width = screen_width/1500
             self.window_width=screen_width*0.8
         else:
             self.window_width = screen_width*0.8 # 1500
@@ -220,7 +220,7 @@ class TimeTableGraphMain(tk.Tk):
         
         self.showFramebyName(startpagename)
         
-        filedir = self.mainfile_dir # os.path.dirname(os.path.realpath(__file__))
+        #filedir = self.mainfile_dir # os.path.dirname(os.path.realpath(__file__))
 
         self.statusmessage.grid(row=1,column=0,sticky="ew")
         #self.statusmessage.pack(side="bottom", fill="x")
@@ -270,34 +270,12 @@ class TimeTableGraphMain(tk.Tk):
     def OpenHelp(self):
         self.call_helppage()
 
-    def ResetColorPalette(self):
-        frame = self.tabdict["ColorCheckPage"]
-        frame.palette_reset_colors()
-
-    def MenuUndo(self,_event=None):
-        for key in self.tabdict:
-            self.tabdict[key].MenuUndo() 
-    
-    def MenuRedo(self,_event=None):
-        for key in self.tabdict:
-            self.tabdict[key].MenuRedo()
-
     def ExitProg(self):
         self.cancel()
         
     def ExitProg_with_save(self):
         self.cancel_with_save()    
 
-    def saveLEDTabtoFile(self, filepath):
-               
-        temp_dict = {"ledeffecttable":self.ledeffecttable.get_table(),
-                     "ledgrouptable" :self.ledeffecttable.mledgrouptable}
-        
-        saveDicttoFile(filepath, temp_dict)
-
-    def readLEDTabfromFile(self, filepath,tabselection=True):
-        pass
-        
     def save_persistent_params(self):
         for macro in self.persistent_param_dict:
             persistent_param_list = self.persistent_param_dict[macro]
@@ -313,10 +291,7 @@ class TimeTableGraphMain(tk.Tk):
         self.setConfigData("pos_y", self.winfo_y())
         self.save_persistent_params()
         self.SaveConfigData()
-        self.SaveParamData()
-        filedir = self.mainfile_dir # os.path.dirname(os.path.realpath(__file__))
-        #temp_ledeffecttable_filename = os.path.join(filedir,self.tempLedeffecttableFilname)
-        #self.saveLEDTabtoFile(temp_ledeffecttable_filename)
+        #self.SaveParamData()
         self.close_notification()
         
     def cancel_step2_without_save(self):
@@ -338,14 +313,6 @@ class TimeTableGraphMain(tk.Tk):
     # ----------------------------------------------------------------
     def cancel_without_save(self):
         logging.debug("Cancel_without_save")
-        #self.set_connectstatusmessage("Closing program...",fg="red")
-        #i=0
-        #for key in self.tabdict:
-        #    #self.tabdict[key].cancel()
-        #    self.container.tab(i, state="disabled")
-        #    i+=1        
-        #self.after(500, self.cancel_step2_without_save) # a trick to show the close message before closing
-        
         self.shutdown_frame.tkraise()
         self.update()
         self.cancel_step2_without_save()
@@ -372,12 +339,7 @@ class TimeTableGraphMain(tk.Tk):
         logging.debug("Close_notification")
         self.setConfigData("pos_x", self.winfo_x())
         self.setConfigData("pos_y", self.winfo_y())
-        #if self.ParamData.data == {}: # ParamData is not used, interface is config data. In this case do not save config data - compatibility modus
         self.SaveConfigData()
-        #try: #create a FINISH_File if possible to show the mobaledlib program that the program finished - ignore any error
-        #    open(FINISH_FILE, 'a').close()                                       # 03.12.19:
-        #except:
-        #    pass
         self.destroy()        
         
     # ----------------------------------------------------------------
@@ -410,16 +372,9 @@ class TimeTableGraphMain(tk.Tk):
         logging.debug("TabChanged %s - %s",oldtab_name,newtab_name)
 
     # ----------------------------------------------------------------
-    # setParamDataChanged
-    # ----------------------------------------------------------------        
-    def setParamDataChanged(self):
-        self.paramDataChanged=True
-        
-    # ----------------------------------------------------------------
     # startup_system
     # ----------------------------------------------------------------             
     def startup_system(self):
-        
         pass
         
     # ----------------------------------------------------------------
@@ -443,26 +398,6 @@ class TimeTableGraphMain(tk.Tk):
         else:
             self.cl_arg_startpagename = startpagename
         return startpagename
-    
-    # ----------------------------------------------------------------
-    # getStartPageClassIndex
-    # ----------------------------------------------------------------
-    def getStartPageClassIndex (self):
-        startpagenumber = self.getConfigData("startpage")
-        startpagename = startpageNumber2Name.get(startpagenumber,self.ConfigData.data.get("startpagename","ColorCheckPage"))
-        startpageindex = tabClassName2Index.get(startpagename,"1")
-        return startpageindex
-    # ----------------------------------------------------------------
-    # getTabNameList
-    # ----------------------------------------------------------------
-    def getTabNameList (self):
-        return list(tabClassName2Name.values())
-    
-    # ----------------------------------------------------------------
-    # getStartPageName
-    # ----------------------------------------------------------------
-    def getStartPageName(self, combolist_index):
-        return tabIndex2ClassName.get(str(combolist_index),defaultStartPage)
 
     def call_helppage(self,event=None):
         macrodata = self.MacroDef.data.get("StartPage",{})
@@ -493,15 +428,11 @@ class TimeTableGraphMain(tk.Tk):
         parent_filedir = os.path.dirname(filedir) # get the parent dirname
         self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=filedir)
         self.ConfigData.data.update(COMMAND_LINE_ARG_DICT) # overwrite configdata mit commandline args
-        
         logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
-        
-        macrodef_filename_str = MACRODEF_FILENAME
-        macroparamdef_filename_str = MACROPARAMDEF_FILENAME
-       
+        #macrodef_filename_str = MACRODEF_FILENAME
+        #macroparamdef_filename_str = MACROPARAMDEF_FILENAME
         if hasattr(sys, '_MEIPASS'):
             logging.debug('running in a PyInstaller bundle')
-        
             try:
                 # PyInstaller creates a temp folder and stores path in _MEIPASS
                 base_path = sys._MEIPASS
@@ -582,18 +513,8 @@ class TimeTableGraphMain(tk.Tk):
             tooltip_var.update_text(text)            
         return
 
-    def addtoclipboard(self,text):
-        self.root.clipboard_clear()
-        # text to clipboard
-        self.root.clipboard_append(text)
-        
-    def readfromclipboard(self):
-        
-        return self.root.clipboard_get()        
-
     def setroot(self, app):
         self.root=app
-        
   
     def set_macroparam_var(self, macro, paramkey,variable,persistent=False):
         paramdict = self.macroparams_var.get(macro,{})
@@ -669,11 +590,9 @@ class TimeTableGraphMain(tk.Tk):
             else:
                 valuedict[param_configname] = True
         return
-
             
     def get_macroparam_var_values(self, macro):
         valuedictmain = {}
-        
         for macrokey in self.macroparams_var:
             valuedict = valuedictmain
             macro_components = macrokey.split(".")
@@ -690,7 +609,6 @@ class TimeTableGraphMain(tk.Tk):
                         valuedict2[macro_components[2]]={}
                         valuedict3 = valuedict2.get(macro_components[2],None)
                     valuedict = valuedict3
-                    
                 if paramdict != {}:
                     for paramkey in paramdict:
                         var = paramdict.get(paramkey,None)
@@ -699,12 +617,9 @@ class TimeTableGraphMain(tk.Tk):
         valuedict = valuedictmain
         return valuedict
      
-     
     def set_macroparam_val(self, macro, paramkey, value, disable = False):
         if value != None:
-            
             macroparams_dict = self.macroparams_var.get(macro,{})
-                    
             variable = macroparams_dict.get(paramkey,None)
             if variable:
                 if disable:
@@ -741,45 +656,13 @@ class TimeTableGraphMain(tk.Tk):
                     variable.config(state="disabled")                    
             else:
                 pass
-            
         return
-    
-    def set_all_macroparam_val(self, macro, paramvalues):
-        try:
-            if macro != "Set_ColTab":
-                for paramkey in paramvalues:
-                    value = paramvalues.get(paramkey)
-                    if value!=None:
-                        self.set_macroparam_val(macro,paramkey,value)
-                        if paramkey=="Group_Colour":
-                            self.setgroupcolor(value)
-            else: # handle set_coltab
-                self.update_color_palette(paramvalues)
-                 
-        except:
-            pass
-        return
-    
-    def get_all_macroparam_val(self, macro):
-        paramvalues={}
-        try:
-            for paramkey in self.macroparams_var[macro]:
-                value = self.get_macroparam_val(macro,paramkey)
-                paramvalues[paramkey] = value
-            for paramkey in self.macroparams_var["Group"]:
-                value = self.get_macroparam_val("Group",paramkey)
-                paramvalues[paramkey] = value            
-        except:
-            paramvalues = {}
-        return paramvalues
     
     def getConfigDatakey(self,paramkey):
         ConfigDatakey = paramkey
         paramconfig_dict = self.MacroParamDef.data.get(paramkey,{})
         param_type = paramconfig_dict.get("Type","")
-        
         ConfigDatakey=[]
-        
         if param_type == "Combo":
             ConfigDatakeyList = paramconfig_dict.get("ConfigName",[paramkey,paramkey])
             ConfigDatakey = ConfigDatakeyList[1]
@@ -795,9 +678,6 @@ class TimeTableGraphMain(tk.Tk):
         if value != "":
             combobox_var.set(value)
             
-    def checkcolor(self,_event=None):
-        self.showFramebyName("ColorCheckPage")    
-    
     def create_macroparam_content(self,parent_frame, macro, macroparams,extratitleline=False,maxcolumns=11, startrow=0, minrow=4, style="MACROPage",generic_methods={}):
         
         if style =="MACROPage":
@@ -1189,20 +1069,6 @@ class TimeTableGraphMain(tk.Tk):
                     if column > maxcolumns:
                         column = 0
                         row=row+deltarow
-                elif param_type == "ColTab": # Color value param
-                    self.coltablabel = tk.Button(parent_frame, text=param_title, width=PARAMLABELWIDTH, height=2, wraplength=PARAMLABELWRAPL,relief="raised", borderwidth=1,command=self.checkcolor,font=self.fontbutton)
-                    #label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,bg=param_default,borderwidth=1)
-                    self.coltablabel.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
-                    self.ToolTip(self.coltablabel, text=param_tooltip)
-                    #paramvar = tk.Entry(parent_frame,width=PARAMENTRWIDTH)
-                    #paramvar.delete(0, 'end')
-                    #paramvar.insert(0, param_default)
-                    #paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
-                    #paramvar.key = paramkey
-                    #self.set_macroparam_var(macro, paramkey, paramvar)
-                    self.create_color_palette(parent_frame)
-                    column = 0
-                    row=row + 4
                 elif param_type == "Var": # Combolist param
                     label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,font=self.fontlabel)
                     label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
@@ -1314,16 +1180,6 @@ class TimeTableGraphMain(tk.Tk):
         else:
             value = ""
         return value
-        
-    
-    def determine_filepath(filename_key):
-        #macrodata = self.MacroDef.data.get("StartPage",{})
-        #filename = macrodata.get(filename_key,"")
-        filename = self.get_macrodef_data("StartPage",filename_key)
-        filedir = self.mainfile_dir
-        filepath1 = os.path.join(filedir, filename)
-        filepath = os.path.normpath(filepath1)
-        return filepath
 
     def _button_cmd(self, macrokey="",button=""):
         """Respond to user click on a button"""
@@ -1341,14 +1197,7 @@ class TimeTableGraphMain(tk.Tk):
         
         (r, g, b) = (hex_str[1:3], hex_str[3:5], hex_str[5:])
         return '#000000' if 1 - (int(r, 16) * 0.299 + int(g, 16) * 0.587 + int(b, 16) * 0.114) / 255 < 0.5 else '#ffffff'        
-    
-    def setbuttoncolor(self,color):
-        color_fg = self.determine_fg_color(color)
-        self.colorlabel.config(bg=color,fg=color_fg)
-        paramvar = self.macroparams_var["Group"]["Group_Colour"]
-        paramvar.delete(0, 'end')
-        paramvar.insert(0, color)    
-    
+   
     def choosecolor(self,paramkey="",macrokey=""):
         paramvar = self.macroparams_var[macrokey][paramkey]
         old_color=paramvar.get()        

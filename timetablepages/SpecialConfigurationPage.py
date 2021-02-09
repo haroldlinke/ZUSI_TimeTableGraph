@@ -33,36 +33,22 @@
 # ***************************************************************************
 
 import tkinter as tk
-from tkinter import ttk,messagebox
-
-from tkcolorpicker.spinbox import Spinbox
-from tkcolorpicker.limitvar import LimitVar
+from tkinter import ttk
+#from tkcolorpicker.spinbox import Spinbox
+#from tkcolorpicker.limitvar import LimitVar
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,HorizontalScrolledFrame,ScrolledFrame
-import uuid
+#import uuid
 
-from locale import getdefaultlocale
+#from locale import getdefaultlocale
 import logging
-import time
-import platform
+#import time
+#import platform
 
 from timetablepages.DefaultConstants import LARGE_FONT, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION
 
-Resp_STK_OK = b'\x10'
-Resp_STK_FAILED = b'\x11'
-Resp_STK_INSYNC = b'\x14'
-Sync_CRC_EOP = b'\x20'
-Cmnd_STK_GET_PARAMETER = b'\x41'
-Cmnd_STK_GET_SYNC = b'\x30'
-STK_READ_SIGN = b'\x75'
-Parm_STK_HW_VER = b'\x80'
-Parm_STK_SW_MAJOR = b'\x81'
-Parm_STK_SW_MINOR = b'\x82'
-
-
 # ----------------------------------------------------------------
-# Class ConfigurationPage
+# Class SpecialConfigurationPage
 # ----------------------------------------------------------------
-
 class SpecialConfigurationPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -73,31 +59,22 @@ class SpecialConfigurationPage(tk.Frame):
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
         self.title = macrodata.get("Title",self.tabClassName)
-
         self.startcmd_filename = ""
-        
         self.grid_columnconfigure(0,weight=1)
         self.grid_rowconfigure(0,weight=1)
-        
         self.frame=ttk.Frame(self,relief="ridge", borderwidth=1)
         self.frame.grid_columnconfigure(0,weight=1)
         self.frame.grid_rowconfigure(0,weight=1)        
-        
         self.scroll_main_frame = ScrolledFrame(self.frame)
         self.scroll_main_frame.grid_columnconfigure(0,weight=1)
         self.scroll_main_frame.grid_rowconfigure(0,weight=1)
-        
         self.main_frame = ttk.Frame(self.scroll_main_frame.interior, relief="ridge", borderwidth=2)
         self.main_frame.grid_columnconfigure(0,weight=1)
         self.main_frame.grid_rowconfigure(2,weight=1) 
-                
         title_frame = ttk.Frame(self.main_frame, relief="ridge", borderwidth=2)
-
         label = ttk.Label(title_frame, text=self.title, font=LARGE_FONT)
         label.pack(padx=5,pady=(5,5))
-        
         #self.scroll_configframe = VerticalScrolledFrame(self.main_frame)
-        
         #config_frame = self.controller.create_macroparam_frame(self.scroll_configframe.interior,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage")        
         config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage")  
         # --- Buttons
@@ -105,7 +82,6 @@ class SpecialConfigurationPage(tk.Frame):
         button1_text = macrodata.get("Button_1",self.tabClassName)
         self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
         self.update_button.pack(side="right", padx=10)
-
         self.button_frame2 = ttk.Frame(self.main_frame)
         self.update_button2 = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
         self.update_button2.pack(side="right", padx=10)
@@ -121,7 +97,6 @@ class SpecialConfigurationPage(tk.Frame):
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
         self.button_frame2.grid(row=3, column=0,pady=10, padx=10)
-        
         macroparams = macrodata.get("Params",[])
         for paramkey in macroparams:
             paramconfig_dict = self.controller.MacroParamDef.data.get(paramkey,{})
@@ -155,7 +130,6 @@ class SpecialConfigurationPage(tk.Frame):
                 configdatakey = self.controller.getConfigDatakey(paramkey)
                 value = self.getConfigData(configdatakey)
                 self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
-                
         self.save_config()
 
         # ----------------------------------------------------------------

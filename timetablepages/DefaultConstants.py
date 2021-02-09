@@ -32,24 +32,15 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-PROG_VERSION ="V00.11 09.02.2021"
+PROG_VERSION ="V00.12 09.02.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
 SMALL_FONT= ("Verdana", 8)
 Very_SMALL_FONT= ("Verdana", 6)
-
 STD_FONT = ("SANS_SERIF",10)
 
-MAC_Version = False #True
-
-COLORCOR_MAX = 255
-
 SIZEFACTOR = 1 # 720/1280
-
-# colorwheel view
-DELTA_H = 270
-INVERT_WHEEL = True
 
 # filenames
 # all filenames are relativ to the location of the main program pyProg_generator_MobaLedLib.py
@@ -60,9 +51,6 @@ PARAM_FILENAME = MAIN_PROG_NAME + '_param.json'
 CONFIG_FILENAME = MAIN_PROG_NAME + '_config.json'
 MACRODEF_FILENAME = MAIN_PROG_NAME + '_macrodef.json'
 MACROPARAMDEF_FILENAME = MAIN_PROG_NAME + '_macroparamdef.json'
-DISCONNECT_FILENAME = MAIN_PROG_NAME + '_disconnect.txt'
-CLOSE_FILENAME = MAIN_PROG_NAME + '_close.txt'
-TEMP_LEDEFFECTTABLE_FILENAME = "temp_ledeffect_table.json"
 
 DEFAULT_CONFIG = {
                     "Bfp_width": 2000,

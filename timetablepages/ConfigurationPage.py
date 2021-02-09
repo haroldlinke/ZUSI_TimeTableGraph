@@ -33,36 +33,22 @@
 # ***************************************************************************
 
 import tkinter as tk
-from tkinter import ttk,messagebox
-
-from tkcolorpicker.spinbox import Spinbox
-from tkcolorpicker.limitvar import LimitVar
+from tkinter import ttk
+#from tkcolorpicker.spinbox import Spinbox
+#from tkcolorpicker.limitvar import LimitVar
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,HorizontalScrolledFrame,ScrolledFrame
-import uuid
+#import uuid
 
-from locale import getdefaultlocale
+#from locale import getdefaultlocale
 import logging
-import time
-import platform
+#import time
+#import platform
 
 from timetablepages.DefaultConstants import LARGE_FONT, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION
-
-Resp_STK_OK = b'\x10'
-Resp_STK_FAILED = b'\x11'
-Resp_STK_INSYNC = b'\x14'
-Sync_CRC_EOP = b'\x20'
-Cmnd_STK_GET_PARAMETER = b'\x41'
-Cmnd_STK_GET_SYNC = b'\x30'
-STK_READ_SIGN = b'\x75'
-Parm_STK_HW_VER = b'\x80'
-Parm_STK_SW_MAJOR = b'\x81'
-Parm_STK_SW_MINOR = b'\x82'
-
 
 # ----------------------------------------------------------------
 # Class ConfigurationPage
 # ----------------------------------------------------------------
-
 class ConfigurationPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -73,31 +59,22 @@ class ConfigurationPage(tk.Frame):
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
         self.title = macrodata.get("Title",self.tabClassName)
-
         self.startcmd_filename = ""
-        
         self.grid_columnconfigure(0,weight=1)
         self.grid_rowconfigure(0,weight=1)
-        
         self.frame=ttk.Frame(self,relief="ridge", borderwidth=1)
         self.frame.grid_columnconfigure(0,weight=1)
         self.frame.grid_rowconfigure(0,weight=1)        
-        
         self.scroll_main_frame = ScrolledFrame(self.frame)
         self.scroll_main_frame.grid_columnconfigure(0,weight=1)
         self.scroll_main_frame.grid_rowconfigure(0,weight=1)
-        
         self.main_frame = ttk.Frame(self.scroll_main_frame.interior, relief="ridge", borderwidth=2)
         self.main_frame.grid_columnconfigure(0,weight=1)
         self.main_frame.grid_rowconfigure(2,weight=1) 
-                
         title_frame = ttk.Frame(self.main_frame, relief="ridge", borderwidth=2)
-
         label = ttk.Label(title_frame, text=self.title, font=LARGE_FONT)
         label.pack(padx=5,pady=(5,5))
-        
         #self.scroll_configframe = VerticalScrolledFrame(self.main_frame)
-        
         #config_frame = self.controller.create_macroparam_frame(self.scroll_configframe.interior,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage")        
         config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage")  
         # --- Buttons
@@ -105,14 +82,11 @@ class ConfigurationPage(tk.Frame):
         button1_text = macrodata.get("Button_1",self.tabClassName)
         self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
         self.update_button.pack(side="right", padx=10)
-        
         self.button_frame2 = ttk.Frame(self.main_frame)
         self.update_button2 = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
         self.update_button2.pack(side="right", padx=10)        
-        
         #self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
         #self.update_tree_button.pack(side="left", padx=10)        
-        
         self.tree_frame = ttk.Frame(self.main_frame)
 
         # --- placement
@@ -127,9 +101,7 @@ class ConfigurationPage(tk.Frame):
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
         self.tree_frame.grid(row=3, column=0, pady=10, padx=10, sticky="nesw")
         self.button_frame2.grid(row=4, column=0,pady=10, padx=10)
-
         macroparams = macrodata.get("Params",[])
-        
         for paramkey in macroparams:
             paramconfig_dict = self.controller.MacroParamDef.data.get(paramkey,{})
             param_type = paramconfig_dict.get("Type","")
@@ -159,7 +131,6 @@ class ConfigurationPage(tk.Frame):
                 configdatakey = self.controller.getConfigDatakey(paramkey)
                 value = self.getConfigData(configdatakey)
                 self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
-                
         self.save_config()
 
         # ----------------------------------------------------------------
@@ -220,7 +191,6 @@ class ConfigurationPage(tk.Frame):
     def disconnect (self):
         pass    
     
-
     # ----------------------------------------------------------------
     # ConfigurationPage save_config
     # ----------------------------------------------------------------
@@ -232,31 +202,24 @@ class ConfigurationPage(tk.Frame):
             curItem_value = self.tree.item(curItem)
             #tree_selection = self.tree.selection()
         except:
-            
             #tree_selection = ""
             curItem_value = {}
-            
         selectedtrain=curItem_value.get("text","")
         param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-
         self.setConfigDataDict(param_values_dict)
-
         self.store_old_config()
         self.controller.SaveConfigData()
-
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
         
     def update_tree(self):
         self.save_config()
         self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
-        
 
     def store_old_config(self):
         self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
     
     def check_if_config_data_changed(self):
-        
         param_values_dict = self.get_macroparam_var_values(self.tabClassName)
         if self.old_param_values_dict != param_values_dict:
             return True
@@ -278,15 +241,12 @@ class ConfigurationPage(tk.Frame):
                 Tree.insert(Parent, 'end', uid, text=key, value=value)
     
     def create_zusi_zug_treeframe(self,parent):
-
             # Setup Data
             fpl_filename = self.getConfigData("Bfp_filename")
             Data = self.controller.timetable_main.create_zusi_zug_liste(fpl_filename)
-
             # Setup the Frames
             TreeFrame = ttk.Frame(parent, padding="3")
             TreeFrame.grid(row=0, column=0, sticky=tk.NSEW)
-    
             # Setup the Tree
             tree = ttk.Treeview(TreeFrame, columns=('Values'))
             tree.column('Values', width=300, anchor='center')

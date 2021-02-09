@@ -34,32 +34,18 @@
 
 import tkinter as tk
 from tkinter import ttk,messagebox
-from timetablepages.configfile import ConfigFile
+#from timetablepages.configfile import ConfigFile
 from locale import getdefaultlocale
-#import re
-#import math
 import os
-#import serial
-#import sys
-#import threading
-#import queue
 import time
 import logging
-#import concurrent.futures
-#import random
-#import webbrowser
 from datetime import datetime
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,HorizontalScrolledFrame,ScrolledFrame
 
-#import json
-
-VERSION ="V02.00 - 11.04.2020"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 SMALL_FONT= ("Verdana", 8)
 
-BUTTONLABELWIDTH = 10
-            
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         self.tabClassName = "StartPage"
@@ -68,29 +54,19 @@ class StartPage(tk.Frame):
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
         self.title = macrodata.get("Title",self.tabClassName)
-        
         tk.Frame.__init__(self, parent)
-        
         self.grid_columnconfigure(0,weight=1)
         self.grid_rowconfigure(0,weight=1)
-        
         self.frame=ttk.Frame(self,relief="ridge", borderwidth=1)
-        
         self.scroll_main_frame = ScrolledFrame(self.frame)
-
         self.main_frame = ttk.Frame(self.scroll_main_frame.interior, relief="ridge", borderwidth=2)
-
         title_frame = ttk.Frame(self.main_frame, relief="ridge", borderwidth=1)
         label = ttk.Label(title_frame, text=self.title, font=LARGE_FONT)
         label.pack(padx=5,pady=(5,5))
-
         #config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=4,startrow=1,style="CONFIGPage")        
-
         text_frame = ttk.Frame(self.main_frame,relief="ridge", borderwidth=2)
         #text = macrodata.get("Ausführliche Beschreibung","")
-        
         photo_filename = macrodata.get("Photo","")
-                
         if photo_filename != "":
             try:
                 logging.debug("Open Photo1 %s ",photo_filename)
@@ -104,10 +80,8 @@ class StartPage(tk.Frame):
                 logging.debug("Open Photo %s ",self.photofilepath)
             except BaseException as e:
                 logging.debug("Photo-Error",self.photofilepath,e)
-                 
         else:
             text1 = tk.Text(text_frame, bg=self.cget('bg'),relief="flat",width=200)
-
         content = macrodata.get("Content",{})
         logging.debug("Open Content %s ",content)
         if content != {}:
@@ -124,7 +98,6 @@ class StartPage(tk.Frame):
         else:
             text_widget = tk.Text(text_frame,wrap=tk.WORD,bg=self.cget('bg'),relief="flat")
             text_scroll = tk.Scrollbar(text_frame, command=text_widget.yview)            
-
         # --- placement
         # Tabframe => frame
         self.grid_columnconfigure(0,weight=1)
@@ -137,7 +110,6 @@ class StartPage(tk.Frame):
         self.scroll_main_frame.grid(row=0,column=0,sticky="nesw")
         self.scroll_main_frame.grid_columnconfigure(0,weight=1)
         self.scroll_main_frame.grid_rowconfigure(1,weight=1)
-        
         self.scroll_main_frame.interior.grid_rowconfigure(0,weight=1)
         self.scroll_main_frame.interior.grid_columnconfigure(0,weight=1)
         
@@ -158,8 +130,6 @@ class StartPage(tk.Frame):
         text1.grid(row=0,column=0,sticky="nesw")
         text_widget.grid(row=1,column=0,sticky=("nesw"),padx=10,pady=10)
         text_scroll.grid(row=1,column=1,sticky=("ns"))                
-
-
        
     def cancel(self,_event=None):
         pass
