@@ -241,7 +241,7 @@ class TimeTablePage(tk.Frame):
         else:
             config_traintype_prop_dict[999]=config_traintype_prop_default_dict["0"]
         for i,value_dict in config_traintype_prop_dict.items():
-            print(repr(value_dict))
+            #print(repr(value_dict))
             traintype = value_dict.get("Bfp_TrainType","")
             #traintypecolor = value_dict.get("Bfp_TrainTypeColor","black")
             #traintypewidth = value_dict.get("Bfp_TrainTypeWidth","4")

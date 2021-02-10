@@ -564,11 +564,11 @@ class TimeTableGraphMain(tk.Tk):
             valuedict[param_configname] = value                                        
         elif param_type in ["Combo"]:
             current_index = var.current()
-            #if current_index == -1: # entry not in list
-            value = var.get()
-            #else:
-            #    value_list = var.keyvalues
-            #    value = value_list[current_index]
+            value_list = var.keyvalues
+            if current_index in range(0,len(value_list)):
+                value = value_list[current_index]
+            else:
+                value = var.get()
             param_configname_list = paramconfig_dict.get("ConfigName",[var.key])
             if param_configname_list[0] != "":
                 valuedict[param_configname_list[0]] = value
@@ -749,6 +749,7 @@ class TimeTableGraphMain(tk.Tk):
                 param_value_scrollable = (paramconfig_dict.get("Scrollable","False") == "True")
                 param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
                 param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))
+                param_list_height = int(paramconfig_dict.get("ParamListHeight",10))
                 param_description = paramconfig_dict.get("ParamDescription","")
                 param_descLines  = int(paramconfig_dict.get("ParamDescLines","0"))
                 
@@ -842,12 +843,17 @@ class TimeTableGraphMain(tk.Tk):
                     label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,font=self.fontlabel)
                     label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
-                    paramvar = tk.Entry(parent_frame,width=param_entry_width*3,font=self.fontentry)
+                    if param_readonly:
+                        paramvar = tk.Entry(parent_frame,width=param_entry_width*3,font=self.fontentry,state="readonly")
+                    else:
+                        paramvar = tk.Entry(parent_frame,width=param_entry_width*3,font=self.fontentry)
                     if param_value_change_event:
                         paramvar.bind("<Return>",self._key_return)
                     paramvar.delete(0, 'end')
                     paramvar.insert(0, param_default)
                     paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
+                    if param_readonly:
+                        paramvar.state = "disabled"                    
                     paramvar.key = paramkey
                     paramvar.macro = macro
                     self.set_macroparam_var(macro, paramkey, paramvar)                
@@ -944,7 +950,7 @@ class TimeTableGraphMain(tk.Tk):
                         label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                         label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                         self.ToolTip(label, text=param_tooltip)
-                        paramvar = tk.Listbox(parent_frame, width=PARAMCOMBOWIDTH,font=self.fontlabel,selectmode=tk.EXTENDED)
+                        paramvar = tk.Listbox(parent_frame, width=param_entry_width,font=self.fontlabel,selectmode=tk.EXTENDED,height=param_list_height)
                     listbox_value_list = paramconfig_dict.get("KeyValues",paramconfig_dict.get("Values",[]))
                     for i in listbox_value_list:
                         paramvar.insert("end",i)
@@ -1007,10 +1013,11 @@ class TimeTableGraphMain(tk.Tk):
                     else:
                         repeat_number_int = int(repeat_number)
                         repeat_max_columns = 10
+                        labelcolumn=0
                         for i in range(repeat_number_int):
                             repeat_macro=macro+"."+paramkey+"."+str(i)
                             multipleparam_frame = ttk.Frame(parent_frame)
-                            multipleparam_frame.grid(row=row,column=column+1 ,columnspan=10,sticky='nesw', padx=0, pady=0)
+                            multipleparam_frame.grid(row=row,column=column+labelcolumn ,columnspan=10,sticky='nesw', padx=0, pady=0)
                             multipleparams = paramconfig_dict.get("MultipleParams",[])
                             if multipleparams != []:
                                 self.create_macroparam_content(multipleparam_frame,repeat_macro, multipleparams,extratitleline=extratitleline,maxcolumns=repeat_max_columns,minrow=0,style=style,generic_methods=generic_methods)
@@ -1109,7 +1116,7 @@ class TimeTableGraphMain(tk.Tk):
                     column = 0
                     row=row+deltarow                    
                 if param_readonly:
-                    paramvar.state = "DISABLED"            
+                    paramvar.state = tk.DISABLED            
             if maxcolumns > 6:        
                 seplabel=tk.Label(parent_frame, text="",width=90,height=1)
                 seplabel.grid(row=row+2, column=0, columnspan=10,sticky='ew', padx=2, pady=2)
@@ -1328,7 +1335,8 @@ class TimeTableGraphMain(tk.Tk):
                 if FplAbf == "":
                     continue # only use station with "Abf"-Entry                
                 FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="---")
-                stationlist.append(FplName)
+                if not FplName in stationlist:
+                    stationlist.append(FplName)
             except BaseException as e:
                 logging.debug("Error: get_stationlist - FplZeile %s %s",repr(FplZeile_dict),e)
                 continue # entry format wrong
