@@ -14,7 +14,7 @@ Zur Erstellung eines Bildfahrplans geht man folgendermassen vor:
   
   Installation:
   
-1. Unter "Releases" die Datei ZUSI_timetablegraph.zip herunterladen
+1. Datei ZUSI_timetablegraph.zip herunterladen
 2. ZUSI_timetablegraph.zip in einem beliebigen Verzeichnis entpacken
 3. Es wird ein neuer Ordner ZUSI_timetablegraph erzeugt. Dieser Ordner enthält alle notwendigen Python-Dateien und eine Python3 Installation.
 4. Programm starten mit anklicken von ZUSI_timetablegraph.exe

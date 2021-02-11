@@ -75,16 +75,19 @@ class StationsConfigurationPage(tk.Frame):
         self.std_font = font.Font(font=STD_FONT)
         self.generic_methods = {"TreeView": self.treeview}
         config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage",generic_methods=self.generic_methods)  
-
         # --- Buttons
         self.button_frame = ttk.Frame(self.main_frame)
         button1_text = macrodata.get("Button_1",self.tabClassName)
-        
         self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
         self.update_button.pack(side="right", padx=10)
+        self.button_frame2 = ttk.Frame(self.main_frame)
+        self.update_button2 = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
+        self.update_button2.pack(side="right", padx=10)        
         #update treeview, when value in FPL-filename changed
         paramvar = self.controller.macroparams_var[self.tabClassName]["Bfp_filename"]
-        paramvar.trace('w',self.bfpl_filename_updated)        
+        paramvar.trace('w',self.bfpl_filename_updated)
+        paramvar = self.controller.macroparams_var[self.tabClassName]["Bfp_trainfilename"]
+        paramvar.trace('w',self.xml_filename_updated)            
         # --- placement
         # Tabframe
         self.frame.grid(row=0,column=0)
@@ -95,33 +98,11 @@ class StationsConfigurationPage(tk.Frame):
         title_frame.grid(row=0, column=0, pady=10, padx=10)
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
-
-        macroparams = macrodata.get("Params",[])
+        self.button_frame2.grid(row=3, column=0,pady=10, padx=10)
         
-        for paramkey in macroparams:
-            paramconfig_dict = self.controller.MacroParamDef.data.get(paramkey,{})
-            param_type = paramconfig_dict.get("Type","")
-            if param_type == "Multipleparams":
-                mparamlist = paramconfig_dict.get("MultipleParams",[])
-                mp_repeat  = paramconfig_dict.get("Repeat","")
-                if mp_repeat == "":
-                    for mparamkey in mparamlist:
-                        configdatakey = self.controller.getConfigDatakey(mparamkey)
-                        value = self.getConfigData(configdatakey)
-                        self.controller.set_macroparam_val(self.tabClassName, mparamkey, value)
-                else:
-                    # get the repeated multipleparams rep_mparamkey=macro.mparamkey.index (e.g. ConfigDataPage.Z21Data.0
-                    for i in range(int(mp_repeat)):
-                        for mparamkey in mparamlist:
-                            configdatakey = self.controller.getConfigDatakey(mparamkey)
-                            value = self.controller.getConfigData_multiple(configdatakey,paramkey,i)
-                            mp_macro = self.tabClassName+"." + paramkey + "." + str(i)
-                            self.controller.set_macroparam_val(mp_macro, mparamkey, value)
-            else:
-                configdatakey = self.controller.getConfigDatakey(paramkey)
-                value = self.getConfigData(configdatakey)
-                self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
-                
+        self.controller.update_variables_with_config_data(self.tabClassName)
+        
+
         self.save_config()
 
         # ----------------------------------------------------------------
@@ -192,17 +173,21 @@ class StationsConfigurationPage(tk.Frame):
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
         
     def bfpl_filename_updated(self, *args):
-        self.update_tree()        
+        self.update_tree()
+        
+    def xml_filename_updated(self, *args):
+        self.update_tree()  
     
     def update_tree(self):
         self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
+        station_list = []
+        self.controller.set_macroparam_val(StationsConfigurationPage, "StationChooser", station_list)
 
     def treeview(self,parent_frame, marco,macroparams):
         #self.save_config()
         self.tree=self.create_zusi_zug_treeframe(parent_frame)
         self.tree_frame = parent_frame
-        
 
     def store_old_config(self):
         self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
@@ -260,7 +245,6 @@ class StationsConfigurationPage(tk.Frame):
                     endStationparamvar.set(stationlist_list[len(stationlist_list)-1])
                 else:
                     self.controller.set_statusmessage("No <.timetable.xml> file found for "+trainname)
-                
     
     def create_zusi_zug_treeframe(self,parent):
         # Setup Data
@@ -271,17 +255,14 @@ class StationsConfigurationPage(tk.Frame):
         # Setup the Frames
         TreeFrame = ttk.Frame(parent, padding="3")
         TreeFrame.grid(row=0, column=0, sticky=tk.NSEW)
-
         # Setup the Tree
         self.tree = ScrollableTV(TreeFrame, height=20, columns=("value")) #ttk.Treeview(TreeFrame, columns=('Values'))
         style = ttk.Style()
         style.configure("Treeview", font=STD_FONT)
-        
         self.tree.heading("value", text="Strecken-Bahnhöfe", anchor="w")
         #tree.column("#0", width=200, stretch=False)
         #tree.column("value", minwidth=2500, width=1000, stretch=True)
         self.tree.grid(padx=8, pady=(8,0),sticky="nesw")
-        
         if fpl_filename == "":
             return            
         if self.controller.timetable_main:
@@ -289,7 +270,6 @@ class StationsConfigurationPage(tk.Frame):
         self.Bfp_xmlfilenamelist = Data_main.get("XML_Filenamelist",{})
         Data = Data_main.get("Trainlist",{})
         Data_sorted = dict(sorted(Data.items()))            
-        
         self.JSONTree(self.tree, '', Data_sorted)
         TreeFrame.grid_columnconfigure(0,weight=1)
         TreeFrame.grid_rowconfigure(0,weight=1)
@@ -308,16 +288,13 @@ class StationsConfigurationPage(tk.Frame):
         self.tree.column("#0", width=self.max_key_width, stretch=False)
         self.tree.column("value",minwidth=self.max_value_width,width=1000,stretch=True)
         self.tree.bind('<Double-1>', self.selectItem)
-        
         return self.tree
-        
+
         # subclass treeview for the convenience of overriding the column method
-        
 class ScrollableTV(ttk.Treeview):
         def __init__(self, master, **kw):
             super().__init__(master, **kw)
             self.columns=[]
-    
         # column now records the name and details of each column in the TV just before they're added
         def column(self, column, **kw):
             if column not in [column[0] for column in self.columns]:

@@ -34,33 +34,15 @@
 
 import tkinter as tk
 from tkinter import ttk
-#from timetablepages.configfile import ConfigFile
-#from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,HorizontalScrolledFrame,ScrolledFrame
-
-#import re
-#import math
 import os
-#import sys
-#import threading
-#import queue
-#import time
 import logging
-#import concurrent.futures
-#import random
-#import webbrowser
-#from datetime import datetime
-#import json
 import timetablepages.TimetablegraphCanvas
 from PIL import Image, EpsImagePlugin
 
-VERSION ="V01.17 - 25.12.2019"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 SMALL_FONT= ("Verdana", 8)
 
-
-ThreadEvent = None
-            
 class TimeTablePage(tk.Frame):
     def __init__(self, parent, controller):
         self.tabClassName = "Bildfahrplan"
@@ -99,6 +81,7 @@ class TimeTablePage(tk.Frame):
         self.old_scalefactor = 1
         self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
+        self.firstcall = True
         
     def move_from(self, event):
         ''' Remember previous coordinates for scrolling with the mouse '''
@@ -259,7 +242,7 @@ class TimeTablePage(tk.Frame):
         else:
             config_traintype_prop_dict[999]=config_traintype_prop_default_dict["0"]
         for i,value_dict in config_traintype_prop_dict.items():
-            print(repr(value_dict))
+            #print(repr(value_dict))
             traintype = value_dict.get("Bfp_TrainType","")
             #traintypecolor = value_dict.get("Bfp_TrainTypeColor","black")
             #traintypewidth = value_dict.get("Bfp_TrainTypeWidth","4")
@@ -273,7 +256,7 @@ class TimeTablePage(tk.Frame):
         logging.debug("Tabselected: %s",self.tabname)
         #self.controller.currentTabClass = self.tabClassName
         logging.info(self.tabname)
-        self.controller.set_statusmessage("Bildfahrplanerstellung gestartet - bitte etwas Geduld")
+        
         self.controller.update()
         self.canvas_width = self.getConfigData("Bfp_width")
         self.canvas_height = self.getConfigData("Bfp_height")
@@ -283,8 +266,6 @@ class TimeTablePage(tk.Frame):
         duration = self.getConfigData("Bfp_duration")
         self.create_train_type_to_color_dict()
         self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
-
-        
         if fpl_filename == "":
             self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
             return
@@ -297,21 +278,17 @@ class TimeTablePage(tk.Frame):
         if duration == "" or duration==None:
             self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
             return        
-        
         self.timetable_main.create_zusi_zug_liste(fpl_filename)
-        
-        if True: # (fpl_filename != self.fpl_filename) or (self.xml_filename != xml_filename) or (self.starthour != starthour) or (self.duration != duration):
+        if self.controller.check_if_config_data_changed() or self.firstcall:
+            self.controller.set_statusmessage("Bildfahrplanerstellung gestartet - bitte etwas Geduld")
+            self.firstcall = False
             self.xml_filename = xml_filename
             self.fpl_filename = fpl_filename
             self.starthour = starthour
             self.duration = duration
             self.timetable_main.redo_fpl_and_canvas(self.canvas_width,self.canvas_height,fpl_filename=fpl_filename,xml_filename=xml_filename,starthour=starthour,duration=duration)
         else:
-            old_height =self.canvas.winfo_reqheight()
-            old_width = self.canvas.winfo_reqwidth()
-            
-            #if (old_height-4 != self.canvas_height) or (old_width-4 != self.canvas_width):
-            self.timetable_main.resize_canvas(self.canvas_width,self.canvas_height,starthour,duration)
+            self.controller.set_statusmessage(" ")
     
     def tabunselected(self):
         logging.debug("Tabunselected: %s",self.tabname)

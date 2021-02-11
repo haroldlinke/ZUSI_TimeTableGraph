@@ -13,11 +13,11 @@
             "TLDirection",
             "Bfp_CanvasSize",
             "Bfp_TimeRange",
-            "TLFileType",
-            "Bfp_TrainMinuteSize",
             "Bfp_S_LineProp",
+            "Bfp_ZFS_LineProp",
             "Bfp_TH_LineProp",
             "Bfp_TM_LineProp",
+            "Bfp_TrainMinuteSize",
             "Bfp_TrainTypePropDefault",
             "Bfp_TrainTypeProp"
         ]
@@ -25,18 +25,20 @@
     "SpecialConfigurationPage": {
         "Typ": "SpecialConfigurationPage",
         "Name": "SpecialConfigurationPage",
-        "MTabName": "Extra Einstellungen",
-        "Title": "Extra Einstellungen",
+        "MTabName": "Experten Einstellungen",
+        "Title": "Experten Einstellungen",
         "Button_1": "Geänderte Einstellungen übernehmen",
         "Button_2": "n",
         "Button_3": "",
         "Kurzbeschreibung": "Einstellungsparameter",
-        "Ausführliche Beschreibung": "Extra Bildfahrplan Einstellungen\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
+        "Ausführliche Beschreibung": "Bildfahrplan Einstellungen für experten - Bitte nur ändern, wenn Sie wissen, was Sie tun!\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
         "Params": [
-            "Bfp_ZFS_LineProp",
+            "TLFileType",
+            "Bfp_ZFS_Id",
             "InOutBoundTrainsProp",
             "FplRglGgl",
-            "ExtraShowAlleZFS",
+            "Bfp_TrainLine_Distance_from_Stationline",
+            "!ExtraShowAlleZFS",
             "StationChooser"
         ]
     },
