@@ -81,6 +81,7 @@ class TimeTablePage(tk.Frame):
         self.old_scalefactor = 1
         self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
+        self.firstcall = True
         
     def move_from(self, event):
         ''' Remember previous coordinates for scrolling with the mouse '''
@@ -255,7 +256,7 @@ class TimeTablePage(tk.Frame):
         logging.debug("Tabselected: %s",self.tabname)
         #self.controller.currentTabClass = self.tabClassName
         logging.info(self.tabname)
-        self.controller.set_statusmessage("Bildfahrplanerstellung gestartet - bitte etwas Geduld")
+        
         self.controller.update()
         self.canvas_width = self.getConfigData("Bfp_width")
         self.canvas_height = self.getConfigData("Bfp_height")
@@ -278,17 +279,16 @@ class TimeTablePage(tk.Frame):
             self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
             return        
         self.timetable_main.create_zusi_zug_liste(fpl_filename)
-        if True: # (fpl_filename != self.fpl_filename) or (self.xml_filename != xml_filename) or (self.starthour != starthour) or (self.duration != duration):
+        if self.controller.check_if_config_data_changed() or self.firstcall:
+            self.controller.set_statusmessage("Bildfahrplanerstellung gestartet - bitte etwas Geduld")
+            self.firstcall = False
             self.xml_filename = xml_filename
             self.fpl_filename = fpl_filename
             self.starthour = starthour
             self.duration = duration
             self.timetable_main.redo_fpl_and_canvas(self.canvas_width,self.canvas_height,fpl_filename=fpl_filename,xml_filename=xml_filename,starthour=starthour,duration=duration)
         else:
-            old_height =self.canvas.winfo_reqheight()
-            old_width = self.canvas.winfo_reqwidth()
-            #if (old_height-4 != self.canvas_height) or (old_width-4 != self.canvas_width):
-            self.timetable_main.resize_canvas(self.canvas_width,self.canvas_height,starthour,duration)
+            self.controller.set_statusmessage(" ")
     
     def tabunselected(self):
         logging.debug("Tabunselected: %s",self.tabname)

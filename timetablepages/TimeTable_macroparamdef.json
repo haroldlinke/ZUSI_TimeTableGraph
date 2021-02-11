@@ -141,10 +141,10 @@
             "Bfp_TrainTypeLineDashed": ""
             },
         "Repeat": "1",
-        "ParamDescription": "Standard Linieneigenschaften für alle Zuggattungen festlegen",
-        "ParamDescLines": "2",
+        "ParamDescription": "Linieneigenschaften für eine, mehrere oder alle Zuggattungen festlegen",
+        "ParamDescLines": "1",
         "Input Text": " ",
-        "Hint": "Standard Einstellungen für alle Zuggattungen",
+        "Hint": "Einstellungen für alle Zuggattungen, die nicht unten genannt sind",
         "Implementation comment": "",
         "MultipleParams": [
             "Bfp_TrainTypeAll",
@@ -164,8 +164,8 @@
         "Default": "",
         "Input Text": "Alle Zuggattungen",
         "ReadOnly": "True",
-        "ParamEntryWidth": "3",
-        "Hint": "",
+        "ParamEntryWidth": "9",
+        "Hint": "Einstellungen für alle Zuggattungen, die nicht unten genannt sind",
         "Implementation comment": ""
     },
     "Bfp_TrainTypeProp": {
@@ -184,8 +184,8 @@
             "Bfp_TrainTypeLineDashed": " "
             },
         "Repeat": "15",
-        "ParamDescription": "Linieneigenschaften für eine oder mehrere Zuggattungen festlegen. z.B. <D> oder <IC>.",
-        "ParamDescLines": "2",
+        "!ParamDescription": "Linieneigenschaften für eine oder mehrere Zuggattungen festlegen. z.B. <D> oder <IC>.",
+        "!ParamDescLines": "2",
         "Input Text": "Einstellungen für Zuggattungen",
         "Hint": "Einstellungen für Zuggattungen\nEs können beliebige Zuggattungsbezeichnungen angegeben werden.\nDurch Klick auf den Farb-Button kann eine Farbe ausgewählt werden.",
         "Implementation comment": "",
@@ -206,7 +206,7 @@
         "Max": "1000",
         "Default": "",
         "Input Text": "Zuggattung(en)",
-        "ParamEntryWidth": "3",
+        "ParamEntryWidth": "9",
         "Hint": "Bezeichnung der Zuggattung(en), für die die Eigenschaften gelten sollen. Mehrere Zuggattungen können mit Komma getrennt angegeben werden z.B. D,Dt  ",
         "Implementation comment": ""
     },
@@ -217,9 +217,9 @@
         "Min": "0",
         "Max": "1000",
         "Default": "black",
-        "ParamEntryWidth": "3",
-        "Input Text": "Farbe",
-        "Hint": "Farbe, die für die Zuggattung verwendet werden soll",
+        "ParamEntryWidth": "9",
+        "Input Text": "Farbe-Zug",
+        "Hint": "Farbe, die für die Linie der Zuggattung verwendet werden soll",
         "Implementation comment": ""
     },
     "Bfp_TrainTypeWidth": {
@@ -321,7 +321,7 @@
         "Max": "1000",
         "Default": "",
         "Input Text": "FplRglGgl",
-        "ParamEntryWidth": "3",
+        "ParamEntryWidth": "9",
         "Hint": "Liste der FplRglGgl, die angezeigt werden sollen",
         "Implementation comment": ""
     },
@@ -463,8 +463,8 @@
         "Min": "0",
         "Max": "1000",
         "Default": "black",
-        "ParamEntryWidth": "3",
-        "Input Text": "Farbe",
+        "ParamEntryWidth": "9",
+        "Input Text": "Farbe-Stationen",
         "Hint": "Farbe, die für die Linie verwendet werden soll",
         "Implementation comment": ""
     },
@@ -566,8 +566,8 @@
         "Min": "0",
         "Max": "1000",
         "Default": "black",
-        "ParamEntryWidth": "3",
-        "Input Text": "Farbe",
+        "ParamEntryWidth": "9",
+        "Input Text": "Farbe-ZFS",
         "Hint": "Farbe, die für die Zugfolgestellelinie verwendet werden soll",
         "Implementation comment": ""
     },
@@ -647,9 +647,9 @@
         "Min": "0",
         "Max": "1000",
         "Default": "black",
-        "ParamEntryWidth": "3",
-        "Input Text": "Farbe",
-        "Hint": "Farbe, die für die Linie verwendet werden soll",
+        "ParamEntryWidth": "9",
+        "Input Text": "Farbe-Stunden",
+        "Hint": "Farbe, die für die Stundenlinie verwendet werden soll",
         "Implementation comment": ""
     },
     "Bfp_TH_LineWidth": {
@@ -727,9 +727,9 @@
         "Min": "0",
         "Max": "1000",
         "Default": "black",
-        "ParamEntryWidth": "3",
-        "Input Text": "Farbe",
-        "Hint": "Farbe, die für die Linie verwendet werden soll",
+        "ParamEntryWidth": "9",
+        "Input Text": "Farbe-Minuten",
+        "Hint": "Farbe, die für die Minutenlinie verwendet werden soll",
         "Implementation comment": ""
     },
     "Bfp_TM_LineWidth": {

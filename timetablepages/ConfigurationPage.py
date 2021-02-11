@@ -101,36 +101,9 @@ class ConfigurationPage(tk.Frame):
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
         self.tree_frame.grid(row=3, column=0, pady=10, padx=10, sticky="nesw")
         self.button_frame2.grid(row=4, column=0,pady=10, padx=10)
-        macroparams = macrodata.get("Params",[])
-        for paramkey in macroparams:
-            paramconfig_dict = self.controller.MacroParamDef.data.get(paramkey,{})
-            param_type = paramconfig_dict.get("Type","")
-            if param_type == "Multipleparams":
-                mparamlist = paramconfig_dict.get("MultipleParams",[])
-                mp_repeat  = paramconfig_dict.get("Repeat","")
-                if mp_repeat == "":
-                    for mparamkey in mparamlist:
-                        configdatakey = self.controller.getConfigDatakey(mparamkey)
-                        value = self.getConfigData(configdatakey)
-                        if value != None:
-                            self.controller.set_macroparam_val(self.tabClassName, mparamkey, value)
-                else:
-                    # get the repeated multipleparams rep_mparamkey=macro.mparamkey.index (e.g. ConfigDataPage.Z21Data.0
-                    for i in range(int(mp_repeat)):
-                        for mparamkey in mparamlist:
-                            configdatakey = self.controller.getConfigDatakey(mparamkey)
-                            value = self.controller.getConfigData_multiple(configdatakey,paramkey,i)
-                            if value != None:
-                                mp_macro = self.tabClassName+"." + paramkey + "." + str(i)
-                                self.controller.set_macroparam_val(mp_macro, mparamkey, value)
-            elif param_type == "List":
-                configdatakey = self.controller.getConfigDatakey(paramkey)
-                value = self.getConfigData(configdatakey)
-                self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
-            else:
-                configdatakey = self.controller.getConfigDatakey(paramkey)
-                value = self.getConfigData(configdatakey)
-                self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
+        
+        self.controller.update_variables_with_config_data(self.tabClassName)
+
         self.save_config()
 
         # ----------------------------------------------------------------
@@ -138,8 +111,6 @@ class ConfigurationPage(tk.Frame):
         # ----------------------------------------------------------------
 
     def tabselected(self):
-        #self.controller.currentTabClass = self.tabClassName
-        #self.ledmaxcount.set(self.controller.get_maxLEDcnt())
         logging.debug("Tabselected: %s",self.tabname)
         self.controller.set_statusmessage("")
         self.store_old_config()
@@ -185,26 +156,18 @@ class ConfigurationPage(tk.Frame):
         logging.debug("MenuRedo: %s",self.tabname)
         pass
     
-    def connect (self):
-        pass
-    
-    def disconnect (self):
-        pass    
-    
     # ----------------------------------------------------------------
     # ConfigurationPage save_config
     # ----------------------------------------------------------------
     def save_config(self):
         self.setConfigData("pos_x",self.winfo_x())
         self.setConfigData("pos_y",self.winfo_y())
-        try:
-            curItem = self.tree.focus()
-            curItem_value = self.tree.item(curItem)
-            #tree_selection = self.tree.selection()
-        except:
-            #tree_selection = ""
-            curItem_value = {}
-        selectedtrain=curItem_value.get("text","")
+        #try:
+            #curItem = self.tree.focus()
+            #curItem_value = self.tree.item(curItem)
+        #except:
+            #curItem_value = {}
+        #selectedtrain=curItem_value.get("text","")
         param_values_dict = self.get_macroparam_var_values(self.tabClassName)
         self.setConfigDataDict(param_values_dict)
         self.store_old_config()

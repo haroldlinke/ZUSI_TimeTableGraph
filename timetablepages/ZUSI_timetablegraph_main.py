@@ -62,6 +62,8 @@ from tools.xmltodict import parse
 
 tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,SpecialConfigurationPage)
 
+configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage")
+
 defaultStartPage = "StartPage"
 
 # ----------------------------------------------------------------
@@ -231,6 +233,7 @@ class TimeTableGraphMain(tk.Tk):
 
         self.lift()
         self.grab_set()
+        self.configDataChanged = True
         
     def set_statusmessage(self,status_text,fg="black"):
         #logging.debug("set_statusmessage: %s",status_text)
@@ -468,6 +471,7 @@ class TimeTableGraphMain(tk.Tk):
 
     def SaveConfigData(self):
         logging.debug("SaveConfigData")
+        self.set_configDataChanged()
         self.ConfigData.save()
         
     def SaveParamData(self):
@@ -740,7 +744,6 @@ class TimeTableGraphMain(tk.Tk):
                 param_max = paramconfig_dict.get("Max",255)
                 param_title = paramconfig_dict.get("Input Text","")
                 param_tooltip = paramconfig_dict.get("Hint","")
-                param_persistent = (paramconfig_dict.get("Persistent","False") == "True")
                 param_configname = paramconfig_dict.get("ConfigName",paramkey)
                 param_default = paramconfig_dict.get("Default","")
                 param_allow_value_entry = (paramconfig_dict.get("AllowValueEntry","False") == "True")
@@ -748,11 +751,10 @@ class TimeTableGraphMain(tk.Tk):
                 param_value_change_event = (paramconfig_dict.get("ValueChangeEvent","False") == "True")
                 param_value_scrollable = (paramconfig_dict.get("Scrollable","False") == "True")
                 param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                param_label_height = int(paramconfig_dict.get("ParamLabelWidth","2"))
                 param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))
-                param_list_height = int(paramconfig_dict.get("ParamListHeight",10))
-                param_description = paramconfig_dict.get("ParamDescription","")
-                param_descLines  = int(paramconfig_dict.get("ParamDescLines","0"))
-                
+                param_entry_height = int(paramconfig_dict.get("ParamEntryHeight","2"))
+                param_persistent = (paramconfig_dict.get("Persistent","False") == "True")
                 if param_persistent:
                     configData = self.getConfigData(paramkey)
                     if configData != "":
@@ -762,8 +764,9 @@ class TimeTableGraphMain(tk.Tk):
         
                 if param_title == "":
                     param_title = paramkey
-                    
+                param_description = paramconfig_dict.get("ParamDescription","")    
                 if param_description != "":
+                    param_descLines  = int(paramconfig_dict.get("ParamDescLines","0"))
                     paramdescriptionlabel = tk.Text(parent_frame, wrap='word', height=param_descLines, bg=self.cget('bg'), font=self.fontlabel)
                     paramdescriptionlabel.delete("1.0", "end")
                     paramdescriptionlabel.insert("end", param_description)
@@ -775,7 +778,12 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow
                 if param_type == "": # number value param
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMSPINBOXWIDTH))
+                    param_min = paramconfig_dict.get("Min",0)
+                    param_max = paramconfig_dict.get("Max",255)
+                    param_default = paramconfig_dict.get("Default","")
+                    label=tk.Label(parent_frame, text=param_title,width=param_label_width,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                     label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
                     if param_max == "":
@@ -784,9 +792,9 @@ class TimeTableGraphMain(tk.Tk):
                     paramvar.set(param_default)
                     paramvar.key = paramkey
                     if param_value_change_event:
-                        s_paramvar = Spinbox(parent_frame, from_=param_min, to=param_max, width=PARAMSPINBOXWIDTH, name='spinbox', textvariable=paramvar,font=self.fontspinbox,command=lambda:self._update_value(macro,paramkey))
+                        s_paramvar = Spinbox(parent_frame, from_=param_min, to=param_max, width=param_entry_width, name='spinbox', textvariable=paramvar,font=self.fontspinbox,justify=tk.RIGHT,command=lambda:self._update_value(macro,paramkey))
                     else:
-                        s_paramvar = Spinbox(parent_frame, from_=param_min, to=param_max, width=PARAMSPINBOXWIDTH, name='spinbox', textvariable=paramvar,font=self.fontspinbox)
+                        s_paramvar = Spinbox(parent_frame, from_=param_min, to=param_max, width=param_entry_width, name='spinbox', textvariable=paramvar,font=self.fontspinbox,justify=tk.RIGHT)
                     s_paramvar.delete(0, 'end')
                     s_paramvar.insert(0, param_default)
                     s_paramvar.grid(row=row+valuerow, column=column+valuecolumn, padx=2, pady=2, sticky=STICKY)
@@ -809,10 +817,13 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow                    
                 elif param_type == "Time": # Time value param
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                     label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
-                    paramvar = tk.Entry(parent_frame,width=PARAMENTRWIDTH,font=self.fontentry)
+                    paramvar = tk.Entry(parent_frame,width=param_entry_width,font=self.fontentry)
                     paramvar.delete(0, 'end')
                     paramvar.insert(0, param_default)
                     paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
@@ -823,10 +834,13 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow      
                 elif param_type == "String": # String value param
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                     label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
-                    paramvar = tk.Entry(parent_frame,width=PARAMENTRWIDTH,font=self.fontentry)
+                    paramvar = tk.Entry(parent_frame,width=param_entry_width,font=self.fontentry)
                     if param_value_change_event:
                         paramvar.bind("<Return>",self._key_return)                
                     paramvar.delete(0, 'end')
@@ -840,13 +854,16 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow
                 elif param_type == "BigEntry": # Text value param
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,font=self.fontlabel)
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH*3))
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,font=self.fontlabel)
                     label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
                     if param_readonly:
-                        paramvar = tk.Entry(parent_frame,width=param_entry_width*3,font=self.fontentry,state="readonly")
+                        paramvar = tk.Entry(parent_frame,width=param_entry_width,font=self.fontentry,state="readonly")
                     else:
-                        paramvar = tk.Entry(parent_frame,width=param_entry_width*3,font=self.fontentry)
+                        paramvar = tk.Entry(parent_frame,width=param_entry_width,font=self.fontentry)
                     if param_value_change_event:
                         paramvar.bind("<Return>",self._key_return)
                     paramvar.delete(0, 'end')
@@ -862,17 +879,19 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow            
                 elif param_type == "Text": # Text value param
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH*5))
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    number_of_lines = paramconfig_dict.get("Lines","2")
+                    
                     if not param_hide:
-                        label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
+                        label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                         label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                         self.ToolTip(label, text=param_tooltip)
-                    number_of_lines = paramconfig_dict.get("Lines","")
-                    if number_of_lines == "":
-                        number_of_lines = "2"
                     if param_value_scrollable:
-                        paramvar = tk.scrolledtext.ScrolledText(parent_frame,bg=self.cget('bg'),width=PARAMENTRWIDTH*5,height=int(number_of_lines),font=self.fonttext)
+                        paramvar = tk.scrolledtext.ScrolledText(parent_frame,bg=self.cget('bg'),width=param_entry_width,height=int(number_of_lines),font=self.fonttext)
                     else:
-                        paramvar = tk.Text(parent_frame,width=PARAMENTRWIDTH*5,bg=self.cget('bg'),height=int(number_of_lines),font=self.fonttext)
+                        paramvar = tk.Text(parent_frame,width=param_entry_width,bg=self.cget('bg'),height=int(number_of_lines),font=self.fonttext)
                     paramvar.delete("1.0", "end")
                     paramvar.insert("end",param_default)
                     if not param_hide:
@@ -886,10 +905,12 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow
                 elif param_type == "Checkbutton": # Checkbutton param
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH*2))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))                      
                     paramvar = tk.IntVar()
                     paramvar.key = paramkey
-                    label=tk.Checkbutton(parent_frame, text=param_title,width=PARAMLABELWIDTH*2,wraplength = PARAMLABELWRAPL*2,variable=paramvar,font=self.fontlabel)
-                    label.grid(row=row+valuerow, column=column, columnspan=2,sticky=STICKY, padx=2, pady=2)
+                    label=tk.Checkbutton(parent_frame, text=param_title,width=param_label_width,wraplength = PARAMLABELWRAPL*2,variable=paramvar,font=self.fontlabel,justify=tk.LEFT)
+                    label.grid(row=row+valuerow, column=column, columnspan=2,sticky="ew",padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)                
                     self.set_macroparam_var(macro, paramkey, paramvar)
                     paramvar.trace_add("write", lambda nm, indx, mode,macrokey=macro,paramkey=paramkey: self.checkbuttonvar_changed(nm,indx,mode,macrokey=macrokey,paramkey=paramkey))
@@ -898,14 +919,17 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow
                 elif param_type == "Combo": # Combolist param
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMCOMBOWIDTH))                      
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
                     if not param_hide:
-                        label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
+                        label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                         label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                         self.ToolTip(label, text=param_tooltip)
                     if param_allow_value_entry:
-                        paramvar = ttk.Combobox(parent_frame, width=PARAMCOMBOWIDTH,font=self.fontlabel)
+                        paramvar = ttk.Combobox(parent_frame, width=param_entry_width,font=self.fontlabel)
                     else:                
-                        paramvar = ttk.Combobox(parent_frame, state="readonly", width=PARAMCOMBOWIDTH,font=self.fontlabel)
+                        paramvar = ttk.Combobox(parent_frame, state="readonly", width=param_entry_width,font=self.fontlabel)
                     combo_value_list = paramconfig_dict.get("KeyValues",paramconfig_dict.get("Values",[]))
                     combo_text_list = paramconfig_dict.get("ValuesText",[])
                     if combo_text_list == []:
@@ -923,75 +947,34 @@ class TimeTableGraphMain(tk.Tk):
                     if column > maxcolumns:
                         column = 0
                         row=row+deltarow      
-                elif param_type == "GroupCombo": # Combolist param
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
-                    label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
-                    self.ToolTip(label, text=param_tooltip)
-                    paramvar = ttk.Combobox(parent_frame, width=PARAMCOMBOWIDTH,postcommand=self.update_GroupComboValues,font=self.fontlabel)
-                    combo_value_list = list(self.ledeffecttable.mledgrouptable.keys())
-                    combo_text_list = []
-                    if combo_text_list == []:
-                        paramvar["value"] = combo_value_list
-                    else:
-                        paramvar["value"] = combo_text_list
-                    paramvar.current(0) #set the selected view                    
-                    paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
-                    paramvar.key = paramkey
-                    paramvar.keyvalues = combo_value_list
-                    paramvar.textvalues = combo_text_list
-                    paramvar.bind("<<ComboboxSelected>>", self.GroupComboSelected)
-                    self.set_macroparam_var(macro, paramkey, paramvar)               
-                    column = column + deltacolumn
-                    if column > maxcolumns:
-                        column = 0
-                        row=row+deltarow
                 elif param_type == "List": # Combolist param
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMCOMBOWIDTH))                      
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    param_list_height = int(paramconfig_dict.get("ParamListHeight",10))
                     if not param_hide:
-                        label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
+                        label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                         label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                         self.ToolTip(label, text=param_tooltip)
                         paramvar = tk.Listbox(parent_frame, width=param_entry_width,font=self.fontlabel,selectmode=tk.EXTENDED,height=param_list_height)
                     listbox_value_list = paramconfig_dict.get("KeyValues",paramconfig_dict.get("Values",[]))
                     for i in listbox_value_list:
                         paramvar.insert("end",i)
-                    #paramvar.current(0) #set the selected view                    
                     if not param_hide:
                         paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
                     paramvar.key = paramkey
-                    #paramvar.values = listbox_value_list
-                    #paramvar.textvalues = combo_text_list
                     self.set_macroparam_var(macro, paramkey, paramvar)               
                     column = column + deltacolumn
                     if column > maxcolumns:
                         column = 0
                         row=row+deltarow                            
-                elif param_type == "CX": # Channel value param
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
-                    label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
-                    self.ToolTip(label, text=param_tooltip)
-                    paramvar = ttk.Combobox(parent_frame, width=PARAMCOMBOWIDTH,font=self.fontlabel)
-                    combo_value_list = paramconfig_dict.get("KeyValues",paramconfig_dict.get("Values",("C_All", "C12", "C23", "C1", "C2", "C3", "C_RED", "C_GREEN", "C_BLUE", "C_WHITE", "C_YELLOW", "C_CYAN")))
-                    combo_text_list = paramconfig_dict.get("ValuesText",[])
-                    if combo_text_list == []:
-                        paramvar["value"] = combo_value_list
-                    else:
-                        paramvar["value"] = combo_text_list                    
-                    paramvar.current(0) #set the selected colorview                    
-                    paramvar.grid(row=row+valuerow, column=column+valuecolumn, columnspan=1, sticky=STICKY, padx=2, pady=2)
-                    paramvar.key = paramkey
-                    paramvar.keyvalues = combo_value_list
-                    paramvar.textvalues = combo_text_list
-                    self.set_macroparam_var(macro, paramkey, paramvar)                
-                    column = column + deltacolumn
-                    if column > maxcolumns:
-                        column = 0
-                        row=row+deltarow      
                 elif param_type == "Multipleparams": # Multiple params
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
                     logging.info ("%s - %s",macro,param_type)
                     if row >1 or column>0: 
                         row += deltarow
                         column = 0
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
+                    label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=2,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                     #label.grid(row=row+titlerow, column=column+titlecolumn, rowspan=2, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(label, text=param_tooltip)
                     repeat_number = paramconfig_dict.get("Repeat","")
@@ -1024,13 +1007,16 @@ class TimeTableGraphMain(tk.Tk):
                             column = 0
                             row=row+1
                 elif param_type == "ChooseColor": # Color value param
-                    self.colorlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=2, padx=2, pady=2, wraplength=PARAMLABELWRAPL,relief="raised", background=param_default,borderwidth=1,font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosecolor(macrokey=macrokey,paramkey=paramkey))
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",8))
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","1"))
+                    self.colorlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=param_label_height, padx=2, pady=2, wraplength=PARAMLABELWRAPL,relief="raised", background=param_default,borderwidth=1,font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosecolor(macrokey=macrokey,paramkey=paramkey))
                     #label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,bg=param_default,borderwidth=1)
                     self.colorlabel.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(self.colorlabel, text=param_tooltip)
                     paramvar_strvar = tk.StringVar()
                     paramvar_strvar.set("")                    
-                    paramvar = tk.Entry(parent_frame,width=PARAMENTRWIDTH,font=self.fontentry,textvariable=paramvar_strvar)
+                    paramvar = tk.Entry(parent_frame,width=param_entry_width,font=self.fontentry,textvariable=paramvar_strvar)
                     paramvar.delete(0, 'end')
                     paramvar.insert(0, param_default)
                     paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
@@ -1044,7 +1030,10 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow
                 elif param_type == "ChooseFileName": # parameter AskFileName
-                    self.filechooserlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=2, padx=2, pady=2, wraplength=PARAMLABELWRAPL, font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosefilename(macrokey=macrokey,paramkey=paramkey))
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH*3))                      
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    self.filechooserlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=param_label_height, padx=2, pady=2, wraplength=PARAMLABELWRAPL, font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosefilename(macrokey=macrokey,paramkey=paramkey))
                     #label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,bg=param_default,borderwidth=1)
                     self.filechooserlabel.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=10, pady=10)
                     self.ToolTip(self.filechooserlabel, text=param_tooltip)
@@ -1064,40 +1053,14 @@ class TimeTableGraphMain(tk.Tk):
                         column = 0
                         row=row+deltarow                
                 elif param_type == "Button": # Text value param
-                    number_of_lines = paramconfig_dict.get("Lines","")
-                    if number_of_lines == "":
-                        number_of_lines = "2"
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))                      
+                    number_of_lines = paramconfig_dict.get("Lines","2")
                     button_function = paramconfig_dict.get("Function","")
-                    button=tk.Button(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=number_of_lines,wraplength = PARAMLABELWRAPL,font=self.fontbutton,command=lambda macrokey=macro,button=button_function: self._button_cmd(macrokey=macrokey,button=button))
+                    button=tk.Button(parent_frame, text=param_title,width=param_label_width,height=number_of_lines,wraplength = PARAMLABELWRAPL,font=self.fontbutton,command=lambda macrokey=macro,button=button_function: self._button_cmd(macrokey=macrokey,button=button))
                     button.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                     self.ToolTip(button, text=param_tooltip)
                     #self.buttonlist.append(self.button)
-                    column = column + deltacolumn
-                    if column > maxcolumns:
-                        column = 0
-                        row=row+deltarow
-                elif param_type == "Var": # Combolist param
-                    label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,font=self.fontlabel)
-                    label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
-                    self.ToolTip(label, text=param_tooltip)
-                    if param_allow_value_entry:
-                        paramvar = ttk.Combobox(parent_frame, width=PARAMCOMBOWIDTH,font=self.fontlabel)
-                    else:                
-                        paramvar = ttk.Combobox(parent_frame, state="readonly", width=PARAMCOMBOWIDTH,font=self.fontlabel)                
-                    combo_value_list = paramconfig_dict.get("KeyValues",paramconfig_dict.get("Values",[]))
-                    combo_text_list = paramconfig_dict.get("ValuesText",[])
-                    if combo_text_list != []:
-                        paramvar["value"] = combo_text_list
-                    elif combo_value_list != []:
-                        paramvar["value"] = combo_value_list
-                    else:
-                        paramvar["value"] = ["Variable"]
-                    paramvar.current(0) #set the selected view                    
-                    paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
-                    paramvar.key = paramkey
-                    paramvar.keyvalues = combo_value_list
-                    paramvar.textvalues = combo_text_list
-                    self.set_macroparam_var(macro, paramkey, paramvar)
                     column = column + deltacolumn
                     if column > maxcolumns:
                         column = 0
@@ -1117,25 +1080,13 @@ class TimeTableGraphMain(tk.Tk):
                     row=row+deltarow                    
                 if param_readonly:
                     paramvar.state = tk.DISABLED            
-            if maxcolumns > 6:        
+            if maxcolumns > 10:        
                 seplabel=tk.Label(parent_frame, text="",width=90,height=1)
                 seplabel.grid(row=row+2, column=0, columnspan=10,sticky='ew', padx=2, pady=2)
     
     def create_macroparam_frame(self,parent_frame, macro, extratitleline=False,maxcolumns=5, startrow=0, minrow=4,style="MACROPage",generic_methods={}):
         
         MACROLABELWIDTH = 15
-        MACRODESCWIDTH = 20
-        MACRODESCWRAPL = 120
-        BUTTONLABELWIDTH = 10
-        
-        PARAMFRAMEWIDTH = 105
-        
-        PARAMLABELWIDTH = 15
-        PARAMLABELWRAPL = 100        
-        
-        PARAMSPINBOXWIDTH = 4
-        PARAMENTRWIDTH = 8
-        PARAMCOMBOWIDTH = 16
         
         macroparam_frame = ttk.Frame(parent_frame, relief="ridge", borderwidth=1)
         self.macroparam_frame_dict[macro] = macroparam_frame
@@ -1177,7 +1128,6 @@ class TimeTableGraphMain(tk.Tk):
             self.create_macroparam_content(param_frame,macro, macroparams,extratitleline=extratitleline,maxcolumns=maxcolumns,startrow=startrow,style=style,generic_methods=generic_methods)
     
             param_frame.grid(row=1,column=1,rowspan=2,padx=0, pady=0,sticky="nw")
-    
         return macroparam_frame
     
     def get_macrodef_data(self, macro, param):
@@ -1223,13 +1173,16 @@ class TimeTableGraphMain(tk.Tk):
         #print("colorvar_changed",var,indx,mode)
         paramvar = self.macroparams_var[macrokey][paramkey]
         color = paramvar.get()
-        buttonlabel=paramvar.button
         if color == "":
-            color="black"
+            color="#000000"
         try:
-            buttonlabel.configure(background=color)
+            color_fg = self.determine_fg_color(color)
         except:
-            buttonlabel.configure(background="black")
+            color_fg = "black"
+        try:
+            paramvar.button.config(bg=color,fg=color_fg)
+        except:
+            paramvar.button.configure(background="black",fg="white")
 
 
     def choosefilename(self,paramkey="",macrokey=""):
@@ -1340,7 +1293,58 @@ class TimeTableGraphMain(tk.Tk):
             except BaseException as e:
                 logging.debug("Error: get_stationlist - FplZeile %s %s",repr(FplZeile_dict),e)
                 continue # entry format wrong
-        return stationlist    
+        return stationlist
+    
+    def set_configDataChanged(self,value=True):
+        self.configDataChanged = value
+    
+    def check_if_config_data_changed(self):
+        if self.configDataChanged:
+            self.set_configDataChanged(value=False)
+            return True
+        
+        config_changed = False
+        for configpagename in configpage_list:
+            configpageframe=self.getFramebyName(configpagename)
+            if configpageframe.check_if_config_data_changed():
+                config_changed = True
+        self.set_configDataChanged(value=False)
+        return config_changed
+    
+    def update_variables_with_config_data(self,tabClassName):
+        macrodata = self.MacroDef.data.get(tabClassName,{})
+        macroparams = macrodata.get("Params",[])
+        for paramkey in macroparams:
+            paramconfig_dict = self.MacroParamDef.data.get(paramkey,{})
+            param_type = paramconfig_dict.get("Type","")
+            if param_type == "Multipleparams":
+                mparamlist = paramconfig_dict.get("MultipleParams",[])
+                mp_repeat  = paramconfig_dict.get("Repeat","")
+                if mp_repeat == "":
+                    for mparamkey in mparamlist:
+                        configdatakey = self.getConfigDatakey(mparamkey)
+                        value = self.getConfigData(configdatakey)
+                        if value != None:
+                            self.set_macroparam_val(tabClassName, mparamkey, value)
+                else:
+                    # get the repeated multipleparams rep_mparamkey=macro.mparamkey.index (e.g. ConfigDataPage.Z21Data.0
+                    for i in range(int(mp_repeat)):
+                        for mparamkey in mparamlist:
+                            configdatakey = self.getConfigDatakey(mparamkey)
+                            value = self.getConfigData_multiple(configdatakey,paramkey,i)
+                            if value != None:
+                                mp_macro = tabClassName+"." + paramkey + "." + str(i)
+                                self.set_macroparam_val(mp_macro, mparamkey, value)
+            elif param_type == "List":
+                configdatakey = self.getConfigDatakey(paramkey)
+                value = self.getConfigData(configdatakey)
+                self.set_macroparam_val(tabClassName, paramkey, value)
+            else:
+                configdatakey = self.getConfigDatakey(paramkey)
+                value = self.getConfigData(configdatakey)
+                self.set_macroparam_val(tabClassName, paramkey, value)    
+    
+############################################################################################################    
 
 def img_resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """

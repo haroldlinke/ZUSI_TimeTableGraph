@@ -25,13 +25,13 @@
     "SpecialConfigurationPage": {
         "Typ": "SpecialConfigurationPage",
         "Name": "SpecialConfigurationPage",
-        "MTabName": "Extra Einstellungen",
-        "Title": "Extra Einstellungen",
+        "MTabName": "Experten Einstellungen",
+        "Title": "Experten Einstellungen",
         "Button_1": "Geänderte Einstellungen übernehmen",
         "Button_2": "n",
         "Button_3": "",
         "Kurzbeschreibung": "Einstellungsparameter",
-        "Ausführliche Beschreibung": "Extra Bildfahrplan Einstellungen\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
+        "Ausführliche Beschreibung": "Bildfahrplan Einstellungen für experten - Bitte nur ändern, wenn Sie wissen, was Sie tun!\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
         "Params": [
             "TLFileType",
             "Bfp_ZFS_Id",

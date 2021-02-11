@@ -610,6 +610,7 @@ class TimeTableGraphCommon():
         return time in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)
 
     def setBegin(self, stop,stationName):
+        self.determine_DirectionofTravel()
         self.firstStationName = stationName
         if not self.check_time_in_range(self.arriveTime):
             return                
@@ -622,7 +623,6 @@ class TimeTableGraphCommon():
         if y == None:
             return
         self.trainLine_dict = [x, y]
-        self.determine_DirectionofTravel()
         self.arriveTime = stop.get("ArriveTime",0)
         if not(self.trainLineLastStop_Flag) and show_arrive_time:
             self.drawTrainTime(self.arriveTime, "begin", x, y)
@@ -662,7 +662,7 @@ class TimeTableGraphCommon():
                 if yd==None:
                     return
                 self.trainLine_dict.extend([xd, yd])
-                if not self.trainLineLastStop_Flag:
+                if not self.trainLineLastStop_Flag or self.arriveTime == 0:
                     self.drawTrainTime(self.departTime, "depart", xd, yd)
                 if (len(self.trainLine_dict)>3) and yd!=None:
                     self.draw_trainName_parallel(self.trainName, self.trainLine_dict[-4],self.trainLine_dict[-3],xd, yd)               

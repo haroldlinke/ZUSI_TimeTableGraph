@@ -99,30 +99,10 @@ class StationsConfigurationPage(tk.Frame):
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
         self.button_frame2.grid(row=3, column=0,pady=10, padx=10)
-        macroparams = macrodata.get("Params",[])
-        for paramkey in macroparams:
-            paramconfig_dict = self.controller.MacroParamDef.data.get(paramkey,{})
-            param_type = paramconfig_dict.get("Type","")
-            if param_type == "Multipleparams":
-                mparamlist = paramconfig_dict.get("MultipleParams",[])
-                mp_repeat  = paramconfig_dict.get("Repeat","")
-                if mp_repeat == "":
-                    for mparamkey in mparamlist:
-                        configdatakey = self.controller.getConfigDatakey(mparamkey)
-                        value = self.getConfigData(configdatakey)
-                        self.controller.set_macroparam_val(self.tabClassName, mparamkey, value)
-                else:
-                    # get the repeated multipleparams rep_mparamkey=macro.mparamkey.index (e.g. ConfigDataPage.Z21Data.0
-                    for i in range(int(mp_repeat)):
-                        for mparamkey in mparamlist:
-                            configdatakey = self.controller.getConfigDatakey(mparamkey)
-                            value = self.controller.getConfigData_multiple(configdatakey,paramkey,i)
-                            mp_macro = self.tabClassName+"." + paramkey + "." + str(i)
-                            self.controller.set_macroparam_val(mp_macro, mparamkey, value)
-            else:
-                configdatakey = self.controller.getConfigDatakey(paramkey)
-                value = self.getConfigData(configdatakey)
-                self.controller.set_macroparam_val(self.tabClassName, paramkey, value)
+        
+        self.controller.update_variables_with_config_data(self.tabClassName)
+        
+
         self.save_config()
 
         # ----------------------------------------------------------------

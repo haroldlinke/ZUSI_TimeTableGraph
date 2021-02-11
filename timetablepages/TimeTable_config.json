@@ -1,18 +1,18 @@
 {
     "startpagename": "StartPage",
-    "pos_x": 1,
-    "pos_y": 23,
+    "pos_x": 0,
+    "pos_y": 0,
     "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
-    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D843.timetable.xml",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\Dstg80489.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
-    "EndStation": "Kassel_Hbf",
+    "EndStation": "Bestwig",
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
     "Bfp_width": 2000,
     "Bfp_height": 1000,
     "Bfp_start": 11,
-    "Bfp_duration": 8,
+    "Bfp_duration": 7,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineDashed": " ",
@@ -42,9 +42,9 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Alle Segmente",
-            "Bfp_TrainTypeLabel_No": 0,
-            "Bfp_TrainTypeLabelSize": 10,
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
+            "Bfp_TrainTypeLabelSize": 8,
             "Bfp_TrainType": "*"
         }
     },
@@ -55,9 +55,9 @@
             "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Alle Segmente",
-            "Bfp_TrainTypeLabel_No": 0,
-            "Bfp_TrainTypeLabelSize": 10
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
+            "Bfp_TrainTypeLabelSize": 8
         },
         "1": {
             "Bfp_TrainType": "E,N",
@@ -65,9 +65,9 @@
             "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Alle Segmente",
-            "Bfp_TrainTypeLabel_No": 0,
-            "Bfp_TrainTypeLabelSize": 10
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
+            "Bfp_TrainTypeLabelSize": 8
         },
         "2": {
             "Bfp_TrainType": "",
@@ -205,9 +205,9 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Alle Segmente",
-            "Bfp_TrainTypeLabel_No": 0,
-            "Bfp_TrainTypeLabelSize": 10,
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
+            "Bfp_TrainTypeLabelSize": 8,
             "Bfp_TrainType": "*"
         }
     },
@@ -219,9 +219,7 @@
     "InOutBoundTrainsNoStartStation": false,
     "InOutBoundTrainsNoEndStation": false,
     "FplRglGgl": "1,2",
-    "StationChooser": [
-        "Hagen Hbf"
-    ],
+    "StationChooser": [],
     "Bfp_TreeView": 0,
     "Teilstrecke": 0,
     "Bfp_CanvasSize": 0,
@@ -230,5 +228,5 @@
     "Bfp_ZFS_LineProp": 0,
     "Bfp_TH_LineProp": 0,
     "Bfp_TM_LineProp": 0,
-    "Bfp_TrainLine_Distance_from_Stationline": 2
+    "Bfp_TrainLine_Distance_from_Stationline": 0
 }
