@@ -101,7 +101,7 @@ class TimeTableGraphMain(tk.Tk):
         self.ghostscript_path_rel = self.getConfigData("GhostScriptPath")
         
         if self.ghostscript_path_rel == None:
-            self.ghostscript_path_rel = r"gs9.53.3\bin\gswin32c.exe"
+            self.ghostscript_path_rel = r"..\gs9.53.3\bin\gswin32c.exe"
             
         self.ghostscript_path = os.path.join(self.mainfile_dir,self.ghostscript_path_rel)
 
@@ -249,21 +249,21 @@ class TimeTableGraphMain(tk.Tk):
     def Save_Bfp_as_PDF(self):
         filepath = filedialog.asksaveasfilename(filetypes=[("PDF files","*.pdf")],defaultextension=".pdf")
         if filepath:
-            frame = self.tabdict["Bildfahrplan"]
+            frame = self.getFramebyName("TimeTablePage")
             # save postscipt image
             frame.save_as_pdf(filepath)        
 
     def Save_Bfp_as_EPS(self):
         filepath = filedialog.asksaveasfilename(filetypes=[("EPS files","*.eps")],defaultextension=".eps")
         if filepath:
-            frame = self.tabdict["Bildfahrplan"]
+            frame = self.getFramebyName("TimeTablePage")
             # save postscipt image
             frame.save_as_eps(filepath)    
 
     def Save_Bfp_as_Image(self):
         filepath = filedialog.asksaveasfilename(filetypes=[("png","*.png"),("jpg","*.jpg"),("tiff","*.tiff")],defaultextension=".jpg")
         if filepath:
-            frame = self.tabdict["Bildfahrplan"]
+            frame = self.getFramebyName("TimeTablePage")
             # save postscipt image
             frame.save_as_image(filepath)
 
