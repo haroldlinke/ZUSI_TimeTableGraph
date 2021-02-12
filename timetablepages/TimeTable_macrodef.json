@@ -72,5 +72,19 @@
             "Bfp_trainfilename",
             "Teilstrecke"
         ]
+    },
+    "TimeTablePage": {
+        "Typ": "TimeTablePage",
+        "Name": "TimeTablePage",
+        "MTabName": "Bildfahrplan",
+        "Title": "Bildfahrplan",
+        "Button_1": "",
+        "Button_2": "",
+        "Button_3": "",
+        "Ausführliche Beschreibung": "",
+        "Kurzbeschreibung": "",
+        "MacroDescLines": "",
+        "Params": [
+        ]
     }
 }

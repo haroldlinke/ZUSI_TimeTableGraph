@@ -34,17 +34,11 @@
 
 import tkinter as tk
 from tkinter import ttk
-#from tkcolorpicker.spinbox import Spinbox
-#from tkcolorpicker.limitvar import LimitVar
-from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,HorizontalScrolledFrame,ScrolledFrame
-#import uuid
-
-#from locale import getdefaultlocale
+from scrolledFrame.ScrolledFrame import ScrolledFrame
 import logging
-#import time
-#import platform
 
-from timetablepages.DefaultConstants import LARGE_FONT, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION
+
+from timetablepages.DefaultConstants import LARGE_FONT
 
 # ----------------------------------------------------------------
 # Class ConfigurationPage

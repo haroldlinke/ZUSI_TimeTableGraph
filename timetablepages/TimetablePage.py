@@ -45,7 +45,7 @@ SMALL_FONT= ("Verdana", 8)
 
 class TimeTablePage(tk.Frame):
     def __init__(self, parent, controller):
-        self.tabClassName = "Bildfahrplan"
+        self.tabClassName = "TimeTablePage"
         tk.Frame.__init__(self,parent)
         self.controller = controller
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
@@ -200,11 +200,11 @@ class TimeTablePage(tk.Frame):
         self.canvas.update()
         self.canvas.postscript(file = fileName + 'tmp.eps',colormode='color',width=self.canvas_width,height=self.canvas_height) 
         EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
+        logging.debug("Ghostscriptpath: %s", self.controller.ghostscript_path)
         img = Image.open(fileName + 'tmp.eps')
         try:
             img.load(scale=8)
             size = img.size
-            #img.save(fileName + '.png', 'png')
             img.save(fileName,"pdf",resolution=300)
         except BaseException as e:
             logging.debug("Error while generating pdf-file\n %s",e)
