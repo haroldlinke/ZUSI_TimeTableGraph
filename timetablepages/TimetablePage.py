@@ -139,6 +139,9 @@ class TimeTablePage(tk.Frame):
     
     def onShiftMouseWheel(self, event):
         self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
+        
+    def onRefreshCanvas(self, event):
+        self.timetable_main.regenerate_canvas()
     
     def onHome(self, event):
         if round(self.total_scalefactor,4)!=1:
@@ -188,7 +191,8 @@ class TimeTablePage(tk.Frame):
         self.frame.bind("<Prior>", self.onPrior)
         self.frame.bind("<Next>", self.onNext)
         self.frame.bind("<Shift-Prior>", self.onPrior)
-        self.frame.bind("<Shift-Next>", self.onNext) 
+        self.frame.bind("<Shift-Next>", self.onNext)
+        self.frame.bind("<F5>", self.onRefreshCanvas) 
      
 
     def save_as_pdf(self, fileName):
