@@ -32,7 +32,7 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-PROG_VERSION ="V00.12 09.02.2021"
+PROG_VERSION ="V00.14 12.02.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -48,7 +48,7 @@ MAIN_PROG_NAME = "TimeTable"
 
 LOG_FILENAME = '..\\logfile.log'
 PARAM_FILENAME = MAIN_PROG_NAME + '_param.json'
-CONFIG_FILENAME = MAIN_PROG_NAME + '_config.json'
+CONFIG_FILENAME = '..\\'+MAIN_PROG_NAME + '_config.json'
 MACRODEF_FILENAME = MAIN_PROG_NAME + '_macrodef.json'
 MACROPARAMDEF_FILENAME = MAIN_PROG_NAME + '_macroparamdef.json'
 

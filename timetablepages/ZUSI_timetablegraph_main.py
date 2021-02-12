@@ -1302,7 +1302,6 @@ class TimeTableGraphMain(tk.Tk):
         if self.configDataChanged:
             self.set_configDataChanged(value=False)
             return True
-        
         config_changed = False
         for configpagename in configpage_list:
             configpageframe=self.getFramebyName(configpagename)

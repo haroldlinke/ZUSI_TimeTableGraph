@@ -327,10 +327,10 @@ class TimeTableGraphCommon():
         if (time < 0): time = 0;
         if (time > 1439): time = 1439;
         hour = int(time / 60)
-        min = int(time % 60)
+        min = (time % 60)
         timeposhour = self.hour_to_XY_Map.get(hour,None)
         if timeposhour:
-            timeposhour = timeposhour + (min * self.sizeMinute)
+            timeposhour = int(timeposhour + (min * self.sizeMinute))
             if timeposhour > self.lastHourXY:
                 timeposhour = self.lastHourXY
         else:
@@ -515,6 +515,7 @@ class TimeTableGraphCommon():
             self.departTime = stop_dict.get("DepartTime",0)
             station_dict = self.schedule_stations_dict.get(stop_dict.get("StationIdx"))
             self.stationName = station_dict.get("StationName")
+            self.signal = stop_dict.get("Signal")
             #print("process_trainstops:",self.stationName,self.trainName,self.arriveTime,self.departTime)
             self.stopStation  = stop_dict
             if (self.stopIdx > 0): 
@@ -537,10 +538,13 @@ class TimeTableGraphCommon():
     def drawTrainTime(self, time,  mode,  x,  y):
         if (not self.TrainMinuteShow):
             return
-        if not (time in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)):
-            return                
-        minutes = "{:02d}".format(time % 60) 
+        if not (int(time) in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)):
+            return
+        minutes = "{:02d}".format(int(time % 60))
         hours = "{:02d}".format(int(time/60))
+        sec1 = time-int(time)
+        sec2 = round(sec1*60)
+        seconds = "{:02d}".format(sec2)
         if mode ==  "begin" :
             mode_txt = "Start"
         elif mode == "arrive":
@@ -572,7 +576,11 @@ class TimeTableGraphCommon():
         trainTime_objid = self.tt_canvas.create_text(x , y, text = minutes, anchor=anchor,activefill="red",font=self.TrainMinuteFont)
         if self.trainLineName == None:
             self.trainLineName = ""
-        self.controller.ToolTip_canvas(self.tt_canvas, trainTime_objid, text=hours+":"+minutes+"\nZug: "+self.trainName+" - "+mode_txt+" "+self.stationName+"\n"+self.trainLineName, key=self.trainName,button_1=True)
+        if self.signal != None and self.signal != "":
+            signal_str = "("+self.signal+")"
+        else:
+            signal_str = ""
+        self.controller.ToolTip_canvas(self.tt_canvas, trainTime_objid, text=hours+":"+minutes+":"+seconds+"\nZug: "+self.trainName+"\n"+mode_txt+" "+self.stationName+signal_str + "\n"+self.trainLineName, key=self.trainName,button_1=True)
   
     def determine_DirectionofTravel(self):
         if (self.trainLineStopCnt == 1):
@@ -607,7 +615,7 @@ class TimeTableGraphCommon():
         return Station
     
     def check_time_in_range(self,time):
-        return time in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)
+        return int(time) in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)
 
     def setBegin(self, stop,stationName):
         self.determine_DirectionofTravel()
@@ -815,16 +823,21 @@ class TimeTableGraphCommon():
                 return stationIdx
         return -1
 
-    def enter_trainLine_stop(self, train_idx, trainstop_idx, FplName, FplAnk_min, FplAbf_min):
+    def enter_trainLine_stop(self, train_idx, trainstop_idx, FplName, FplAnk_min, FplAbf_min,signal=""):
         #print("enter_trainline_stop:", train_idx, FplName, FplAnk_min, FplAbf_min)
         train_dict = self.schedule_trains_dict.get(train_idx)
         trainstops_dict = train_dict.get("Stops",{})
         station_idx = self.search_station(FplName)
+        if trainstop_idx>0:
+            last_station_idx = trainstops_dict[trainstop_idx-1]["StationIdx"]
+            if station_idx == last_station_idx:
+                trainstop_idx -= 1  # update only extisting train stop
         arriveTime = FplAnk_min
         departTime = FplAbf_min
         trainstops_dict[trainstop_idx] = {"StationIdx" : station_idx,
                                           "ArriveTime" : arriveTime,
-                                          "DepartTime" : departTime
+                                          "DepartTime" : departTime,
+                                          "Signal"     : signal
                                        }
         return trainstop_idx + 1
         
@@ -866,8 +879,8 @@ class TimeTableGraphCommon():
             result = default
         return result
 
-    def convert_zusi_fpn_dict_to_schedule_dict(self, zusi_fpn_dict, define_stations=False):
-        Zusi_dict = zusi_fpn_dict.get("Zusi")
+    def convert_tt_xml_dict_to_schedule_dict(self, tt_xml_dict, define_stations=False):
+        Zusi_dict = tt_xml_dict.get("Zusi")
         Buchfahrplan_dict = Zusi_dict.get("Buchfahrplan",{})
         if Buchfahrplan_dict=={}:
             return False
@@ -875,7 +888,7 @@ class TimeTableGraphCommon():
         ZugNummer = Buchfahrplan_dict.get("@Nummer","")
         ZugGattung = Buchfahrplan_dict.get("@Gattung","")
         ZugLok = Buchfahrplan_dict.get("@BR","")
-        if ZugGattung == "X-Deko":
+        if ZugGattung == "X-Deko" and not define_stations:
             return False
         Zuglauf = Buchfahrplan_dict.get("@Zuglauf","")
         Datei_fpn_dict = Buchfahrplan_dict.get("Datei_fpn",{})
@@ -890,7 +903,7 @@ class TimeTableGraphCommon():
         train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok)
         train_stop_idx = 0
         FplRglGgl_str = self.controller.getConfigData("FplRglGgl")
-        showstationonly = not self.controller.getConfigData("ExtraShowAlleZFS")
+        #showstationonly = not self.controller.getConfigData("ExtraShowAlleZFS")
         if FplRglGgl_str !="":
             self.FplRglGgl = FplRglGgl_str.split(",")
         else:
@@ -941,21 +954,21 @@ class TimeTableGraphCommon():
                         last_km = Neukm
 
                 FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
-                if FplAbf == "" and showstationonly:
+                if FplAbf == "":
                     continue # only use station with "Abf"-Entry
                 if FplAbf != "":
                     FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
-                    FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute
+                    FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
                 else:
                     FplAbf_min = 0
                 FplAnk = self.get_fplZeile_entry(FplZeile_dict, "FplAnk","@Ank")
                 if FplAnk!="":
                     FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
-                    FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute
+                    FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
                 else:
                     FplAnk_min = 0
                 FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
-                if FplName == "" and not showstationonly:
+                if FplName == "":
                     continue
                 if self.schedule_stationIdx_write_next == 0:
                     stationdistance = 0
@@ -979,44 +992,56 @@ class TimeTableGraphCommon():
             self.enter_train_outgoing_station(train_idx, FplName)             
         return True
     
-    def convert_zusi_trn_to_timetable_train_x(self, zusi_trn_zug_dict):
+    def convert_trn_dict_to_schedule_dict(self, zusi_trn_dict):
         try:
-            if zusi_trn_zug_dict=={}:
+            if zusi_trn_dict=={}:
                 return
-            ZugNummer = zusi_trn_zug_dict.get("@Nummer","")
-            ZugGattung = zusi_trn_zug_dict.get("@Gattung","")
-            ZugLok = zusi_trn_zug_dict.get("@BR","")
+            ZugNummer = zusi_trn_dict.get("@Nummer","")
+            ZugGattung = zusi_trn_dict.get("@Gattung","")
+            ZugLok = zusi_trn_dict.get("@BR","")
             if ZugGattung == "X-Deko":
                 return
-            Zuglauf = zusi_trn_zug_dict.get("@Zuglauf","")
-            Datei_fpn_dict = zusi_trn_zug_dict.get("Datei",{})
+            Zuglauf = zusi_trn_dict.get("@Zuglauf","")
+            Datei_fpn_dict = zusi_trn_dict.get("Datei",{})
             if Datei_fpn_dict == {}:
                 return
             fpn_dateiname = Datei_fpn_dict.get("@Dateiname","")
             self.schedule_dict["Name"] = fpn_dateiname
             train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok)
             train_stop_idx = 0
-            FplZeile_list = zusi_trn_zug_dict.get("FahrplanEintrag",{})
+            FplZeile_list = zusi_trn_dict.get("FahrplanEintrag",{})
             if FplZeile_list=={}:
                 return
             #Fpl_Zeile_cnt_max = len(FplZeile_list)
             for FplZeile_dict in FplZeile_list:
                 #print(repr(FplZeile_dict))
+               
                 FplAbf = FplZeile_dict.get("@Abf","")
                 if FplAbf == "":
                     continue # only use station with "Abf"-Entry
                 FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
-                FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute
+                FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
                 FplAnk = FplZeile_dict.get("@Ank","")
                 if FplAnk!="":
                     FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
-                    FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute
+                    FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
                 else:
                     FplAnk_min = 0
-                FplName = FplZeile_dict.get("@Betrst","----")
+                FahrplanSignal = None
+                Fpl_SignalEintrag_dict = FplZeile_dict.get("FahrplanSignalEintrag",None)
+                if Fpl_SignalEintrag_dict:
+                    try:
+                        FahrplanSignal = Fpl_SignalEintrag_dict.get("@FahrplanSignal",None)
+                    except: # list instead of dict
+                        FahrplanSignal = ""
+                        for signal in Fpl_SignalEintrag_dict:
+                            FahrplanSignal += " "+signal.get("@FahrplanSignal","")+" "
+                FplName = FplZeile_dict.get("@Betrst","")
+                if FplName == "":
+                    continue                
                 station_idx = self.search_station(FplName)
                 if station_idx != -1:
-                    train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min)
+                    train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min,signal=FahrplanSignal)
                 else:
                     if train_stop_idx == 0:
                         # train is comming from another station
@@ -1057,22 +1082,22 @@ class Timetable_main(Frame):
             if Buchfahrplan_dict != {}:
                 timetable_filepathname = Buchfahrplan_dict.get("@Dateiname")
                 timetable_filecomp = timetable_filepathname.split("\\")
-                Bfpl_filepathname = os.path.join(trn_filepath,timetable_filecomp[-2],timetable_filecomp[-1])
+                tt_xml__filepathname = os.path.join(trn_filepath,timetable_filecomp[-2],timetable_filecomp[-1])
             else:
                 asc_zugGattung = zugGattung.replace("Ü","Ue").replace("ü","ue").replace("Ä","Ae").replace("ä","ae").replace("Ö","Oe").replace("ö","oe")
                 trn_filecomp = trn_filepathname.split("\\")
-                Bfpl_filepathname = os.path.join(trn_filepath,trn_filecomp[-2],asc_zugGattung+zugNummer+".timetable.xml")                
-                if not os.path.exists(Bfpl_filepathname):
+                tt_xml__filepathname = os.path.join(trn_filepath,trn_filecomp[-2],asc_zugGattung+zugNummer+".timetable.xml")                
+                if not os.path.exists(tt_xml__filepathname):
                     logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
                     self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
                     return             
-            with open(Bfpl_filepathname,mode="r",encoding="utf-8") as fd:
+            with open(tt_xml__filepathname,mode="r",encoding="utf-8") as fd:
                 xml_text = fd.read()
-                Bfpl_timetable_dict = parse(xml_text)
+                tt_xml_timetable_dict = parse(xml_text)
                 #enter train-timetable
-                result_ok = self.timetable.convert_zusi_fpn_dict_to_schedule_dict(Bfpl_timetable_dict)
+                result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict)
         else:
-            self.timetable.convert_zusi_trn_to_timetable_train_x(trn_zug_dict)        
+            self.timetable.convert_trn_dict_to_schedule_dict(trn_zug_dict)        
 
     def open_zusi_trn_file(self, trn_filepathname,fpn_filepathname):
         with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
@@ -1103,7 +1128,7 @@ class Timetable_main(Frame):
             return False
         zug_list = fahrplan_dict.get("Zug",{})
         if zug_list == {}:
-            # integrate fpl file
+            # integrated fpl file
             self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
             for trn_zug_dict in fahrplan_dict.get("trn",{}):
                 self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filename)
@@ -1293,7 +1318,6 @@ class Timetable_main(Frame):
         #self.timetable.set_zuggattung_to_color(self.traintype_to_color_dict)
         return zusi_zug_list_main_dict
 
-
     def resize_canvas(self,width,height,starthour,duration):
         self.canvas.delete("all")
         self.canvas.update()
@@ -1303,27 +1327,37 @@ class Timetable_main(Frame):
         
     def create_station_list_from_tt_xml_file(self,xml_filename):
         pass
-
-    def redo_fpl_and_canvas(self,width,height, starthour=8, duration=9,fpl_filename="", xml_filename = ""):
+    
+    def regenerate_canvas(self):
         self.canvas.delete("all")
-        self.canvas.config(width=width,height=height,scrollregion=(0,0,width,height))
+        self.canvas.config(width=self.width,height=self.height,scrollregion=(0,0,self.width,self.height))
         self.canvas.update()
-        self.controller.set_statusmessage("Erzeuge Bahnhofsliste - "+xml_filename)
+        self.controller.set_statusmessage("Erzeuge Bahnhofsliste - "+self.xml_filename)
         self.controller.update()
         #print('Input File master train timetable, %s.' % xml_filename)
-        with open(xml_filename,mode="r",encoding="utf-8") as fd:
+        with open(self.xml_filename,mode="r",encoding="utf-8") as fd:
             xml_text = fd.read()
             zusi_timetable_dict = parse(xml_text)
-        self.timetable = TimeTableGraphCommon(self.controller, True, height, width,xml_filename=xml_filename)
+        self.timetable = TimeTableGraphCommon(self.controller, True, self.height, self.width,xml_filename=self.xml_filename)
         self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
         #define stops via selected train-timetable
-        result_ok = self.timetable.convert_zusi_fpn_dict_to_schedule_dict(zusi_timetable_dict,define_stations=True)
+        result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(zusi_timetable_dict,define_stations=True)
         if  not result_ok:
             return
-        result_ok = self.open_zusi_master_schedule(fpn_filename=fpl_filename)
+        result_ok = self.open_zusi_master_schedule(fpn_filename=self.fpl_filename)
         if not result_ok:
             return
-        self.timetable.doPaint(self.canvas,starthour=starthour,duration=duration)                
+        self.timetable.doPaint(self.canvas,starthour=self.starthour,duration=self.duration)                        
+
+    def redo_fpl_and_canvas(self,width,height, starthour=8, duration=9,fpl_filename="", xml_filename = ""):
+        self.fpl_filename = fpl_filename
+        self.xml_filename = xml_filename
+        self.width = width
+        self.height = height
+        self.starthour = starthour
+        self.duration = duration
+        self.regenerate_canvas()
+        return
 
     def set_traintype_prop(self,traintype_prop_dict):
         self.main_traintype_prop_dict = traintype_prop_dict
