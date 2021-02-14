@@ -33,6 +33,7 @@
 # ***************************************************************************
 
 from timetablepages.ZUSI_timetablegraph_main import main
-
-main()
+import os
+mainfile_dir = os.path.dirname(os.path.realpath(__file__))
+main(mainfile_dir)
 

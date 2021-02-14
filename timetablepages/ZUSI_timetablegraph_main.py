@@ -75,9 +75,13 @@ class TimeTableGraphMain(tk.Tk):
     # ----------------------------------------------------------------
     # TimeTableGraphMain __init__
     # ----------------------------------------------------------------
-    def __init__(self, *args, **kwargs):
-        self.mainfile_dir = os.path.dirname(os.path.realpath(__file__))
-        self.readConfigData()
+    def __init__(self, mainfiledir, *args, **kwargs):
+        self.exefile_dir = mainfiledir # directory of the .exe file
+        self.localfile_dir = os.path.dirname(os.path.realpath(__file__)) # location of timetablepages directory
+        self.start_ok = True
+        if not self.readConfigData():
+            self.start_ok = False
+            return
         self.macroparams_value = {}
         self.macroparams_var = {"dummy": {}}
         self.persistent_param_dict = {}
@@ -94,16 +98,16 @@ class TimeTableGraphMain(tk.Tk):
         self.fontbutton = self.get_font("FontLabel")
         self.fontentry = self.get_font("FontLabel")
         self.fonttext = self.get_font("FontText")
-        
+
         self.canvas_width = self.getConfigData("Bfp_width")
         self.canvas_height = self.getConfigData("Bfp_height")
         
         self.ghostscript_path_rel = self.getConfigData("GhostScriptPath")
         
         if self.ghostscript_path_rel == None:
-            self.ghostscript_path_rel = r"..\gs9.53.3\bin\gswin32c.exe"
+            self.ghostscript_path_rel = r"gs9.53.3\bin\gswin32c.exe"
             
-        self.ghostscript_path = os.path.join(self.mainfile_dir,self.ghostscript_path_rel)
+        self.ghostscript_path = os.path.join(self.exefile_dir,self.ghostscript_path_rel)
 
         #macrodata = self.MacroDef.data.get("StartPage",{})
         
@@ -427,9 +431,8 @@ class TimeTableGraphMain(tk.Tk):
             
     def readConfigData(self):
         logging.debug("readConfigData")
-        filedir = self.mainfile_dir # os.path.dirname(os.path.realpath(__file__))
-        parent_filedir = os.path.dirname(filedir) # get the parent dirname
-        self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=filedir)
+        #filedir = self.exefile_dir # os.path.dirname(os.path.realpath(__file__))
+        self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=self.exefile_dir)
         self.ConfigData.data.update(COMMAND_LINE_ARG_DICT) # overwrite configdata mit commandline args
         logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
         #macrodef_filename_str = MACRODEF_FILENAME
@@ -440,24 +443,30 @@ class TimeTableGraphMain(tk.Tk):
                 # PyInstaller creates a temp folder and stores path in _MEIPASS
                 base_path = sys._MEIPASS
                 logging.debug("PyInstaller: sys._MEIPASS: %s",base_path)
-                if parent_filedir != base_path: # onefile using temp directory
-                    filedir = base_path
+                #if parent_filedir != base_path: # onefile using temp directory
+                #    filedir = base_path
             except BaseException as e:
                 logging.debug("PyInstaller handling Error %s",e)
         else:
             logging.debug('running in a normal Python process')        
         try:
-            self.MacroDef = ConfigFile({},MACRODEF_FILENAME,filedir=filedir)
-            logging.debug("Read MACRODEF: %s %s",MACRODEF_FILENAME,filedir)
-            if self.MacroDef =={}:
-                    logging.debug("Read MACRODEF ERROR: %s %s",MACRODEF_FILENAME,filedir)
-            self.MacroParamDef = ConfigFile({},MACROPARAMDEF_FILENAME,filedir=filedir)
-            logging.debug("Read MACROPARAMDEF: %s %s",MACROPARAMDEF_FILENAME,filedir)
-            if self.MacroDef =={}:
-                    logging.debug("Read MACROPARAMDEF_FILENAME ERROR: %s %s",MACROPARAMDEF_FILENAME,filedir)            
-            logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
+            self.MacroDef = ConfigFile({},MACRODEF_FILENAME,filedir=self.localfile_dir)
+            logging.debug("Read MACRODEF: %s %s",MACRODEF_FILENAME,self.localfile_dir)
+            if self.MacroDef.data =={}:
+                    logging.debug("Read MACRODEF ERROR: %s %s",MACRODEF_FILENAME,self.localfile_dir)
+                    tk.messagebox.showerror("Installation Problem","Datei "+ MACRODEF_FILENAME + " not found\nthe program will be terminated")
+                    return False
+            self.MacroParamDef = ConfigFile({},MACROPARAMDEF_FILENAME,filedir=self.localfile_dir)
+            logging.debug("Read MACROPARAMDEF: %s %s",MACROPARAMDEF_FILENAME,self.localfile_dir)
+            if self.MacroParamDef.data =={}:
+                    logging.debug("Read MACROPARAMDEF_FILENAME ERROR: %s %s",MACROPARAMDEF_FILENAME,self.localfile_dir)
+                    tk.messagebox.showerror("Installation Problem","Datei "+ MACROPARAMDEF_FILENAME + "not found\nthe program will be terminated")
+                    return False 
+            #logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
+            return True
         except BaseException as e:
-            logging.debug("PyInstaller handling Error %s",e)            
+            logging.debug("PyInstaller handling Error %s",e)
+            return False
         
     def setConfigData(self,key, value):
         self.ConfigData.data[key] = value
@@ -922,14 +931,21 @@ class TimeTableGraphMain(tk.Tk):
                     param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
                     param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMCOMBOWIDTH))                      
                     param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    param_font_std = paramconfig_dict.get("ParamFontStd","False")
                     if not param_hide:
                         label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                         label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                         self.ToolTip(label, text=param_tooltip)
+                    
+                    if param_font_std=="True":
+                        cb_font=None
+                    else:
+                        cb_font=self.fontlabel
+                        
                     if param_allow_value_entry:
-                        paramvar = ttk.Combobox(parent_frame, width=param_entry_width,font=self.fontlabel)
+                        paramvar = ttk.Combobox(parent_frame, width=param_entry_width,font=cb_font)
                     else:                
-                        paramvar = ttk.Combobox(parent_frame, state="readonly", width=param_entry_width,font=self.fontlabel)
+                        paramvar = ttk.Combobox(parent_frame, state="readonly", width=param_entry_width,font=cb_font)
                     combo_value_list = paramconfig_dict.get("KeyValues",paramconfig_dict.get("Values",[]))
                     combo_text_list = paramconfig_dict.get("ValuesText",[])
                     if combo_text_list == []:
@@ -1358,31 +1374,26 @@ def img_resource_path(relative_path):
 #-------------------------------------------
 COMMAND_LINE_ARG_DICT = {}
 
-def main():
+def main(mainfiledir):
     global COMMAND_LINE_ARG_DICT
-    
     if sys.hexversion < 0x30700F0:
         tk.messagebox.showerror("Wrong Python Version","You need Python Version > 3.7 to run this Program")
         exit()
-    
     parser = argparse.ArgumentParser(description='Generate a Timetablegraph for ZUSI timetables')
     parser.add_argument('--loglevel',choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],help="Logginglevel to be printed inot the logfile")
     parser.add_argument('--logfile',help="Logfilename")
     parser.add_argument('--startpage',choices=['StartPage', 'StationsConfigurationPage', 'ConfigurationPage'],help="Name of the first page shown after start")
     args = parser.parse_args()
-    
     format = "%(asctime)s: %(message)s"
-    
     filedir = os.path.dirname(os.path.realpath(__file__))
     if args.logfile:
         logfilename1=args.logfile
     else:
         logfilename1=LOG_FILENAME
-        
     if logfilename1 == "stdout":
         logfilename=""
     else:
-        logfilename = os.path.join(filedir, logfilename1)
+        logfilename = os.path.join(mainfiledir, logfilename1)
     
     if args.loglevel:
         logging_level = args.loglevel.upper()
@@ -1398,10 +1409,10 @@ def main():
             logging.basicConfig(format=format, filename=logfilename,filemode="w",level=logging.CRITICAL,datefmt="%H:%M:%S")
     else:
         logging.basicConfig(format=format, filename=logfilename,filemode="w",level=logging.DEBUG,datefmt="%H:%M:%S")
-    
     logging.info("ZUSI-TimetableGraph started %s", PROG_VERSION)
     logging.info(" Platform: %s",platform.platform())
-    logging.debug("Installationfolder %s",filedir)
+    logging.debug("Localfolder %s",filedir)
+    logging.debug("Callfolder %s",mainfiledir)
     
     if args.startpage:
         COMMAND_LINE_ARG_DICT["startpagename"]=args.startpage
@@ -1409,17 +1420,12 @@ def main():
         COMMAND_LINE_ARG_DICT["startpagename"]="StartPage"
     
     try:
-        
-        app = TimeTableGraphMain()
-        
-        app.setroot(app)
-        
-        app.protocol("WM_DELETE_WINDOW", app.cancel)
-        
-        app.startup_system()
-        
-        app.mainloop()
-        
+        app = TimeTableGraphMain(mainfiledir)
+        if app.start_ok:
+            app.setroot(app)
+            app.protocol("WM_DELETE_WINDOW", app.cancel)
+            app.startup_system()
+            app.mainloop()
     except Exception as e:
         logging.info("Error in Mainfile %s",e)
         logging.exception("Mainfile")

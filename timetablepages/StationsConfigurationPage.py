@@ -99,10 +99,7 @@ class StationsConfigurationPage(tk.Frame):
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
         self.button_frame2.grid(row=3, column=0,pady=10, padx=10)
-        
         self.controller.update_variables_with_config_data(self.tabClassName)
-        
-
         self.save_config()
 
         # ----------------------------------------------------------------

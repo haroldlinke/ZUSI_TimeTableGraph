@@ -43,7 +43,7 @@ import logging
 class ConfigFile():
     """ Configuration File """
 
-    def __init__(self,default_config, filename,filedir=""):
+    def __init__(self,default_config, filename,filedir="", altfiledir=""):
         # type:
         """ Config Constructor Method (__init__)
 
@@ -54,40 +54,44 @@ class ConfigFile():
         Raises:
             None
         """
+        self.filepath = self.determine_filename(filename,filedir)
+        self.readConfigData(self.filepath)
+        if self.data=={}:
+            # check for default data
+            altfilenamepath = self.determine_filename(filename,altfiledir)
+            self.readConfigData(altfilenamepath)            
+        
+    def determine_filename(self, filename, filedir):
         if filedir == "":
             filedir = os.path.dirname(os.path.realpath(__file__))
-            
         filepath1 = os.path.join(filedir, filename)
-        
-        self.filepath = os.path.normpath(filepath1)
-
+        return os.path.normpath(filepath1)        
+            
+    def readConfigData(self, filenamepath):
         try:
             jsondata={}
             file_not_found=True
-            with open(self.filepath, "r", encoding='utf8') as read_file:
+            with open(filenamepath, "r", encoding='utf8') as read_file:
                 file_not_found=False
                 jsondata = json.load(read_file)
         except ValueError as err:
-            logging.error ("ERROR: JSON Error in Config File %s",self.filepath)
+            logging.error ("ERROR: JSON Error in Config File %s",filenamepath)
             logging.error(err)
         except:
             if file_not_found:
-                logging.warning ("Warning: Config File %s not found",self.filepath)
+                logging.warning ("Warning: Config File %s not found",filenamepath)
             else:
-                logging.error ("ERROR: JSON Error in Config File %s",self.filepath)
+                logging.error ("ERROR: JSON Error in Config File %s",filenamepath)
                 logging.error(jsondata)
                 jsondata = {}
-            
         try:
-            #self.data = default_config.copy()
             self.data = {}
             self.data.update(jsondata)
 
         except:
-            logging.error ("Error in Config File %s",self.filepath)
+            logging.error ("Error in Config File %s",filenamepath)
             logging.error(self.data)
-            self.data={}
-            #self.data = default_config.copy()
+            self.data={}        
 
     def save(self):
 

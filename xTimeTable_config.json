@@ -1,12 +1,12 @@
 {
     "startpagename": "StartPage",
-    "pos_x": -1288,
-    "pos_y": 119,
+    "pos_x": 0,
+    "pos_y": 0,
     "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr.fpn",
-    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\D17441.timetable.xml",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\Dg61005.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
-    "EndStation": "Kassel_Hbf",
+    "EndStation": "Hagen_Vorhalle",
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
     "Bfp_width": 2000,
@@ -44,8 +44,7 @@
             "Bfp_TrainTypeLineDashed_No": 0,
             "Bfp_TrainTypeLabel": "Mitte",
             "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
+            "Bfp_TrainTypeLabelSize": 8
         }
     },
     "Bfp_TrainTypeProp": {
@@ -198,23 +197,12 @@
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
             "Bfp_TrainTypeLabelSize": 10
-        },
-        "999": {
-            "Bfp_TrainTypeAll": "",
-            "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 1,
-            "Bfp_TrainTypeLineDashed": " ",
-            "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
         }
     },
     "TLFileType": ".timetable.xml",
     "TLFileType_No": 1,
     "Bfp_ZFS_Id": "Sbk,Abzw,Asig,Esig",
-    "InOutBoundTrainsShow": false,
+    "InOutBoundTrainsShow": true,
     "InOutBoundTrainsNoOneStop": false,
     "InOutBoundTrainsNoStartStation": false,
     "InOutBoundTrainsNoEndStation": false,

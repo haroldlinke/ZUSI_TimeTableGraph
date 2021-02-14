@@ -260,7 +260,6 @@ class TimeTablePage(tk.Frame):
         logging.debug("Tabselected: %s",self.tabname)
         #self.controller.currentTabClass = self.tabClassName
         logging.info(self.tabname)
-        
         self.controller.update()
         self.canvas_width = self.getConfigData("Bfp_width")
         self.canvas_height = self.getConfigData("Bfp_height")
@@ -293,6 +292,7 @@ class TimeTablePage(tk.Frame):
             self.timetable_main.redo_fpl_and_canvas(self.canvas_width,self.canvas_height,fpl_filename=fpl_filename,xml_filename=xml_filename,starthour=starthour,duration=duration)
         else:
             self.controller.set_statusmessage(" ")
+        self.canvas_bindings()
     
     def tabunselected(self):
         logging.debug("Tabunselected: %s",self.tabname)

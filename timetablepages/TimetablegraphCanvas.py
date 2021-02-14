@@ -137,7 +137,7 @@ class TimeTableGraphCommon():
         self.graphHeadersize = 140
         self.graphBottomsize = 20
         self.graphLeftbordersize = 50
-        self.graphRightbordersize = 20
+        self.graphRightbordersize = 40
         self.tt_canvas = None 
         #    ------------ train variables ------------
         #   Train
@@ -171,9 +171,9 @@ class TimeTableGraphCommon():
         if s_labeldir==0:
             return 140
         elif s_labeldir==1:
-            return stationNameLengthMax+100
+            return stationNameLengthMax+140
         else:
-            return int(stationNameLengthMax/1.4)+100
+            return int(stationNameLengthMax/1.4)+140
         return stationNameLengthMax
 
     def determine_stationNameLength(self):
@@ -199,6 +199,8 @@ class TimeTableGraphCommon():
             self.canvas_dimWidth = self.tt_canvas.winfo_reqwidth()                
             self.schedule_startHour=starthour
             self.schedule_startTime_min = self.schedule_startHour * 60
+            if self.schedule_startTime_min == 0:
+                self.schedule_startTime_min = 1
             self.schedule_duration = duration
             self.stationGrid  = {} 
             self.hourGrid     = []
@@ -269,7 +271,6 @@ class TimeTableGraphCommon():
         return x,y
 
     def print_station(self, stationIdx, stationName, distance, stationkm):
-        #s_color=self.controller.getConfigData("Bfp_S_LineColor")
         s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize")
         s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No")
         self.s_font = font.Font(family="SANS_SERIF", size=int(s_labelsize))
@@ -557,9 +558,17 @@ class TimeTableGraphCommon():
             return        
         if self.draw_stations_vertical:
             if (self.direction== "down"):
-                anchor="n"
+            # down
+                if mode in ["end","arrive"]:
+                    anchor="sw"
+                else:
+                    anchor="ne"
             else:
-                anchor="s"            
+            # up
+                if mode in ["end","arrive"]:
+                    anchor="nw"
+                else:
+                    anchor="se"      
         else:
             if (self.direction== "down"):
             # left to right
@@ -828,17 +837,26 @@ class TimeTableGraphCommon():
         train_dict = self.schedule_trains_dict.get(train_idx)
         trainstops_dict = train_dict.get("Stops",{})
         station_idx = self.search_station(FplName)
+        do_not_override_station = False
+        last_station_arriveTime = 0
         if trainstop_idx>0:
             last_station_idx = trainstops_dict[trainstop_idx-1]["StationIdx"]
             if station_idx == last_station_idx:
                 trainstop_idx -= 1  # update only extisting train stop
-        arriveTime = FplAnk_min
-        departTime = FplAbf_min
-        trainstops_dict[trainstop_idx] = {"StationIdx" : station_idx,
-                                          "ArriveTime" : arriveTime,
-                                          "DepartTime" : departTime,
-                                          "Signal"     : signal
-                                       }
+                last_station_arriveTime = trainstops_dict[trainstop_idx]["ArriveTime"]
+                if last_station_arriveTime > 0 and FplAnk_min==0:
+                    do_not_override_station = True
+        if not do_not_override_station:
+            if last_station_arriveTime>0:
+                arriveTime = last_station_arriveTime
+            else:
+                arriveTime = FplAnk_min
+            departTime = FplAbf_min
+            trainstops_dict[trainstop_idx] = {"StationIdx" : station_idx,
+                                              "ArriveTime" : arriveTime,
+                                              "DepartTime" : departTime,
+                                              "Signal"     : signal
+                                           }
         return trainstop_idx + 1
         
     def set_trainline_data(self,trainIdx, key, data):
@@ -918,6 +936,8 @@ class TimeTableGraphCommon():
         self.StartStation = self.StartStation.replace("_"," ")
         self.EndStation = self.controller.getConfigData("EndStation")
         self.EndStation = self.EndStation.replace("_"," ")
+        if self.StartStation == "":
+            self.addStation = True
         self.select_stationlist  = self.controller.getConfigData("StationChooser")
         if FplZeile_list=={}:
             logging.info("timetable.xml file error: %s",trn_dateiname )
