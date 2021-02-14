@@ -299,6 +299,7 @@
         "Min": "0",
         "Max": "255",
         "Default": "",
+        "ParamFontStd": "True",
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
@@ -500,6 +501,7 @@
         "Min": "0",
         "Max": "255",
         "Default": "0",
+        "ParamEntryWidth": "26",
         "Input Text": "Richtung der Beschriftung",
         "Hint": "Richtung der Beschriftung"
     },
@@ -539,6 +541,7 @@
         "Min": "0",
         "Max": "255",
         "Default": "",
+        "ParamFontStd": "True",
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
@@ -619,6 +622,7 @@
         "Min": "0",
         "Max": "255",
         "Default": "",
+        "ParamFontStd": "True",
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
@@ -699,6 +703,7 @@
         "Min": "0",
         "Max": "255",
         "Default": "",
+        "ParamFontStd": "True",
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
@@ -779,6 +784,7 @@
         "Min": "0",
         "Max": "255",
         "Default": "",
+        "ParamFontStd": "True",
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },

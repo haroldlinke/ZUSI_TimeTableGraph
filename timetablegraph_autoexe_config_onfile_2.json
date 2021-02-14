@@ -63,7 +63,11 @@
   },
   {
    "optionDest": "datas",
-   "value": "D:/data/doc/GitHub/ZUSI_TimeTableGraph/gs9.53.3;gs9.53.3/"
+   "value": "D:/data/doc/GitHub/ZUSI_TimeTableGraph/timetablepages/TimeTable_macrodef.json;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/data/doc/GitHub/ZUSI_TimeTableGraph/timetablepages/TimeTable_macroparamdef.json;."
   },
   {
    "optionDest": "datas",
