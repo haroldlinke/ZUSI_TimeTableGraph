@@ -37,18 +37,24 @@ from tkinter import ttk,font
 from scrolledFrame.ScrolledFrame import ScrolledFrame
 import uuid
 import logging
-from timetablepages.DefaultConstants import STD_FONT
-from timetablepages.DefaultConstants import LARGE_FONT
-
+from timetablepages.DefaultConstants import STD_FONT, LARGE_FONT
+from timetablepages.ConfigPageTemplate import ConfigPagetemplate
 page_link = None
 
 # ----------------------------------------------------------------
 # Class ConfigurationPage
 # ----------------------------------------------------------------
 
-class StationsConfigurationPage(tk.Frame):
+class StationsConfigurationPage(ConfigPagetemplate):
 
     def __init__(self, parent, controller):
+        self.tabClassName = "StationsConfigurationPage"
+        self.generic_methods = {"TreeView": self.treeview}
+        super().__init__(parent, controller, self.tabClassName, generic_methods=self.generic_methods)
+        self.controller = controller
+        return
+    
+    """
         self.controller = controller
         self.arduino_portlist = {}
         tk.Frame.__init__(self,parent)
@@ -140,11 +146,6 @@ class StationsConfigurationPage(tk.Frame):
         
     def get_macroparam_var_values(self,macro):
         return self.controller.get_macroparam_var_values(macro)
-    
-    def get_macroparam_var_val(self,paramkey,macro=""):
-        if macro == "":
-            macro=self.tabClassName
-        return self.controller.get_macroparam_val(macro,paramkey)        
 
     def setParamData(self,key, value):
         self.controller.setParamData(key, value)
@@ -169,6 +170,20 @@ class StationsConfigurationPage(tk.Frame):
         self.controller.SaveConfigData()
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
         
+    def store_old_config(self):
+        self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
+    
+    def check_if_config_data_changed(self):
+        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
+        if self.old_param_values_dict != param_values_dict:
+            return True
+        return False
+    """
+    def get_macroparam_var_val(self,paramkey,macro=""):
+        if macro == "":
+            macro=self.tabClassName
+        return self.controller.get_macroparam_val(macro,paramkey)            
+    
     def bfpl_filename_updated(self, *args):
         self.update_tree()
         
@@ -185,15 +200,6 @@ class StationsConfigurationPage(tk.Frame):
         #self.save_config()
         self.tree=self.create_zusi_zug_treeframe(parent_frame)
         self.tree_frame = parent_frame
-
-    def store_old_config(self):
-        self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-    
-    def check_if_config_data_changed(self):
-        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-        if self.old_param_values_dict != param_values_dict:
-            return True
-        return False
 
     def JSONTree(self, Tree, Parent, Dictionary):
         for key in Dictionary :

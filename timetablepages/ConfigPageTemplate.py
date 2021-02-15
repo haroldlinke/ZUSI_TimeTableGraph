@@ -54,7 +54,7 @@ class ConfigPagetemplate(tk.Frame):
     def __init__(self, parent, controller, tabname, generic_methods=None):
         self.controller = controller
         tk.Frame.__init__(self,parent)
-        self.tabClassName = "ConfigurationPage"
+        self.tabClassName = tabname
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
         self.title = macrodata.get("Title",self.tabClassName)
@@ -172,11 +172,6 @@ class ConfigPagetemplate(tk.Frame):
         self.store_old_config()
         self.controller.SaveConfigData()
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
-        
-    def update_tree(self):
-        self.save_config()
-        self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
-        logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
 
     def store_old_config(self):
         self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
@@ -186,33 +181,3 @@ class ConfigPagetemplate(tk.Frame):
         if self.old_param_values_dict != param_values_dict:
             return True
         return False
-
-    def JSONTree(self, Tree, Parent, Dictionary):
-        for key in Dictionary :
-            uid = uuid.uuid4()
-            if isinstance(Dictionary[key], dict):
-                Tree.insert(Parent, 'end', uid, text=key)
-                self.JSONTree(Tree, uid, Dictionary[key])
-            elif isinstance(Dictionary[key], list):
-                Tree.insert(Parent, 'end', uid, text=key + '[]')
-                self.JSONTree(Tree,uid,dict([(i, x) for i, x in enumerate(Dictionary[key])]))
-            else:
-                value = Dictionary[key]
-                if isinstance(value, str):
-                    value = value.replace(' ', '_')
-                Tree.insert(Parent, 'end', uid, text=key, value=value)
-    
-    def create_zusi_zug_treeframe(self,parent):
-            # Setup Data
-            fpl_filename = self.getConfigData("Bfp_filename")
-            Data = self.controller.timetable_main.create_zusi_zug_liste(fpl_filename)
-            # Setup the Frames
-            TreeFrame = ttk.Frame(parent, padding="3")
-            TreeFrame.grid(row=0, column=0, sticky=tk.NSEW)
-            # Setup the Tree
-            tree = ttk.Treeview(TreeFrame, columns=('Values'))
-            tree.column('Values', width=300, anchor='center')
-            tree.heading('Values', text='Zuglauf')
-            self.JSONTree(tree, '', Data)
-            tree.pack(fill=tk.BOTH, expand=1)
-            return tree

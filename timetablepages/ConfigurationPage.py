@@ -35,6 +35,7 @@
 import tkinter as tk
 from tkinter import ttk
 from scrolledFrame.ScrolledFrame import ScrolledFrame
+from timetablepages.ConfigPageTemplate import ConfigPagetemplate
 import logging
 
 
@@ -43,9 +44,15 @@ from timetablepages.DefaultConstants import LARGE_FONT
 # ----------------------------------------------------------------
 # Class ConfigurationPage
 # ----------------------------------------------------------------
-class ConfigurationPage(tk.Frame):
+class ConfigurationPage(ConfigPagetemplate):
 
     def __init__(self, parent, controller):
+        
+        self.tabClassName = "ConfigurationPage"
+        super().__init__(parent, controller, self.tabClassName, generic_methods=None) 
+        
+        return
+    """    
         self.controller = controller
         self.arduino_portlist = {}
         tk.Frame.__init__(self,parent)
@@ -104,83 +111,83 @@ class ConfigurationPage(tk.Frame):
         # Standardprocedures for every tabpage
         # ----------------------------------------------------------------
 
-    def tabselected(self):
-        logging.debug("Tabselected: %s",self.tabname)
-        self.controller.set_statusmessage("")
-        self.store_old_config()
-    
-    def tabunselected(self):
-        logging.debug("Tabunselected: %s",self.tabname)
-        if self.check_if_config_data_changed():
-            answer = tk.messagebox.askyesnocancel ('Sie verlassen die Einstellungen','Die Einstellungen wurden verändert. Sollen die geänderten Einstellungen gesichert werden?',default='no')
-            if answer == None:
-                return # cancelation return to "ConfigurationOage"
-            if answer:
-                self.save_config()
-       
-    def cancel(self):
-        self.save_config()
-
-    def getConfigPageParams(self):
-        pass
-    
-    def getConfigData(self, key):
-        return self.controller.getConfigData(key)
-    
-    def readConfigData(self):
-        self.controller.readConfigData()
-        
-    def setConfigData(self,key, value):
-        self.controller.setConfigData(key, value)
-        
-    def setConfigDataDict(self,paramdict):
-        self.controller.setConfigDataDict(paramdict)
-        
-    def get_macroparam_var_values(self,macro):
-        return self.controller.get_macroparam_var_values(macro)        
-
-    def setParamData(self,key, value):
-        self.controller.setParamData(key, value)
-
-    def MenuUndo(self,_event=None):
-        logging.debug("MenuUndo: %s",self.tabname)
-        pass
-    
-    def MenuRedo(self,_event=None):
-        logging.debug("MenuRedo: %s",self.tabname)
-        pass
+#    def tabselected(self):
+#        logging.debug("Tabselected: %s",self.tabname)
+#        self.controller.set_statusmessage("")
+#        self.store_old_config()
+#    
+#    def tabunselected(self):
+#        logging.debug("Tabunselected: %s",self.tabname)
+#        if self.check_if_config_data_changed():
+#            answer = tk.messagebox.askyesnocancel ('Sie verlassen die Einstellungen','Die Einstellungen wurden verändert. Sollen die geänderten Einstellungen gesichert werden?',default='no')
+#            if answer == None:
+#                return # cancelation return to "ConfigurationOage"
+#            if answer:
+#                self.save_config()
+#       
+#    def cancel(self):
+#        self.save_config()
+#
+#    def getConfigPageParams(self):
+#        pass
+#    
+#    def getConfigData(self, key):
+#        return self.controller.getConfigData(key)
+#    
+#    def readConfigData(self):
+#        self.controller.readConfigData()
+#        
+#    def setConfigData(self,key, value):
+#        self.controller.setConfigData(key, value)
+#        
+#    def setConfigDataDict(self,paramdict):
+#        self.controller.setConfigDataDict(paramdict)
+#        
+#    def get_macroparam_var_values(self,macro):
+#        return self.controller.get_macroparam_var_values(macro)
+#
+#    def setParamData(self,key, value):
+#        self.controller.setParamData(key, value)
+#
+#    def MenuUndo(self,_event=None):
+#        logging.debug("MenuUndo: %s",self.tabname)
+#        pass
+#    
+#    def MenuRedo(self,_event=None):
+#        logging.debug("MenuRedo: %s",self.tabname)
+#        pass
     
     # ----------------------------------------------------------------
     # ConfigurationPage save_config
     # ----------------------------------------------------------------
-    def save_config(self):
-        self.setConfigData("pos_x",self.winfo_x())
-        self.setConfigData("pos_y",self.winfo_y())
-        #try:
-            #curItem = self.tree.focus()
-            #curItem_value = self.tree.item(curItem)
-        #except:
-            #curItem_value = {}
-        #selectedtrain=curItem_value.get("text","")
-        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-        self.setConfigDataDict(param_values_dict)
-        self.store_old_config()
-        self.controller.SaveConfigData()
-        logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
-        
+#    def save_config(self):
+#        self.setConfigData("pos_x",self.winfo_x())
+#        self.setConfigData("pos_y",self.winfo_y())
+#        #try:
+#            #curItem = self.tree.focus()
+#            #curItem_value = self.tree.item(curItem)
+#        #except:
+#            #curItem_value = {}
+#        #selectedtrain=curItem_value.get("text","")
+#        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
+#        self.setConfigDataDict(param_values_dict)
+#        self.store_old_config()
+#        self.controller.SaveConfigData()
+#        logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
+#
+#    def store_old_config(self):
+#        self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
+#    
+#    def check_if_config_data_changed(self):
+#        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
+#        if self.old_param_values_dict != param_values_dict:
+#            return True
+#        return False
+    """
     def update_tree(self):
         self.save_config()
         self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
-
-    def store_old_config(self):
-        self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-    
-    def check_if_config_data_changed(self):
-        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-        if self.old_param_values_dict != param_values_dict:
-            return True
-        return False
 
     def JSONTree(self, Tree, Parent, Dictionary):
         for key in Dictionary :

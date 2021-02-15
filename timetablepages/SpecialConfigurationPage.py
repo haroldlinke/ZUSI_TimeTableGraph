@@ -37,6 +37,7 @@ from tkinter import ttk
 #from tkcolorpicker.spinbox import Spinbox
 #from tkcolorpicker.limitvar import LimitVar
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,HorizontalScrolledFrame,ScrolledFrame
+from timetablepages.ConfigPageTemplate import ConfigPagetemplate
 from tools.xmltodict import parse
 #import uuid
 
@@ -50,9 +51,18 @@ from timetablepages.DefaultConstants import LARGE_FONT, SMALL_FONT, VERY_LARGE_F
 # ----------------------------------------------------------------
 # Class SpecialConfigurationPage
 # ----------------------------------------------------------------
-class SpecialConfigurationPage(tk.Frame):
+class SpecialConfigurationPage(ConfigPagetemplate):
 
     def __init__(self, parent, controller):
+        
+        self.tabClassName = "SpecialConfigurationPage"
+        super().__init__(parent, controller, self.tabClassName, generic_methods=None) 
+        
+        self.get_stationlist_for_station_chooser()
+        return
+    
+    """
+    
         self.controller = controller
         self.arduino_portlist = {}
         tk.Frame.__init__(self,parent)
@@ -180,6 +190,8 @@ class SpecialConfigurationPage(tk.Frame):
         if self.old_param_values_dict != param_values_dict:
             return True
         return False
+        
+    """
     
     def get_fplZeile_entry(self, FplZeile_dict, main_key, key, default=""):
         try:
