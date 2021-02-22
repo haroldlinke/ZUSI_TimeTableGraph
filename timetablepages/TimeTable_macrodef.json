@@ -34,11 +34,13 @@
         "Ausführliche Beschreibung": "Bildfahrplan Einstellungen für experten - Bitte nur ändern, wenn Sie wissen, was Sie tun!\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
         "Params": [
             "TLFileType",
+            "Edit_Permission",
             "Bfp_ZFS_Id",
             "InOutBoundTrainsProp",
             "FplRglGgl",
             "Bfp_TrainLine_Distance_from_Stationline",
             "!ExtraShowAlleZFS",
+            "Bfp_show_train_dir",
             "StationChooser"
         ]
     },

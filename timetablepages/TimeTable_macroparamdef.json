@@ -901,5 +901,54 @@
         "Default": "0",
         "Input Text": "Abstand von Stationslinie",
         "Hint": "Um haltende Züge besser sichtbar zu machen kann hier der Abstand der Zuglinien von der Stationslinie geändert werden"
+    },
+    "Bfp_show_train_dir": {
+        "ParName": "Bfp_show_train_dir",
+        "Cnt": "1",
+        "Type": "Combo",
+        "Values": [
+            "all",
+            "down",
+            "up"
+        ],
+        "ValuesText": [
+            "beide Richtungen",
+            "nur ==>",
+            "nur <=="
+        ],
+        "ConfigName": [
+            "Bfp_show_train_dir",
+            "Bfp_show_train_dir_No"
+        ],
+        "Min": "0",
+        "Max": "255",
+        "Default": "all",
+        "ParamFontStd": "True",
+        "Input Text": "Zeige Züge in Richtung",
+        "Hint": "Zeige Züge in Richtung"
+    },
+    "Edit_Permission": {
+        "ParName": "Edit_Permission",
+        "Cnt": "1",
+        "Type": "Combo",
+        "Values": [
+            "Edit_blocked",
+            "Edit_allowed"
+        ],
+        "ValuesText": [
+            "Bearbeitung gesperrt",
+            "Bearbeitung erlaubt"
+        ],
+        "ConfigName": [
+            "Edit_Permission",
+            "Edit_Permission_No"
+        ],
+        "Min": "0",
+        "Max": "255",
+        "Default": "all",
+        "ParamFontStd": "True",
+        "ParamEntryWidth": "26",
+        "Input Text": "Bearbeiten erlauben",
+        "Hint": "Ermöglicht die Bearbeitung von Abfahrts- und Ankunftszeiten im Bildfahrplan"
     }
 }

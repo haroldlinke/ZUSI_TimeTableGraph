@@ -37,143 +37,42 @@ from tkinter import ttk,font
 from scrolledFrame.ScrolledFrame import ScrolledFrame
 import uuid
 import logging
-from timetablepages.DefaultConstants import STD_FONT
-from timetablepages.DefaultConstants import LARGE_FONT
-
+from timetablepages.DefaultConstants import STD_FONT, LARGE_FONT
+from timetablepages.ConfigPageTemplate import ConfigPagetemplate
 page_link = None
 
 # ----------------------------------------------------------------
 # Class ConfigurationPage
 # ----------------------------------------------------------------
 
-class StationsConfigurationPage(tk.Frame):
+class StationsConfigurationPage(ConfigPagetemplate):
 
     def __init__(self, parent, controller):
-        self.controller = controller
-        self.arduino_portlist = {}
-        tk.Frame.__init__(self,parent)
         self.tabClassName = "StationsConfigurationPage"
-        macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
-        self.tabname = macrodata.get("MTabName",self.tabClassName)
-        self.title = macrodata.get("Title",self.tabClassName)
-        page_link = self
-        self.startcmd_filename = ""
-        self.grid_columnconfigure(0,weight=1)
-        self.grid_rowconfigure(0,weight=1)
-        self.frame=ttk.Frame(self,relief="ridge", borderwidth=1)
-        self.frame.grid_columnconfigure(0,weight=1)
-        self.frame.grid_rowconfigure(0,weight=1)        
-        self.scroll_main_frame = ScrolledFrame(self.frame)
-        self.scroll_main_frame.grid_columnconfigure(0,weight=1)
-        self.scroll_main_frame.grid_rowconfigure(0,weight=1)
-        self.main_frame = ttk.Frame(self.scroll_main_frame.interior, relief="ridge", borderwidth=2)
-        self.main_frame.grid_columnconfigure(0,weight=1)
-        self.main_frame.grid_rowconfigure(2,weight=1) 
-        title_frame = ttk.Frame(self.main_frame, relief="ridge", borderwidth=2)
-        label = ttk.Label(title_frame, text=self.title, font=LARGE_FONT)
-        label.pack(padx=5,pady=(5,5))
-        self.std_font = font.Font(font=STD_FONT)
         self.generic_methods = {"TreeView": self.treeview}
-        config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage",generic_methods=self.generic_methods)  
-        # --- Buttons
-        self.button_frame = ttk.Frame(self.main_frame)
-        button1_text = macrodata.get("Button_1",self.tabClassName)
-        self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
-        self.update_button.pack(side="right", padx=10)
-        self.button_frame2 = ttk.Frame(self.main_frame)
-        self.update_button2 = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
-        self.update_button2.pack(side="right", padx=10)        
+        self.std_font = font.Font(font=STD_FONT)
+        page_link = self
+        super().__init__(parent, controller, self.tabClassName, generic_methods=self.generic_methods)
+        self.controller = controller
         #update treeview, when value in FPL-filename changed
         paramvar = self.controller.macroparams_var[self.tabClassName]["Bfp_filename"]
         paramvar.trace('w',self.bfpl_filename_updated)
         paramvar = self.controller.macroparams_var[self.tabClassName]["Bfp_trainfilename"]
-        paramvar.trace('w',self.xml_filename_updated)            
-        # --- placement
-        # Tabframe
-        self.frame.grid(row=0,column=0)
-        self.scroll_main_frame.grid(row=0,column=0,sticky="nesw")
-        # scroll_main_frame
-        self.main_frame.grid(row=0,column=0)
-        # main_frame        
-        title_frame.grid(row=0, column=0, pady=10, padx=10)
-        self.button_frame.grid(row=1, column=0,pady=10, padx=10)
-        config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
-        self.button_frame2.grid(row=3, column=0,pady=10, padx=10)
+        paramvar.trace('w',self.xml_filename_updated)
         self.controller.update_variables_with_config_data(self.tabClassName)
-        self.save_config()
+        return
 
-        # ----------------------------------------------------------------
-        # Standardprocedures for every tabpage
-        # ----------------------------------------------------------------
-
-    def tabselected(self):
-        logging.debug("Tabselected: %s",self.tabname)
-        self.controller.set_statusmessage("")
-        self.store_old_config()
-    
-    def tabunselected(self):
-        logging.debug("Tabunselected: %s",self.tabname)
-        if self.check_if_config_data_changed():
-            answer = tk.messagebox.askyesnocancel ('Sie verlassen die Einstellungen','Die Einstellungen wurden verändert. Sollen die geänderten Einstellungen gesichert werden?',default='no')
-            if answer == None:
-                return # cancelation return to "ConfigurationOage"
-            if answer:
-                self.save_config()
-       
-    def cancel(self):
-        self.save_config()
-
-    def getConfigPageParams(self):
-        pass
-    
-    def getConfigData(self, key):
-        return self.controller.getConfigData(key)
-    
-    def readConfigData(self):
-        self.controller.readConfigData()
-        
-    def setConfigData(self,key, value):
-        self.controller.setConfigData(key, value)
-        
-    def setConfigDataDict(self,paramdict):
-        self.controller.setConfigDataDict(paramdict)
-        
-    def get_macroparam_var_values(self,macro):
-        return self.controller.get_macroparam_var_values(macro)
-    
     def get_macroparam_var_val(self,paramkey,macro=""):
         if macro == "":
             macro=self.tabClassName
-        return self.controller.get_macroparam_val(macro,paramkey)        
-
-    def setParamData(self,key, value):
-        self.controller.setParamData(key, value)
-
-    def MenuUndo(self,_event=None):
-        logging.debug("MenuUndo: %s",self.tabname)
-        pass
+        return self.controller.get_macroparam_val(macro,paramkey)            
     
-    def MenuRedo(self,_event=None):
-        logging.debug("MenuRedo: %s",self.tabname)
-        pass
-
-    # ----------------------------------------------------------------
-    # ConfigurationPage save_config
-    # ----------------------------------------------------------------
-    def save_config(self):
-        self.setConfigData("pos_x",self.winfo_x())
-        self.setConfigData("pos_y",self.winfo_y())
-        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-        self.setConfigDataDict(param_values_dict)
-        self.store_old_config()
-        self.controller.SaveConfigData()
-        logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
-        
     def bfpl_filename_updated(self, *args):
         self.update_tree()
         
     def xml_filename_updated(self, *args):
-        self.update_tree()  
+        #self.update_tree()
+        pass
     
     def update_tree(self):
         self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
@@ -182,18 +81,9 @@ class StationsConfigurationPage(tk.Frame):
         self.controller.set_macroparam_val(StationsConfigurationPage, "StationChooser", station_list)
 
     def treeview(self,parent_frame, marco,macroparams):
-        #self.save_config()
-        self.tree=self.create_zusi_zug_treeframe(parent_frame)
         self.tree_frame = parent_frame
-
-    def store_old_config(self):
-        self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-    
-    def check_if_config_data_changed(self):
-        param_values_dict = self.get_macroparam_var_values(self.tabClassName)
-        if self.old_param_values_dict != param_values_dict:
-            return True
-        return False
+        self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
+        
 
     def JSONTree(self, Tree, Parent, Dictionary):
         for key in Dictionary :
@@ -211,7 +101,6 @@ class StationsConfigurationPage(tk.Frame):
             else:
                 value = Dictionary[key]
                 if isinstance(value, str):
-                    #value = value.replace(' ', '_')
                     value = value.replace('[', '')
                     value = value.replace(']', '')
                     value = value.replace(" '", '')
@@ -219,7 +108,6 @@ class StationsConfigurationPage(tk.Frame):
                     value = value.replace(' ', '_')
                     value_width = self.std_font.measure(value+"      ")
                     self.max_value_width = max(value_width, self.max_value_width)
-                    pass
                 Tree.insert(Parent, 'end', uid, text=key, value=value)
                 
     def selectItem(self,a):
@@ -234,7 +122,6 @@ class StationsConfigurationPage(tk.Frame):
                     self.controller.set_string_variable(xml_filename,paramkey="Bfp_trainfilename", macrokey=self.tabClassName)
                     startStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["StartStation"]
                     stationlist_list=stationlist[0].split(",")
-                    #stationlist_list.insert(0,"Keine")
                     startStationparamvar["value"]=stationlist_list
                     startStationparamvar.set(stationlist_list[0])
                     endStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["EndStation"]
@@ -248,7 +135,6 @@ class StationsConfigurationPage(tk.Frame):
         self.max_value_width = 0
         self.max_key_width = 0
         fpl_filename = self.get_macroparam_var_val("Bfp_filename")
-        #self.getConfigData("Bfp_filename")
         # Setup the Frames
         TreeFrame = ttk.Frame(parent, padding="3")
         TreeFrame.grid(row=0, column=0, sticky=tk.NSEW)
