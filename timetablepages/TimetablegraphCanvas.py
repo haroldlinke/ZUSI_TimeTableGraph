@@ -31,17 +31,18 @@
 # * You should have received a copy of the GNU Affero General Public License
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
-
+import tkinter as tk
 from tkinter import Tk, Canvas, Frame, BOTH, font
 #import uuid
 #from tkinter import ttk
 from tools.xmltodict import parse
 #from collections import OrderedDict
 from datetime import datetime
-#from timetablepages.DefaultConstants import STD_FONT
+from timetablepages.DefaultConstants import STD_FONT,LARGE_STD_FONT
 import os
 import logging
 import math
+import xml.etree.ElementTree as ET
 
 class Point:
     def __init__(self, x, y):
@@ -99,11 +100,76 @@ class Vector:
 
     def __str__(self):
         return f'{self.__class__.__name__}({self.x}, {self.y})'
+    
+class RightClickMenu(tk.Frame):   
+    def __init__(self, parent, objectid):
+        self.master = parent
+        #self.mainpage = mainpage
+        tk.Frame.__init__(self, self.master)  
+        self.objectid = objectid
+        self.edit_own_object = False
+        #print("RightClick:Menu - %s",objectid)
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.create_right_click_menu()
+
+    def create_right_click_menu(self):
+        self.right_click_menu = tk.Menu(self.master, tearoff=0, relief='sunken')
+        self.right_click_menu.add_command(label="Bearbeiten starten (gesamter Fahrplan)", command=self.edit_schedule_complete)
+        self.right_click_menu.add_command(label="Bearbeiten starten (alle Zeiten nach der geänderten)", command=self.edit_schedule_part)
+        self.right_click_menu.add_command(label="Bearbeiten starten (jede Zeit einzeln)", command=self.edit_schedule_single)
+        self.right_click_menu.add_separator()
+        self.right_click_menu.add_command(label="Bearbeiten beenden", command=self.edit_stop)
+        self.right_click_menu.add_command(label="Bearbeiten beenden und Zeiten zurück auf .trn Zeiten setzen", command=self.edit_stop_original)
+        self.right_click_menu.add_separator()
+        self.right_click_menu.add_command(label="Zugfahrplan in .trn-Datei exportieren", command=self.edit_export_to_trn)
+        self.right_click_menu.add_separator()
+        self.right_click_menu.add_command(label="Zugfahrplan klonen", command=self.edit_clone_schedule,state="disabled")
+        #self.right_click_menu.add_separator()
+    
+    def popup_text(self, event,cvobject):
+        if not self.master.editflag:
+            return
+        trainline_tag = self.master.canvas.gettags(cvobject)[0]
+        if not self.master.controller.edit_active or self.master.controller.edit_trainline_tag==trainline_tag:
+            self.objectid = cvobject
+            self.right_click_menu.post(event.x_root, event.y_root)
+
+    def edit_schedule_complete(self):
+        #print("edit_schedule complete %s",self.objectid)
+        self.master.edit_train_schedule(self.objectid,"complete")
+        
+    def edit_schedule_part(self):
+        #print("edit_schedule part %s",self.objectid)
+        self.master.edit_train_schedule(self.objectid,"part")
+        
+    def edit_schedule_single(self):
+        #print("edit_schedule single %s",self.objectid)
+        self.master.edit_train_schedule(self.objectid,"single")
+        
+    def edit_stop(self):
+        #print("edit_stop")
+        self.master.edit_train_schedule_stop()
+        
+    def edit_stop_original(self):
+        #print("edit_stop")
+        self.master.edit_stop_original(self.objectid)
+    
+    def edit_export_to_trn(self):
+        #print("edit_stop")
+        self.master.edit_export_to_trn(self.objectid)
+        
+    def edit_clone_schedule(self):
+        #print("edit_stop")
+        self.master.edit_export_to_trn(self.objectid)
 
 class TimeTableGraphCommon():
 
-    def __init__(self, controller, showTrainTimes, height, width, xml_filename="xml_filename"):
+    def __init__(self, controller, showTrainTimes, height, width, xml_filename="xml_filename",ttmain_page=None,tt_page=None):
         self.controller = controller
+        self.ttmain_page = ttmain_page
+        self.ttpage = tt_page
         self.xml_filename = xml_filename
         self.TrainMinuteShow = showTrainTimes
         self.canvas_traintype_prop_dict = {}
@@ -120,6 +186,7 @@ class TimeTableGraphCommon():
         self.canvas_dimHeight = height
         self.canvas_dimWidth  = width
         self.bigFont = font.Font(family="SANS_SERIF", size=20)
+        self.largeFont = font.Font(family="SANS_SERIF", size=12)
         self.stdFont = font.Font(family="SANS_SERIF", size=10)
         self.smallFont = font.Font(family="SANS_SERIF", size=8)
         self.trainLineStops = []
@@ -157,6 +224,10 @@ class TimeTableGraphCommon():
         self.firstHourXY = 0.0
         self.lastHourXY = 0.0
         self.sizeMinute = 0.0
+        
+    def bind_right_click_menu_to_trainline(self, trainlineid):
+        self.popup = RightClickMenu(self.ttmain_page, trainlineid)
+        self.tt_canvas.tag_bind(trainlineid,"<Button-3>",lambda e,Object=trainlineid:self.popup.popup_text(e,Object))
 
     def set_tt_traintype_prop(self,traintype_prop_dict):
         self.canvas_traintype_prop_dict = traintype_prop_dict.copy()
@@ -221,7 +292,18 @@ class TimeTableGraphCommon():
             self.startstationName = self.schedule_stations_dict[0]["StationName"]
             self.stationsCntMax = len(self.schedule_stations_dict)-1
             self.endstationName = self.schedule_stations_dict[self.stationsCntMax]["StationName"]
+            self.showTrainDir = self.controller.getConfigData("Bfp_show_train_dir")
+            self.trainLineFirstStationIdx = -1
+            self.trainLineLastStationIdx = 0            
+            
+            if self.showTrainDir == None:
+                self.showTrainDir = "all"
             self.dashline_pattern = "-"
+            self.tt_canvas_dropdragflg = False
+            self.edit_trainline_tag = ""
+            self.mm_canvas_coord_idx=-1
+            self.controller.edit_active = False
+            self.controller.active_id = -1
 
             # Draw the left column components
             self.drawInfoSection()
@@ -258,6 +340,8 @@ class TimeTableGraphCommon():
                 x+=delta
             else:
                 x-=delta
+        x = x*self.controller.total_scalefactor
+        y = y*self.controller.total_scalefactor
         return x,y
 
     def determine_station_xy_point(self, stationName, distance):
@@ -271,6 +355,9 @@ class TimeTableGraphCommon():
         return x,y
 
     def print_station(self, stationIdx, stationName, distance, stationkm):
+        if self.trainLineFirstStationIdx == -1:
+            self.trainLineFirstStationIdx = stationIdx
+        self.trainLineLastStationIdx = stationIdx
         s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize")
         s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No")
         self.s_font = font.Font(family="SANS_SERIF", size=int(s_labelsize))
@@ -285,24 +372,25 @@ class TimeTableGraphCommon():
             self.stationGrid[stationIdx] = x
             if s_labeldir==0:
                 yName = y - 15 * (stationIdx%2)
-                self.tt_canvas.create_rectangle(x-textwidth/2, yName-textheight/2, x+textwidth/2, yName+textheight/2, fill="white",width=0,outline="white")
+                self.tt_canvas.create_rectangle(x-textwidth/2, yName-textheight/2, x+textwidth/2, yName+textheight/2, fill="white",width=0,outline="white",tags=("Station",stationName))
                 s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="center",font=self.s_font)
             elif s_labeldir==1:
                 s_labelangle=90
                 yName = y - 15
                 #self.tt_canvas.create_rectangle(x, yName-textheight/2, x, yName+textheight/2, fill="white",width=0,outline="white")
-                s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="w",font=self.s_font)                
+                s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="w",font=self.s_font,tags=("Station",stationName))                
                 self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)
             elif s_labeldir==2:
                 yName = y - 15
                 #self.tt_canvas.create_rectangle(x, yName-textheight/2, x, yName+textheight/2, fill="white",width=0,outline="white")
-                s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="w",font=self.s_font)                
+                s_obj=self.tt_canvas.create_text(x, yName, text=stationName, anchor="w",font=self.s_font,tags=("Station",stationName))                
                 s_labelangle=45
                 self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)            
             yKm = y + 12
-            self.tt_canvas.create_text(x, yKm, text=str(f"{stationkm:.1f}"), anchor="center",font=self.s_font)
+            self.tt_canvas.create_text(x, yKm, text=str(f"{stationkm:.1f}"), anchor="center",font=self.s_font,tags=("Station",stationName))
 
     def print_hour(self, i, currentHour):
+        self.coord_null_item = self.tt_canvas.create_text(0,0, text = "0,0")
         #th_color=self.controller.getConfigData("Bfp_TH_LineColor")
         th_labelsize=self.controller.getConfigData("Bfp_TH_LineLabelSize")
         #th_labeldir=self.controller.getConfigData("Bfp_TH_LineLabelDir_No")
@@ -311,11 +399,11 @@ class TimeTableGraphCommon():
         hOffset = self.stdFont.measure(hourString) / 2 # hOffset = self.g2.getFontMetrics().stringWidth(hourString) / 2;
         if self.draw_stations_vertical:
             hourXY = (self.hourWidth * i) + self.graphHourOffset + self.graphLeft
-            self.tt_canvas.create_text(hourXY - hOffset, self.graphBottom + 20, text = hourString, anchor="w",fill="black",font=th_font)
+            self.tt_canvas.create_text(hourXY - hOffset, self.graphBottom + 20, text = hourString, anchor="w",fill="black",font=th_font,tags="Hour")
             self.tt_canvas.create_text(hourXY - hOffset, self.graphTop - 8, text = hourString, anchor="w",fill="black",font=th_font)
         else:
             hourXY = (self.hourWidth * i) + self.graphHourOffset + self.graphTop
-            self.tt_canvas.create_text(self.graphLeft-10,hourXY, text = hourString, anchor="e",fill="black",font=th_font)
+            self.tt_canvas.create_text(self.graphLeft-10,hourXY, text = hourString, anchor="e",fill="black",font=th_font,tags="Hour")
         self.hour_to_XY_Map[currentHour] = hourXY
         self.hourGrid.append(hourXY);
         if (i == 0):
@@ -339,8 +427,8 @@ class TimeTableGraphCommon():
                 timeposhour = self.lastHourXY
             else:
                 timeposhour = self.firstHourXY
-        return timeposhour      
-
+        return timeposhour
+    
     def drawInfoSection(self):
         scheduleName = self.schedule_dict.get("Name","")
         self.tt_canvas.create_text(10, 10, text="ZUSI Bildfahrplan", font=self.bigFont, anchor="nw")
@@ -422,7 +510,7 @@ class TimeTableGraphCommon():
                 else:
                     if s_linedashed !="no line":
                         objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color,dash=s_linedashed)
-                self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx), key="",button_1=True)
+                self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx),button_1=True)
             for x in self.hourGrid:
                 if th_linedashed !="no line":
                     self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color,dash=th_linedashed)
@@ -450,7 +538,7 @@ class TimeTableGraphCommon():
                 else:
                     if s_linedashed  !="no line":
                         objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=s_width, fill=s_color,dash=s_linedashed)
-                    self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx), key="",button_1=True)
+                    self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx),button_1=True)
 
 #     * Create the train line for each train with labels.  Include times if
 #     * selected.
@@ -474,8 +562,8 @@ class TimeTableGraphCommon():
             "Bfp_TrainTypeLabelSize": 10
         }
         self.default_trainprop = self.canvas_traintype_prop_dict.get("*",const_default_trainprop)
-        for trainidx in self.schedule_trains_dict:
-            self.process_train(trainidx)
+        for self.trainIdx in self.schedule_trains_dict:
+            self.process_train(self.trainIdx)
         self.controller.set_statusmessage("") 
 
     def process_train(self,trainidx):
@@ -502,11 +590,13 @@ class TimeTableGraphCommon():
         self.trainLineStopMiddleIdx=int(self.trainLineStopCnt/2)
         if self.trainLineStopMiddleIdx < 0:
             self.trainLineStopMiddleIdx = 0
-        self.trainLineFirstStop_Flag = True;
-        self.trainLineLastStop_Flag = False;
+        self.trainLineFirstStop_Flag = True
+        self.trainLineLastStop_Flag = False
         #self.trainLinePrevStop_dict = None
         self.drawTrainName_Flag = self.TrainLabelPos in [0,1,2,3]
         self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan für Zug - "+self.trainName)
+        self.trainLine_dict = []
+        self.trainLine_dict_idx = -1        
         self.process_trainStops()
         return
 
@@ -548,12 +638,16 @@ class TimeTableGraphCommon():
         seconds = "{:02d}".format(sec2)
         if mode ==  "begin" :
             mode_txt = "Start"
+            timetag = "DepartTime"
         elif mode == "arrive":
             mode_txt = "Ankunft"
+            timetag = "ArriveTime"
         elif mode == "depart":
             mode_txt = "Abfahrt"
+            timetag = "DepartTime"
         elif mode == "end":
             mode_txt = "Ziel"
+            timetag = "ArriveTime"
         else:
             return        
         if self.draw_stations_vertical:
@@ -582,14 +676,99 @@ class TimeTableGraphCommon():
                     anchor="sw"
                 else:
                     anchor="ne"
-        trainTime_objid = self.tt_canvas.create_text(x , y, text = minutes, anchor=anchor,activefill="red",font=self.TrainMinuteFont)
+        trainTime_objid = self.tt_canvas.create_text(x , y, text = minutes, anchor=anchor,activefill="red",font=self.TrainMinuteFont,tags=(self.trainName,self.stationName,timetag,"LI_"+str(self.trainLine_dict_idx),"S_"+str(self.stopIdx),self.direction))
+        #self.bind_right_click_menu_to_trainline(trainTime_objid)
         if self.trainLineName == None:
             self.trainLineName = ""
         if self.signal != None and self.signal != "":
             signal_str = "("+self.signal+")"
         else:
             signal_str = ""
-        self.controller.ToolTip_canvas(self.tt_canvas, trainTime_objid, text=hours+":"+minutes+":"+seconds+"\nZug: "+self.trainName+"\n"+mode_txt+" "+self.stationName+signal_str + "\n"+self.trainLineName, key=self.trainName,button_1=True)
+        self.controller.ToolTip_canvas(self.tt_canvas, trainTime_objid, text=hours+":"+minutes+":"+seconds+"\nZug: "+self.trainName+"\n"+mode_txt+" "+self.stationName+signal_str + "\n"+self.trainLineName, button_1=True)
+        self.tt_canvas.tag_bind(trainTime_objid,"<Button-1>" ,lambda e,Object=trainTime_objid:self.MouseButton1(e,Object))
+        self.tt_canvas.tag_bind(trainTime_objid,"<Control-1>" ,lambda e,Object=trainTime_objid:self.MouseButton1(e,Object))
+        self.tt_canvas.tag_bind(trainTime_objid,"<Alt-1>" ,lambda e,Object=trainTime_objid:self.MouseButton1(e,Object,seconds_flag=True))
+        self.tt_canvas.tag_bind(trainTime_objid,"<ButtonRelease 1>",lambda e,Object=trainTime_objid:self.MouseRelease1())
+        # Event für Mausbewegung
+        self.tt_canvas.tag_bind(trainTime_objid,"<B1-Motion>",lambda e,Object=trainTime_objid:self.MouseMove(e,Object))
+        self.tt_canvas.tag_bind(trainTime_objid,"<Control-B1-Motion>",lambda e,Object=trainTime_objid:self.MouseMove(e,Object))
+        self.tt_canvas.tag_bind(trainTime_objid,"<Alt-B1-Motion>",lambda e,Object=trainTime_objid:self.MouseMove(e,Object))
+
+    def get_trainline_id(self, trainName,stationName):
+        id_list = self.tt_canvas.find_withtag("L_"+trainName)
+        #print(id_list)
+        return id_list[0]
+    
+    def get_trainStationTime_id(self, trainName,stationName, stoptimemode):
+        id_list = self.tt_canvas.find_withtag(trainName+"&&"+stationName+"&&"+stoptimemode)
+        if len(id_list) == 0:
+            return -1
+        else:
+            return id_list[0]    
+    
+    def determine_time_value(self,time_str):
+        time_min = 0
+        if time_str != "":
+            time_obj = datetime.strptime(time_str, '%Y-%m-%d %H:%M:%S')
+            time_min = time_obj.hour * 60 + time_obj.minute + time_obj.second/60        
+        return time_min
+                
+    def determine_time_str(self,time,timeformat="hh:mm:ss"):
+        try:
+            if timeformat == "hh:mm:ss":
+                self.mm_minutes = int(time % 60)
+                minutes = "{:02d}".format(self.mm_minutes)
+                self.mm_hours = int(time/60)
+                hours = "{:02d}".format(self.mm_hours)
+                sec1 = time-int(time)
+                self.mm_seconds = round(sec1*60)
+                seconds = "{:02d}".format(self.mm_seconds)
+                return hours+":"+minutes+":"+seconds
+            elif timeformat == "hh:mm":
+                self.mm_minutes = int(time % 60)
+                minutes = "{:02d}".format(self.mm_minutes)
+                self.mm_hours = int(time/60)
+                hours = "{:02d}".format(self.mm_hours)
+                return hours+":"+minutes
+            elif timeformat == "mm":
+                self.mm_minutes = int(time % 60)
+                minutes = "{:02d}".format(self.mm_minutes)
+                return minutes
+            else:
+                return " "
+        except:
+            print(time)
+            return " "
+        
+    def delete_train(self,trainName):
+        self.tt_canvas.delete(trainName)
+            
+    def get_train_idx_from_Name(self,trainName,scalefactor=1):
+        for trainIdx in self.schedule_trains_dict:
+            train = self.schedule_trains_dict.get(trainIdx,{})
+            search_trainType = train.get("TrainType","X-Deko")
+            search_trainName = search_trainType + train.get("TrainName","0000")
+            if search_trainName == trainName:
+                if train.get("Stops",{}) != {}:
+                    return trainIdx
+        return -1
+    
+    def get_trainline_station_data(self,trainName,stationName):
+        self.trainIdx = self.get_train_idx_from_Name(trainName)
+        train = self.schedule_trains_dict.get(self.trainIdx,{})
+        search_stops = train.get("Stops",{})
+        for stopIdx,stop_dict in search_stops.items():
+            station_dict = self.schedule_stations_dict.get(stop_dict.get("StationIdx"))
+            search_stationName = station_dict.get("StationName")
+            if search_stationName == stationName:
+                return stopIdx,stop_dict
+            
+    def get_trainline_stationidx_data(self,trainName,stopidx):
+        self.trainIdx = self.get_train_idx_from_Name(trainName)
+        train = self.schedule_trains_dict.get(self.trainIdx,{})
+        search_stops = train.get("Stops",{})
+        stop_dict = search_stops.get(stopidx,{})
+        return stop_dict    
   
     def determine_DirectionofTravel(self):
         if (self.trainLineStopCnt == 1):
@@ -628,6 +807,8 @@ class TimeTableGraphCommon():
 
     def setBegin(self, stop,stationName):
         self.determine_DirectionofTravel()
+        if self.showTrainDir != "all" and self.showTrainDir != self.direction:
+            return
         self.firstStationName = stationName
         if not self.check_time_in_range(self.arriveTime):
             return                
@@ -640,19 +821,23 @@ class TimeTableGraphCommon():
         if y == None:
             return
         self.trainLine_dict = [x, y]
+        self.trainLine_dict_idx = 0
         self.arriveTime = stop.get("ArriveTime",0)
         if not(self.trainLineLastStop_Flag) and show_arrive_time:
             self.drawTrainTime(self.arriveTime, "begin", x, y)
         # Check for stop duration before depart
         self.departTime = stop.get("DepartTime",0)
-        if (self.departTime - self.arriveTime > 0):
-            x,y = self.determine_xy_point(stop,self.departTime)
-            self.trainLine_dict.extend([x, y])
-            if not (self.trainLineLastStop_Flag):
-                self.drawTrainTime(self.departTime, "depart", x, y)
+        #if (self.departTime - self.arriveTime != 0):
+        x,y = self.determine_xy_point(stop,self.departTime)
+        self.trainLine_dict.extend([x, y])
+        self.trainLine_dict_idx += 1
+        if not (self.trainLineLastStop_Flag):
+            self.drawTrainTime(self.departTime, "depart", x, y)
 
     def drawLine(self, stop):
         self.determine_DirectionofTravel()
+        if self.showTrainDir != "all" and self.showTrainDir != self.direction:
+            return        
         y=None
         if self.arriveTime > 0:
             if self.check_time_in_range(self.arriveTime):
@@ -661,8 +846,10 @@ class TimeTableGraphCommon():
                     return
                 if self.direction=="down":
                     self.trainLine_dict.extend([xa, ya])
+                    self.trainLine_dict_idx += 1
                 else:              
                     self.trainLine_dict.extend([xa, ya])
+                    self.trainLine_dict_idx += 1
                 self.drawTrainTime(self.arriveTime, "arrive", xa, ya)
                 if (len(self.trainLine_dict)>3) and ya!=None:
                     self.draw_trainName_parallel(self.trainName, self.trainLine_dict[-4],self.trainLine_dict[-3],xa, ya)
@@ -671,6 +858,7 @@ class TimeTableGraphCommon():
                     if yd==None:
                         return
                     self.trainLine_dict.extend([xd, yd])
+                    self.trainLine_dict_idx += 1
                     if not self.trainLineLastStop_Flag:
                         self.drawTrainTime(self.departTime, "depart", xd, yd)
         else:
@@ -679,6 +867,7 @@ class TimeTableGraphCommon():
                 if yd==None:
                     return
                 self.trainLine_dict.extend([xd, yd])
+                self.trainLine_dict_idx += 1
                 if not self.trainLineLastStop_Flag or self.arriveTime == 0:
                     self.drawTrainTime(self.departTime, "depart", xd, yd)
                 if (len(self.trainLine_dict)>3) and yd!=None:
@@ -718,10 +907,13 @@ class TimeTableGraphCommon():
                 if y==None:
                     logging.debug("SetEnd Error: %s %s",self.trainType+self.trainName,repr(stop))
                     return
-                self.trainLine_dict.extend([x, y])
+                if self.showTrainDir == "all" or self.showTrainDir == self.direction:
+                    self.trainLine_dict.extend([x, y])
+                    self.trainLine_dict_idx += 1
                 if self.TrainLineDashed != "no line":
-                    train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,dash=self.TrainLineDashed)
-                self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
+                    train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,dash=self.TrainLineDashed,tags=(self.trainName,"L_"+self.trainName,str(self.trainIdx)))
+                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, button_1=True)
+                    self.bind_right_click_menu_to_trainline(train_line_objid)
             arrowwidth = self.trainLineWidth
             if arrowwidth<4:
                 arrowwidth=4
@@ -733,10 +925,10 @@ class TimeTableGraphCommon():
                     else:
                         arrow_delta = -10
                     if self.draw_stations_vertical:
-                        train_line_out_objid = self.tt_canvas.create_line([x,y,x,y+arrow_delta],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
+                        train_line_out_objid = self.tt_canvas.create_line([x,y,x,y+arrow_delta],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="last",arrowshape=(10,10,arrowwidth),tags=(self.trainName))
                     else:
-                        train_line_out_objid = self.tt_canvas.create_line([x,y,x+arrow_delta,y],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="last",arrowshape=(10,10,arrowwidth))
-                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_out_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nNach "+self.trainOutgoingStation, key=self.trainName,button_1=True)
+                        train_line_out_objid = self.tt_canvas.create_line([x,y,x+arrow_delta,y],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="last",arrowshape=(10,10,arrowwidth),tags=(self.trainName))
+                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_out_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nNach "+self.trainOutgoingStation, button_1=True)
                 
             if self.trainIncomingStation!="": # draw incoming arrow
                 startstationname = self.firstStationName
@@ -749,10 +941,10 @@ class TimeTableGraphCommon():
                     x = self.trainLine_dict[0]
                     y = self.trainLine_dict[1]                    
                     if self.draw_stations_vertical:
-                        train_line_in_objid = self.tt_canvas.create_line([x,y,x,y-arrow_delta],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
+                        train_line_in_objid = self.tt_canvas.create_line([x,y,x,y-arrow_delta],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="first",arrowshape=(10,10,arrowwidth),tags=(self.trainName))
                     else:
-                        train_line_in_objid = self.tt_canvas.create_line([x,y,x-arrow_delta,y],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="first",arrowshape=(10,10,arrowwidth))
-                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_in_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nVon "+self.trainIncomingStation, key=self.trainName,button_1=True)                
+                        train_line_in_objid = self.tt_canvas.create_line([x,y,x-arrow_delta,y],fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,arrow="first",arrowshape=(10,10,arrowwidth),tags=(self.trainName))
+                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_in_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nVon "+self.trainIncomingStation, button_1=True)                
         except BaseException as e:
             logging.debug("SetEnd Error %s %s",self.trainType+self.trainName+"-"+repr(self.trainLine_dict),e)
             return  
@@ -772,8 +964,8 @@ class TimeTableGraphCommon():
         segment_len = segment.norm()
         if segment_len > trainName_len+15:
             if self.drawTrainName_Flag:
-                txt = self.tt_canvas.create_text(*(mid_point), text=trainName,activefill="red",font=self.TrainLabelFont,anchor="s")
-                self.controller.ToolTip_canvas(self.tt_canvas, txt, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, key=self.trainName,button_1=True)
+                txt = self.tt_canvas.create_text(*(mid_point), text=trainName,activefill="red",font=self.TrainLabelFont,anchor="s",tags=(self.trainName))
+                self.controller.ToolTip_canvas(self.tt_canvas, txt, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, button_1=True)
                 if self.TrainLabelPos!=0:
                     self.drawTrainName_Flag=False
                 if y0 != y1:
@@ -811,10 +1003,11 @@ class TimeTableGraphCommon():
             return -1
         return self.schedule_stationIdx_write_next - 1
 
-    def enter_schedule_trainLine_data(self,trainNumber,trainType,ZugLauf,ZugLok):
+    def enter_schedule_trainLine_data(self,trainNumber,trainType,ZugLauf,ZugLok,trn_filepathname=""):
         color = self.canvas_traintype_prop_dict.get(trainType,"black")
         width = self.trainType_to_Width_dict.get(trainType,"1")
         self.schedule_trains_dict[self.schedule_trainIdx_write_next] = {"TrainName"     : trainNumber,
+                                                                        "trn_filename"  : trn_filepathname,
                                                                         "TrainType"     : trainType,
                                                                         "TrainLineName" : ZugLauf,
                                                                         "TrainEngine"   : ZugLok,
@@ -852,10 +1045,12 @@ class TimeTableGraphCommon():
             else:
                 arriveTime = FplAnk_min
             departTime = FplAbf_min
-            trainstops_dict[trainstop_idx] = {"StationIdx" : station_idx,
-                                              "ArriveTime" : arriveTime,
-                                              "DepartTime" : departTime,
-                                              "Signal"     : signal
+            trainstops_dict[trainstop_idx] = {"StationIdx"     : station_idx,
+                                              "ArriveTime"     : arriveTime,
+                                              "ArriveTimeOrig" : arriveTime,
+                                              "DepartTime"     : departTime,
+                                              "DepartTimeOrig" : departTime,
+                                              "Signal"         : signal
                                            }
         return trainstop_idx + 1
         
@@ -1012,7 +1207,7 @@ class TimeTableGraphCommon():
             self.enter_train_outgoing_station(train_idx, FplName)             
         return True
     
-    def convert_trn_dict_to_schedule_dict(self, zusi_trn_dict):
+    def convert_trn_dict_to_schedule_dict(self, zusi_trn_dict,trn_filepathname=""):
         try:
             if zusi_trn_dict=={}:
                 return
@@ -1027,7 +1222,7 @@ class TimeTableGraphCommon():
                 return
             fpn_dateiname = Datei_fpn_dict.get("@Dateiname","")
             self.schedule_dict["Name"] = fpn_dateiname
-            train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok)
+            train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname)
             train_stop_idx = 0
             FplZeile_list = zusi_trn_dict.get("FahrplanEintrag",{})
             if FplZeile_list=={}:
@@ -1072,13 +1267,393 @@ class TimeTableGraphCommon():
                 
         except BaseException as e:
             logging.debug("FplZeile conversion Error %s %s",ZugGattung+ZugNummer+"-"+repr(FplZeile_dict),e)
-                                             
-        return    
+        return
+    
+    def MouseButton1(self,mouse,cvobject,seconds_flag=False):
+        #~~~Setzt die Bewegungsflag
+        if self.edit_trainline_tag == self.tt_canvas.gettags(cvobject)[0]:
+            trainName = self.tt_canvas.gettags(cvobject)[0]
+            stationName = self.tt_canvas.gettags(cvobject)[1]
+            self.mm_stoptimemode = self.tt_canvas.gettags(cvobject)[2]
+            trainLine_idx_str = self.tt_canvas.gettags(cvobject)[3]
+            stopIdx = self.tt_canvas.gettags(cvobject)[4]
+            trainLine_idx_split = trainLine_idx_str.split("_")
+            self.mm_trainLine_idx = int(trainLine_idx_split[1])
+            self.tt_canvas.tag_raise(cvobject,None)
+            if trainName == None and stationName == None:
+                return
+            stopIdx,self.mm_stop_dict = self.get_trainline_station_data(trainName,stationName)
+            #if mode =="depart":
+            #    self.mm_stoptimemode="DepartTime"
+            #else:
+            #    self.mm_stoptimemode="ArriveTime"
+            self.mm_currtime_int = self.mm_stop_dict[self.mm_stoptimemode]
+            self.mm_currtime_str = self.determine_time_str(self.mm_currtime_int)
+            x1,y1 = self.tt_canvas.coords(cvobject)
+            #xc1 = self.tt_canvas.canvasx(x1)
+            xc1 = x1
+            #yc1 = self.tt_canvas.canvasy(y1)
+            yc1 = y1
+            self.tt_canvas_cvobject = cvobject
+            self.tt_canvas.itemconfigure(self.tt_canvas_cvobject,text=self.mm_currtime_str,font=self.largeFont,fill="red")
+            self.tt_canvas_dropdragflg = True
+            self.mm_canvas_x_org = xc1
+            self.mm_canvas_y_org = yc1
+            self.mm_canvas_t_org = self.mm_currtime_int
+            self.mm_trainlineid = self.get_trainline_id(trainName,stationName)
+            self.mm_canvas_coord_list = self.tt_canvas.coords(self.mm_trainlineid)
+            self.mm_canvas_coord_list_org = self.mm_canvas_coord_list.copy()
+            self.mm_canvas_coord_idx = self.mm_trainLine_idx
+            self.mm_stopIdx = stopIdx
+            self.mm_trainName = trainName
+            self.mm_stationName = stationName
+            self.mm_seconds_flag = seconds_flag
+            
+    def update_stop_time(self,stop_dict,delta_t):
+        arriveTime = stop_dict["ArriveTime"]
+        if arriveTime >0:
+            stop_dict["ArriveTime"] = delta_t + arriveTime
+        departTime = stop_dict["DepartTime"]
+        if departTime > 0:
+            stop_dict["DepartTime"] = delta_t + departTime        
+                
+    def update_mm_stop_times(self,stopIdx,stopTimeMode):
+        delta_t = self.mm_currtime_int - self.mm_canvas_t_org
+        self.update_mm_stop_times_delta(delta_t, stopTimeMode)
+
+    def update_mm_stop_times_delta(self, delta_t, stopTimeMode):
+        train = self.schedule_trains_dict.get(self.trainIdx,{})
+        stops_dict = train.get("Stops",{})       
+        if self.edit_trainline_mode == "complete":
+            for idx in range(0,len(stops_dict)):
+                stop_dict = stops_dict[idx]
+                self.update_stop_time(stop_dict,delta_t)
+        elif self.edit_trainline_mode == "part":
+            for idx in range(self.mm_stopIdx,len(stops_dict)):
+                stop_dict = stops_dict[idx]
+                self.update_stop_time(stop_dict,delta_t)
+        else:
+            stop_dict = stops_dict[self.mm_stopIdx]
+            stop_dict[stopTimeMode] += delta_t
+
+    def MouseRelease1(self):
+        if self.tt_canvas_dropdragflg:
+            self.tt_canvas_dropdragflg = False
+            #minutes = "{:02d}".format(int(self.mm_currtime_int % 60))
+            #self.tt_canvas.itemconfigure(self.tt_canvas_cvobject,text=minutes)
+            self.update_mm_stop_times(self.mm_stopIdx,self.mm_stoptimemode)
+            #self.mm_stop_dict[self.mm_stoptimemode] = self.mm_currtime_int
+            self.delete_train(self.mm_trainName)
+            trainidx = self.get_train_idx_from_Name(self.mm_trainName)
+            self.process_train(trainidx)
+            self.tt_canvas_cvobject = self.get_trainStationTime_id(self.mm_trainName,self.mm_stationName,self.mm_stoptimemode)
+            try:
+                self.tt_canvas.itemconfigure(self.edit_trainline_tag,font=self.largeFont,fill="red")
+            except:
+                pass
+            self.tt_canvas.itemconfigure(self.tt_canvas_cvobject,text=self.mm_currtime_str)
+
+    def MouseMove(self,mouse,cvobject):
+        if self.tt_canvas_dropdragflg == True:
+            #x1 = mouse.x
+            y1 = mouse.y
+            x0,y0 = self.tt_canvas.coords(cvobject)
+            #xc0 = self.tt_canvas.canvasx(x0)
+            xc0 = x0
+            yc1 = self.tt_canvas.canvasy(y1)
+            scaled_size_minute = self.sizeMinute *self.controller.total_scalefactor
+            delta_y = yc1-self.mm_canvas_y_org
+            if self.mm_seconds_flag:
+                delta_y_scaled = delta_y
+            else:
+                delta_y_scaled = int(delta_y / scaled_size_minute) * scaled_size_minute
+            #print(delta_y, delta_y_scaled)
+            yc1 = self.mm_canvas_y_org + delta_y_scaled
+            delta_t = delta_y / scaled_size_minute
+            if self.mm_seconds_flag:
+                self.mm_currtime_int = self.mm_canvas_t_org + delta_t
+            else:
+                self.mm_currtime_int = int(self.mm_canvas_t_org + delta_t)    
+            self.mm_currtime_str = self.determine_time_str(self.mm_currtime_int)
+            self.tt_canvas.coords(cvobject,xc0,yc1)
+            self.tt_canvas.itemconfigure(cvobject,text=self.mm_currtime_str)
+            if self.edit_trainline_mode == "complete":
+                point_no = int(len(self.mm_canvas_coord_list)/2)
+                for point in range(0,point_no):
+                    self.mm_canvas_coord_list[point*2+1]= self.mm_canvas_coord_list_org[point*2+1] + delta_y_scaled
+            elif self.edit_trainline_mode == "part":
+                point_no = int(len(self.mm_canvas_coord_list)/2)
+                for point in range(self.mm_canvas_coord_idx,point_no):
+                    self.mm_canvas_coord_list[point*2+1]= self.mm_canvas_coord_list_org[point*2+1] + delta_y_scaled
+            else:
+                self.mm_canvas_coord_list[self.mm_canvas_coord_idx*2+1] = yc1
+            #print(self.mm_canvas_coord_list, self.mm_trainlineid)
+            self.tt_canvas.coords(self.mm_trainlineid,self.mm_canvas_coord_list)
+            self.tt_canvas.update_idletasks()    
+    
+    def edit_bindings(self):
+        #self.ttpage.bind("<Home>", self.onHome)
+        self.ttpage.frame.bind("<Up>", self.onArrowUp)
+        self.ttpage.frame.bind("<Down>", self.onArrowDown)
+        self.ttpage.frame.bind("<Left>", self.onArrowLeft)
+        self.ttpage.frame.bind("<Right>", self.onArrowRight)
+        self.ttpage.frame.bind("<Shift-Up>", self.onShiftArrowUp)
+        self.ttpage.frame.bind("<Shift-Down>", self.onShiftArrowDown)        
+        self.ttpage.frame.bind("<Alt-Up>", self.onALTArrowUp)
+        self.ttpage.frame.bind("<Alt-Down>", self.onALTArrowDown)
+        
+    def edit_unbind(self):
+        self.ttpage.frame.unbind("<Up>")
+        self.ttpage.frame.unbind("<Down>")
+        self.ttpage.frame.unbind("<Left>")
+        self.ttpage.frame.unbind("<Right>")
+        self.ttpage.frame.unbind("<Shift-Up>")
+        self.ttpage.frame.unbind("<Shift-Down>")        
+        self.ttpage.frame.unbind("<Control-Up>")
+        self.ttpage.frame.unbind("<Control-Down>") 
+        self.ttpage.canvas_bindings()
+        
+    def process_onarrow(self,delta):
+        if not self.controller.edit_active:
+            return
+        self.update_mm_stop_times_delta(delta,self.mm_stoptimemode)
+        #self.mm_stop_dict[self.mm_stoptimemode] = self.mm_currtime_int
+        self.delete_train(self.mm_trainName)
+        trainidx = self.get_train_idx_from_Name(self.mm_trainName)
+        self.process_train(trainidx)
+        self.mm_currtime_int = self.mm_stop_dict[self.mm_stoptimemode]
+        self.mm_currtime_str = self.determine_time_str(self.mm_currtime_int)
+        self.tt_canvas_cvobject = self.get_trainStationTime_id(self.mm_trainName,self.mm_stationName,self.mm_stoptimemode)
+        #print(self.mm_trainName,self.mm_stationName,cvobject)
+        try:
+            self.tt_canvas.itemconfigure(self.edit_trainline_tag,font=self.largeFont,fill="red")
+        except:
+            pass
+        self.tt_canvas.itemconfigure(self.tt_canvas_cvobject,text=self.mm_currtime_str)        
+        #self.tt_canvas.itemconfigure(cvobject,text=self.mm_currtime_str,font=self.largeFont,fill="red")            
+        
+        
+    def onArrowDown(self, event):
+        self.process_onarrow(1)
+        
+    def onArrowUp(self, event):
+        self.process_onarrow(-1)
+    
+    def onShiftArrowDown(self, event):
+        self.process_onarrow(1/6)
+    
+    def onShiftArrowUp(self, event):
+        self.process_onarrow(-1/6)
+    
+    def onALTArrowDown(self, event):
+        self.process_onarrow(1/60)
+    
+    def onALTArrowUp(self, event):
+        self.process_onarrow(-1/60)
+        
+    def onArrowLeft(self, event):
+        self.active_next_stop_time(direction=1)
+    
+    def onArrowRight(self, event):
+        self.active_next_stop_time(direction=-1)
+    
+    def active_next_stop_time(self,direction=-1):
+        return
+        
+        self.delete_train(self.mm_trainName)
+        trainidx = self.get_train_idx_from_Name(self.mm_trainName)
+        self.process_train(trainidx)        
+        if direction==1:
+            if self.mm_stoptimemode == "ArriveTime":
+                self.mm_stoptimemode = "DepartTime"
+            else:
+                self.mm_stopIdx += 1
+                if self.mm_stopIdx > self.trainLineLastStopIdx: #self.mm_stopcnt
+                    self.mm_stopIdx = self.trainLineLastStopIdx
+                self.mm_stoptimemode = "ArriveTime"
+        else:
+            if self.mm_stoptimemode == "DepartTime":
+                self.mm_stoptimemode = "ArriveTime"
+            else:
+                self.mm_stopIdx -= 1
+                if self.mm_stopIdx <self.trainLineFirstStopIdx:
+                    self.mm_stopIdx = self.trainLineFirstStopIdx
+                self.mm_stoptimemode = "DepartTime"            
+        self.mm_stop_dict = self.get_trainline_stationidx_data(self.mm_trainName,self.mm_stopIdx)
+        self.mm_stationName = self.get_stationName(self.mm_stop_dict.get("StationIdx",0))
+        currtime = self.mm_stop_dict[self.mm_stoptimemode]
+        if currtime == 0:
+            self.active_next_stop_time(direction)
+        else:
+            self.mm_currtime_int = currtime
+            self.mm_currtime_str = self.determine_time_str(self.mm_currtime_int)
+            cvobject = self.get_trainStationTime_id(self.mm_trainName,self.mm_stationName,self.mm_stoptimemode)
+            if cvobject!=-1:
+                #print(self.mm_trainName,self.mm_stationName,cvobject)
+                try:
+                    self.tt_canvas.itemconfigure(cvobject,text=self.mm_currtime_str,font=self.largeFont,fill="red")            
+                except:
+                    pass
+            else:
+                self.active_next_stop_time(direction)                
+            
+    def get_stationName_from_StopDict(self,stop_dict):
+        station_idx = stop_dict.get("StationIdx")
+        return self.get_stationName(station_idx)
+    
+    def determine_first_and_last_stop_idx(self):
+        self.trainLineFirstStopIdx = -1
+        self.trainIdx = self.get_train_idx_from_Name(self.mm_trainName)
+        train = self.schedule_trains_dict.get(self.trainIdx,{})
+        search_stops = train.get("Stops",{})
+        #search first stop from left:
+        for stationIdx in self.schedule_stations_dict:
+                station = self.schedule_stations_dict.get(stationIdx,{})
+                stationName = station.get("StationName","")
+                for stopIdx,stop_dict in search_stops.items():
+                    stopstationName = self.get_stationName_from_StopDict(stop_dict)
+                    if stationName == stopstationName:
+                        if self.trainLineFirstStopIdx == -1:
+                            self.trainLineFirstStopIdx = stopIdx
+                        self.trainLineLastStopIdx = stopIdx
+        if self.trainLineFirstStopIdx<=self.trainLineFirstStopIdx:
+            save_idx = self.trainLineFirstStopIdx
+            self.trainLineFirstStopIdx = self.trainLineLastStopIdx
+            self.trainLineLastStopIdx = save_idx
+        return 
+    
+    def edit_train_schedule(self,objectid,mode):
+        #print("edit_train_schedule %s %s",objectid,mode,self.tt_canvas.gettags(objectid))
+        self.edit_bindings()
+        self.controller.edit_active = True
+        self.controller.active_id = objectid
+        self.edit_trainline_tag = self.tt_canvas.gettags(objectid)[0]
+        self.controller.edit_trainline_tag = self.edit_trainline_tag
+        self.edit_trainline_mode = mode
+        self.mm_stoptimemode = "DepartTime"
+        self.mm_trainName = self.edit_trainline_tag
+        self.determine_first_and_last_stop_idx()
+        self.mm_stopIdx = 0
+        self.mm_stationName = self.get_stationName(self.mm_stopIdx)
+        self.mm_stop_dict = self.get_trainline_stationidx_data(self.mm_trainName,self.mm_stopIdx)
+        try:
+            self.tt_canvas.itemconfigure(self.edit_trainline_tag,font=self.largeFont,fill="red")
+        except:
+            pass
+        
+    def edit_train_schedule_stop(self):
+        #print("edit_train_schedule %s %s",objectid,mode,self.tt_canvas.gettags(objectid))
+        self.controller.edit_active = False
+        self.controller.active_id = -1
+        self.delete_train(self.mm_trainName)
+        trainidx = self.get_train_idx_from_Name(self.mm_trainName)
+        self.process_train(trainidx)
+        self.edit_trainline_tag = ""
+        self.controller.edit_trainline_tag = ""
+        self.edit_trainline_mode = ""
+        self.edit_unbind()
+        
+    def edit_stop_original(self,objectid):
+        #print("edit_stop_original",self.controller.edit_trainline_tag)
+        trainIdx = int(self.tt_canvas.gettags(objectid)[2])
+        train_dict = self.schedule_trains_dict.get(trainIdx,{})
+        stops_dict = train_dict.get("Stops",{})
+        for stopIdx in stops_dict:
+            stop_dict = stops_dict.get(stopIdx,{})
+            stop_dict["ArriveTime"] =  stop_dict["ArriveTimeOrig"]
+            stop_dict["DepartTime"] =  stop_dict["DepartTimeOrig"]
+        self.delete_train(self.mm_trainName)
+        trainidx = self.get_train_idx_from_Name(self.mm_trainName)
+        self.process_train(trainidx)
+        self.controller.edit_active = False
+        self.controller.active_id = -1
+        self.edit_trainline_tag = ""
+        self.controller.edit_trainline_tag = ""
+        self.edit_trainline_mode = ""
+        self.edit_unbind()
+    
+    def search_stop_for_betrst(self,train_dict, betrst):
+        stops_dict = train_dict.get("Stops",{})
+        for stopIdx in stops_dict:
+            stop_dict = stops_dict.get(stopIdx,{})
+            stationIdx = stop_dict.get("StationIdx",-1)
+            stationName = self.get_stationName(stationIdx)
+            if stationName == betrst:
+                return stop_dict
+        return {}
+    
+    def calculate_updated_time(self,datetime_str,time_delta):
+        newtime_str = datetime_str
+        if datetime_str != None:
+            if time_delta != 0:
+                date_str, time_str = datetime_str.split(" ")
+                time_min = self.determine_time_value(datetime_str)
+                newtime_min = time_min + time_delta
+                newtime_str = date_str+" "+ self.determine_time_str(newtime_min)
+                return newtime_str
+            else:
+                return None
+        else:
+            return None
+    
+    def update_trn_xml_data(self,FahrplanEintrag_tag, train_dict):
+        betrst = FahrplanEintrag_tag.get('Betrst')
+        if self.update_trn_old_betrst != betrst:
+            self.update_trn_main_entry_found = False
+            self.update_trn_old_betrst = betrst
+        ank = FahrplanEintrag_tag.get('Ank')
+        abf = FahrplanEintrag_tag.get('Abf')
+        #print(betrst,ank,abf)
+        stop_dict = self.search_stop_for_betrst(train_dict,betrst)
+        if stop_dict == {}:
+            return
+        ArriveTime = stop_dict.get("ArriveTime",0)
+        ArriveTimeOrig = stop_dict.get("ArriveTimeOrig",0)
+        ArriveTimedelta = ArriveTime - ArriveTimeOrig
+        DepartTime = stop_dict.get("DepartTime","")
+        DepartTimeOrig = stop_dict.get("DepartTimeOrig","")
+        DepartTimedelta = DepartTime - DepartTimeOrig
+        if ank != None:
+            self.update_trn_main_entry_found = True
+            new_ank = self.calculate_updated_time(ank,ArriveTimedelta)
+            if new_ank!=None:
+                FahrplanEintrag_tag.set("Ank",new_ank)
+                self.edit_update_logfile.write(betrst + " Update Ankunft:" + ank + " ==> " + new_ank + "\n")
+                stop_dict["ArriveTimeOrig"] = ArriveTime
+        if self.update_trn_main_entry_found or (ArriveTime == 0):
+            new_abf = self.calculate_updated_time(abf,DepartTimedelta)
+        else:
+            new_abf = self.calculate_updated_time(abf,ArriveTimedelta)
+        if new_abf!=None:
+            FahrplanEintrag_tag.set("Abf",new_abf)
+            self.edit_update_logfile.write(betrst + " Update Abfahrt:" + abf + " ==> " + new_abf + "\n")
+            stop_dict["DepartTimeOrig"] = DepartTime
+    
+    def edit_export_to_trn(self,objectid):
+        trainIdx = int(self.tt_canvas.gettags(objectid)[2])
+        train_dict = self.schedule_trains_dict.get(trainIdx,{})
+        trn_filepathname = train_dict.get("trn_filename","")
+        trn_tree = ET.parse(trn_filepathname)
+        trn_tree.write(trn_filepathname+".bak",encoding="UTF-8",xml_declaration=True)
+        trn_root = trn_tree.getroot()
+        with open(trn_filepathname+".update.log", 'w', encoding='utf-8') as self.edit_update_logfile:
+            self.edit_update_logfile.write(trn_filepathname+"\n")
+            self.update_trn_old_betrst = ""
+            for FahrplanEintrag_tag in trn_root.findall('Zug/FahrplanEintrag'):
+                self.update_trn_xml_data(FahrplanEintrag_tag,train_dict)
+
+        trn_tree.write(trn_filepathname,encoding="UTF-8",xml_declaration=True)
+        self.controller.set_statusmessage("Änderungen in exportiert in Datei: "+trn_filepathname)
+        
+    def edit_clone_schedule(self,objectid):
+        print("edit_clone_schedule",self.controller.edit_trainline_tag)
+        pass
 
 class Timetable_main(Frame):
 
-    def __init__(self,controller,canvas):
+    def __init__(self,controller,canvas,parent):
         super().__init__()
+        self.ttpage = parent
         self.controller = controller
         self.zusi_master_timetable_dict = {}
         self.canvas = canvas
@@ -1088,6 +1663,21 @@ class Timetable_main(Frame):
         self.xml_filename = self.controller.getConfigData("Bfp_trainfilename")
         self.starthour = self.controller.getConfigData("Bfp_start")
         self.duration = self.controller.getConfigData("Bfp_duration")
+        
+    def edit_train_schedule(self,objectid,mode):
+        self.timetable.edit_train_schedule(objectid,mode)
+        
+    def edit_train_schedule_stop(self):
+        self.timetable.edit_train_schedule_stop()
+        
+    def edit_stop_original(self,objectid):
+        self.timetable.edit_stop_original(objectid)
+           
+    def edit_export_to_trn(self,objectid):
+        self.timetable.edit_export_to_trn(objectid)
+                
+    def edit_clone_schedule(self,objectid):
+        self.timetable.edit_clone_schedule(objectid)
         
     def open_zusi_trn_zug_dict(self,trn_zug_dict,fpn_filepathname,trn_filepathname=""):
         TLFileType = self.controller.getConfigData("TLFileType")
@@ -1117,7 +1707,7 @@ class Timetable_main(Frame):
                 #enter train-timetable
                 result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict)
         else:
-            self.timetable.convert_trn_dict_to_schedule_dict(trn_zug_dict)        
+            self.timetable.convert_trn_dict_to_schedule_dict(trn_zug_dict,trn_filepathname=trn_filepathname)        
 
     def open_zusi_trn_file(self, trn_filepathname,fpn_filepathname):
         with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
@@ -1225,7 +1815,7 @@ class Timetable_main(Frame):
                     else:
                         stationName_list.append(FplName)
                 except BaseException as e:
-                    logging.debug("FplZeile conversion Error %s %s",ZugGattung+ZugNummer+"-"+repr(FplZeile_dict),e)
+                    logging.debug("FplZeile conversion Error %s",trn_dateiname+"-"+repr(FplZeile_dict),e)
                     continue # entry format wrong
         
 
@@ -1343,6 +1933,7 @@ class Timetable_main(Frame):
         self.canvas.update()
         self.canvas.config(width=width,height=height,scrollregion=(0,0,width,height))
         self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
+        self.editflag = self.controller.getConfigData("Edit_Permission") == "Edit_allowed"
         self.timetable.doPaint(self.canvas,starthour=starthour,duration=duration)
         
     def create_station_list_from_tt_xml_file(self,xml_filename):
@@ -1350,6 +1941,7 @@ class Timetable_main(Frame):
     
     def regenerate_canvas(self):
         self.canvas.delete("all")
+        self.controller.total_scalefactor = 1
         self.canvas.config(width=self.width,height=self.height,scrollregion=(0,0,self.width,self.height))
         self.canvas.update()
         self.controller.set_statusmessage("Erzeuge Bahnhofsliste - "+self.xml_filename)
@@ -1358,7 +1950,7 @@ class Timetable_main(Frame):
         with open(self.xml_filename,mode="r",encoding="utf-8") as fd:
             xml_text = fd.read()
             zusi_timetable_dict = parse(xml_text)
-        self.timetable = TimeTableGraphCommon(self.controller, True, self.height, self.width,xml_filename=self.xml_filename)
+        self.timetable = TimeTableGraphCommon(self.controller, True, self.height, self.width,xml_filename=self.xml_filename,ttmain_page=self,tt_page=self.ttpage)
         self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
         #define stops via selected train-timetable
         result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(zusi_timetable_dict,define_stations=True)
@@ -1367,6 +1959,7 @@ class Timetable_main(Frame):
         result_ok = self.open_zusi_master_schedule(fpn_filename=self.fpl_filename)
         if not result_ok:
             return
+        self.editflag = self.controller.getConfigData("Edit_Permission") == "Edit_allowed"
         self.timetable.doPaint(self.canvas,starthour=self.starthour,duration=self.duration)                        
 
     def redo_fpl_and_canvas(self,width,height, starthour=8, duration=9,fpl_filename="", xml_filename = ""):

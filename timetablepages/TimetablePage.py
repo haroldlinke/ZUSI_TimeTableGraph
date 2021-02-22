@@ -75,9 +75,9 @@ class TimeTablePage(tk.Frame):
         self.canvas.config(width=self.canvas_width,height=self.canvas_height)
         self.canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
         self.canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
-        self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas)
+        self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas, self)
         self.scalefactorunit = 0.75
-        self.total_scalefactor = 1
+        self.controller.total_scalefactor = 1
         self.old_scalefactor = 1
         self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
@@ -144,14 +144,14 @@ class TimeTablePage(tk.Frame):
         self.timetable_main.regenerate_canvas()
     
     def onHome(self, event):
-        if round(self.total_scalefactor,4)!=1:
-            self.old_scalefactor = self.total_scalefactor
+        if round(self.controller.total_scalefactor,4)!=1:
+            self.old_scalefactor = self.controller.total_scalefactor
             #self.canvas_old_x, self.canavs_old_y = self.canvas.coords("all")
             #print(self.canvas_old_x, self.canavs_old_y)
             #self.canvas_old_x, self.canavs_old_y, x2, y2 = self.canvas.bbox("all")
             #print(self.canvas_old_x, self.canavs_old_y)
-            self.resize(event, 1/self.total_scalefactor)
-            self.total_scalefactor = 1
+            self.resize(event, 1/self.controller.total_scalefactor)
+            self.controller.total_scalefactor = 1
         else:
             self.resize(event, self.old_scalefactor)
             self.old_scalefactor = 1
@@ -164,23 +164,23 @@ class TimeTablePage(tk.Frame):
         self.canvas.scale('all', 0, 0, scale, scale)        
         
     def resize(self, event, scale):
-        self.total_scalefactor *= scale
+        self.controller.total_scalefactor *= scale
         if event == None:
             x=0
             y=0
         else:
-            x = self.canvas.canvasx(event.x)
-            y = self.canvas.canvasy(event.y)
+            x = 0 #self.canvas.canvasx(event.x)
+            y = 0 #self.canvas.canvasy(event.y)
         self.canvas.scale('all', x, y, scale, scale)
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))           
         
     def canvas_bindings(self):
-        self.canvas.bind('<ButtonPress-1>', self.move_from)
-        self.canvas.bind('<B1-Motion>',     self.move_to)
-        self.canvas.bind("<Control-MouseWheel>", self.onCtrlMouseWheel)
-        self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel)
-        self.canvas.bind("<MouseWheel>", self.onMouseWheel)
-        self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel)
+        self.canvas.bind('<Shift-ButtonPress-1>', self.move_from, add="+")
+        self.canvas.bind('<Shift-B1-Motion>', self.move_to, add="+")
+        self.canvas.bind("<Control-MouseWheel>", self.onCtrlMouseWheel, add="+")
+        self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel, add="+")
+        self.canvas.bind("<MouseWheel>", self.onMouseWheel, add="+")
+        self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel, add="+")
         self.frame.bind("<Home>", self.onHome)
         self.frame.bind("<Up>", self.onArrowUp)
         self.frame.bind("<Down>", self.onArrowDown)
@@ -192,8 +192,7 @@ class TimeTablePage(tk.Frame):
         self.frame.bind("<Next>", self.onNext)
         self.frame.bind("<Shift-Prior>", self.onPrior)
         self.frame.bind("<Shift-Next>", self.onNext)
-        self.frame.bind("<F5>", self.onRefreshCanvas) 
-     
+        self.frame.bind("<F5>", self.onRefreshCanvas)
 
     def save_as_pdf(self, fileName):
         # save postscipt image 

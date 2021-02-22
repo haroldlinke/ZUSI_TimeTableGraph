@@ -43,7 +43,7 @@ from timetablepages.StartPage import StartPage
 from timetablepages.SpecialConfigurationPage import SpecialConfigurationPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
 from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
-CONFIG_FILENAME, TOOLTIPLIST, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME
+CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,ScrolledFrame,HorizontalScrolledFrame
 from tkcolorpicker.limitvar import LimitVar
 from tkcolorpicker.spinbox import Spinbox
@@ -146,29 +146,33 @@ class TimeTableGraphMain(tk.Tk):
                   bordercolor=[('focus', "#4D4D4D")])
         self.configure(background=style.lookup("TFrame", "background"))
          
+         
+        #self.editFlag = tk.BooleanVar()
+        #self.editFlag.set(False)
+                
         menu = tk.Menu(self)
         self.config(menu=menu)
-        filemenu = tk.Menu(menu)
-        menu.add_cascade(label="Bildfahrplan speichern", menu=filemenu)
-        filemenu.add_command(label="als EPS", command=self.Save_Bfp_as_EPS)
-        filemenu.add_command(label="als PDF", command=self.Save_Bfp_as_PDF)
-        #filemenu.add_separator()
-        filemenu.add_command(label="als Bild", command=self.Save_Bfp_as_Image)
-        #filemenu.add_command(label="LED Liste speichern als", command=self.SaveFileLEDTab)
+        filemenu1 = tk.Menu(menu)
+        menu.add_cascade(label="Datei", menu=filemenu1)
+        filemenu1.add_command(label="Einstellungen lesen von ...", command=self.OpenConfigFile)
+        filemenu1.add_command(label="Einstellungen speichern als ...", command=self.SaveConfigFileas)
+        filemenu1.add_separator()
+        filemenu1.add_command(label="Beenden und Daten speichern", command=self.ExitProg_with_save)
+        filemenu1.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
+        filemenu2 = tk.Menu(menu)
+        menu.add_cascade(label="Bildfahrplan", menu=filemenu2)
+        filemenu2.add_command(label="Speichern als EPS", command=self.Save_Bfp_as_EPS)
+        filemenu2.add_command(label="Speichern als PDF", command=self.Save_Bfp_as_PDF)
+        filemenu2.add_command(label="Speichern als Bild", command=self.Save_Bfp_as_Image)
+        #filemenu2.add_checkbutton(label="Bearbeiten", onvalue=1, offvalue=0, variable=self.editFlag)
         #filemenu.add_separator()
         #filemenu.add_command(label="Beenden und Daten speichern", command=self.ExitProg_with_save)
         #filemenu.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
-
         #colormenu = tk.Menu(menu)
         #menu.add_cascade(label="Farbpalette", menu=colormenu)
         #colormenu.add_command(label="letzte Änderung Rückgängig machen [CTRL-Z]", command=self.MenuUndo)
-               
-        #colormenu.add_command(label="von Datei lesen", command=self.OpenFile)
-        #colormenu.add_command(label="speichern als ...", command=self.SaveFileas)
-        #colormenu.add_separator()
-        #colormenu.add_command(label="auf Standard zurücksetzen", command=self.ResetColorPalette)
-
-        
+        #filemenu.add_command(label="Einstellungen von Datei lesen", command=self.OpenConfigFile)
+        #filemenu.add_command(label="Einstellungen speichern als ...", command=self.SaveConfigFileas)
         helpmenu = tk.Menu(menu)
         menu.add_cascade(label="Hilfe", menu=helpmenu)
         helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
@@ -238,6 +242,7 @@ class TimeTableGraphMain(tk.Tk):
         self.lift()
         self.grab_set()
         self.configDataChanged = True
+        self.edit_active = False
         
     def set_statusmessage(self,status_text,fg="black"):
         #logging.debug("set_statusmessage: %s",status_text)
@@ -281,30 +286,30 @@ class TimeTableGraphMain(tk.Tk):
         self.cancel()
         
     def ExitProg_with_save(self):
-        self.cancel_with_save()    
+        self.cancel_with_save()
+        
+    def SaveConfigFileas(self):
+        filepathname = filedialog.asksaveasfilename(filetypes=[("Einstellungen Dateien","*.config.json")],defaultextension=".config.json")
+        if filepathname:
+            self.SaveConfigData(filepathname=filepathname)
+
+    def OpenConfigFile(self):
+        filepathname = filedialog.askopenfilename(filetypes=[("Einstellungsdatei","*.config.json"),("All JSON files","*.json")],defaultextension=".clr.json")
+        if filepathname:
+            #filepath,filename=os.path.split(filepathname)
+            self.ConfigData.readConfigData(filepathname)
+            for confpage in configpage_list:
+                self.update_variables_with_config_data(confpage)
+            self.get_stationlist_for_station_chooser()
 
     def save_persistent_params(self):
         for macro in self.persistent_param_dict:
             persistent_param_list = self.persistent_param_dict[macro]
             for paramkey in persistent_param_list:
                 self.setConfigData(paramkey, self.get_macroparam_val(macro, paramkey))
+                
+    
             
-    # ----------------------------------------------------------------
-    #  cancel_with_save
-    # ----------------------------------------------------------------
-    def cancel_step2_with_save(self):
-        logging.debug("Cancel_with_save2")
-        self.setConfigData("pos_x", self.winfo_x())
-        self.setConfigData("pos_y", self.winfo_y())
-        self.save_persistent_params()
-        self.SaveConfigData()
-        #self.SaveParamData()
-        self.close_notification()
-        
-    def cancel_step2_without_save(self):
-        logging.debug("Cancel_without_save2")
-        self.close_notification()           
-
     # ----------------------------------------------------------------
     #  cancel_with_save
     # ----------------------------------------------------------------
@@ -313,7 +318,13 @@ class TimeTableGraphMain(tk.Tk):
         #self.set_connectstatusmessage("Closing program...",fg="red")
         self.shutdown_frame.tkraise()
         self.update()        
-        self.cancel_step2_with_save()   
+        logging.debug("Cancel_with_save2")
+        self.setConfigData("pos_x", self.winfo_x())
+        self.setConfigData("pos_y", self.winfo_y())
+        self.save_persistent_params()
+        self.SaveConfigData()
+        #self.SaveParamData()
+        self.close_notification() 
 
     # ----------------------------------------------------------------
     #  cancel_without_save
@@ -322,7 +333,8 @@ class TimeTableGraphMain(tk.Tk):
         logging.debug("Cancel_without_save")
         self.shutdown_frame.tkraise()
         self.update()
-        self.cancel_step2_without_save()
+        logging.debug("Cancel_without_save2")
+        self.close_notification()  
 
     # ----------------------------------------------------------------
     #  cancel
@@ -333,14 +345,12 @@ class TimeTableGraphMain(tk.Tk):
             answer = tk.messagebox.askyesnocancel ('Das Programm wird beendet','Daten wurden verändert. Sollen die Daten gesichert werden?',default='no')
             if answer == None:
                 return # no cancelation
-            
             if answer:
                 self.cancel_with_save() 
             else:
                 self.cancel_without_save()
         else:
             self.cancel_without_save()
-
 
     def close_notification(self):
         logging.debug("Close_notification")
@@ -365,7 +375,6 @@ class TimeTableGraphMain(tk.Tk):
     # Event TabChanged
     # ----------------------------------------------------------------        
     def TabChanged(self,_event=None):
-        
         oldtab_name = self.currentTabClass
         if oldtab_name != "":
             oldtab = self.nametowidget(oldtab_name)
@@ -398,7 +407,6 @@ class TimeTableGraphMain(tk.Tk):
         if not startpagename in self.tabdict.keys():
             startpagename=""
             logging.debug("Commandline argument --startpage %s wrong. Allowed: %s",startpagename,repr(self.tabdict.keys()))
-            
         if startpagename == "":
             startpagenumber = self.getConfigData("startpage")
             startpagename = startpageNumber2Name.get(startpagenumber,self.ConfigData.data.get("startpagename","ColorCheckPage"))
@@ -427,28 +435,22 @@ class TimeTableGraphMain(tk.Tk):
             if configdatakey_dict != {}:
                 value = configdatakey_dict.get(configdatakey,None)
         return value
-
             
     def readConfigData(self):
         logging.debug("readConfigData")
-        #filedir = self.exefile_dir # os.path.dirname(os.path.realpath(__file__))
         self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=self.exefile_dir)
         self.ConfigData.data.update(COMMAND_LINE_ARG_DICT) # overwrite configdata mit commandline args
         logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
-        #macrodef_filename_str = MACRODEF_FILENAME
-        #macroparamdef_filename_str = MACROPARAMDEF_FILENAME
-        if hasattr(sys, '_MEIPASS'):
-            logging.debug('running in a PyInstaller bundle')
-            try:
-                # PyInstaller creates a temp folder and stores path in _MEIPASS
-                base_path = sys._MEIPASS
-                logging.debug("PyInstaller: sys._MEIPASS: %s",base_path)
-                #if parent_filedir != base_path: # onefile using temp directory
-                #    filedir = base_path
-            except BaseException as e:
-                logging.debug("PyInstaller handling Error %s",e)
-        else:
-            logging.debug('running in a normal Python process')        
+        #if hasattr(sys, '_MEIPASS'):
+        #    logging.debug('running in a PyInstaller bundle')
+        #    try:
+        #        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        #        base_path = sys._MEIPASS
+        #        logging.debug("PyInstaller: sys._MEIPASS: %s",base_path)
+        #    except BaseException as e:
+        #        logging.debug("PyInstaller handling Error %s",e)
+        #else:
+        #    logging.debug('running in a normal Python process')        
         try:
             self.MacroDef = ConfigFile({},MACRODEF_FILENAME,filedir=self.localfile_dir)
             logging.debug("Read MACRODEF: %s %s",MACRODEF_FILENAME,self.localfile_dir)
@@ -462,7 +464,6 @@ class TimeTableGraphMain(tk.Tk):
                     logging.debug("Read MACROPARAMDEF_FILENAME ERROR: %s %s",MACROPARAMDEF_FILENAME,self.localfile_dir)
                     tk.messagebox.showerror("Installation Problem","Datei "+ MACROPARAMDEF_FILENAME + "not found\nthe program will be terminated")
                     return False 
-            #logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
             return True
         except BaseException as e:
             logging.debug("PyInstaller handling Error %s",e)
@@ -473,26 +474,15 @@ class TimeTableGraphMain(tk.Tk):
         
     def setConfigDataDict(self,param_dict):
         self.ConfigData.data.update(param_dict)  
-    
-    def setParamData(self,key, value):
-        if self.ParamData.data:
-            self.ParamData.data[key] = value
 
-    def SaveConfigData(self):
+    def SaveConfigData(self,filepathname=""):
         logging.debug("SaveConfigData")
         self.set_configDataChanged()
-        self.ConfigData.save()
+        self.ConfigData.save(filepathname=filepathname)
         
-    def SaveParamData(self):
-        logging.debug("SaveParamData")
-        if self.ParamData.data:
-            self.ParamData.save()
 
-    def ToolTip(self, widget,text="", key="",button_1=False):
-        if text:
-            tooltiptext = text
-        else:
-            tooltiptext = TOOLTIPLIST.get(key,key)
+    def ToolTip(self, widget,text="", button_1=False):
+        tooltiptext = text
         tooltip_var = None
         try:
             tooltip_var = widget.tooltip
@@ -500,7 +490,7 @@ class TimeTableGraphMain(tk.Tk):
             tooltip_var = None
             
         if tooltip_var==None:
-            tooltip_var=Tooltip(widget, text=tooltiptext,button_1=button_1)
+            tooltip_var=Tooltip(widget, text=tooltiptext,button_1=button_1,controller=self)
             widget.tooltip = tooltip_var
         else:
             tooltip_var.unschedule()
@@ -508,17 +498,11 @@ class TimeTableGraphMain(tk.Tk):
             tooltip_var.update_text(text)            
         return
     
-    def ToolTip_canvas(self, canvas, objid,text="", key="",button_1=False):
-        if text:
-            tooltiptext = text
-        else:
-            tooltiptext = _(TOOLTIPLIST.get(key,key))
-        tooltip_var = None
-        
+    def ToolTip_canvas(self, canvas, objid,text="",button_1=False):
+        tooltiptext = text
         tooltip_var = self.tooltip_var_dict.get(objid,None)
-            
         if tooltip_var==None:
-            tooltip_var=Tooltip_Canvas(canvas, objid, text=tooltiptext,button_1=button_1)
+            tooltip_var=Tooltip_Canvas(canvas, objid, text=tooltiptext,button_1=button_1,controller=self)
             self.tooltip_var_dict[objid] = tooltip_var
         else:
             tooltip_var.unschedule()
@@ -972,7 +956,7 @@ class TimeTableGraphMain(tk.Tk):
                         label=tk.Label(parent_frame, text=param_title,width=param_label_width,height=param_label_height,wraplength = PARAMLABELWRAPL,anchor=ANCHOR,font=self.fontlabel)
                         label.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=2, pady=2)
                         self.ToolTip(label, text=param_tooltip)
-                        paramvar = tk.Listbox(parent_frame, width=param_entry_width,font=self.fontlabel,selectmode=tk.EXTENDED,height=param_list_height)
+                        paramvar = tk.Listbox(parent_frame, width=param_entry_width,font=self.fontlabel,selectmode=tk.EXTENDED,height=param_list_height,exportselection=False)
                     listbox_value_list = paramconfig_dict.get("KeyValues",paramconfig_dict.get("Values",[]))
                     for i in listbox_value_list:
                         paramvar.insert("end",i)
@@ -1358,6 +1342,18 @@ class TimeTableGraphMain(tk.Tk):
                 configdatakey = self.getConfigDatakey(paramkey)
                 value = self.getConfigData(configdatakey)
                 self.set_macroparam_val(tabClassName, paramkey, value)    
+                
+    def get_stationlist_for_station_chooser(self):
+        xml_filename = self.getConfigData("Bfp_trainfilename")
+        self.stationlist = self.get_stationlist_from_tt_xml(xml_filename)
+        self.set_macroparam_val("SpecialConfigurationPage", "StationChooser", self.stationlist)
+        paramkey = "StationChooser"
+        configdatakey = self.getConfigDatakey(paramkey)
+        value = self.getConfigData(configdatakey)
+        listbox_var = self.macroparams_var["SpecialConfigurationPage"][paramkey]
+        for i in range(0,listbox_var.size()):
+            if listbox_var.get(i) in value:
+                listbox_var.select_set(i)       
     
 ############################################################################################################    
 

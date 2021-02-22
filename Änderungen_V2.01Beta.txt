@@ -1,0 +1,51 @@
+Korrekturen:
+
+Stationsauswahlliste wird jetzt korrekt gespeichert
+
+Neue Menuoption im Datei Menue:
+Einstellungen lesen von ..
+Einstellungen speichern als ..
+Die Einstelluneg können jetzt in eine Datei gespeichert und wieder gelesen werden.
+
+Neue Optionen in den Experten Einstellungen:
+
+Zeige Züge in Richtung: Beide Richtungen, nach rechts, nach links
+Bearbeiten erlauben: Bearbeitung gesperrt, Bearbeitung erlaubt
+
+Neue Funktion: Abfahrts- und Ankunftszeiten bearbeiten.
+
+ACHTUNG: Diese Funktion ist noch nicht komplet implementiert und noch nicht komplett getestet. Nur auf Kopie der Fahrplandaten anwenden!!
+
+Diese Funktion ermöglicht es Abfahrts- und Ankunftszeiten von Zügen zu bearbeiten und danch in der .trn Datei zu speichern.
+
+Damit man nicht aus Versehen, den Fahrplan bearbeitet, muss diese Funktion über die Einstellung "Bearbeiten erlauben" eingeschaltet werden. Die Einstellung wid gespeichert, muss also nur einmal vorgenommen werden.
+
+Ändern von Ankunfts- und Abfahrtszeiten mit dem Bildfahrplan:
+
+Die Linie des Zuges dessen Zeiten geändert wedren soll, mit der rechten Maustaset anklicken. Es erscheint ein Kontextmenue:
+
+Bearbeiten starten (gesamter Fahrplan)
+Bearbeiten starten (alle Zeiten nach der geänderten)
+Bearbeiten starten (jede Zeit einzeln)
+Bearbeiten beenden
+Bearbeiten beenden und Zeiten zurück auf .trn Zeiten setzen
+Zugfahrplan in .trn-Datei exportieren
+
+Nachdem eine der 3 "Bearbeiten starten"Optionen ausgewählt wurde, werden alle Ankunfts- und Abfahrtszeiten des Zuges in grösserer Schrift in rot angezeigt.
+Beim Ancklicken einer roten Zeitanzeige mit der Maus ändert diese von einer Minutennazeige zu einer HH:MM:SS-Anzeige.
+Durch Verschieben dieser Anzeige mit der Maus ändert sich die Anzeige entsprechend der ausgewählte Uhrzeit.
+Zur Änderung der Zeit gibt es folgende Möglichkeiten:
+Verschieben mit Linker Maustaste: Änderung der Zeit im Minutenraster
+Verschieben mit ALT-Linker Maustaste: Änderung der Zeit im Sekundenraster (Genauigkeit abhängig von der Zoomstufe)
+
+Genauere Einstellung ist über die Pfeiltasten möglich:
+
+Pfeiltaste nach oben/unten: +/- 1 Minute
+Shift-Pfeiltaste nach oben/unten: +/- 10 Sekunden
+Alt-Pfeiltaste nach oben/unten: +/- 1 Sekunden
+
+CTRL-Pfeiltaste: Änderung der Zoomstufe
+
+Über das Kontextmenü kann jederzeit der Modusgeändert, die Bearbeitung beendet werden oder der aktuelle Stand in die .TRN-Datei exportiert werden.
+ 
+

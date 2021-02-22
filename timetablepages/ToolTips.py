@@ -71,6 +71,7 @@ class ToolTips :
         widget.bind("<Enter>", self.showToolTips, add="+")
         widget.bind("<Leave>", self.hideToolTips, add="+")
         widget.bind("<Button-1>", self.hideToolTips, add="+")
+        widget.bind("<Control-1>", self.hideToolTips, add="+")
 
     # this method will be called when widgets with tooltips are hovered over
     def showToolTips(self, event) :

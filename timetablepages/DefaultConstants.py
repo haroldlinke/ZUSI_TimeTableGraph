@@ -32,13 +32,14 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-PROG_VERSION ="V02.01 15.02.2021"
+PROG_VERSION ="V02.00 22.02.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
 SMALL_FONT= ("Verdana", 8)
 Very_SMALL_FONT= ("Verdana", 6)
 STD_FONT = ("SANS_SERIF",10)
+LARGE_STD_FONT = ("SANS_SERIF",14)
 
 SIZEFACTOR = 1 # 720/1280
 
@@ -61,23 +62,7 @@ DEFAULT_CONFIG = {
                     "pos_y": 100,
                     "startpage": 1,
                     "startpagename" : "StartPage",
-                    "StationChooser": "Stationx"
+                    "StationChooser": ""
                 }
-
-DEFAULT_PARAM = {}
-
-CONFIG2PARAMKEYS = {
-                    "old_color"   :"color",
-                    "lastLed"     :"Lednum",
-                    "lastLedCount":"LedCount", 
-                    "serportname" :"comport",
-                    "palette"     :"coltab", 
-                    }
-
-TOOLTIPLIST = {
-                   "Alte Farbe": "Alte Farbe",
-                   "Aktuelle Farbe": "Aktuelle Farbe",
-                   "ColorWheel":"Farbton und Sättigung auswählen durch Mausklick"
-                   }
 
 

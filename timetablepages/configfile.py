@@ -93,8 +93,11 @@ class ConfigFile():
             logging.error(self.data)
             self.data={}        
 
-    def save(self):
-
+    def save(self,filepathname=""):
         # Write JSON file
-        with open(self.filepath, 'w', encoding='utf8') as outfile:
+        if filepathname == "":
+            filepathname = self.filepath
+        with open(filepathname, 'w', encoding='utf8') as outfile:
             json.dump(self.data, outfile, ensure_ascii=False, indent=4)
+
+        

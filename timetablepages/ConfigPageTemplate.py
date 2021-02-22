@@ -86,7 +86,7 @@ class ConfigPagetemplate(tk.Frame):
         self.update_button2.pack(side="right", padx=10)        
         #self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
         #self.update_tree_button.pack(side="left", padx=10)        
-        self.tree_frame = ttk.Frame(self.main_frame)
+        #self.tree_frame = ttk.Frame(self.main_frame)
 
         # --- placement
         # Tabframe
@@ -98,12 +98,12 @@ class ConfigPagetemplate(tk.Frame):
         title_frame.grid(row=0, column=0, pady=10, padx=10)
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
-        self.tree_frame.grid(row=3, column=0, pady=10, padx=10, sticky="nesw")
+        #self.tree_frame.grid(row=3, column=0, pady=10, padx=10, sticky="nesw")
         self.button_frame2.grid(row=4, column=0,pady=10, padx=10)
         
         self.controller.update_variables_with_config_data(self.tabClassName)
 
-        self.save_config()
+        #self.save_config()
 
         # ----------------------------------------------------------------
         # Standardprocedures for every tabpage
