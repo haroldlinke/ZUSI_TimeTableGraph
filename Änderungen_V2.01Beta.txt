@@ -1,3 +1,5 @@
+Änderungsbeschreibung V02.01Beta
+
 Korrekturen:
 
 Stationsauswahlliste wird jetzt korrekt gespeichert
