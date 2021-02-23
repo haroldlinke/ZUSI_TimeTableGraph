@@ -11,8 +11,8 @@
     "TLDirection_No": 0,
     "Bfp_width": 2000,
     "Bfp_height": 1000,
-    "Bfp_start": 19,
-    "Bfp_duration": 2,
+    "Bfp_start": 18,
+    "Bfp_duration": 3,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineDashed": " ",
@@ -44,8 +44,7 @@
             "Bfp_TrainTypeLineDashed_No": 0,
             "Bfp_TrainTypeLabel": "Mitte",
             "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
+            "Bfp_TrainTypeLabelSize": 8
         }
     },
     "Bfp_TrainTypeProp": {
@@ -198,28 +197,6 @@
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
             "Bfp_TrainTypeLabelSize": 10
-        },
-        "999": {
-            "Bfp_TrainTypeAll": "",
-            "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 1,
-            "Bfp_TrainTypeLineDashed": " ",
-            "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
-        },
-        "999": {
-            "Bfp_TrainTypeAll": "",
-            "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 1,
-            "Bfp_TrainTypeLineDashed": " ",
-            "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
         }
     },
     "TLFileType": ".trn",
@@ -230,19 +207,7 @@
     "InOutBoundTrainsNoStartStation": false,
     "InOutBoundTrainsNoEndStation": false,
     "FplRglGgl": "1,2",
-    "StationChooser": [
-        "Hagen Hbf",
-        "Westhofen",
-        "Bk Steinhausen",
-        "Schwerte",
-        "Schwerte Ost",
-        "Langschede",
-        "Fröndenberg",
-        "Wickede",
-        "Voßwinkel",
-        "Neheim-Hüsten",
-        "Arnsberg"
-    ],
+    "StationChooser": [],
     "Bfp_TreeView": 0,
     "Teilstrecke": 0,
     "Bfp_CanvasSize": 0,

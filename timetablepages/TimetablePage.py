@@ -143,7 +143,7 @@ class TimeTablePage(tk.Frame):
     def onRefreshCanvas(self, event):
         self.timetable_main.regenerate_canvas()
     
-    def onHome(self, event):
+    def onRestoreZoom(self, event):
         if round(self.controller.total_scalefactor,4)!=1:
             self.old_scalefactor = self.controller.total_scalefactor
             #self.canvas_old_x, self.canavs_old_y = self.canvas.coords("all")
@@ -172,7 +172,7 @@ class TimeTablePage(tk.Frame):
             x = 0 #self.canvas.canvasx(event.x)
             y = 0 #self.canvas.canvasy(event.y)
         self.canvas.scale('all', x, y, scale, scale)
-        self.canvas.configure(scrollregion=self.canvas.bbox('all'))           
+        self.canvas.configure(scrollregion=self.canvas.bbox('all'))
         
     def canvas_bindings(self):
         self.canvas.bind('<Shift-ButtonPress-1>', self.move_from, add="+")
@@ -181,7 +181,7 @@ class TimeTablePage(tk.Frame):
         self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel, add="+")
         self.canvas.bind("<MouseWheel>", self.onMouseWheel, add="+")
         self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel, add="+")
-        self.frame.bind("<Home>", self.onHome)
+        self.frame.bind("<Home>", self.onRestoreZoom)
         self.frame.bind("<Up>", self.onArrowUp)
         self.frame.bind("<Down>", self.onArrowDown)
         self.frame.bind("<Left>", self.onArrowLeft)

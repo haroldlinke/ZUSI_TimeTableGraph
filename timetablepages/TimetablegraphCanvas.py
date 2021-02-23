@@ -38,7 +38,7 @@ from tkinter import Tk, Canvas, Frame, BOTH, font
 from tools.xmltodict import parse
 #from collections import OrderedDict
 from datetime import datetime
-from timetablepages.DefaultConstants import STD_FONT,LARGE_STD_FONT
+from timetablepages.DefaultConstants import STD_FONT,LARGE_STD_FONT,get_shortcut
 import os
 import logging
 import math
@@ -677,7 +677,7 @@ class TimeTableGraphCommon():
                 else:
                     anchor="ne"
         trainTime_objid = self.tt_canvas.create_text(x , y, text = minutes, anchor=anchor,activefill="red",font=self.TrainMinuteFont,tags=(self.trainName,self.stationName,timetag,"LI_"+str(self.trainLine_dict_idx),"S_"+str(self.stopIdx),self.direction))
-        #self.bind_right_click_menu_to_trainline(trainTime_objid)
+        self.bind_right_click_menu_to_trainline(trainTime_objid)
         if self.trainLineName == None:
             self.trainLineName = ""
         if self.signal != None and self.signal != "":
@@ -1393,14 +1393,14 @@ class TimeTableGraphCommon():
     
     def edit_bindings(self):
         #self.ttpage.bind("<Home>", self.onHome)
-        self.ttpage.frame.bind("<Up>", self.onArrowUp)
-        self.ttpage.frame.bind("<Down>", self.onArrowDown)
-        self.ttpage.frame.bind("<Left>", self.onArrowLeft)
-        self.ttpage.frame.bind("<Right>", self.onArrowRight)
-        self.ttpage.frame.bind("<Shift-Up>", self.onShiftArrowUp)
-        self.ttpage.frame.bind("<Shift-Down>", self.onShiftArrowDown)        
-        self.ttpage.frame.bind("<Alt-Up>", self.onALTArrowUp)
-        self.ttpage.frame.bind("<Alt-Down>", self.onALTArrowDown)
+        self.ttpage.frame.bind("<Up>", self.onTimeDecMinute)
+        self.ttpage.frame.bind("<Down>", self.onTimeIncMinute)
+        self.ttpage.frame.bind("<Left>", self.onPreviousStation)
+        self.ttpage.frame.bind("<Right>", self.onNextStation)
+        self.ttpage.frame.bind("<Shift-Up>", self.onTimeDec10Sec)
+        self.ttpage.frame.bind("<Shift-Down>", self.onTimeInc10Sec)        
+        self.ttpage.frame.bind("<Alt-Up>", self.onTimeDecSec)
+        self.ttpage.frame.bind("<Alt-Down>", self.onTimeIncSec)
         
     def edit_unbind(self):
         self.ttpage.frame.unbind("<Up>")
@@ -1413,7 +1413,7 @@ class TimeTableGraphCommon():
         self.ttpage.frame.unbind("<Control-Down>") 
         self.ttpage.canvas_bindings()
         
-    def process_onarrow(self,delta):
+    def process_change_stop_time(self,delta):
         if not self.controller.edit_active:
             return
         self.update_mm_stop_times_delta(delta,self.mm_stoptimemode)
@@ -1433,28 +1433,28 @@ class TimeTableGraphCommon():
         #self.tt_canvas.itemconfigure(cvobject,text=self.mm_currtime_str,font=self.largeFont,fill="red")            
         
         
-    def onArrowDown(self, event):
-        self.process_onarrow(1)
+    def onTimeIncMinute(self, event):
+        self.process_change_stop_time(1)
         
-    def onArrowUp(self, event):
-        self.process_onarrow(-1)
+    def onTimeDecMinute(self, event):
+        self.process_change_stop_time(-1)
     
-    def onShiftArrowDown(self, event):
-        self.process_onarrow(1/6)
+    def onTimeInc10Sec(self, event):
+        self.process_change_stop_time(1/6)
     
-    def onShiftArrowUp(self, event):
-        self.process_onarrow(-1/6)
+    def onTimeDec10Sec(self, event):
+        self.process_change_stop_time(-1/6)
     
-    def onALTArrowDown(self, event):
-        self.process_onarrow(1/60)
+    def onTimeIncSec(self, event):
+        self.process_change_stop_time(1/60)
     
-    def onALTArrowUp(self, event):
-        self.process_onarrow(-1/60)
+    def onTimeDecSec(self, event):
+        self.process_change_stop_time(-1/60)
         
-    def onArrowLeft(self, event):
+    def onPreviousStation(self, event):
         self.active_next_stop_time(direction=1)
     
-    def onArrowRight(self, event):
+    def onNextStation(self, event):
         self.active_next_stop_time(direction=-1)
     
     def active_next_stop_time(self,direction=-1):
@@ -1507,16 +1507,18 @@ class TimeTableGraphCommon():
         train = self.schedule_trains_dict.get(self.trainIdx,{})
         search_stops = train.get("Stops",{})
         #search first stop from left:
-        for stationIdx in self.schedule_stations_dict:
+        for stopIdx,stop_dict in search_stops.items():
+            stopstationName = self.get_stationName_from_StopDict(stop_dict)
+            for stationIdx in self.schedule_stations_dict:
                 station = self.schedule_stations_dict.get(stationIdx,{})
-                stationName = station.get("StationName","")
-                for stopIdx,stop_dict in search_stops.items():
-                    stopstationName = self.get_stationName_from_StopDict(stop_dict)
-                    if stationName == stopstationName:
-                        if self.trainLineFirstStopIdx == -1:
-                            self.trainLineFirstStopIdx = stopIdx
-                        self.trainLineLastStopIdx = stopIdx
-        if self.trainLineFirstStopIdx<=self.trainLineFirstStopIdx:
+                stationName = station.get("StationName","")                    
+                if stationName == stopstationName:
+                    if self.trainLineFirstStopIdx == -1:
+                        self.trainLineFirstStopIdx = stopIdx
+                        self.trainLineFirstStopName = stopstationName
+                    self.trainLineLastStopIdx = stopIdx
+                    self.trainLineLastStopName = stopstationName
+        if False: #self.trainLineFirstStopIdx<=self.trainLineFirstStopIdx:
             save_idx = self.trainLineFirstStopIdx
             self.trainLineFirstStopIdx = self.trainLineLastStopIdx
             self.trainLineLastStopIdx = save_idx
@@ -1533,8 +1535,8 @@ class TimeTableGraphCommon():
         self.mm_stoptimemode = "DepartTime"
         self.mm_trainName = self.edit_trainline_tag
         self.determine_first_and_last_stop_idx()
-        self.mm_stopIdx = 0
-        self.mm_stationName = self.get_stationName(self.mm_stopIdx)
+        self.mm_stopIdx = self.trainLineFirstStopIdx
+        self.mm_stationName = self.trainLineFirstStopName
         self.mm_stop_dict = self.get_trainline_stationidx_data(self.mm_trainName,self.mm_stopIdx)
         try:
             self.tt_canvas.itemconfigure(self.edit_trainline_tag,font=self.largeFont,fill="red")
@@ -1745,7 +1747,10 @@ class Timetable_main(Frame):
                 self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
         else:
             for zug in zug_list:
-                datei_dict = zug.get("Datei")
+                try:
+                    datei_dict = zug.get("Datei")
+                except (AttributeError, TypeError):
+                    datei_dict = zug_list.get("Datei")
                 trn_filename = datei_dict.get("@Dateiname")
                 trn_filename_comp = trn_filename.split("\\")
                 trn_file_and_path = os.path.join(fpl_path,trn_filename_comp[-2],trn_filename_comp[-1])
@@ -1909,7 +1914,10 @@ class Timetable_main(Frame):
                 self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)            
         else:
             for zug in zug_list:
-                datei_dict = zug.get("Datei")
+                try:
+                    datei_dict = zug.get("Datei")
+                except (AttributeError, TypeError):
+                    datei_dict = zug_list.get("Datei")
                 trn_filename = datei_dict.get("@Dateiname")
                 trn_filename_comp = trn_filename.split("\\")
                 trn_file_and_path = os.path.join(fpl_path,trn_filename_comp[-2],trn_filename_comp[-1])
