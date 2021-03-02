@@ -127,6 +127,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
                     endStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["EndStation"]
                     endStationparamvar["value"]=stationlist_list
                     endStationparamvar.set(stationlist_list[len(stationlist_list)-1])
+                    self.controller.get_stationlist_for_station_chooser()
                 else:
                     self.controller.set_statusmessage("No <.timetable.xml> file found for "+trainname)
     

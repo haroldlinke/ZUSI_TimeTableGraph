@@ -43,7 +43,7 @@ from timetablepages.StartPage import StartPage
 from timetablepages.SpecialConfigurationPage import SpecialConfigurationPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
 from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
-CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME
+CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, shortCutDict
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,ScrolledFrame,HorizontalScrolledFrame
 from tkcolorpicker.limitvar import LimitVar
 from tkcolorpicker.spinbox import Spinbox
@@ -129,6 +129,13 @@ class TimeTableGraphMain(tk.Tk):
             self.window_height=screen_height*0.8
         else:
             self.window_height=screen_height*0.8 #1080
+            
+        w_width = self.getConfigData("w_width")
+        w_height = self.getConfigData("w_height")
+        
+        if w_width != None and w_height != None:
+            self.window_height = w_height
+            self.window_width = w_width
         
         if self.getConfigData("pos_x") < screen_width and self.getConfigData("pos_y") < screen_height:
             self.geometry('%dx%d+%d+%d' % (self.window_width,self.window_height,self.getConfigData("pos_x"), self.getConfigData("pos_y")))
@@ -301,14 +308,13 @@ class TimeTableGraphMain(tk.Tk):
             for confpage in configpage_list:
                 self.update_variables_with_config_data(confpage)
             self.get_stationlist_for_station_chooser()
+            self.SaveConfigData()
 
     def save_persistent_params(self):
         for macro in self.persistent_param_dict:
             persistent_param_list = self.persistent_param_dict[macro]
             for paramkey in persistent_param_list:
                 self.setConfigData(paramkey, self.get_macroparam_val(macro, paramkey))
-                
-    
             
     # ----------------------------------------------------------------
     #  cancel_with_save
@@ -321,6 +327,8 @@ class TimeTableGraphMain(tk.Tk):
         logging.debug("Cancel_with_save2")
         self.setConfigData("pos_x", self.winfo_x())
         self.setConfigData("pos_y", self.winfo_y())
+        self.setConfigData("w_height", self.winfo_height())
+        self.setConfigData("w_width", self.winfo_width())        
         self.save_persistent_params()
         self.SaveConfigData()
         #self.SaveParamData()
@@ -356,6 +364,8 @@ class TimeTableGraphMain(tk.Tk):
         logging.debug("Close_notification")
         self.setConfigData("pos_x", self.winfo_x())
         self.setConfigData("pos_y", self.winfo_y())
+        self.setConfigData("w_height", self.winfo_height())
+        self.setConfigData("w_width", self.winfo_width())        
         self.SaveConfigData()
         self.destroy()        
         
@@ -365,10 +375,8 @@ class TimeTableGraphMain(tk.Tk):
     def showFramebyName(self, pageName):
         frame = self.tabdict.get(pageName,None)
         if frame == None:
-            pageName = "ColorCheckPage"
+            pageName = "TimetablePage"
             frame = self.tabdict.get(pageName,None)
-        if pageName == "ColorCheckPage":
-            frame._update_cor_rgb()
         self.container.select(self.tabdict[pageName])
 
     # ----------------------------------------------------------------
@@ -441,16 +449,6 @@ class TimeTableGraphMain(tk.Tk):
         self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=self.exefile_dir)
         self.ConfigData.data.update(COMMAND_LINE_ARG_DICT) # overwrite configdata mit commandline args
         logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
-        #if hasattr(sys, '_MEIPASS'):
-        #    logging.debug('running in a PyInstaller bundle')
-        #    try:
-        #        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        #        base_path = sys._MEIPASS
-        #        logging.debug("PyInstaller: sys._MEIPASS: %s",base_path)
-        #    except BaseException as e:
-        #        logging.debug("PyInstaller handling Error %s",e)
-        #else:
-        #    logging.debug('running in a normal Python process')        
         try:
             self.MacroDef = ConfigFile({},MACRODEF_FILENAME,filedir=self.localfile_dir)
             logging.debug("Read MACRODEF: %s %s",MACRODEF_FILENAME,self.localfile_dir)
@@ -479,7 +477,6 @@ class TimeTableGraphMain(tk.Tk):
         logging.debug("SaveConfigData")
         self.set_configDataChanged()
         self.ConfigData.save(filepathname=filepathname)
-        
 
     def ToolTip(self, widget,text="", button_1=False):
         tooltiptext = text
@@ -488,7 +485,6 @@ class TimeTableGraphMain(tk.Tk):
             tooltip_var = widget.tooltip
         except:
             tooltip_var = None
-            
         if tooltip_var==None:
             tooltip_var=Tooltip(widget, text=tooltiptext,button_1=button_1,controller=self)
             widget.tooltip = tooltip_var
@@ -549,10 +545,8 @@ class TimeTableGraphMain(tk.Tk):
         except:
             value = variable.get()
         return value     
-            
 
     def get_macroparam_var_value(self, var,valuedict):
-        
         paramconfig_dict = self.MacroParamDef.data.get(var.key,{})
         param_type = paramconfig_dict.get("Type","")
         if param_type == "":
@@ -1353,7 +1347,10 @@ class TimeTableGraphMain(tk.Tk):
         listbox_var = self.macroparams_var["SpecialConfigurationPage"][paramkey]
         for i in range(0,listbox_var.size()):
             if listbox_var.get(i) in value:
-                listbox_var.select_set(i)       
+                listbox_var.select_set(i)
+        
+    def get_key_for_action(self,action):
+        return shortCutDict["Key"].get(action,None)
     
 ############################################################################################################    
 
