@@ -61,34 +61,62 @@ class TimeTablePage(tk.Frame):
         self.frame.grid_columnconfigure(0,weight=1)
         self.frame.grid_rowconfigure(0,weight=1)
         self.frame.grid(row=0,column=0,sticky="nesw")
-        frame = ttk.Frame(self.frame)
-        frame.grid(row=0,column=0,sticky="nesw")
-        frame.grid_columnconfigure(0,weight=1)
-        frame.grid_rowconfigure(0,weight=1)        
-        self.canvas=tk.Canvas(frame,width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height),bg="white")
-        hbar=tk.Scrollbar(frame,orient=tk.HORIZONTAL)
-        hbar.pack(side=tk.BOTTOM,fill=tk.X)
-        hbar.config(command=self.canvas.xview)
-        vbar=tk.Scrollbar(frame,orient=tk.VERTICAL)
-        vbar.pack(side=tk.RIGHT,fill=tk.Y)
-        vbar.config(command=self.canvas.yview)
-        self.canvas.config(width=self.canvas_width,height=self.canvas_height)
-        self.canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
-        self.canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
+        self.cv_frame=None
+        self.define_key_bindings()
+        self.canvas = self.create_canvas()
         self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas, self)
         self.scalefactorunit = 0.75
         self.controller.total_scalefactor = 1
         self.old_scalefactor = 1
-        self.canvas_bindings()
         self.controller.timetable_main = self.timetable_main
         self.firstcall = True
+        #self.canvas_bindings()
+        self.block_Canvas_movement_flag = False
+        self.canvas_init = True
+ 
+    def create_canvas(self):
+        if self.cv_frame:
+            self.cv_frame.destroy()
+        self.cv_frame = ttk.Frame(self.frame)
+        self.cv_frame.grid(row=0,column=0,sticky="nesw")
+        self.cv_frame.grid_columnconfigure(0,weight=1)
+        self.cv_frame.grid_rowconfigure(0,weight=1)                        
+        canvas=tk.Canvas(self.cv_frame,width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height),bg="white")
+        hbar=tk.Scrollbar(self.cv_frame,orient=tk.HORIZONTAL)
+        hbar.pack(side=tk.BOTTOM,fill=tk.X)
+        hbar.config(command=canvas.xview)
+        vbar=tk.Scrollbar(self.cv_frame,orient=tk.VERTICAL)
+        vbar.pack(side=tk.RIGHT,fill=tk.Y)
+        vbar.config(command=canvas.yview)
+        canvas.config(width=self.canvas_width,height=self.canvas_height)
+        canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
+        canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
+        self.canvas = canvas
+        self.canvas_bindings()
+        return canvas
+        
+    def define_key_bindings(self):
+        
+        self.key_to_method_dict = { "onRestoreZoom"     : self.onRestoreZoom,
+                                    "onMoveCanvasUp"    : self.onMoveCanvasUp,
+                                    "onMoveCanvasDown"  : self.onMoveCanvasDown,
+                                    "onMoveCanvasLeft"  : self.onMoveCanvasLeft, 
+                                    "onMoveCanvasRight" : self.onMoveCanvasRight,
+                                    "onZoomIn"          : self.onZoomIn,
+                                    "onZoomOut"         : self.onZoomOut,
+                                    "onRefreshCanvas"   : self.onRefreshCanvas
+                                   }            
         
     def move_from(self, event):
         ''' Remember previous coordinates for scrolling with the mouse '''
+        if self.block_Canvas_movement_flag:
+            return
         self.canvas.scan_mark(event.x, event.y)
 
     def move_to(self, event):
         ''' Drag (move) canvas to the new position '''
+        if self.block_Canvas_movement_flag:
+            return        
         self.canvas.scan_dragto(event.x, event.y, gain=1)
         
     def onCtrlMouseWheel(self, event):
@@ -105,37 +133,37 @@ class TimeTablePage(tk.Frame):
     def onMouseWheel(self, event):
         self.canvas.yview_scroll(int(-1*(event.delta/120)), "units")
     
-    def onArrowUp(self, event):
+    def onMoveCanvasUp(self, event):
         if event.keysym == "Up":
             self.canvas.yview_scroll(-1, "units")
         else:
             self.canvas.yview_scroll(-1, "pages")
     
-    def onArrowDown(self, event):
+    def onMoveCanvasDown(self, event):
         if event.keysym == "Down":
             self.canvas.yview_scroll(1, "units")
         else:
             self.canvas.yview_scroll(1, "pages")
     
-    def onCTRLArrowDown(self, event):
+    def onZoomIn(self, event):
         scale = self.scalefactorunit
         self.resize(event, scale)
     
-    def onCTRLArrowUp(self, event):
+    def onZoomOut(self, event):
         scale = 1.0/self.scalefactorunit
         self.resize(event, scale)
     
-    def onArrowLeft(self, event):
+    def onMoveCanvasLeft(self, event):
         self.canvas.xview_scroll(-1, "units")
     
-    def onArrowRight(self, event):
+    def onMoveCanvasRight(self, event):
         self.canvas.xview_scroll(1, "units")
     
-    def onPrior(self, event):
-        self.canvas.xview_scroll(1, "pages")
+    #def onPrior(self, event):
+    #    self.canvas.xview_scroll(1, "pages")
     
-    def onNext(self, event):
-        self.canvas.xview_scroll(-1, "pages")
+    #def onNext(self, event):
+    #    self.canvas.xview_scroll(-1, "pages")
     
     def onShiftMouseWheel(self, event):
         self.canvas.xview_scroll(int(-1*(event.delta/120)), "units")
@@ -161,38 +189,49 @@ class TimeTablePage(tk.Frame):
         #self.total_scalefactor = 1
    
     def scale_objects(self, scale):
-        self.canvas.scale('all', 0, 0, scale, scale)        
+        self.canvas.scale('all', 0, 0, scale, scale)
+        
+    def scale_canvas_arround_object(self, scale, objectid):
+        if False: #objectid != -1:
+            object_coords = self.canvas.coords(objectid)
+            self.scaleshift_x0 = object_coords[0]
+            self.scaleshift_y0 = object_coords[1]
+        else:
+            self.scaleshift_x0 = 0
+            self.scaleshift_y0 = 0
+        self.canvas.scale('all', self.scaleshift_x0, self.scaleshift_y0, scale, scale)        
         
     def resize(self, event, scale):
         self.controller.total_scalefactor *= scale
+        if self.controller.total_scalefactor > 1:
+            self.canvas.itemconfigure("Background",fill="",outline="")
+        else:
+            self.canvas.itemconfigure("Background",fill="white",outline="")
         if event == None:
             x=0
             y=0
         else:
             x = 0 #self.canvas.canvasx(event.x)
             y = 0 #self.canvas.canvasy(event.y)
+        objectid = self.timetable_main.timetable.tt_canvas_cvobject
+        self.scale_canvas_arround_object(scale, objectid)
         self.canvas.scale('all', x, y, scale, scale)
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))
+                
+    def block_Canvas_movement(self,flag):
+        self.block_Canvas_movement_flag = flag
         
     def canvas_bindings(self):
-        self.canvas.bind('<Shift-ButtonPress-1>', self.move_from, add="+")
-        self.canvas.bind('<Shift-B1-Motion>', self.move_to, add="+")
+        self.canvas.bind('<Shift-ButtonPress-1>', self.move_from)
+        self.canvas.bind('<Shift-B1-Motion>', self.move_to)
         self.canvas.bind("<Control-MouseWheel>", self.onCtrlMouseWheel, add="+")
         self.canvas.bind("<Alt-MouseWheel>", self.onAltMouseWheel, add="+")
         self.canvas.bind("<MouseWheel>", self.onMouseWheel, add="+")
         self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel, add="+")
-        self.frame.bind("<Home>", self.onRestoreZoom)
-        self.frame.bind("<Up>", self.onArrowUp)
-        self.frame.bind("<Down>", self.onArrowDown)
-        self.frame.bind("<Left>", self.onArrowLeft)
-        self.frame.bind("<Right>", self.onArrowRight)
-        self.frame.bind("<Control-Up>", self.onCTRLArrowUp)
-        self.frame.bind("<Control-Down>", self.onCTRLArrowDown)        
-        self.frame.bind("<Prior>", self.onPrior)
-        self.frame.bind("<Next>", self.onNext)
-        self.frame.bind("<Shift-Prior>", self.onPrior)
-        self.frame.bind("<Shift-Next>", self.onNext)
-        self.frame.bind("<F5>", self.onRefreshCanvas)
+        for action,method in self.key_to_method_dict.items():
+            key_str = self.controller.get_key_for_action(action)
+            self.frame.bind(key_str,method)
+        return
 
     def save_as_pdf(self, fileName):
         # save postscipt image 
@@ -292,10 +331,19 @@ class TimeTablePage(tk.Frame):
         else:
             self.controller.set_statusmessage(" ")
         self.canvas_bindings()
+ 
     
     def tabunselected(self):
         logging.debug("Tabunselected: %s",self.tabname)
-        pass 
+        #if self.timetable_main.timetable.test_trainline_data_changed_flag:
+        #    answer = tk.messagebox.askyesnocancel ('Sie verlassen den Bildfahrplan','Der Fahrplan wurde verändert. Sie sollten die Änderungen vor dem Verlassen speichern. Wollen Sie zurück zum Bildfahrplan, und die Änderungen speichern?',default='yes')
+        #    if answer == None:
+        #        return # cancelation return
+        #    if answer:
+        #        self.controller.showFramebyName("TimeTablePage")
+        #    else:
+        #        pass
+        #pass 
     
     def _update_value(self,paramkey):
         logging.info("SerialMonitorPage - update_value: %s",paramkey)

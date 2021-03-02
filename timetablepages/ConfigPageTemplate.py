@@ -102,6 +102,7 @@ class ConfigPagetemplate(tk.Frame):
         self.button_frame2.grid(row=4, column=0,pady=10, padx=10)
         
         self.controller.update_variables_with_config_data(self.tabClassName)
+        self.store_old_config()
 
         #self.save_config()
 

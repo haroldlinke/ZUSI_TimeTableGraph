@@ -32,7 +32,7 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-PROG_VERSION ="V02.02 22.02.2021"
+PROG_VERSION ="V02.03 02.03.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -68,52 +68,38 @@ DEFAULT_CONFIG = {
 def get_shortcut(activity,type,action):
     return shortCutDict[activity][type][action]
 
-shortCutDict =  { "View":
-                   { "MouseButton":
-                     {"move_from"  : '<Shift-ButtonPress-1>',
-                      "move_to"    : '<Shift-B1-Motion>'
+shortCutDict =  { "MouseButton":
+                     {"move_from"        : '<Shift-ButtonPress-1>',
+                      "move_to"          : '<Shift-B1-Motion>',
+                      "Activate_Min"     : "<Button-1>",
+                      "Activate_Sec"     : "<Alt-1>",
+                      "Motion_Min"       : "<B1-Motion>",
+                      "Motion_Sec"       : "<Alt-B1-Motion>"                      
                       },
                      "MouseWheel" :
-                     {"onCtrlMouseWheel" : "<Control-MouseWheel>",
+                     {"Zoom" : "<Control-MouseWheel>",
                       "onAltMouseWheel"  : "<Alt-MouseWheel>",
                       "onMouseWheel"     : "<MouseWheel>",
                       "onShiftMouseWheel":"<Shift-MouseWheel>"                      
                       },
                      "Key":
-                     {"onRestoreZoom"    : "<Home>", 
-                      "onArrowUp"        : "<Up>",
-                      "onArrowDown"      : "<Down>",
-                      "onArrowLeft"      : "<Left>", 
-                      "onArrowRight"     : "<Right>",
-                      "onCTRLArrowUp"    :"<Control-Up>",
-                      "onCTRLArrowDown"  : "<Control-Down>",
-                      "onPrior"          : "<Prior>",
-                      "onNext"           : "<Next>",
-                      "onRefreshCanvas"  :"<F5>"
+                     {"onRestoreZoom"     : "<Home>", 
+                      "onMoveCanvasUp"    : "<Up>",
+                      "onMoveCanvasDown"  : "<Down>",
+                      "onMoveCanvasLeft"  : "<Left>", 
+                      "onMoveCanvasRight" : "<Right>",
+                      "onZoomIn"          : "<Control-Down>",
+                      "onZoomOut"         : "<Control-Up>",
+                      "onRefreshCanvas"   : "<F5>",
+                      "onTimeDecMinute"   : "-",
+                      "onTimeIncMinute"   : "+",
+                      "onPreviousStation" : "4",
+                      "onNextStation"     : "6",
+                      "onTimeDec10Sec"    : "<Shift-Key-8>",
+                      "onTimeInc10Sec"    : "<Shift-Key-2>",
+                      "onTimeDecSec"      : "<Alt-Key-8>",
+                      "onTimeIncSec"      : "<Alt-Key-2>"                                 
                      }
-                   },
-                   "Edit":
-                   {"MouseButton":
-                    {"Activate_Min" : "<Button-1>",
-                     "Activate_Sec" : "<Alt-1>",
-                     "Motion_Min"   : "<B1-Motion>",
-                     "Motion_Sec"   : "<Alt-B1-Motion>"
-                     },
-                    "MouseWheel":
-                    {"Zoom": "CTRL-Wheel"
-                     },
-                    "Key" : 
-                     {"onTimeDecMinute"   : "<Up>",
-                      "onTimeIncMinute"   : "<Down>",
-                      "onPreviousStation" : "<Left>",
-                      "onNextStation"     : "<Right>",
-                      "onTimeDec10Sec"    : "<Shift-Up>",
-                      "onTimeInc10Sec"    : "<Shift-Down>",
-                      "onTimeDecSec"      : "<Alt-Up>",
-                      "onTimeIncSec"      : "<Alt-Down>"                      
-                      }
-                     }
-                    }
-
+                   }
 
 

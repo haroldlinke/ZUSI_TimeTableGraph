@@ -37,6 +37,7 @@
             "Edit_Permission",
             "Bfp_ZFS_Id",
             "InOutBoundTrainsProp",
+            "SpecialOptions",
             "FplRglGgl",
             "Bfp_TrainLine_Distance_from_Stationline",
             "!ExtraShowAlleZFS",

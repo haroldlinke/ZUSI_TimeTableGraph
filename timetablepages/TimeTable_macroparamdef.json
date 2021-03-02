@@ -788,6 +788,33 @@
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
+    "SpecialOptions": {
+        "ParName": "SpecialOptions",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Spezialoptionen",
+        "Hint": "Spetielle Optionen",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "SO_remove_leading_Zero"
+        ]
+    },
+    "SO_remove_leading_Zero": {
+        "ParName": "SO_remove_leading_Zero",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "SO_remove_leading_Zero",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Führende Nullen löschen",
+        "Hint": "Bei der Anzeige von Zugnamen, führende Nullen in den Zugnummern unterdrücken"
+    },
+
     "InOutBoundTrainsProp": {
         "ParName": "InOutBoundTrainsProp",
         "Cnt": "",
@@ -933,7 +960,7 @@
         "Type": "Combo",
         "Values": [
             "Edit_blocked",
-            "Edit_allowed"
+            "Fast_Edit_allowed"
         ],
         "ValuesText": [
             "Bearbeitung gesperrt",
@@ -949,6 +976,6 @@
         "ParamFontStd": "True",
         "ParamEntryWidth": "26",
         "Input Text": "Bearbeiten erlauben",
-        "Hint": "Ermöglicht die Bearbeitung von Abfahrts- und Ankunftszeiten im Bildfahrplan"
+        "Hint": "Ermöglicht die Bearbeitung von Abfahrts- und Ankunftszeiten im Bildfahrplan - alle Zeiten und Züge können direkt ausgewählt und bearbeitet werden"
     }
 }
