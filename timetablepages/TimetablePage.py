@@ -213,8 +213,8 @@ class TimeTablePage(tk.Frame):
         else:
             x = 0 #self.canvas.canvasx(event.x)
             y = 0 #self.canvas.canvasy(event.y)
-        objectid = self.timetable_main.timetable.tt_canvas_cvobject
-        self.scale_canvas_arround_object(scale, objectid)
+        #objectid = self.timetable_main.timetable.tt_canvas_cvobject
+        #self.scale_canvas_arround_object(scale, objectid)
         self.canvas.scale('all', x, y, scale, scale)
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))
                 

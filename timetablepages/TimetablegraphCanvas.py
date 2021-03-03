@@ -2189,6 +2189,7 @@ class Timetable_main(Frame):
             #self.canvas.delete("all")
             self.canvas.destroy()
             self.canvas = self.ttpage.create_canvas()
+            self.controller.tooltip_var_dict={}
             
         self.ttpage.canvas_init = False
         self.controller.total_scalefactor = 1
