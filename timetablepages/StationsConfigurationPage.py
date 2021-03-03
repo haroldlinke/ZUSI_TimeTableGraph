@@ -52,6 +52,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
         self.generic_methods = {"TreeView": self.treeview}
         self.std_font = font.Font(font=STD_FONT)
         page_link = self
+        self.tree = None
         super().__init__(parent, controller, self.tabClassName, generic_methods=self.generic_methods)
         self.controller = controller
         #update treeview, when value in FPL-filename changed
@@ -83,7 +84,6 @@ class StationsConfigurationPage(ConfigPagetemplate):
     def treeview(self,parent_frame, marco,macroparams):
         self.tree_frame = parent_frame
         self.tree=self.create_zusi_zug_treeframe(self.tree_frame)
-        
 
     def JSONTree(self, Tree, Parent, Dictionary):
         for key in Dictionary :
@@ -140,6 +140,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
         TreeFrame = ttk.Frame(parent, padding="3")
         TreeFrame.grid(row=0, column=0, sticky=tk.NSEW)
         # Setup the Tree
+        #if self.tree == None:
         self.tree = ScrollableTV(TreeFrame, height=20, columns=("value")) #ttk.Treeview(TreeFrame, columns=('Values'))
         style = ttk.Style()
         style.configure("Treeview", font=STD_FONT)
