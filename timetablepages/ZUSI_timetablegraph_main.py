@@ -172,8 +172,8 @@ class TimeTableGraphMain(tk.Tk):
         filemenu2.add_command(label="Speichern als PDF", command=self.Save_Bfp_as_PDF)
         filemenu2.add_command(label="Speichern als Bild", command=self.Save_Bfp_as_Image)
         #filemenu2.add_checkbutton(label="Bearbeiten", onvalue=1, offvalue=0, variable=self.editFlag)
-        #filemenu.add_separator()
-        #filemenu.add_command(label="Beenden und Daten speichern", command=self.ExitProg_with_save)
+        filemenu2.add_separator()
+        filemenu2.add_command(label="Alle Änderungen in .trn speichern", command=self.export_all_changes_to_trnfiles)
         #filemenu.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
         #colormenu = tk.Menu(menu)
         #menu.add_cascade(label="Farbpalette", menu=colormenu)
@@ -295,13 +295,18 @@ class TimeTableGraphMain(tk.Tk):
     def ExitProg_with_save(self):
         self.cancel_with_save()
         
+    def export_all_changes_to_trnfiles(self):
+        frame = self.getFramebyName("TimeTablePage")
+        # save postscipt image
+        frame.edit_export_to_all_trn()
+        
     def SaveConfigFileas(self):
         filepathname = filedialog.asksaveasfilename(filetypes=[("Einstellungen Dateien","*.config.json")],defaultextension=".config.json")
         if filepathname:
             self.SaveConfigData(filepathname=filepathname)
 
     def OpenConfigFile(self):
-        filepathname = filedialog.askopenfilename(filetypes=[("Einstellungsdatei","*.config.json"),("All JSON files","*.json")],defaultextension=".clr.json")
+        filepathname = filedialog.askopenfilename(filetypes=[("Einstellungsdatei","*.config.json"),("All JSON files","*.json")],defaultextension=".config.json")
         if filepathname:
             #filepath,filename=os.path.split(filepathname)
             self.ConfigData.readConfigData(filepathname)
@@ -309,6 +314,21 @@ class TimeTableGraphMain(tk.Tk):
                 self.update_variables_with_config_data(confpage)
             self.get_stationlist_for_station_chooser()
             self.SaveConfigData()
+            
+    def SaveScheduleFileas(self):
+        filepathname = filedialog.asksaveasfilename(filetypes=[("Bildfahrplan Dateien","*.schedule.json")],defaultextension=".schedule.json")
+        if filepathname:
+            self.SaveScheduleData(filepathname=filepathname)
+            
+    def OpenScheduleFile(self):
+        filepathname = filedialog.askopenfilename(filetypes=[("Bildfahrplandatei","*.schedule.json"),("All JSON files","*.json")],defaultextension="..schedule.json")
+        if filepathname:
+            #filepath,filename=os.path.split(filepathname)
+            self.ConfigData.readConfigData(filepathname)
+            for confpage in configpage_list:
+                self.update_variables_with_config_data(confpage)
+            self.get_stationlist_for_station_chooser()
+            self.SaveConfigData()    
 
     def save_persistent_params(self):
         for macro in self.persistent_param_dict:
