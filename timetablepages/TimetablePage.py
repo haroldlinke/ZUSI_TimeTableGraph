@@ -230,7 +230,7 @@ class TimeTablePage(tk.Frame):
         self.canvas.bind("<Shift-MouseWheel>", self.onShiftMouseWheel, add="+")
         for action,method in self.key_to_method_dict.items():
             key_str = self.controller.get_key_for_action(action)
-            self.frame.bind(key_str,method)
+            self.canvas.bind(key_str,method)
         return
 
     def save_as_pdf(self, fileName):
@@ -271,7 +271,10 @@ class TimeTablePage(tk.Frame):
         except BaseException as e:
             logging.debug("Error while generating image-file\n %s",e)
             self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
-            pass    
+            pass
+        
+    def edit_export_to_all_trn(self):
+        self.timetable_main.edit_export_to_all_trn()
         
     def create_train_type_to_color_dict(self):
         self.train_type_prop_dict = {}
@@ -295,55 +298,73 @@ class TimeTablePage(tk.Frame):
                     self.train_type_prop_dict[traintype]=value_dict
 
     def tabselected(self):
-        logging.debug("Tabselected: %s",self.tabname)
-        #self.controller.currentTabClass = self.tabClassName
-        logging.info(self.tabname)
-        self.controller.update()
-        self.canvas_width = self.getConfigData("Bfp_width")
-        self.canvas_height = self.getConfigData("Bfp_height")
-        fpl_filename = self.getConfigData("Bfp_filename")
-        xml_filename = self.getConfigData("Bfp_trainfilename")
-        starthour = self.getConfigData("Bfp_start")
-        duration = self.getConfigData("Bfp_duration")
-        self.create_train_type_to_color_dict()
-        self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
-        if fpl_filename == "":
-            self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
-            return
-        if xml_filename == "":
-            self.controller.set_statusmessage("Kein ZUSI Buchfahrplann eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
-            return
-        if starthour == "" or starthour==None:
-            self.controller.set_statusmessage("Keine Startzeit für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
-            return
-        if duration == "" or duration==None:
-            self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
-            return        
-        self.timetable_main.create_zusi_zug_liste(fpl_filename)
-        if self.controller.check_if_config_data_changed() or self.firstcall:
-            self.controller.set_statusmessage("Bildfahrplanerstellung gestartet - bitte etwas Geduld")
-            self.firstcall = False
-            self.xml_filename = xml_filename
-            self.fpl_filename = fpl_filename
-            self.starthour = starthour
-            self.duration = duration
-            self.timetable_main.redo_fpl_and_canvas(self.canvas_width,self.canvas_height,fpl_filename=fpl_filename,xml_filename=xml_filename,starthour=starthour,duration=duration)
+        try:
+            if self.cancel_pagechange:
+                self.cancel_pagechange = True
+        except:
+            self.cancel_pagechange = False
+        if self.cancel_pagechange:
+            self.pagechange_canceled = True
         else:
-            self.controller.set_statusmessage(" ")
+            self.pagechange_canceled = False
+            logging.debug("Tabselected: %s",self.tabname)
+            #self.controller.currentTabClass = self.tabClassName
+            logging.info(self.tabname)
+            self.controller.update()
+            self.canvas_width = self.getConfigData("Bfp_width")
+            self.canvas_height = self.getConfigData("Bfp_height")
+            fpl_filename = self.getConfigData("Bfp_filename")
+            xml_filename = self.getConfigData("Bfp_trainfilename")
+            starthour = self.getConfigData("Bfp_start")
+            duration = self.getConfigData("Bfp_duration")
+            self.create_train_type_to_color_dict()
+            self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
+            if fpl_filename == "":
+                self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
+                return
+            if xml_filename == "":
+                self.controller.set_statusmessage("Kein ZUSI Buchfahrplann eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
+                return
+            if starthour == "" or starthour==None:
+                self.controller.set_statusmessage("Keine Startzeit für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
+                return
+            if duration == "" or duration==None:
+                self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
+                return        
+            self.timetable_main.create_zusi_zug_liste(fpl_filename)
+            if self.controller.check_if_config_data_changed() or self.firstcall:
+                self.controller.set_statusmessage("Bildfahrplanerstellung gestartet - bitte etwas Geduld")
+                self.firstcall = False
+                self.xml_filename = xml_filename
+                self.fpl_filename = fpl_filename
+                self.starthour = starthour
+                self.duration = duration
+                self.timetable_main.redo_fpl_and_canvas(self.canvas_width,self.canvas_height,fpl_filename=fpl_filename,xml_filename=xml_filename,starthour=starthour,duration=duration)
+            else:
+                self.controller.set_statusmessage(" ")
         self.canvas_bindings()
- 
+        self.cancel_pagechange = False
     
     def tabunselected(self):
-        logging.debug("Tabunselected: %s",self.tabname)
-        #if self.timetable_main.timetable.test_trainline_data_changed_flag:
-        #    answer = tk.messagebox.askyesnocancel ('Sie verlassen den Bildfahrplan','Der Fahrplan wurde verändert. Sie sollten die Änderungen vor dem Verlassen speichern. Wollen Sie zurück zum Bildfahrplan, und die Änderungen speichern?',default='yes')
-        #    if answer == None:
-        #        return # cancelation return
-        #    if answer:
-        #        self.controller.showFramebyName("TimeTablePage")
-        #    else:
-        #        pass
-        #pass 
+        if self.pagechange_canceled:
+            self.pagechange_canceled = False
+        else:
+            logging.debug("Tabunselected: %s",self.tabname)
+            if self.timetable_main.timetable.test_trainline_data_changed_flag():
+                answer = tk.messagebox.askyesnocancel ('Sie verlassen den Bildfahrplan','Der Fahrplan wurde verändert. Sie sollten die Änderungen vor dem Verlassen speichern. Wollen Sie zurück zum Bildfahrplan, und die Änderungen speichern?',default='yes')
+                if answer == None:
+                    self.cancel_pagechange = True
+                    self.controller.showFramebyName("TimeTablePage")               
+                if answer:
+                    self.cancel_pagechange = True
+                    self.controller.showFramebyName("TimeTablePage")
+                else:
+                    pass
+            pass
+    
+    def save_schedule_data(self):
+        
+        pass
     
     def _update_value(self,paramkey):
         logging.info("SerialMonitorPage - update_value: %s",paramkey)
