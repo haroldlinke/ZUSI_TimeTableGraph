@@ -64,7 +64,7 @@
         "MTabName": "Fahrplan und Strecke",
         "Title": "Fahrplan und Strecke",
         "Button_1": "Geänderte Einstellungen übernehmen",
-        "Button_2": "n",
+        "Button_2": "",
         "Button_3": "",
         "Ausführliche Beschreibung": "Fahrplan und Strecke festlegen\n\r\n\rAuf dieser Seite kann der ZUSI Fahrplan und die Strecke ausgewähkt werden, die im den Bildfahrplan angezeigt werden soll.",
         "Kurzbeschreibung": "Fahrplan und Strecke festlegen",
@@ -72,8 +72,7 @@
         "Params": [
             "Bfp_filename",
             "Bfp_TreeView",
-            "Bfp_trainfilename",
-            "Teilstrecke"
+            "Bfp_trainfilename"
         ]
     },
     "TimeTablePage": {
@@ -89,5 +88,24 @@
         "MacroDescLines": "",
         "Params": [
         ]
+    },
+    "PopupWinClone": {
+        "Typ": "PopupWinClone",
+        "Name": "PopupWinClone",
+        "MTabName": "Fahrplan Klonen",
+        "Title": "Fahrplan Klonen",
+        "Button_1": "Klonen",
+        "Button_2": "",
+        "Button_3": "",
+        "Ausführliche Beschreibung": "Klonen von Zugfahrplänen",
+        "Kurzbeschreibung": "Klonen",
+        "MacroDescLines": "2",
+        "Params": [
+            "PWC_train_filename",
+            "PWC_TrainType",
+            "PWC_TrainNumbers",
+            "PWC_DeltaTime"
+        ]
     }
+    
 }

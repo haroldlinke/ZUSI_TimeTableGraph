@@ -977,5 +977,57 @@
         "ParamEntryWidth": "26",
         "Input Text": "Bearbeiten erlauben",
         "Hint": "Ermöglicht die Bearbeitung von Abfahrts- und Ankunftszeiten im Bildfahrplan - alle Zeiten und Züge können direkt ausgewählt und bearbeitet werden"
+    },
+    "PWC_train_filename": {
+        "ParName": "PWC_train_filename",
+        "Cnt": "1",
+        "Type": "ChooseFileName",
+        "ConfigName": "PWC_train_filename",
+        "FileTypes" : "Zusi-Fahrplan, .trn ,all files, *.*",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "ParamDescription": "zu klonender Fahrplan",
+        "ParamDescLines": "1",
+        "Kurzbeschreibung": "zu klonender Fahrplan",
+        "ParamLabelWidth": "30",
+        "ParamEntryWidth": "100",
+        "Input Text": "ZUSI Fahrplan",
+        "Hint": "ZUSI Fahrplan, der geklont werden soll"
+    },
+    "PWC_TrainType": {
+        "ParName": "PWC_TrainType",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "",
+        "Input Text": "Zuggattung",
+        "ParamEntryWidth": "9",
+        "Hint": "Bezeichnung der Zuggattung, die die geklonten Fahrpläne haben sollen",
+        "Implementation comment": ""
+    },
+    "PWC_TrainNumbers": {
+        "ParName": "PWC_TrainNumbers",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "",
+        "Input Text": "Zugnummer(n)",
+        "ParamEntryWidth": "40",
+        "Hint": "Bezeichnung der Zugnummer(n), die die geklonten Fahrpläne haben sollen. Mehrere Zugnummern können mit Komma getrennt angegeben werden z.B 1000,1001,1002",
+        "Implementation comment": ""
+    },
+    "PWC_DeltaTime": {
+        "ParName": "PWC_DeltaTime",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "PWC_DeltaTime",
+        "Min": "1",
+        "Max": "99",
+        "Default": "5",
+        "Input Text": "Zeitverschiebung in Min",
+        "Hint": "Zeitverschiebung aller Ankunfts- und Abfahrtzeiten in Min"
     }
 }

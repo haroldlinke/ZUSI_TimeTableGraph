@@ -73,6 +73,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
         
     def xml_filename_updated(self, *args):
         #self.update_tree()
+        self.controller.get_stationlist_for_station_chooser()
         pass
     
     def update_tree(self):
@@ -120,13 +121,13 @@ class StationsConfigurationPage(ConfigPagetemplate):
                 xml_filename = self.Bfp_xmlfilenamelist.get(trainname)
                 if xml_filename != "":
                     self.controller.set_string_variable(xml_filename,paramkey="Bfp_trainfilename", macrokey=self.tabClassName)
-                    startStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["StartStation"]
-                    stationlist_list=stationlist[0].split(",")
-                    startStationparamvar["value"]=stationlist_list
-                    startStationparamvar.set(stationlist_list[0])
-                    endStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["EndStation"]
-                    endStationparamvar["value"]=stationlist_list
-                    endStationparamvar.set(stationlist_list[len(stationlist_list)-1])
+                    #startStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["StartStation"]
+                    #stationlist_list=stationlist[0].split(",")
+                    #startStationparamvar["value"]=stationlist_list
+                    #startStationparamvar.set(stationlist_list[0])
+                    #endStationparamvar = self.controller.macroparams_var["StationsConfigurationPage"]["EndStation"]
+                    #endStationparamvar["value"]=stationlist_list
+                    #endStationparamvar.set(stationlist_list[len(stationlist_list)-1])
                     self.controller.get_stationlist_for_station_chooser()
                 else:
                     self.controller.set_statusmessage("No <.timetable.xml> file found for "+trainname)

@@ -544,7 +544,10 @@ class TimeTableGraphMain(tk.Tk):
             
     def get_macroparam_val(self, macro, paramkey):
         value = ""
-        variable = self.macroparams_var[macro][paramkey]
+        try:
+            variable = self.macroparams_var[macro][paramkey]
+        except:
+            return None
         try:
             var_class = variable.winfo_class()
             if var_class == "TCombobox":
@@ -559,7 +562,9 @@ class TimeTableGraphMain(tk.Tk):
                     else:
                         value=variable.get()
             elif var_class == "Text":
-                value = variable.get("1.0",tk.END)            
+                value = variable.get("1.0",tk.END)
+            elif var_class == "Listbox":
+                value = [variable.get(i) for i in variable.curselection()]                
             else:
                 value = variable.get()
         except:
@@ -1358,16 +1363,20 @@ class TimeTableGraphMain(tk.Tk):
                 self.set_macroparam_val(tabClassName, paramkey, value)    
                 
     def get_stationlist_for_station_chooser(self):
-        xml_filename = self.getConfigData("Bfp_trainfilename")
-        self.stationlist = self.get_stationlist_from_tt_xml(xml_filename)
-        self.set_macroparam_val("SpecialConfigurationPage", "StationChooser", self.stationlist)
-        paramkey = "StationChooser"
-        configdatakey = self.getConfigDatakey(paramkey)
-        value = self.getConfigData(configdatakey)
-        listbox_var = self.macroparams_var["SpecialConfigurationPage"][paramkey]
-        for i in range(0,listbox_var.size()):
-            if listbox_var.get(i) in value:
-                listbox_var.select_set(i)
+        xml_filename = self.get_macroparam_val("StationsConfigurationPage","Bfp_trainfilename")
+        if xml_filename != None:
+            self.stationlist = self.get_stationlist_from_tt_xml(xml_filename)
+            self.set_macroparam_val("SpecialConfigurationPage", "StationChooser", self.stationlist)
+            paramkey = "StationChooser"
+            configdatakey = self.getConfigDatakey(paramkey)
+            value = self.getConfigData(configdatakey)
+            try:
+                listbox_var = self.macroparams_var["SpecialConfigurationPage"][paramkey]
+                for i in range(0,listbox_var.size()):
+                    if listbox_var.get(i) in value:
+                        listbox_var.select_set(i)
+            except:
+                pass
         
     def get_key_for_action(self,action):
         return shortCutDict["Key"].get(action,None)
