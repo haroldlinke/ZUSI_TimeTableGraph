@@ -32,7 +32,7 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-PROG_VERSION ="V02.05b002 04.03.2021"
+PROG_VERSION ="V02.06 05.03.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
