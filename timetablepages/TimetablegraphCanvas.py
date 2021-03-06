@@ -2208,7 +2208,7 @@ class Timetable_main(Frame):
             self.controller.tooltip_var_dict={}
         self.ttpage.canvas_init = False
         self.controller.total_scalefactor = 1
-        self.canvas.config(width=self.width,height=self.height,scrollregion=(0,0,self.width,self.height))
+        self.canvas.config(width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height))
         self.canvas.update()
         self.controller.set_statusmessage("Erzeuge Bahnhofsliste - "+self.xml_filename)
         self.controller.update()

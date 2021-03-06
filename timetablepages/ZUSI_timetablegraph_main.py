@@ -314,6 +314,7 @@ class TimeTableGraphMain(tk.Tk):
                 self.update_variables_with_config_data(confpage)
             self.get_stationlist_for_station_chooser()
             self.SaveConfigData()
+            self.showFramebyName("StationsConfigurationPage")
             
     def SaveScheduleFileas(self):
         filepathname = filedialog.asksaveasfilename(filetypes=[("Bildfahrplan Dateien","*.schedule.json")],defaultextension=".schedule.json")
