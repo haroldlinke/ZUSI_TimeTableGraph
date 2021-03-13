@@ -322,9 +322,17 @@ class TimeTablePage(tk.Frame):
             if fpl_filename == "":
                 self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
                 return
+            else:
+                if not os.path.isfile(fpl_filename):
+                    self.controller.set_statusmessage("ZUSI Fahrplan <"+ fpl_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+                    return                    
             if xml_filename == "":
                 self.controller.set_statusmessage("Kein ZUSI Buchfahrplann eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
                 return
+            else:
+                if not os.path.isfile(xml_filename):
+                    self.controller.set_statusmessage("ZUSI Buchfahrplan <"+ xml_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+                    return                      
             if starthour == "" or starthour==None:
                 self.controller.set_statusmessage("Keine Startzeit für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
                 return
@@ -350,17 +358,20 @@ class TimeTablePage(tk.Frame):
             self.pagechange_canceled = False
         else:
             logging.debug("Tabunselected: %s",self.tabname)
-            if self.timetable_main.timetable.test_trainline_data_changed_flag():
-                answer = tk.messagebox.askyesnocancel ('Sie verlassen den Bildfahrplan','Der Fahrplan wurde verändert. Sie sollten die Änderungen vor dem Verlassen speichern. Wollen Sie zurück zum Bildfahrplan, und die Änderungen speichern?',default='yes')
-                if answer == None:
-                    self.cancel_pagechange = True
-                    self.controller.showFramebyName("TimeTablePage")               
-                if answer:
-                    self.cancel_pagechange = True
-                    self.controller.showFramebyName("TimeTablePage")
-                else:
-                    pass
-            pass
+            try:
+                if self.timetable_main.timetable.test_trainline_data_changed_flag():
+                    answer = tk.messagebox.askyesnocancel ('Sie verlassen den Bildfahrplan','Der Fahrplan wurde verändert. Sie sollten die Änderungen vor dem Verlassen speichern. Wollen Sie zurück zum Bildfahrplan, und die Änderungen speichern?',default='yes')
+                    if answer == None:
+                        self.cancel_pagechange = True
+                        self.controller.showFramebyName("TimeTablePage")               
+                    if answer:
+                        self.cancel_pagechange = True
+                        self.controller.showFramebyName("TimeTablePage")
+                    else:
+                        pass
+                pass
+            except:
+                pass
     
     def save_schedule_data(self):
         

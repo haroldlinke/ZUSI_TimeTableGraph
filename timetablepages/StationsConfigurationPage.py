@@ -40,6 +40,7 @@ import logging
 from timetablepages.DefaultConstants import STD_FONT, LARGE_FONT
 from timetablepages.ConfigPageTemplate import ConfigPagetemplate
 page_link = None
+import os
 
 # ----------------------------------------------------------------
 # Class ConfigurationPage
@@ -69,11 +70,21 @@ class StationsConfigurationPage(ConfigPagetemplate):
         return self.controller.get_macroparam_val(macro,paramkey)            
     
     def bfpl_filename_updated(self, *args):
+        fpl_filename = self.controller.get_macroparam_val("StationsConfigurationPage","Bfp_filename")
+        if not os.path.isfile(fpl_filename):
+            self.controller.set_statusmessage("ZUSI Fahrplan <"+ fpl_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+            return
+        self.fpl_filename = fpl_filename 
         self.update_tree()
         
     def xml_filename_updated(self, *args):
         #self.update_tree()
         self.controller.get_stationlist_for_station_chooser()
+        xml_filename = self.controller.get_macroparam_val("StationsConfigurationPage","Bfp_trainfilename")
+        self.xml_filename = xml_filename
+        if not os.path.isfile(xml_filename):
+            self.controller.set_statusmessage("ZUSI Buchfahrplan <"+ xml_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+            return              
         pass
     
     def update_tree(self):
