@@ -250,6 +250,7 @@ class TimeTableGraphMain(tk.Tk):
         self.grab_set()
         self.configDataChanged = True
         self.edit_active = False
+        self.popup_active = False
         
     def set_statusmessage(self,status_text,fg="black"):
         #logging.debug("set_statusmessage: %s",status_text)
@@ -452,7 +453,7 @@ class TimeTableGraphMain(tk.Tk):
             webbrowser.open_new_tab(helppageurl)
 
     def getConfigData(self, key):
-        logging.debug("GetConfigData Key: %s",key)
+        #logging.debug("GetConfigData Key: %s",key)
         return self.ConfigData.data.get(key,DEFAULT_CONFIG.get(key,None))
     
     def getConfigData_multiple(self, configdatakey,paramkey,index):
