@@ -36,6 +36,7 @@ from tkinter import Tk, Canvas, Frame, font
 from tools.xmltodict import parse
 from datetime import datetime
 from timetablepages.DefaultConstants import LARGE_STD_FONT
+from timetablepages.ZUSI_fpn_class import ZUSI_fpn
 import os
 import logging
 import math
@@ -113,13 +114,16 @@ class RightClickMenu(tk.Frame):
 
     def create_right_click_menu(self):
         self.right_click_menu = tk.Menu(self.master, tearoff=0, relief='sunken')
-        self.right_click_menu.add_command(label="Zeiten zurück auf .trn Zeiten setzen", command=self.edit_stop_original)
-        self.right_click_menu.add_separator()
-        self.right_click_menu.add_command(label="Zugfahrplan in .trn-Datei exportieren", command=self.edit_export_to_trn)
-        self.right_click_menu.add_separator()
+        if self.master.editflag:
+            self.right_click_menu.add_command(label="Zeiten zurück auf .trn Zeiten setzen", command=self.edit_stop_original)
+            self.right_click_menu.add_separator()
+            self.right_click_menu.add_command(label="Zugfahrplan in .trn-Datei exportieren", command=self.edit_export_to_trn)
+            self.right_click_menu.add_separator()
+            self.right_click_menu.add_command(label="Zugfahrplan klonen", command=self.edit_clone_schedule) #,state="disabled")            
+            self.right_click_menu.add_separator()
+            
         self.right_click_menu.add_command(label="Zugfahrplan in ZUSI starten", command=self.edit_run_schedule)        
-        self.right_click_menu.add_separator()
-        self.right_click_menu.add_command(label="Zugfahrplan klonen", command=self.edit_clone_schedule,state="disabled")
+        
 
     def popup_text(self, event,cvobject):
         if not self.master.editflag:
@@ -147,11 +151,12 @@ class RightClickMenu(tk.Frame):
         self.master.edit_run_schedule(self.objectid)
 
 class TimeTableGraphCommon():
-    def __init__(self, controller, showTrainTimes, height, width, xml_filename="xml_filename",ttmain_page=None,tt_page=None):
+    def __init__(self, controller, showTrainTimes, height, width, xml_filename="",fpn_filename="",ttmain_page=None,tt_page=None):
         self.controller = controller
         self.ttmain_page = ttmain_page
         self.ttpage = tt_page
         self.xml_filename = xml_filename
+        self.fpn_filename = fpn_filename
         self.TrainMinuteShow = showTrainTimes
         self.canvas_traintype_prop_dict = {}
         self.trainType_to_Width_dict = {}
@@ -1523,7 +1528,8 @@ class TimeTableGraphCommon():
             self.ttpage.block_Canvas_movement(True)
             
     def enter_canvas(self,event=None):
-        self.tt_canvas.focus_set()
+        if not self.controller.popup_active:
+            self.tt_canvas.focus_set()
     
     def edit_bindings(self):
         self.tt_canvas.bind("<Enter>",self.enter_canvas)
@@ -1879,7 +1885,7 @@ class TimeTableGraphCommon():
             for FahrplanEintrag_tag in trn_root.findall('Zug/FahrplanEintrag'):
                 self.update_trn_xml_data(FahrplanEintrag_tag,train_dict)
         trn_tree.write(trn_filepathname,encoding="UTF-8",xml_declaration=True)
-        self.controller.set_statusmessage("Änderungen in exportiert in Datei: "+trn_filepathname)
+        self.controller.set_statusmessage("Änderungen exportiert in Datei: "+trn_filepathname)
         self.reset_trainline_data_changed_flag(trainIdx)
         
     def edit_clone_schedule(self,objectid):
@@ -1888,9 +1894,8 @@ class TimeTableGraphCommon():
         train_dict = self.schedule_trains_dict.get(trainIdx,{})
         trn_filepathname = train_dict.get("trn_filename","")
         
-        self.popwin = popup_win_clone(self,self.controller,trn_filepathname)
-        
-        pass
+        self.popwin = popup_win_clone(self.ttpage,self.controller,trn_filepathname,self.fpn_filename)
+        Tk.wait_window(self.popwin)
     
     def edit_run_schedule(self,objectid):
         trainIdx = int(self.tt_canvas.gettags(objectid)[2])
@@ -1954,22 +1959,33 @@ class Timetable_main(Frame):
                 if not os.path.exists(tt_xml__filepathname):
                     logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
                     self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
-                    return             
-            with open(tt_xml__filepathname,mode="r",encoding="utf-8") as fd:
-                xml_text = fd.read()
-                tt_xml_timetable_dict = parse(xml_text)
-                #enter train-timetable
-                result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict)
+                    return
+            try:
+                with open(tt_xml__filepathname,mode="r",encoding="utf-8") as fd:
+                    xml_text = fd.read()
+                    tt_xml_timetable_dict = parse(xml_text)
+                    #enter train-timetable
+                    result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict)
+            except BaseException as e:
+                logging.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",tt_xml__filepathname,e)
+                self.controller.set_statusmessage("Fehler beim öfnen der Datei \n" + tt_xml__filepathname)
+                pass
         else:
             self.timetable.convert_trn_dict_to_schedule_dict(trn_zug_dict,trn_filepathname=trn_filepathname)        
 
     def open_zusi_trn_file(self, trn_filepathname,fpn_filepathname):
-        with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
-            xml_text = fd.read()
-            trn_dict = parse(xml_text)
-        trn_zusi_dict = trn_dict.get("Zusi",{})
-        trn_zug_dict = trn_zusi_dict.get("Zug",{})        
-        self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filepathname,trn_filepathname=trn_filepathname)
+        try:
+            with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
+                xml_text = fd.read()
+                trn_dict = parse(xml_text)
+            trn_zusi_dict = trn_dict.get("Zusi",{})
+            trn_zug_dict = trn_zusi_dict.get("Zug",{})        
+            self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filepathname,trn_filepathname=trn_filepathname)
+        except BaseException as e:
+            logging.debug("open_zusi_trn_file - Error open file %s \n %s",trn_filepathname,e)
+            self.controller.set_statusmessage("Fehler beim öfnen der Datei \n" + trn_filepathname)
+            pass
+            
 
     def open_zusi_master_schedule(self,fpn_filename=""):
         self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
@@ -2124,9 +2140,14 @@ class Timetable_main(Frame):
         return
 
     def create_zusi_trn_list(self, trn_filepathname):
-        with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
-            xml_text = fd.read()
-            trn_dict = parse(xml_text)
+        try:
+            with open(trn_filepathname,mode="r",encoding="utf-8") as fd:
+                xml_text = fd.read()
+                trn_dict = parse(xml_text)
+        except BaseException as e:
+            logging.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",trn_filepathname,e)
+            self.controller.set_statusmessage("Fehler beim öfnen der Datei \n" + trn_filepathname)
+            return
         trn_filepath, trn_filename = os.path.split(trn_filepathname)
         trn_zusi_dict = trn_dict.get("Zusi")
         if trn_zusi_dict == {}:
@@ -2141,9 +2162,14 @@ class Timetable_main(Frame):
         if fpn_filename == "": return
         fpl_path, fpl_file = os.path.split(fpn_filename)
         #print('Input File, %s.' % fpn_filename)
-        with open(fpn_filename,mode="r",encoding="utf-8") as fd:
-            xml_text = fd.read()
-            self.zusi_master_timetable_dict = parse(xml_text)
+        try:
+            with open(fpn_filename,mode="r",encoding="utf-8") as fd:
+                xml_text = fd.read()
+                self.zusi_master_timetable_dict = parse(xml_text)
+        except BaseException as e:
+            logging.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",fpn_filename,e)
+            self.controller.set_statusmessage("Fehler beim öfnen der Datei \n" + fpn_filename)
+            return
         zusi_dict = self.zusi_master_timetable_dict.get("Zusi")
         if zusi_dict == {}:
             logging.info("ZUSI Entry not found")
@@ -2208,7 +2234,7 @@ class Timetable_main(Frame):
             self.controller.tooltip_var_dict={}
         self.ttpage.canvas_init = False
         self.controller.total_scalefactor = 1
-        self.canvas.config(width=self.width,height=self.height,scrollregion=(0,0,self.width,self.height))
+        self.canvas.config(width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height))
         self.canvas.update()
         self.controller.set_statusmessage("Erzeuge Bahnhofsliste - "+self.xml_filename)
         self.controller.update()
@@ -2216,7 +2242,7 @@ class Timetable_main(Frame):
         with open(self.xml_filename,mode="r",encoding="utf-8") as fd:
             xml_text = fd.read()
             zusi_timetable_dict = parse(xml_text)
-        self.timetable = TimeTableGraphCommon(self.controller, True, self.height, self.width,xml_filename=self.xml_filename,ttmain_page=self,tt_page=self.ttpage)
+        self.timetable = TimeTableGraphCommon(self.controller, True, self.height, self.width,xml_filename=self.xml_filename,fpn_filename=self.fpl_filename,ttmain_page=self,tt_page=self.ttpage)
         self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
         #define stops via selected train-timetable
         result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(zusi_timetable_dict,define_stations=True)
@@ -2235,7 +2261,9 @@ class Timetable_main(Frame):
         self.fpl_filename = fpl_filename
         self.xml_filename = xml_filename
         self.width = width
+        self.canvas_width = width
         self.height = height
+        self.canvas_height = height
         self.starthour = starthour
         self.duration = duration
         self.regenerate_canvas()
