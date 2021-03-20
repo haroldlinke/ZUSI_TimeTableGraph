@@ -89,6 +89,23 @@
         "Params": [
         ]
     },
+    "TCPConfigPage": {
+        "Typ": "TCPConfigPage",
+        "Name": "TCPConfigPage",
+        "MTabName": "Netzwerk Konfiguration",
+        "Title": "Netzwerk Konfiguration",
+        "Button_1": "Geänderte Einstellungen übernehmen",
+        "Button_2": "",
+        "Button_3": "",
+        "Ausführliche Beschreibung": "Einstellungen für die Netzwerkverbindung zum ZUSI Server",
+        "Kurzbeschreibung": "Einstellungen für ZUSI",
+        "MacroDescLines": "2",
+        "Params": [
+            "TCP_Connect_Checkbutton",
+            "TCP_IP_Adress",
+            "TCP_IP_Port"
+            ]
+    },
     "PopupWinClone": {
         "Typ": "PopupWinClone",
         "Name": "PopupWinClone",

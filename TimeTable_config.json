@@ -1,16 +1,17 @@
 {
     "startpagename": "StartPage",
-    "pos_x": -8,
-    "pos_y": -8,
-    "Bfp_filename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr.fpn",
-    "Bfp_trainfilename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\D17441.timetable.xml",
+
+    "pos_x": 1,
+    "pos_y": 23,
+    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\Et3730.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
     "EndStation": "Bft_Leuchtenbergring",
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
-    "Bfp_width": 2400,
-    "Bfp_height": 1200,
+    "Bfp_width": 1900,
+    "Bfp_height": 1000,
     "Bfp_start": 4,
     "Bfp_duration": 8,
     "Bfp_S_LineColor": "#ff8040",
@@ -211,8 +212,8 @@
             "Bfp_TrainType": "*"
         }
     },
-    "TLFileType": ".trn",
-    "TLFileType_No": 0,
+    "TLFileType": ".timetable.xml",
+    "TLFileType_No": 1,
     "Bfp_ZFS_Id": "Sbk,Abzw,Asig,Esig",
     "InOutBoundTrainsShow": true,
     "InOutBoundTrainsNoOneStop": true,
@@ -233,7 +234,10 @@
     "Edit_Permission_No": 1,
     "Bfp_show_train_dir": "all",
     "Bfp_show_train_dir_No": 0,
-    "w_height": 1357,
-    "w_width": 2560,
-    "SO_remove_leading_Zero": false
+    "w_height": 997,
+    "w_width": 1920,
+    "SO_remove_leading_Zero": false,
+    "TCP_Connect_Checkbutton": true,
+    "TCP_IP_Adress": "127.0.0.1",
+    "TCP_IP_Port": "1436"
 }

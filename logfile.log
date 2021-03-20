@@ -1,3 +1,330 @@
+
+14:47:25: ZUSI-TimetableGraph started V02.09 13.03.2021
+14:47:25:  Platform: Windows-10-10.0.19041-SP0
+14:47:25: Localfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+14:47:25: Callfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph
+14:47:25: readConfigData
+14:47:25: ReadConfig: {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\E2539.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 2, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
+14:47:25: Read MACRODEF: TimeTable_macrodef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+14:47:25: Read MACROPARAMDEF: TimeTable_macroparamdef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+14:47:25: Init ZUSI_fpn:  :  
+14:47:25: Screenwidth: 2560 Screenheight: 1440
+14:47:25: TabClass: <class 'timetablepages.StartPage.StartPage'> 
+14:47:25: Init Page StartPage 
+14:47:25: Open Photo1 Bildfahrplan1.png 
+14:47:25: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+14:47:25: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+14:47:25: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
+14:47:25: Create Tab: StartPage
+14:47:25: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
+14:47:25: Create Tab: TimeTablePage
+14:47:25: TabClass: <class 'timetablepages.StationsConfigurationPage.StationsConfigurationPage'> 
+14:47:25: StationsConfigurationPage - Generic
+14:47:25: SaveConfig: Fahrplan und Strecke - {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\E2539.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 2, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
+14:47:25: Create Tab: StationsConfigurationPage
+14:47:25: TabClass: <class 'timetablepages.ConfigurationPage.ConfigurationPage'> 
+14:47:25: ConfigurationPage - Multipleparams
+14:47:25: ConfigurationPage - Multipleparams
+14:47:25: ConfigurationPage - Multipleparams
+14:47:25: ConfigurationPage - Multipleparams
+14:47:25: ConfigurationPage - Multipleparams
+14:47:25: ConfigurationPage - Multipleparams
+14:47:25: ConfigurationPage - Multipleparams
+14:47:25: ConfigurationPage - Multipleparams
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+14:47:26: Create Tab: ConfigurationPage
+14:47:26: TabClass: <class 'timetablepages.SpecialConfigurationPage.SpecialConfigurationPage'> 
+14:47:26: SpecialConfigurationPage - Multipleparams
+14:47:26: SpecialConfigurationPage - Multipleparams
+14:47:26: Create Tab: SpecialConfigurationPage
+14:47:26: TabClass: <class 'timetablepages.TCPConfigPage.TCPConfigPage'> 
+14:47:26: Create Tab: TCPConfigPage
+14:47:26: Tabselected: Start
+14:47:26: Start
+14:47:26: TabChanged  - .!notebook.!startpage
+14:47:28: Tabunselected: Start
+14:47:28: Tabselected: Bildfahrplan
+14:47:28: Bildfahrplan
+14:47:29: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
+14:47:29: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:29: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:29: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:29: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:29: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:29: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
+14:47:29: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
+14:47:29: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
+14:47:29: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:29: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:47:30: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:47:30: TabChanged .!notebook.!startpage - .!notebook.!timetablepage
+14:48:02: Tabunselected: Bildfahrplan
+14:48:02: Tabselected: Ansicht-Einstellungen
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+14:48:02: TabChanged .!notebook.!timetablepage - .!notebook.!configurationpage
+14:48:08: Tabunselected: Ansicht-Einstellungen
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+14:48:09: SaveConfigData
+14:48:09: SaveConfig: Ansicht-Einstellungen - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\E2539.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 8, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
+14:48:09: Tabselected: Bildfahrplan
+14:48:09: Bildfahrplan
+14:48:09: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
+14:48:10: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
+14:48:10: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
+14:48:10: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:10: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
+14:48:11: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:48:11: TabChanged .!notebook.!configurationpage - .!notebook.!timetablepage
+14:48:46: Tabunselected: Bildfahrplan
+14:48:46: Tabselected: Fahrplan und Strecke
+14:48:46: TabChanged .!notebook.!timetablepage - .!notebook.!stationsconfigurationpage
+14:48:59: Tabunselected: Fahrplan und Strecke
+14:48:59: Tabselected: Bildfahrplan
+14:48:59: Bildfahrplan
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+14:49:00: TabChanged .!notebook.!stationsconfigurationpage - .!notebook.!timetablepage
+14:49:05: Tabunselected: Bildfahrplan
+14:49:05: Tabselected: Fahrplan und Strecke
+14:49:05: TabChanged .!notebook.!timetablepage - .!notebook.!stationsconfigurationpage
+14:49:14: Tabunselected: Fahrplan und Strecke
+14:49:16: SaveConfigData
+14:49:16: SaveConfig: Fahrplan und Strecke - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\Et3730.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 8, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, 999: {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
+14:49:16: Tabselected: Bildfahrplan
+14:49:16: Bildfahrplan
+14:49:16: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
+14:49:17: Print Outgoing-Station: DD26318 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: EE340 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EE2539 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: EE2542 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EE2543 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: EE2638 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EE2641 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EE2643 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: EE2646 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EE2833 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: EE3092 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EE5415 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN3151 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN3155 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN3171 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: NN3172 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN5411 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: NN5414 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN5425 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: NN5502 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN5505 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: NN5506 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN5517 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: NN8304 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: NN8306 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NN8307 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: NN8314 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: ExprEExprE14146 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: LrLr19821 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: DgDg45052 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: DgDg45054 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: DgDg45070 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: DgDg45072 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: DgDg55809 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: DgDg55811 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: DgDg61805 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: DstgDstg80216 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: DstsDsts88462 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: GagGag47144 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GagGag47155 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GagGag47157 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GagGag47201 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GagGag47205 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: GagGag47228 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: GagGag47230 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: GagGag47232 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: GagGag48150 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GagGag49249 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: GdgGdg48132 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GdgGdg49121 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GdgGdg49127 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: GdgGdg49251 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: LgLg59349 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: LgLg79239 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: LzLz14566 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: LzLz86946 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: LzLz87024 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: LzLz87031 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: LzLz87073 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
+14:49:17: Print Outgoing-Station: NgNg64431 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: SgSg43244 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: Print Incoming-Station: SgSg51810 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
+14:49:17: TabChanged .!notebook.!stationsconfigurationpage - .!notebook.!timetablepage
+14:50:03: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:03: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:03: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:03: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:03: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:03: open connection to ZUSI Server: 127.0.0.1 : 1436 
+14:50:03: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+14:50:05: Connect failed. Error Code : [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+14:50:08: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:08: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:08: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:08: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:08: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+14:50:08: open connection to ZUSI Server: 127.0.0.1 : 1436 
+14:50:08: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+14:50:10: ZUSIThread started
+14:50:10: Socket bind complete
+14:50:10: Zusi-Version: 3.4.3.0
+14:50:10: Zusi-Verbindungsinfo: 0
+14:50:10: Der Client wurde akzeptiert
+=======
 17:30:53: ZUSI-TimetableGraph started V02.08 06.03.2021
 17:30:53:  Platform: Windows-10-10.0.19041-SP0
 17:30:53: Localfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
@@ -12,7 +339,7 @@
 17:30:54: Open Photo1 Bildfahrplan1.png 
 17:30:54: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
 17:30:54: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
-17:30:54: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Z�gen. Der Benutzer kann sich einen der Z�ge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokf�hrersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans f�r eine Strecke mit definierten Bahnh�fen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan ausw�hlen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnh�fe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enth�lt f�r eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgew�hlt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Gr�sse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es m�glich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexit�t des Fahrplans, kann die Anzeige etwas dauern.\n'} 
+17:30:54: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
 17:30:54: Create Tab: StartPage
 17:30:54: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
 17:30:54: Create Tab: TimeTablePage
@@ -66,17 +393,17 @@
 17:31:04: Print Outgoing-Station: DD841H Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:04: Print Outgoing-Station: DD848 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:04: Print Incoming-Station: DD848H Abzw Heide Hagen Hbf Hagen Hbf Kassel Hbf
-17:31:04: Print Outgoing-Station: DD875 Kassel Hbf Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:04: Print Outgoing-Station: DD875 Kassel Hbf Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:04: Print Incoming-Station: DD875 Bonenburg Kassel Hbf Hagen Hbf Kassel Hbf
-17:31:04: Print Outgoing-Station: DD883 Kassel Hbf Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:04: Print Outgoing-Station: DD883 Kassel Hbf Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:04: Print Incoming-Station: DD883 Bonenburg Kassel Hbf Hagen Hbf Kassel Hbf
 17:31:04: Print Outgoing-Station: DD915 Hagen Hbf Hagen-Kabel Hagen Hbf Kassel Hbf
 17:31:04: Print Incoming-Station: DD915 Abzw Heide Hagen Hbf Hagen Hbf Kassel Hbf
 17:31:04: Print Outgoing-Station: DD935 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
-17:31:04: Print Outgoing-Station: DtDt17465 Kassel Hbf Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:04: Print Outgoing-Station: DtDt17465 Kassel Hbf Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:04: Print Incoming-Station: DtDt17465 Sbk 544 Kassel Hbf Hagen Hbf Kassel Hbf
 17:31:04: Print Incoming-Station: DD17619 Bonenburg Kassel Hbf Hagen Hbf Kassel Hbf
-17:31:05: Print Outgoing-Station: DD19507 Kassel Hbf Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:05: Print Outgoing-Station: DD19507 Kassel Hbf Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: DD19507 Bonenburg Kassel Hbf Hagen Hbf Kassel Hbf
 17:31:05: Print Outgoing-Station: DkDk9684 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: DkDk9684 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
@@ -84,11 +411,11 @@
 17:31:05: Print Incoming-Station: ExprDExprD14130 Abzw Heide Hagen Hbf Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: ExprDExprD14141 Bonenburg Kassel Hbf Hagen Hbf Kassel Hbf
 17:31:05: Print Outgoing-Station: ExprDExprD14164 Warburg Altenbeken Hagen Hbf Kassel Hbf
-17:31:05: Print Incoming-Station: ExprDExprD14164 Kassel-Wilhelmsh�he Warburg Hagen Hbf Kassel Hbf
-17:31:05: Print Outgoing-Station: EE871 Kassel Hbf Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:05: Print Incoming-Station: ExprDExprD14164 Kassel-Wilhelmshöhe Warburg Hagen Hbf Kassel Hbf
+17:31:05: Print Outgoing-Station: EE871 Kassel Hbf Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: EE871 Bonenburg Kassel Hbf Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: EE2025 Abzw Heide Hagen Hbf Hagen Hbf Kassel Hbf
-17:31:05: Print Incoming-Station: EE2170 Kassel-Wilhelmsh�he Hofgeismar Hagen Hbf Kassel Hbf
+17:31:05: Print Incoming-Station: EE2170 Kassel-Wilhelmshöhe Hofgeismar Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: EE2171 Bonenburg Hofgeismar Hagen Hbf Kassel Hbf
 17:31:05: Print Outgoing-Station: EE2531 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:05: Print Outgoing-Station: EE2674 Warburg Altenbeken Hagen Hbf Kassel Hbf
@@ -96,9 +423,9 @@
 17:31:05: Print Outgoing-Station: EE2744 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: EE2836 Abzw Heide Hagen Hbf Hagen Hbf Kassel Hbf
 17:31:05: Print Outgoing-Station: EE2843 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
-17:31:05: Print Outgoing-Station: EE2875 Kassel Hbf Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:05: Print Outgoing-Station: EE2875 Kassel Hbf Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: EE2875 Bonenburg Kassel Hbf Hagen Hbf Kassel Hbf
-17:31:05: Print Outgoing-Station: EE2943A Scherfede N�rde Hagen Hbf Kassel Hbf
+17:31:05: Print Outgoing-Station: EE2943A Scherfede Nörde Hagen Hbf Kassel Hbf
 17:31:05: Print Outgoing-Station: EE3101 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:05: Print Outgoing-Station: EE3103 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:05: Print Incoming-Station: EE3106 Abzw Heide Hagen Hbf Hagen Hbf Kassel Hbf
@@ -139,32 +466,32 @@
 17:31:06: Print Incoming-Station: BauBau81844 Abzw Ksl Rbf Berg Westhofen Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgsDgs52812 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgsDgs52812 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53301 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53301 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53301 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgDg53405 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53405 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgDg53505 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53505 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53701 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53701 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53701 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53705 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53705 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53705 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53707 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53707 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53707 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgDg53720 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53720 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53723 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53723 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgDg53724 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53724 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53725 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53725 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53725 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgDg53800 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53800 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgDg53802 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53802 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53803 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53803 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53803 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
-17:31:06: Print Outgoing-Station: DgDg53807 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:06: Print Outgoing-Station: DgDg53807 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53807 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:06: Print Outgoing-Station: DgDg53827 Obervellmar Kassel Rbf Hagen Hbf Kassel Hbf
 17:31:06: Print Incoming-Station: DgDg53827 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
@@ -172,9 +499,9 @@
 17:31:06: Print Incoming-Station: DgDg53903 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: DgDg54752 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DgDg54752 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: DgDg54765 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: DgDg54765 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DgDg54765 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: DgDg54767 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: DgDg54767 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DgDg54767 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: DgDg54872 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DgDg54872 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
@@ -194,10 +521,10 @@
 17:31:07: Print Incoming-Station: DgDg73822 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: DgmDgm91737H Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DgmDgm91737H Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
-17:31:07: Print Incoming-Station: DgmDgm91763 Abzw Hohensyburg Fr�ndenberg Hagen Hbf Kassel Hbf
+17:31:07: Print Incoming-Station: DgmDgm91763 Abzw Hohensyburg Fröndenberg Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: DstgDstg80026 Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DstgDstg80261 Abzw Hohensyburg Bestwig Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: DstgDstg80425 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: DstgDstg80425 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DstgDstg80425 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: DstgDstg81537 Schwerte Abzw Heide Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DstgDstg81537 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
@@ -207,7 +534,7 @@
 17:31:07: Print Incoming-Station: DstsDsts88221 Abzw Heide Westhofen Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DstsDsts88257 Abzw Hohensyburg Schwerte Ost Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: DstsDsts88812 Abzw Ksl Rbf Berg Hofgeismar Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: GagGag47095 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: GagGag47095 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GagGag49860 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag49860 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GagGag49860H Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
@@ -217,43 +544,43 @@
 17:31:07: Print Outgoing-Station: GagGag56753 Westhofen Hagen-Kabel Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag56753 Abzw Heide Westhofen Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GagGag57265 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: GagGag57355 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: GagGag57355 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag57355 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GagGag57474 Westhofen Hagen Vorhalle Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag57474 Abzw Heide Westhofen Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GagGag57870 Westhofen Hagen Vorhalle Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: GagGag57883 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: GagGag57883 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag57883 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GagGag57925 Westhofen Hagen-Kabel Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag57925 Abzw Heide Westhofen Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag58302 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
-17:31:07: Print Incoming-Station: GagGag58912 Abzw Hohensyburg Neheim-H�sten Hagen Hbf Kassel Hbf
+17:31:07: Print Incoming-Station: GagGag58912 Abzw Hohensyburg Neheim-Hüsten Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GagGag75466 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag75466 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GagGag75480 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: GdgGdg57801 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: GdgGdg57801 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GdgGdg57801 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: GdgGdg57964 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: GdgGdg57964 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
-17:31:07: Print Incoming-Station: GdgGdg58504 Abzw Heide Fr�ndenberg Hagen Hbf Kassel Hbf
+17:31:07: Print Incoming-Station: GdgGdg58504 Abzw Heide Fröndenberg Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LgeLge59924 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LgeLge59924 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LgeLge79214 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LgeLge79214 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
-17:31:07: Print Incoming-Station: LgLg79311 Abzw Hohensyburg Fr�ndenberg Hagen Hbf Kassel Hbf
+17:31:07: Print Incoming-Station: LgLg79311 Abzw Hohensyburg Fröndenberg Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LgLg79540 Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LgLg79540 Abzw Heide Westhofen Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LzLz82021 Schwerte Sbk 15 Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LzLz82022 Abzw Heide Hagen Hbf Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LzLz82236 Abzw Ksl Rbf Berg Hagen Hbf Hagen Hbf Kassel Hbf
-17:31:07: Print Incoming-Station: LzLz84004 Abzw Ksl Rbf Berg H�mme Hagen Hbf Kassel Hbf
+17:31:07: Print Incoming-Station: LzLz84004 Abzw Ksl Rbf Berg Hümme Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LzLz84005 Obervellmar Kassel Rbf Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LzLz85237 Schwerte Abzw Heide Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LzLz85237 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
-17:31:07: Print Incoming-Station: LzLz85438 Abzw Ksl Rbf Berg H�mme Hagen Hbf Kassel Hbf
+17:31:07: Print Incoming-Station: LzLz85438 Abzw Ksl Rbf Berg Hümme Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LzLz85496 Obervellmar Kassel Rbf Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LzLz85496 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
-17:31:07: Print Outgoing-Station: LzLz86319 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:07: Print Outgoing-Station: LzLz86319 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LzLz86319 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LzLz86821 Obervellmar Kassel Rbf Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LzLz87032 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
@@ -264,7 +591,7 @@
 17:31:07: Print Outgoing-Station: LzLz87599 Westhofen Hagen Vorhalle Hagen Hbf Kassel Hbf
 17:31:07: Print Outgoing-Station: LzLz87609 Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
 17:31:07: Print Incoming-Station: LzLz87609 Abzw Heide Westhofen Hagen Hbf Kassel Hbf
-17:31:08: Print Incoming-Station: LzLz87643 Abzw Hohensyburg Fr�ndenberg Hagen Hbf Kassel Hbf
+17:31:08: Print Incoming-Station: LzLz87643 Abzw Hohensyburg Fröndenberg Hagen Hbf Kassel Hbf
 17:31:08: Print Outgoing-Station: LzLz87674 Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
 17:31:08: Print Outgoing-Station: LzLz88518 Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
 17:31:08: Print Outgoing-Station: NeNe62064 Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
@@ -277,9 +604,9 @@
 17:31:08: Print Incoming-Station: NeNe71439 Abzw Hohensyburg Schwerte Hagen Hbf Kassel Hbf
 17:31:08: Print Outgoing-Station: SgSg51280 Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
 17:31:08: Print Incoming-Station: SgSg51280 Abzw Heide Westhofen Hagen Hbf Kassel Hbf
-17:31:08: Print Outgoing-Station: SgSg51341 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:08: Print Outgoing-Station: SgSg51341 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:08: Print Incoming-Station: SgSg51341 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
-17:31:08: Print Outgoing-Station: SgSg51713 Obervellmar Kassel-Wilhelmsh�he Hagen Hbf Kassel Hbf
+17:31:08: Print Outgoing-Station: SgSg51713 Obervellmar Kassel-Wilhelmshöhe Hagen Hbf Kassel Hbf
 17:31:08: Print Incoming-Station: SgSg51713 Bonenburg Obervellmar Hagen Hbf Kassel Hbf
 17:31:08: Print Outgoing-Station: SgSg51730 Warburg Altenbeken Hagen Hbf Kassel Hbf
 17:31:08: Print Incoming-Station: SgSg51730 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
@@ -290,8 +617,8 @@
 17:31:08: Print Incoming-Station: SgSg52008 Abzw Ksl Rbf Berg Warburg Hagen Hbf Kassel Hbf
 17:31:08: Print Outgoing-Station: SgSg52008H Westhofen Hagen Gbf Hagen Hbf Kassel Hbf
 17:31:08: Print Incoming-Station: SgSg52008H Abzw Heide Westhofen Hagen Hbf Kassel Hbf
-17:31:08: Print Incoming-Station: �g�g68870 Abzw Ksl Rbf Berg Hofgeismar Hagen Hbf Kassel Hbf
-17:31:09: Print Outgoing-Station: �g�g69947 Abzw Nuttlar Bigge Hagen Hbf Kassel Hbf
+17:31:08: Print Incoming-Station: ÜgÜg68870 Abzw Ksl Rbf Berg Hofgeismar Hagen Hbf Kassel Hbf
+17:31:09: Print Outgoing-Station: ÜgÜg69947 Abzw Nuttlar Bigge Hagen Hbf Kassel Hbf
 17:31:09: TabChanged .!notebook.!startpage - .!notebook.!timetablepage
 18:09:13: Cancel
 18:09:13: Cancel_without_save

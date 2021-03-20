@@ -350,6 +350,7 @@ class TimeTablePage(tk.Frame):
                 self.timetable_main.redo_fpl_and_canvas(self.canvas_width,self.canvas_height,fpl_filename=fpl_filename,xml_filename=xml_filename,starthour=starthour,duration=duration)
             else:
                 self.controller.set_statusmessage(" ")
+                self.controller.timetable_activ = True
         self.canvas_bindings()
         self.cancel_pagechange = False
     
