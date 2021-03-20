@@ -1029,5 +1029,41 @@
         "Default": "5",
         "Input Text": "Zeitverschiebung in Min",
         "Hint": "Zeitverschiebung aller Ankunfts- und Abfahrtzeiten in Min"
+    },
+    "TCP_Connect_Checkbutton": {
+        "ParName": "TCP_Connect_Checkbutton",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "TCP_Connect_Checkbutton",
+        "Hide": "",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Verbindung herstellen",
+        "Hint": "Wenn möglich, Verbindung zum ZUSI Server herstellen"
+    },
+    "TCP_IP_Adress": {
+        "ParName": "TCP_IP_Adress",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "",
+        "Max": "",
+        "Default": "127.0.0.1",
+        "Input Text": "IP Adresse",
+        "ParamEntryWidth": "16",
+        "Hint": "IP Adresse des ZUSI Servers",
+        "Implementation comment": ""
+    },
+    "TCP_IP_Port": {
+        "ParName": "TCP_IP_Port",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "",
+        "Max": "",
+        "Default": "1436",
+        "Input Text": "Port Adressse",
+        "ParamEntryWidth": "9",
+        "Hint": "Port Adresse des ZUSI Servers",
+        "Implementation comment": ""
     }
 }

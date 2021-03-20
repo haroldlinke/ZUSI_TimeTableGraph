@@ -41,6 +41,7 @@ from timetablepages.StationsConfigurationPage import StationsConfigurationPage
 from timetablepages.TimetablePage import TimeTablePage
 from timetablepages.StartPage import StartPage
 from timetablepages.SpecialConfigurationPage import SpecialConfigurationPage
+from timetablepages.TCPConfigPage import TCPConfigPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
 from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
 CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, shortCutDict
@@ -55,14 +56,15 @@ import logging
 import webbrowser
 import argparse
 from tools.xmltodict import parse
+from timetablepages.ZUSI_TCP_class import ZUSI_TCP
 #from datetime import datetime
 
 
 # ------------------------------
 
-tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,SpecialConfigurationPage)
+tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,SpecialConfigurationPage,TCPConfigPage)
 
-configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage")
+configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage","TCPConfigPage")
 
 defaultStartPage = "StartPage"
 
@@ -91,6 +93,8 @@ class TimeTableGraphMain(tk.Tk):
         self.platform=platform.platform().upper()
         self.buttonlist= []
         self.timetable_main=None
+        self.ZUSI_TCP_var = ZUSI_TCP("","",self)
+        self.ZUSI_monitoring_started = False
 
         self.fontlabel = self.get_font("FontLabel")
         self.fontspinbox = self.get_font("FontSpinbox")
@@ -251,6 +255,7 @@ class TimeTableGraphMain(tk.Tk):
         self.configDataChanged = True
         self.edit_active = False
         self.popup_active = False
+        self.timetable_activ = False
         
     def set_statusmessage(self,status_text,fg="black"):
         #logging.debug("set_statusmessage: %s",status_text)
@@ -375,11 +380,13 @@ class TimeTableGraphMain(tk.Tk):
             answer = tk.messagebox.askyesnocancel ('Das Programm wird beendet','Daten wurden verändert. Sollen die Daten gesichert werden?',default='no')
             if answer == None:
                 return # no cancelation
+            self.ZUSI_TCP_var.close_connection()
             if answer:
                 self.cancel_with_save() 
             else:
                 self.cancel_without_save()
         else:
+            self.ZUSI_TCP_var.close_connection()
             self.cancel_without_save()
 
     def close_notification(self):
