@@ -69,9 +69,12 @@ class ZUSI_TCP():
         return self._start_process_ZUSI()
         
     def close_connection (self):
-        logging.debug("close connection to ZUSI Server: %s : %s ",self._TCP_IP_Adress,self._TCP_Port_Adress)
-        self._stop_process_ZUSI()
-        self._socket.close()
+        if self._ZUSI_server_connected:
+            logging.debug("close connection to ZUSI Server: %s : %s ",self._TCP_IP_Adress,self._TCP_Port_Adress)
+            self._stop_process_ZUSI()
+            self._socket.close()
+            self._ZUSI_server_connected = False
+            self._connected_to_ZUSI_server = False
         
     def start_ZUSI_train(self,fpn_filename,trainnumber):
         self.send_msg = bytearray()
@@ -83,7 +86,12 @@ class ZUSI_TCP():
         self._addKnotenEnde()
         self._addKnotenEnde()
         self._addKnotenEnde()
-        self._socket.sendall(self.send_msg)
+        try:
+            self._socket.sendall(self.send_msg)
+            return True
+        except:
+            self.close_connection()
+            return False
 
     def addcallbackforNeededFunctions(self, knoten, attribute_list, callback_function,valuetype="Single"):
         """assign a callback function and valuetype to a ZUSI function
@@ -200,12 +208,16 @@ class ZUSI_TCP():
                 nodesChanged = False
 
     def _readIntegerInRawAtPos(self,pos):
-        if len(self._incommingData)>=pos+3:
-            data = struct.unpack("<l",self._incommingData[pos:pos+4])
-        else:
-            print("Error _readIntegerInRawAtPos: ",repr(self._incommingData))
+        try:
+            
+            if len(self._incommingData)>=pos+3:
+                data = struct.unpack("<l",self._incommingData[pos:pos+4])
+            else:
+                print("Error _readIntegerInRawAtPos: ",repr(self._incommingData))
+                return 0
+            return data[0]
+        except:
             return 0
-        return data[0]
         
     def _readIntegerAtPos(self, pos):
         data = struct.unpack("<l",self._ZusiCommand[pos:pos+4])        
@@ -374,7 +386,11 @@ class ZUSIThread(threading.Thread):
                 try:
                     data = self._socket.recv(1024)
                 except (socket.timeout,ConnectionResetError):
-                    continue
+                    continue                
+                except BaseException as e: 
+                    logging.debug("ZUSI-Thread %s",str(e))
+                    self._mainpage.close_connection()
+                    break
                 try:
                     if len(data)>0:
                         self._queue_ZUSI.put(data)

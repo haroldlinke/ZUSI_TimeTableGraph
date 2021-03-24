@@ -464,24 +464,25 @@ class TimeTableGraphCommon():
         self.tt_canvas.itemconfigure(self.edit_panel_currtime_objectid, text = self.mm_currtime_str)
         
     def print_monitor_panel(self):
-        self.tt_canvas.create_text(self.graphRight-160, 40, text = "Uhrzeit:", font=self.stdFont,anchor="ne",fill="black",tags="MonitorCurrTime")
-        self.tt_canvas.create_text(self.graphRight-160, 60, text = "KM:", font=self.stdFont,anchor="ne",fill="black",tags="MonitorCurrKm")
-        self.tt_canvas.create_text(self.graphRight-160, 80, text = "Geschwindigkeit", font=self.stdFont,anchor="ne",fill="black",tags="MonitorCurrSpeed")        
-        self.monitor_panel_currtime_objectid = self.tt_canvas.create_text(self.graphRight-100, 40, text = self.monitor_currtime_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
-        self.monitor_panel_currkm_objectid = self.tt_canvas.create_text(self.graphRight-100, 60, text = self.monitor_currkm_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
-        self.monitor_panel_currspeed_objectid = self.tt_canvas.create_text(self.graphRight-100, 80, text = self.monitor_currspeed_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")
+        self.tt_canvas.create_text(1000, 10, text="ZUSI Simulator", font=self.bigFont, anchor="nw")
+        self.tt_canvas.create_text(1000, 55, text = "Uhrzeit:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
+        self.tt_canvas.create_text(1200, 55, text = "KM:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
+        self.tt_canvas.create_text(1400, 55, text = "Geschwindigkeit:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")        
+        self.monitor_panel_currtime_objectid = self.tt_canvas.create_text(1100, 55, text = self.monitor_currtime_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
+        self.monitor_panel_currkm_objectid = self.tt_canvas.create_text(1250, 55, text = self.monitor_currkm_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
+        self.monitor_panel_currspeed_objectid = self.tt_canvas.create_text(1500, 55, text = self.monitor_currspeed_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")
         #self.monitor_panel_currdist_objectid = self.tt_canvas.create_text(self.graphRight-240, 80, text = self.monitor_currdist_str, font=LARGE_STD_FONT,anchor="e",fill="black",tags="MonitorCurrDist")
          
     def print_monitor_status_panel(self):
-        self.tt_canvas.create_text(self.graphRight-160, 100, text = "Fahrplanname:", font=self.stdFont,anchor="ne",fill="black",tags="MonitorCurrTime")
-        self.tt_canvas.create_text(self.graphRight-160, 120, text = "Zugnummer:", font=self.stdFont,anchor="ne",fill="black",tags="MonitorCurrKm")
-        self.tt_canvas.create_text(self.graphRight-160, 140, text = "Status:", font=self.stdFont,anchor="ne",fill="black",tags="MonitorCurrSpeed")        
-        self.monitor_panel_currfpn_objectid = self.tt_canvas.create_text(self.graphRight-100, 100, text = self.monitor_fpn_filepathname, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
-        self.monitor_panel_currtrainNum_objectid = self.tt_canvas.create_text(self.graphRight-100, 120, text = self.monitor_trainNumber, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
-        if self.monitor_ladestatus:
-            self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(self.graphRight-100, 140, text = "Status: Wird geladen ...", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")
-        else:
-            self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(self.graphRight-100, 180, text = "Status: Geladen", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")
+        self.tt_canvas.create_text(1000, 40, text = "ZugFahrplan:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
+        #self.tt_canvas.create_text(1000, 70, text = "Zugnummer:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
+        #self.tt_canvas.create_text(1000, 85, text = "Status:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")        
+        self.monitor_panel_currfpn_objectid = self.tt_canvas.create_text(1100, 40, text = self.monitor_fpn_filepathname, font=self.stdFont,anchor="nw",fill="black",tags="MonitorFpn")
+        #self.monitor_panel_currtrainNum_objectid = self.tt_canvas.create_text(1100, 70, text = self.monitor_trainNumber, font=self.stdFont,anchor="nw",fill="black",tags="MonitorTrainNumber")
+        #if self.monitor_ladestatus:
+        #    self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(1100,85, text = "Status: Wird geladen ...", font=self.stdFont,anchor="nw",fill="black",tags="MonitorStatus")
+        #else:
+        #    self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(1100,85, text = "Status: Geladen", font=self.stdFont,anchor="nw",fill="black",tags="MonitorStatus")
         
     def update_monitor_panel (self):
         self.tt_canvas.itemconfigure(self.monitor_panel_currtime_objectid,text = self.monitor_currtime_str)
@@ -490,11 +491,11 @@ class TimeTableGraphCommon():
             
     def update_monitor_status_panel (self):
         self.tt_canvas.itemconfigure(self.monitor_panel_currfpn_objectid, text = self.monitor_fpn_filepathname)
-        self.tt_canvas.itemconfigure(self.monitor_panel_currtrainNum_objectid, text = self.monitor_trainNumber)
-        if self.monitor_ladestatus:
-            self.tt_canvas.itemconfigure(self.monitor_panel_currladestatus_objectid, text = "Status: Wird geladen ...")
-        else:
-            self.tt_canvas.itemconfigure(self.monitor_panel_currladestatus_objectid, text = "Status: Geladen")
+        #self.tt_canvas.itemconfigure(self.monitor_panel_currtrainNum_objectid, text = self.monitor_trainNumber)
+        #if self.monitor_ladestatus:
+        #    self.tt_canvas.itemconfigure(self.monitor_panel_currladestatus_objectid, text = "Status: Wird geladen ...")
+        #else:
+        #    self.tt_canvas.itemconfigure(self.monitor_panel_currladestatus_objectid, text = "Status: Geladen")
     
 
     def calculateTimePos(self, time):
@@ -1944,16 +1945,16 @@ class TimeTableGraphCommon():
         if self.controller.ZUSI_TCP_var.getConnectionStatus():
             fpn_filename = self.schedule_dict.get("Name","")
             trainnumber = train_dict.get("TrainName","")
-            self.controller.ZUSI_TCP_var.start_ZUSI_train(fpn_filename,trainnumber)
-        else:
-            TCPPageFrame = self.controller.getFramebyName("TCPConfigPage")
-            if TCPPageFrame.connect_to_ZUSI_server():
+            if self.controller.ZUSI_TCP_var.start_ZUSI_train(fpn_filename,trainnumber):
                 return
-            else:
-                trn_filepathname = train_dict.get("trn_filename","")
-                if trn_filepathname != "":
-                    os.startfile(trn_filepathname)
-                    self.ttmain_page.after(3000,TCPPageFrame.connect_to_ZUSI_server) # try to conect to the ZUSI server after ZUSI has been started
+        TCPPageFrame = self.controller.getFramebyName("TCPConfigPage")
+        if TCPPageFrame.connect_to_ZUSI_server():
+            return
+        else:
+            trn_filepathname = train_dict.get("trn_filename","")
+            if trn_filepathname != "":
+                os.startfile(trn_filepathname)
+                self.ttmain_page.after(3000,TCPPageFrame.connect_to_ZUSI_server) # try to conect to the ZUSI server after ZUSI has been started
         
     def monitor_set_time(self,hour,minute,second):
         monitor_time = hour*60+minute+second/60.0
@@ -1974,6 +1975,7 @@ class TimeTableGraphCommon():
                 self.monitor_time = monitor_time
                 self.monitor_currtime_str  = self.determine_time_str(self.monitor_time)
                 self.update_monitor_panel()
+                self.monitor_update_train_pos()
 
     def monitor_set_km(self,km):
         if not self.monitor_start:
@@ -1981,6 +1983,7 @@ class TimeTableGraphCommon():
                 self.monitor_currkm = km
                 self.monitor_currkm_str = "{:.1f}".format(km)
                 self.update_monitor_panel()
+                self.monitor_update_train_pos()
     
     def monitor_set_speed(self,speed):
         if not self.monitor_start:
@@ -1995,7 +1998,7 @@ class TimeTableGraphCommon():
             if abs(dist-self.monitor_currdist) > 0:
                 self.monitor_currdist = dist
                 self.monitor_currdist_str = str(dist)
-                self.update_monitor_panel()
+                #self.update_monitor_panel()
                 
     def monitor_set_status(self,monitor_fpn_filepathname,monitor_trainNumber,monitor_ladestatus):
         self.monitor_fpn_filepathname = monitor_fpn_filepathname
@@ -2015,6 +2018,10 @@ class TimeTableGraphCommon():
             self.monitor_start = False
         else:
             self.update_monitor_status_panel()
+            self.monitor_update_train_pos()
+            
+    def monitor_update_train_pos(self):
+        pass
 
 class Timetable_main(Frame):
     def __init__(self,controller,canvas,parent):

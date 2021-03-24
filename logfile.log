@@ -1,325 +1,150 @@
-14:47:25: ZUSI-TimetableGraph started V02.09 13.03.2021
-14:47:25:  Platform: Windows-10-10.0.19041-SP0
-14:47:25: Localfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
-14:47:25: Callfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph
-14:47:25: readConfigData
-14:47:25: ReadConfig: {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\E2539.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 2, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
-14:47:25: Read MACRODEF: TimeTable_macrodef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
-14:47:25: Read MACROPARAMDEF: TimeTable_macroparamdef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
-14:47:25: Init ZUSI_fpn:  :  
-14:47:25: Screenwidth: 2560 Screenheight: 1440
-14:47:25: TabClass: <class 'timetablepages.StartPage.StartPage'> 
-14:47:25: Init Page StartPage 
-14:47:25: Open Photo1 Bildfahrplan1.png 
-14:47:25: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
-14:47:25: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
-14:47:25: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
-14:47:25: Create Tab: StartPage
-14:47:25: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
-14:47:25: Create Tab: TimeTablePage
-14:47:25: TabClass: <class 'timetablepages.StationsConfigurationPage.StationsConfigurationPage'> 
-14:47:25: StationsConfigurationPage - Generic
-14:47:25: SaveConfig: Fahrplan und Strecke - {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\E2539.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 2, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
-14:47:25: Create Tab: StationsConfigurationPage
-14:47:25: TabClass: <class 'timetablepages.ConfigurationPage.ConfigurationPage'> 
-14:47:25: ConfigurationPage - Multipleparams
-14:47:25: ConfigurationPage - Multipleparams
-14:47:25: ConfigurationPage - Multipleparams
-14:47:25: ConfigurationPage - Multipleparams
-14:47:25: ConfigurationPage - Multipleparams
-14:47:25: ConfigurationPage - Multipleparams
-14:47:25: ConfigurationPage - Multipleparams
-14:47:25: ConfigurationPage - Multipleparams
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
-14:47:26: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
-14:47:26: Create Tab: ConfigurationPage
-14:47:26: TabClass: <class 'timetablepages.SpecialConfigurationPage.SpecialConfigurationPage'> 
-14:47:26: SpecialConfigurationPage - Multipleparams
-14:47:26: SpecialConfigurationPage - Multipleparams
-14:47:26: Create Tab: SpecialConfigurationPage
-14:47:26: TabClass: <class 'timetablepages.TCPConfigPage.TCPConfigPage'> 
-14:47:26: Create Tab: TCPConfigPage
-14:47:26: Tabselected: Start
-14:47:26: Start
-14:47:26: TabChanged  - .!notebook.!startpage
-14:47:28: Tabunselected: Start
-14:47:28: Tabselected: Bildfahrplan
-14:47:28: Bildfahrplan
-14:47:29: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
-14:47:29: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:29: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:29: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:29: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:29: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:29: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:47:29: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:47:29: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:47:29: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:29: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:47:30: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:47:30: TabChanged .!notebook.!startpage - .!notebook.!timetablepage
-14:48:02: Tabunselected: Bildfahrplan
-14:48:02: Tabselected: Ansicht-Einstellungen
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
-14:48:02: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
-14:48:02: TabChanged .!notebook.!timetablepage - .!notebook.!configurationpage
-14:48:08: Tabunselected: Ansicht-Einstellungen
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
-14:48:08: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
-14:48:09: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
-14:48:09: SaveConfigData
-14:48:09: SaveConfig: Ansicht-Einstellungen - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\E2539.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 8, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
-14:48:09: Tabselected: Bildfahrplan
-14:48:09: Bildfahrplan
-14:48:09: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
-14:48:10: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:48:10: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:48:10: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:10: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:48:11: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:48:11: TabChanged .!notebook.!configurationpage - .!notebook.!timetablepage
-14:48:46: Tabunselected: Bildfahrplan
-14:48:46: Tabselected: Fahrplan und Strecke
-14:48:46: TabChanged .!notebook.!timetablepage - .!notebook.!stationsconfigurationpage
-14:48:59: Tabunselected: Fahrplan und Strecke
-14:48:59: Tabselected: Bildfahrplan
-14:48:59: Bildfahrplan
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
-14:49:00: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
-14:49:00: TabChanged .!notebook.!stationsconfigurationpage - .!notebook.!timetablepage
-14:49:05: Tabunselected: Bildfahrplan
-14:49:05: Tabselected: Fahrplan und Strecke
-14:49:05: TabChanged .!notebook.!timetablepage - .!notebook.!stationsconfigurationpage
-14:49:14: Tabunselected: Fahrplan und Strecke
-14:49:16: SaveConfigData
-14:49:16: SaveConfig: Fahrplan und Strecke - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\Et3730.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 8, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, 999: {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
-14:49:16: Tabselected: Bildfahrplan
-14:49:16: Bildfahrplan
-14:49:16: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
-14:49:17: Print Outgoing-Station: DD26318 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: EE340 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EE2539 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: EE2542 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EE2543 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: EE2638 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EE2641 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EE2643 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: EE2646 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EE2833 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: EE3092 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EE5415 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN3151 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN3155 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN3171 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: NN3172 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN5411 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: NN5414 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN5425 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: NN5502 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN5505 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: NN5506 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN5517 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: NN8304 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: NN8306 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NN8307 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: NN8314 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: ExprEExprE14146 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: LrLr19821 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: DgDg45052 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: DgDg45054 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: DgDg45070 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: DgDg45072 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: DgDg55809 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: DgDg55811 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: DgDg61805 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: DstgDstg80216 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: DstsDsts88462 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: GagGag47144 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GagGag47155 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GagGag47157 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GagGag47201 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GagGag47205 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: GagGag47228 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: GagGag47230 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: GagGag47232 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: GagGag48150 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GagGag49249 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: GdgGdg48132 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GdgGdg49121 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GdgGdg49127 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: GdgGdg49251 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: LgLg59349 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: LgLg79239 Abzw Richterich Übach-Palenberg Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: LzLz14566 Kohlscheid Aachen Hbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: LzLz86946 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: LzLz87024 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: LzLz87031 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: LzLz87073 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
-14:49:17: Print Outgoing-Station: NgNg64431 Abzw Richterich Herzogenrath Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: SgSg43244 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: Print Incoming-Station: SgSg51810 Kohlscheid Aachen West Gbf Abzw Richterich Aachen Hbf
-14:49:17: TabChanged .!notebook.!stationsconfigurationpage - .!notebook.!timetablepage
-14:50:03: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:03: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:03: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:03: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:03: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:03: open connection to ZUSI Server: 127.0.0.1 : 1436 
-14:50:03: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
-14:50:05: Connect failed. Error Code : [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
-14:50:08: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:08: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:08: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:08: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:08: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
-14:50:08: open connection to ZUSI Server: 127.0.0.1 : 1436 
-14:50:08: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
-14:50:10: ZUSIThread started
-14:50:10: Socket bind complete
-14:50:10: Zusi-Version: 3.4.3.0
-14:50:10: Zusi-Verbindungsinfo: 0
-14:50:10: Der Client wurde akzeptiert
+19:26:47: ZUSI-TimetableGraph started V02.10 20.03.2021
+19:26:47:  Platform: Windows-10-10.0.19041-SP0
+19:26:47: Localfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+19:26:47: Callfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph
+19:26:47: readConfigData
+19:26:47: ReadConfig: {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn/Fahrplan2012_10Uhr-17Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn\\Fahrplan2012_10Uhr-17Uhr\\WTB2.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 12, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
+19:26:47: Read MACRODEF: TimeTable_macrodef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+19:26:47: Read MACROPARAMDEF: TimeTable_macroparamdef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+19:26:47: Init ZUSI_fpn:  :  
+19:26:47: Screenwidth: 2560 Screenheight: 1440
+19:26:47: TabClass: <class 'timetablepages.StartPage.StartPage'> 
+19:26:47: Init Page StartPage 
+19:26:47: Open Photo1 Bildfahrplan1.png 
+19:26:47: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+19:26:47: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+19:26:47: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
+19:26:47: Create Tab: StartPage
+19:26:47: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
+19:26:47: Create Tab: TimeTablePage
+19:26:47: TabClass: <class 'timetablepages.StationsConfigurationPage.StationsConfigurationPage'> 
+19:26:47: StationsConfigurationPage - Generic
+19:26:47: Kein BuchfahrplanRohDatei Element gefunden DekoFützen 1 D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn\Fahrplan2012_10Uhr-17Uhr
+19:26:47: Kein BuchfahrplanRohDatei Element gefunden DekoBlumberg-Zollhaus 2 D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn\Fahrplan2012_10Uhr-17Uhr
+19:26:47: SaveConfig: Fahrplan und Strecke - {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn/Fahrplan2012_10Uhr-17Uhr.fpn', 'Bfp_trainfilename': 'D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn\\Fahrplan2012_10Uhr-17Uhr\\WTB2.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1900, 'Bfp_height': 1000, 'Bfp_start': 4, 'Bfp_duration': 12, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang, Mitte, Ende', 'Bfp_TrainTypeLabel_No': 1, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': True, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Fast_Edit_allowed', 'Edit_Permission_No': 1, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436'}
+19:26:47: Create Tab: StationsConfigurationPage
+19:26:47: TabClass: <class 'timetablepages.ConfigurationPage.ConfigurationPage'> 
+19:26:47: ConfigurationPage - Multipleparams
+19:26:47: ConfigurationPage - Multipleparams
+19:26:47: ConfigurationPage - Multipleparams
+19:26:47: ConfigurationPage - Multipleparams
+19:26:47: ConfigurationPage - Multipleparams
+19:26:47: ConfigurationPage - Multipleparams
+19:26:48: ConfigurationPage - Multipleparams
+19:26:48: ConfigurationPage - Multipleparams
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+19:26:48: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+19:26:48: Create Tab: ConfigurationPage
+19:26:48: TabClass: <class 'timetablepages.SpecialConfigurationPage.SpecialConfigurationPage'> 
+19:26:48: SpecialConfigurationPage - Multipleparams
+19:26:48: SpecialConfigurationPage - Multipleparams
+19:26:48: Create Tab: SpecialConfigurationPage
+19:26:48: TabClass: <class 'timetablepages.TCPConfigPage.TCPConfigPage'> 
+19:26:48: Create Tab: TCPConfigPage
+19:26:48: Tabselected: Start
+19:26:48: Start
+19:26:48: TabChanged  - .!notebook.!startpage
+19:26:50: Tabunselected: Start
+19:26:50: Tabselected: Bildfahrplan
+19:26:50: Bildfahrplan
+19:26:50: Kein BuchfahrplanRohDatei Element gefunden DekoFützen 1 D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn\Fahrplan2012_10Uhr-17Uhr
+19:26:50: Kein BuchfahrplanRohDatei Element gefunden DekoBlumberg-Zollhaus 2 D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn\Fahrplan2012_10Uhr-17Uhr
+19:26:50: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn/Fahrplan2012_10Uhr-17Uhr.fpn.
+19:26:51: Kein BuchfahrplanRohDatei Element gefunden DekoFützen 1 D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn
+19:26:51: Kein BuchfahrplanRohDatei Element gefunden DekoBlumberg-Zollhaus 2 D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn
+19:26:51: TabChanged .!notebook.!startpage - .!notebook.!timetablepage
+19:26:54: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:54: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:54: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:54: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:54: addNeededFunctions: (4,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:54: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:54: open connection to ZUSI Server: 127.0.0.1 : 1436 
+19:26:54: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+19:26:56: Connect failed. Error Code : [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+19:26:59: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:59: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:59: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:59: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:59: addNeededFunctions: (4,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:59: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:26:59: open connection to ZUSI Server: 127.0.0.1 : 1436 
+19:26:59: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+19:27:01: ZUSIThread started
+19:27:01: Socket bind complete
+19:27:01: Zusi-Version: 3.4.3.0
+19:27:01: Zusi-Verbindungsinfo: 0
+19:27:01: Der Client wurde akzeptiert
+19:27:45: ZUSI-Thread [WinError 10053] Eine bestehende Verbindung wurde softwaregesteuert
+durch den Hostcomputer abgebrochen
+19:28:00: close connection to ZUSI Server: 127.0.0.1 : 1436 
+19:28:01: ZUSI Thread received event. Exiting
+19:28:35: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:35: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:35: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:35: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:35: addNeededFunctions: (4,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:35: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:35: open connection to ZUSI Server: 127.0.0.1 : 1436 
+19:28:35: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+19:28:37: Connect failed. Error Code : [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+19:28:49: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:49: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:49: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:49: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:49: addNeededFunctions: (4,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:49: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:28:49: open connection to ZUSI Server: 127.0.0.1 : 1436 
+19:28:49: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+19:28:51: ZUSIThread started
+19:28:51: Socket bind complete
+19:28:51: Zusi-Version: 3.4.3.0
+19:28:51: Zusi-Verbindungsinfo: 0
+19:28:51: Der Client wurde akzeptiert
+19:29:49: ZUSI-Thread [WinError 10053] Eine bestehende Verbindung wurde softwaregesteuert
+durch den Hostcomputer abgebrochen
+19:34:13: close connection to ZUSI Server: 127.0.0.1 : 1436 
+19:34:14: ZUSI Thread received event. Exiting
+19:34:30: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:30: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:30: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:30: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:30: addNeededFunctions: (4,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:30: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:30: open connection to ZUSI Server: 127.0.0.1 : 1436 
+19:34:30: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+19:34:32: Connect failed. Error Code : [WinError 10061] Es konnte keine Verbindung hergestellt werden, da der Zielcomputer die Verbindung verweigerte
+19:34:35: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:35: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:35: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:35: addNeededFunctions: (1, 2) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:35: addNeededFunctions: (4,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:35: addNeededFunctions: (3,) : <bound method TCPConfigPage.cb_status of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
+19:34:35: open connection to ZUSI Server: 127.0.0.1 : 1436 
+19:34:35: Socket created: HostDESKTOP-Harold2017 IP-adress 192.168.178.73
+19:34:37: ZUSIThread started
+19:34:37: Socket bind complete
+19:34:37: Zusi-Version: 3.4.3.0
+19:34:37: Zusi-Verbindungsinfo: 0
+19:34:37: Der Client wurde akzeptiert
+19:34:58: Cancel
+19:34:58: close connection to ZUSI Server: 127.0.0.1 : 1436 
+19:34:59: ZUSI Thread received event. Exiting
+19:34:59: Cancel_without_save
+19:34:59: Cancel_without_save2
+19:34:59: Close_notification
+19:34:59: SaveConfigData

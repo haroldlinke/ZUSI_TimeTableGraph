@@ -36,6 +36,7 @@
 from timetablepages.ConfigPageTemplate import ConfigPagetemplate
 from timetablepages.ZUSI_TCP_class import ZUSI_TCP
 import logging
+from tools.xmltodict import parse
 
 # ----------------------------------------------------------------
 # Class ConfigurationPage
@@ -61,6 +62,7 @@ class TCPConfigPage(ConfigPagetemplate):
         self.controller.ZUSI_TCP_var.addcallbackforNeededFunctions(0x000A,(0x10,0x11,0x12),self.cb_time)
         self.controller.ZUSI_TCP_var.addcallbackforNeededFunctions(0x000A,(0x19,0x61),self.cb_distance)
         self.controller.ZUSI_TCP_var.addcallbackforNeededFunctions(0x000C,(0x01,0x02),self.cb_status,valuetype="String")
+        self.controller.ZUSI_TCP_var.addcallbackforNeededFunctions(0x000C,(0x04,),self.cb_status,valuetype="Datei")
         self.controller.ZUSI_TCP_var.addcallbackforNeededFunctions(0x000C,(0x03,),self.cb_status,valuetype="Byte")
         if self.controller.ZUSI_TCP_var.open_connection():
             self.after(1000,self.controller.ZUSI_TCP_var.sendNeededData)
@@ -108,6 +110,14 @@ class TCPConfigPage(ConfigPagetemplate):
                 self.monitor_trainNumber = event["Value"]
             elif event["Attribute"]== 3: # 
                 self.monitor_ladepause = bool(event["Value"])
+            elif event["Attribute"]== 4: # 
+                timetable_file = event["Value"]
+                timetable_str = str(timetable_file,"UTF-8") # String
+                xml_start = timetable_str.find("<?xml")
+                if xml_start != -1:
+                    timetable_str = timetable_str[xml_start:]
+                    #print("timetable_str:",timetable_str)
+                    self.controller.simu_timetable_dict = parse(timetable_str)
             self.controller.timetable_main.timetable.monitor_set_status(self.monitor_fpn_filepathname,self.monitor_trainNumber,self.monitor_ladepause)
                 
         
