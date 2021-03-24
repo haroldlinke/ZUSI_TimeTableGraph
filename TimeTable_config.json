@@ -1,10 +1,9 @@
 {
     "startpagename": "StartPage",
-
-    "pos_x": 1,
-    "pos_y": 23,
-    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn",
-    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\Et3730.timetable.xml",
+    "pos_x": -1928,
+    "pos_y": -8,
+    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn/Fahrplan2012_10Uhr-17Uhr.fpn",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Wutachtalbahn\\Fahrplan2012_10Uhr-17Uhr\\WTB2.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
     "EndStation": "Bft_Leuchtenbergring",
@@ -13,7 +12,7 @@
     "Bfp_width": 1900,
     "Bfp_height": 1000,
     "Bfp_start": 4,
-    "Bfp_duration": 8,
+    "Bfp_duration": 12,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineDashed": " ",
@@ -199,6 +198,17 @@
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
             "Bfp_TrainTypeLabelSize": 10
+        },
+        "999": {
+            "Bfp_TrainTypeAll": "",
+            "Bfp_TrainTypeColor": "#000080",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Anfang, Mitte, Ende",
+            "Bfp_TrainTypeLabel_No": 1,
+            "Bfp_TrainTypeLabelSize": 8,
+            "Bfp_TrainType": "*"
         },
         "999": {
             "Bfp_TrainTypeAll": "",

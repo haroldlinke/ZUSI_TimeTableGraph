@@ -95,7 +95,8 @@ class TimeTableGraphMain(tk.Tk):
         self.timetable_main=None
         self.ZUSI_TCP_var = ZUSI_TCP("","",self)
         self.ZUSI_monitoring_started = False
-
+        self.simu_timetable_dict = {}
+        
         self.fontlabel = self.get_font("FontLabel")
         self.fontspinbox = self.get_font("FontSpinbox")
         self.fonttext = self.get_font("FontText")
