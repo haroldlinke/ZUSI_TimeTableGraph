@@ -117,12 +117,18 @@ class ConfigPagetemplate(tk.Frame):
     
     def tabunselected(self):
         logging.debug("Tabunselected: %s",self.tabname)
+        
         if self.check_if_config_data_changed():
+            logging.debug("Config_data changed - request save or cancel")
             answer = tk.messagebox.askyesnocancel ('Sie verlassen die Einstellungen','Die Einstellungen wurden verändert. Sollen die geänderten Einstellungen gesichert werden?',default='no')
             if answer == None:
+                logging.debug("Config_data changed - answer: None")
                 return # cancelation return to "ConfigurationOage"
             if answer:
+                logging.debug("Config_data changed - answer: Yes")
                 self.save_config()
+            else:
+                logging.debug("Config_data changed - answer: No")
        
     def cancel(self):
         self.save_config()
@@ -180,5 +186,6 @@ class ConfigPagetemplate(tk.Frame):
     def check_if_config_data_changed(self):
         param_values_dict = self.get_macroparam_var_values(self.tabClassName)
         if self.old_param_values_dict != param_values_dict:
+            logging.debug("Config-Data changed")
             return True
         return False

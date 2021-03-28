@@ -313,6 +313,7 @@ class TimeTablePage(tk.Frame):
             self.controller.update()
             self.canvas_width = self.getConfigData("Bfp_width")
             self.canvas_height = self.getConfigData("Bfp_height")
+            logging.debug("Timetablepage - tabselected - Canvas_height %s, width %s",self.canvas_height,self.canvas_width)
             fpl_filename = self.getConfigData("Bfp_filename")
             xml_filename = self.getConfigData("Bfp_trainfilename")
             starthour = self.getConfigData("Bfp_start")

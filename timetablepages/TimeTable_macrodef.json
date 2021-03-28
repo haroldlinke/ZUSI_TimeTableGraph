@@ -103,7 +103,10 @@
         "Params": [
             "TCP_Connect_Checkbutton",
             "TCP_IP_Adress",
-            "TCP_IP_Port"
+            "TCP_IP_Port",
+            "Monitoring_Checkbutton",
+            "Monit_train_LineProp",
+            "Monit_time_LineProp"
             ]
     },
     "PopupWinClone": {
