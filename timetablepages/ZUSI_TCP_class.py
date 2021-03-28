@@ -62,28 +62,48 @@ class ZUSI_TCP():
         self._connected_to_ZUSI_server = False
         self._ZUSI_server_connected = False
         
-    def open_connection(self,TCP_IP_Adress="127.0.0.1", TCP_Port_Adress="1436"):
+    def open_connection(self,TCP_IP_Adress="127.0.0.1", TCP_Port_Adress="1436",callback=None):
         self._TCP_IP_Adress = TCP_IP_Adress
-        self._TCP_Port_Adress = TCP_Port_Adress        
+        self._TCP_Port_Adress = TCP_Port_Adress
+        self.connection_status_callback = callback
         logging.debug("open connection to ZUSI Server: %s : %s ",self._TCP_IP_Adress,self._TCP_Port_Adress)
+        if self.connection_status_callback:
+            self.connection_status_callback(status="Connecting",message="open connection to ZUSI Server: " + self._TCP_IP_Adress + self._TCP_Port_Adress)
         return self._start_process_ZUSI()
         
     def close_connection (self):
-        logging.debug("close connection to ZUSI Server: %s : %s ",self._TCP_IP_Adress,self._TCP_Port_Adress)
-        self._stop_process_ZUSI()
-        self._socket.close()
+        if self._ZUSI_server_connected:
+            logging.debug("close connection to ZUSI Server: %s : %s ",self._TCP_IP_Adress,self._TCP_Port_Adress)
+            self._stop_process_ZUSI()
+            self._socket.close()
+            self._ZUSI_server_connected = False
+            self._connected_to_ZUSI_server = False
         
-    def start_ZUSI_train(self,fpn_filename,trainnumber):
+    def start_ZUSI_train(self,trainnumber,fpn_filename=""):
         self.send_msg = bytearray()
-        self._addKnotenAnfang(0x0002) # <Kn>    // Client-Anwendung 02
-        self._addKnotenAnfang(0x010B) # <Kn>    // Befehl CONTROL
-        self._addKnotenAnfang(0x0003) # <Kn>    // Zug starten
-        self._addTextAtribut(0x01, fpn_filename) # Fahrplandateiname
-        self._addTextAtribut(0x02, trainnumber)  # Zugnummer
-        self._addKnotenEnde()
-        self._addKnotenEnde()
-        self._addKnotenEnde()
-        self._socket.sendall(self.send_msg)
+        if fpn_filename=="":
+            self._addKnotenAnfang(0x0002) # <Kn>    // Client-Anwendung 02
+            self._addKnotenAnfang(0x010B) # <Kn>    // Befehl CONTROL
+            self._addKnotenAnfang(0x0006) # <Kn>    // Zug starten
+            self._addTextAtribut(0x01, trainnumber)  # Zugnummer
+            self._addKnotenEnde()
+            self._addKnotenEnde()
+            self._addKnotenEnde()
+        else:
+            self._addKnotenAnfang(0x0002) # <Kn>    // Client-Anwendung 02
+            self._addKnotenAnfang(0x010B) # <Kn>    // Befehl CONTROL
+            self._addKnotenAnfang(0x0003) # <Kn>    // Zug starten
+            self._addTextAtribut(0x01, fpn_filename) # Fahrplandateiname
+            self._addTextAtribut(0x02, trainnumber)  # Zugnummer
+            self._addKnotenEnde()
+            self._addKnotenEnde()
+            self._addKnotenEnde()
+        try:
+            self._socket.sendall(self.send_msg)
+            return True
+        except:
+            self.close_connection()
+            return False
 
     def addcallbackforNeededFunctions(self, knoten, attribute_list, callback_function,valuetype="Single"):
         """assign a callback function and valuetype to a ZUSI function
@@ -198,14 +218,21 @@ class ZUSI_TCP():
                 self._incommingData = self._incommingData[i:]
                 self._AnalyseZUSICommand()
                 nodesChanged = False
+            if nodeCount > 6:
+                self._incommingData = bytearray() # something went wrong Notbremse!!
+                break
 
     def _readIntegerInRawAtPos(self,pos):
-        if len(self._incommingData)>=pos+3:
-            data = struct.unpack("<l",self._incommingData[pos:pos+4])
-        else:
-            print("Error _readIntegerInRawAtPos: ",repr(self._incommingData))
+        try:
+            
+            if len(self._incommingData)>=pos+3:
+                data = struct.unpack("<l",self._incommingData[pos:pos+4])
+            else:
+                print("Error _readIntegerInRawAtPos: ",repr(self._incommingData))
+                return 0
+            return data[0]
+        except:
             return 0
-        return data[0]
         
     def _readIntegerAtPos(self, pos):
         data = struct.unpack("<l",self._ZusiCommand[pos:pos+4])        
@@ -288,6 +315,9 @@ class ZUSI_TCP():
             if self.attributeData[0] == 0:
                 logging.debug("Der Client wurde akzeptiert")
                 self._ZUSI_server_connected = True
+                if self.connection_status_callback:
+                    self.connection_status_callback(status="Connected",message="Connection to ZUSI Server: " + self.ZUSI_version + self.ZUSI_Verbindungsinfo)                        
+                
             pass
 
     def _process_ZUSI_TCP(self):
@@ -318,6 +348,8 @@ class ZUSI_TCP():
             logging.debug ('Socket created: Host' + hostname + " IP-adress " + ip_address)
         except (socket.error, msg) :
             logging.debug ('Failed to create socket. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])
+            if self.connection_status_callback:
+                self.connection_status_callback(status="Not Connected",message='Failed to create socket. Error Code : ' + str(msg[0]) + ' Message ' + msg[1])              
             return False
         self.send_msg = bytearray()
         self._addKnotenAnfang(0x0001)  #<Kn>  Verbindungsaufbau
@@ -333,6 +365,8 @@ class ZUSI_TCP():
             self._socket.connect((self._TCP_IP_Adress,int(self._TCP_Port_Adress)))
             self._socket.sendall(self.send_msg)
         except BaseException as e:
+            if self.connection_status_callback:
+                self.connection_status_callback(status="Not Connected",message='Failed to create socket. Error Code : ' + str(e))              
             logging.debug ('Connect failed. Error Code : %s',str(e))
             return False
         self._connected_to_ZUSI_server = True
@@ -374,7 +408,11 @@ class ZUSIThread(threading.Thread):
                 try:
                     data = self._socket.recv(1024)
                 except (socket.timeout,ConnectionResetError):
-                    continue
+                    continue                
+                except BaseException as e: 
+                    logging.debug("ZUSI-Thread %s",str(e))
+                    self._mainpage.close_connection()
+                    break
                 try:
                     if len(data)>0:
                         self._queue_ZUSI.put(data)
