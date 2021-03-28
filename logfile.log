@@ -13,7 +13,7 @@
 14:14:22: Open Photo1 Bildfahrplan1.png 
 14:14:22: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
 14:14:22: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
-14:14:22: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
+14:14:22: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zï¿½gen. Der Benutzer kann sich einen der Zï¿½ge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokfï¿½hrersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans fï¿½r eine Strecke mit definierten Bahnhï¿½fen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswï¿½hlen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhï¿½fe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthï¿½lt fï¿½r eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewï¿½hlt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grï¿½sse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es mï¿½glich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexitï¿½t des Fahrplans, kann die Anzeige etwas dauern.\n'} 
 14:14:22: Create Tab: StartPage
 14:14:22: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
 14:14:22: Create Tab: TimeTablePage
@@ -64,41 +64,41 @@
 14:14:24: Timetablepage - tabselected - Canvas_height 1000, width 1850
 14:14:25: Regenerate_CANVAS - Canvas_height 1000, width 1850
 14:14:25: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
-14:14:26: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:26: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:26: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:26: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:14:26: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:26: Print Incoming-Station: ï¿½gï¿½g68132 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
 14:14:26: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:14:26: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:14:26: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
@@ -186,41 +186,41 @@
 14:14:39: Timetablepage - tabselected - Canvas_height 2000, width 1850
 14:14:40: Regenerate_CANVAS - Canvas_height 2000, width 1850
 14:14:40: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
-14:14:41: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:41: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:41: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:41: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:14:41: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:41: Print Incoming-Station: ï¿½gï¿½g68132 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
 14:14:41: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:14:41: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:14:41: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
@@ -290,41 +290,41 @@
 14:14:52: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
 14:14:52: Regenerate_CANVAS - Canvas_height 2000, width 1850
 14:14:52: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
-14:14:53: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:53: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:53: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:14:53: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:14:53: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:14:53: Print Incoming-Station: ï¿½gï¿½g68132 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
 14:14:53: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:14:53: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:14:53: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
@@ -469,41 +469,41 @@
 14:15:23: Timetablepage - tabselected - Canvas_height 2000, width 1850
 14:15:23: Regenerate_CANVAS - Canvas_height 2000, width 1850
 14:15:23: Input File, D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn.
-14:15:24: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:15:24: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:15:24: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf Übach-Palenberg
-14:15:24: Print Incoming-Station: ÜgÜg68132 von Geilenkirchen Herzogenrath Aachen Hbf Übach-Palenberg
+14:15:24: Print Incoming-Station: EE340 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: EE2542 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: EE2638 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: EE2646 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: EE3092 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Outgoing-Station: EtEt3733 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Outgoing-Station: EtEt3735 Abzw Richterich nach Simpelfeld Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: NN3172 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: NN5414 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: NN5502 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: NN5506 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: NN8304 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: NN8306 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: NN8314 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: ExprEExprE14146 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: DgDg45052 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: DgDg45054 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: DgDg45070 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: DgDg45072 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: DstgDstg80216 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: DstsDsts88462 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: GagGag47144 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: GagGag47228 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: GagGag48150 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: GagGag57854 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: GdgGdg48132 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: GdgGdg57858 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: LzLz14566 von Geilenkirchen Aachen Hbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: LzLz86944 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: LzLz86946 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: LzLz87024 Esig Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: SgSg43244 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: SgSg51810 von Geilenkirchen Aachen West Gbf Aachen Hbf ï¿½bach-Palenberg
+14:15:24: Print Incoming-Station: ï¿½gï¿½g68132 von Geilenkirchen Herzogenrath Aachen Hbf ï¿½bach-Palenberg
 14:15:24: addNeededFunctions: (1,) : <bound method TCPConfigPage.cb_speed of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:15:24: addNeededFunctions: (16, 17, 18) : <bound method TCPConfigPage.cb_time of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
 14:15:24: addNeededFunctions: (25, 97) : <bound method TCPConfigPage.cb_distance of <timetablepages.TCPConfigPage.TCPConfigPage object .!notebook.!tcpconfigpage>>
