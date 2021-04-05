@@ -124,12 +124,12 @@ class RightClickMenu(tk.Frame):
         if self.master.controller.ZUSI_monitoring_started:
             self.right_click_menu.add_command(label="Mit ZUSI Server verbinden", command=self.edit_connect_ZUSI)
             self.right_click_menu.add_command(label="Von ZUSI Server trennen", command=self.edit_disconnect_ZUSI)    
-            self.right_click_menu.add_command(label="Zugfahrplan in ZUSI starten (mit Fahrplanneustart)", command=self.edit_run_schedule)
-            self.right_click_menu.add_command(label="Zugfahrplan in ZUSI starten (ohne Fahrplanneustart)", command=self.edit_run_schedule2)       
+            self.right_click_menu.add_command(label="Zug in ZUSI starten (mit Fahrplanneustart)", command=self.edit_run_schedule)
+            #self.right_click_menu.add_command(label="Zugfahrplan in ZUSI starten (ohne Fahrplanneustart)", command=self.edit_run_schedule2)       
         
 
     def popup_text(self, event,cvobject):
-        if not self.master.editflag:
+        if not self.master.editflag and not self.master.controller.ZUSI_monitoring_started:
             return
         self.objectid = cvobject
         self.right_click_menu.post(event.x_root, event.y_root)
@@ -326,6 +326,8 @@ class TimeTableGraphCommon():
         self.monitor_curr_trainline_objectid = -1
         self.monitor_curr_timeline_objectid = -1
         self.monitor_start_time = 0
+        self.monitor_panel_con_status_objectid = -1
+        self.monitor_panel_currfpn_objectid  = -1
         
         if self.showTrainDir == None:
             self.showTrainDir = "all"
@@ -393,7 +395,7 @@ class TimeTableGraphCommon():
             y = self.graphTop - 10                        
         return x,y
     
-    def print_station(self, stationIdx, stationName, distance, stationkm):
+    def print_station(self, stationIdx, stationName, distance, stationkm,neukm=0):
         if self.trainLineFirstStationIdx == -1:
             self.trainLineFirstStationIdx = stationIdx
         self.trainLineLastStationIdx = stationIdx
@@ -439,9 +441,12 @@ class TimeTableGraphCommon():
                     s_labelangle=45
                     self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)            
             yKm = y + 12
-            km_obj=self.tt_canvas.create_text(x, yKm, text=str(f"{stationkm:.1f}"), anchor="center",font=self.s_font,tags=("Station",stationName))
-            if self.test_overlap(km_obj):
-                self.tt_canvas.delete(km_obj)
+            km_str = str(f"{stationkm:.1f}")
+            if neukm != 0:
+                km_str = km_str +"\n"+ str(f"{abs(neukm):.1f}")
+            km_obj=self.tt_canvas.create_text(x, yKm, text=km_str, anchor="center",font=self.s_font,tags=("Station",stationName))
+            #if self.test_overlap(km_obj):
+                #self.tt_canvas.delete(km_obj)
 
     def test_overlap(self, objId,objlist=[]):
         rectangle = self.tt_canvas.bbox(objId)
@@ -487,26 +492,32 @@ class TimeTableGraphCommon():
         self.tt_canvas.itemconfigure(self.edit_panel_currtime_objectid, text = self.mm_currtime_str)
         
     def print_monitor_panel(self):
-        self.tt_canvas.create_text(1000, 10, text="ZUSI Simulator", font=self.bigFont, anchor="nw")
-        self.monitor_panel_con_status_objectid = self.tt_canvas.create_text(1200, 10, text="(Nicht Verbunden)", font=self.stdFont, anchor="nw")
-        self.tt_canvas.create_text(1000, 55, text = "Uhrzeit:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
-        self.tt_canvas.create_text(1200, 55, text = "KM:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
-        self.tt_canvas.create_text(1400, 55, text = "Geschwindigkeit:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")        
-        self.monitor_panel_currtime_objectid = self.tt_canvas.create_text(1100, 55, text = self.monitor_currtime_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
-        self.monitor_panel_currkm_objectid = self.tt_canvas.create_text(1250, 55, text = self.monitor_currkm_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
-        self.monitor_panel_currspeed_objectid = self.tt_canvas.create_text(1500, 55, text = self.monitor_currspeed_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")
-        #self.monitor_panel_currdist_objectid = self.tt_canvas.create_text(1350, 55, text = self.monitor_currdist_str, font=LARGE_STD_FONT,anchor="e",fill="black",tags="MonitorCurrDist")
+        if self.monitor_panel_con_status_objectid !=-1:
+            self.update_monitor_panel()
+        else:
+            self.tt_canvas.create_text(1000, 10, text="ZUSI Simulator", font=self.bigFont, anchor="nw")
+            self.monitor_panel_con_status_objectid = self.tt_canvas.create_text(1200, 10, text="(Nicht Verbunden)", font=self.stdFont, anchor="nw")
+            self.tt_canvas.create_text(1000, 55, text = "Uhrzeit:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
+            self.tt_canvas.create_text(1200, 55, text = "KM:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
+            self.tt_canvas.create_text(1400, 55, text = "Geschwindigkeit:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")        
+            self.monitor_panel_currtime_objectid = self.tt_canvas.create_text(1100, 55, text = self.monitor_currtime_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
+            self.monitor_panel_currkm_objectid = self.tt_canvas.create_text(1250, 55, text = self.monitor_currkm_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
+            self.monitor_panel_currspeed_objectid = self.tt_canvas.create_text(1500, 55, text = self.monitor_currspeed_str, font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")
+            #self.monitor_panel_currdist_objectid = self.tt_canvas.create_text(1350, 55, text = self.monitor_currdist_str, font=LARGE_STD_FONT,anchor="e",fill="black",tags="MonitorCurrDist")
          
     def print_monitor_status_panel(self):
-        self.tt_canvas.create_text(1000, 40, text = "ZugFahrplan:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
-        #self.tt_canvas.create_text(1000, 70, text = "Zugnummer:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
-        #self.tt_canvas.create_text(1000, 85, text = "Status:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")        
-        self.monitor_panel_currfpn_objectid = self.tt_canvas.create_text(1100, 40, text = self.monitor_fpn_filepathname, font=self.stdFont,anchor="nw",fill="black",tags="MonitorFpn")
-        #self.monitor_panel_currtrainNum_objectid = self.tt_canvas.create_text(1100, 70, text = self.monitor_trainNumber, font=self.stdFont,anchor="nw",fill="black",tags="MonitorTrainNumber")
-        #if self.monitor_ladepause:
-        #    self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(1100,85, text = "Status: Ladepause", font=self.stdFont,anchor="nw",fill="black",tags="MonitorStatus")
-        #else:
-        #    self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(1100,85, text = "Status: Geladen", font=self.stdFont,anchor="nw",fill="black",tags="MonitorStatus")
+        if self.monitor_panel_currfpn_objectid  !=-1:
+            self.update_monitor_status_panel()
+        else:
+            self.tt_canvas.create_text(1000, 40, text = "ZugFahrplan:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrTime")
+            #self.tt_canvas.create_text(1000, 70, text = "Zugnummer:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrKm")
+            #self.tt_canvas.create_text(1000, 85, text = "Status:", font=self.stdFont,anchor="nw",fill="black",tags="MonitorCurrSpeed")        
+            self.monitor_panel_currfpn_objectid = self.tt_canvas.create_text(1100, 40, text = self.monitor_fpn_filepathname, font=self.stdFont,anchor="nw",fill="black",tags="MonitorFpn")
+            #self.monitor_panel_currtrainNum_objectid = self.tt_canvas.create_text(1100, 70, text = self.monitor_trainNumber, font=self.stdFont,anchor="nw",fill="black",tags="MonitorTrainNumber")
+            #if self.monitor_ladepause:
+            #    self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(1100,85, text = "Status: Ladepause", font=self.stdFont,anchor="nw",fill="black",tags="MonitorStatus")
+            #else:
+            #    self.monitor_panel_currladestatus_objectid = self.tt_canvas.create_text(1100,85, text = "Status: Geladen", font=self.stdFont,anchor="nw",fill="black",tags="MonitorStatus")
         
     def update_monitor_panel (self):
         self.tt_canvas.itemconfigure(self.monitor_panel_currtime_objectid,text = self.monitor_currtime_str)
@@ -523,25 +534,16 @@ class TimeTableGraphCommon():
         #    self.tt_canvas.itemconfigure(self.monitor_panel_currladestatus_objectid, text = "Status: Geladen")
     
     def update_monitor_conn_status_panel (self):
-        if self.monitor_conn_status == "Connected":
-            self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Verbunden", fill="green")
-        elif self.monitor_conn_status == "Not Connected":
-            self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Nicht Verbunden", fill="red" )
-        elif self.monitor_conn_status == "Connecting":
-            self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Verbindungsaufbau", fill="yellow")
-        else:
-            self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Zusi sendet keine Daten (mehr)", fill="orange")
-            
-    def monitor_check_ZUSI_connection_alife(self):
-        if self.controller.ZUSI_monitoring_started and self.controller.timetable_activ:
-            if self.monitor_zusi_life_status == False:
-                self.monitor_conn_status = "Connection Timeout"
+        if self.tt_canvas:
+            if self.monitor_conn_status == "Connected":
+                self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Verbunden", fill="green")
+            elif self.monitor_conn_status == "Not Connected":
+                self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Nicht Verbunden", fill="red" )
+            elif self.monitor_conn_status == "Connecting":
+                self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Verbindungsaufbau", fill="yellow")
             else:
-                self.monitor_conn_status = "Connected"
-            self.monitor_zusi_life_status = False
-            self.update_monitor_conn_status_panel()
-            self.ttmain_page.after(3000,self.monitor_check_ZUSI_connection_alife)
-
+                self.tt_canvas.itemconfigure(self.monitor_panel_con_status_objectid , text = "Zusi sendet keine Daten (mehr)", fill="orange")
+            
     def calculateTimePos(self, time):
         if (time < 0): time = 0;
         if (time > 1439): time = 1439;
@@ -589,6 +591,7 @@ class TimeTableGraphCommon():
                 station = self.schedule_stations_dict.get(stationIdx,{})
                 stationName = station.get("StationName","")
                 stationkm = station.get("StationKm",0.00)
+                neukm = station.get("Neukm",0)
                 distance = station.get("Distance",0.00)
                 if stationkm == None:
                     print("Error: Stationkm = None - ",stationName)
@@ -596,7 +599,7 @@ class TimeTableGraphCommon():
                 #stationName = stationName# + " (km "+str(f"{stationkm:.2f}")+")"
                 stationType_ZFS=self.check_stationtypeZFS(stationName)
                 self.stationTypeZFS_list.append(stationType_ZFS)
-                self.print_station(stationIdx, stationName, distance, stationkm)
+                self.print_station(stationIdx, stationName, distance, stationkm,neukm=neukm)
 
     def drawHours(self):
         currentHour = self.schedule_startHour
@@ -752,6 +755,8 @@ class TimeTableGraphCommon():
         for self.stopIdx,stop_dict in self.trainLineStops.items():
             self.arriveTime = stop_dict.get("ArriveTime",0)
             self.departTime = stop_dict.get("DepartTime",0)
+            if self.departTime == 0:
+                continue
             station_dict = self.schedule_stations_dict.get(stop_dict.get("StationIdx"))
             self.stationName = station_dict.get("StationName")
             self.signal = stop_dict.get("Signal")
@@ -1146,12 +1151,13 @@ class TimeTableGraphCommon():
             return  
 
     def draw_trainName_parallel(self,trainName,x0,y0,x1,y1):
+        direction_changed = (self.old_direction != self.direction)
         if self.TrainLabelSize==0:
             return
-        if self.stopIdx == self.trainLineStopMiddleIdx and self.TrainLabelPos in [1,4]:  # draw middle label
+        if (self.stopIdx == self.trainLineStopMiddleIdx or direction_changed) and self.TrainLabelPos in [1,4]:  # draw middle label
             self.drawTrainName_Flag=True
-        if self.stopIdx == self.trainLineStopCnt-1 and self.TrainLabelPos in [1,2,5]: # draw End label
-            self.drawTrainName_Flag=True            
+        elif (self.stopIdx == self.trainLineStopCnt-1 or direction_changed) and self.TrainLabelPos in [1,2,5]: # draw End label
+            self.drawTrainName_Flag=True
         p0=Point(x0,y0)
         p1=Point(x1,y1)
         segment = p1 - p0
@@ -1161,7 +1167,7 @@ class TimeTableGraphCommon():
         if segment_len > trainName_len+15:
             if self.drawTrainName_Flag:
                 txtobj = self.tt_canvas.create_text(*(mid_point), text=trainName,activefill="red",font=self.TrainLabelFont,anchor="s",tags=(self.trainName,"TrainName"))
-                rectangle = self.tt_canvas.bbox(txtobj)
+                #rectangle = self.tt_canvas.bbox(txtobj)
                 #rectobj= self.tt_canvas.create_rectangle(rectangle[0]+1,rectangle[1]+1,rectangle[2]-1,rectangle[3]-1,fill="white",outline="",tags=(self.trainName,"Background"),width=0)                
                 if y0 != y1:
                     angle = segment.angle()
@@ -1185,7 +1191,7 @@ class TimeTableGraphCommon():
         self.tt_canvas.create_rectangle(rectangle[0]+1,rectangle[1]+1,rectangle[2]-1,rectangle[3]-1,fill=fill,outline=fill,tags=tags,width=0)
         self.tt_canvas.tag_raise(objId)
                     
-    def enter_station(self,stationName, distance, stationKm):
+    def enter_station(self,stationName, distance, stationKm,neukm=0):
         if stationKm == None:
             print("Error: km=None -",stationName)
             stationKm = 0
@@ -1193,25 +1199,17 @@ class TimeTableGraphCommon():
             station_data = self.schedule_stations_dict.get(stationIdx,0)
             if station_data.get("StationName","") == stationName:
                 return stationIdx
-        #if not self.addStation:
-            # check if currentStation = Startstation
-        #    if stationName == self.StartStation:
-        #        self.addStation = True
-        #    else:
-        #        return -1
-        # check if currentStation = Endstation
-        #if stationName == self.EndStation and self.teilstrecke_flag:
-        #    self.addStation = False
         if (len(self.select_stationlist) < 2) or (stationName in self.select_stationlist):     
-            self.schedule_stations_dict[self.schedule_stationIdx_write_next] = {"StationName": stationName, 
-                                                                                "Distance": distance,
-                                                                                "StationKm": stationKm}
+            self.schedule_stations_dict[self.schedule_stationIdx_write_next] = {"StationName"     : stationName, 
+                                                                                "Distance"        : distance,
+                                                                                "StationKm"       : stationKm,
+                                                                                "Neukm"           : neukm}
             self.schedule_stationIdx_write_next +=1
         else:
             return -1
         return self.schedule_stationIdx_write_next - 1
 
-    def enter_schedule_trainLine_data(self,trainNumber,trainType,ZugLauf,ZugLok,trn_filepathname=""):
+    def enter_schedule_trainLine_data(self,trainNumber,trainType,ZugLauf,ZugLok,trn_filepathname="",pendelzug=False):
         color = self.canvas_traintype_prop_dict.get(trainType,"black")
         width = self.trainType_to_Width_dict.get(trainType,"1")
         self.schedule_trains_dict[self.schedule_trainIdx_write_next] = {"TrainName"     : trainNumber,
@@ -1221,6 +1219,7 @@ class TimeTableGraphCommon():
                                                                         "TrainEngine"   : ZugLok,
                                                                         "Color"         : color,
                                                                         "Width"         : width,
+                                                                        "Pendelzug"     : pendelzug,
                                                                         "Stops"         : {}
                                                                         }
         self.schedule_trainIdx_write_next += 1
@@ -1233,9 +1232,16 @@ class TimeTableGraphCommon():
                 return stationIdx
         return -1
 
-    def enter_trainLine_stop(self, train_idx, trainstop_idx, FplName, FplAnk_min, FplAbf_min,signal=""):
+    def enter_trainLine_stop(self, train_idx, trainstop_idx, FplName, FplAnk_min, FplAbf_min,signal="",Richtungswechsel=False):
         #print("enter_trainline_stop:", train_idx, FplName, FplAnk_min, FplAbf_min)
         train_dict = self.schedule_trains_dict.get(train_idx)
+        if Richtungswechsel:
+            train_dict["Richtungswechsel"]=True
+            #print(FplName,Richtungswechsel)
+            pendelstops = train_dict.get("PendelStops",[])
+            pendelstops.append(trainstop_idx)
+            train_dict["Pendelstops"]=pendelstops
+            #print("Pendelstops:",pendelstops)
         trainstops_dict = train_dict.get("Stops",{})
         station_idx = self.search_station(FplName)
         do_not_override_station = False
@@ -1253,12 +1259,13 @@ class TimeTableGraphCommon():
             else:
                 arriveTime = FplAnk_min
             departTime = FplAbf_min
-            trainstops_dict[trainstop_idx] = {"StationIdx"     : station_idx,
-                                              "ArriveTime"     : arriveTime,
-                                              "ArriveTimeOrig" : arriveTime,
-                                              "DepartTime"     : departTime,
-                                              "DepartTimeOrig" : departTime,
-                                              "Signal"         : signal
+            trainstops_dict[trainstop_idx] = {"StationIdx"      : station_idx,
+                                              "ArriveTime"      : arriveTime,
+                                              "ArriveTimeOrig"  : arriveTime,
+                                              "DepartTime"      : departTime,
+                                              "DepartTimeOrig"  : departTime,
+                                              "Signal"          : signal,
+                                              "Richtungswechsel": Richtungswechsel
                                            }
         return trainstop_idx + 1
         
@@ -1313,12 +1320,15 @@ class TimeTableGraphCommon():
             result = default
         return result
 
-    def convert_tt_xml_dict_to_schedule_dict(self, tt_xml_dict, define_stations=False,trn_filepathname=""):
+    def convert_tt_xml_dict_to_schedule_dict(self, tt_xml_dict, define_stations=False,trn_filepathname="",fpn_filename=""):
         Zusi_dict = tt_xml_dict.get("Zusi")
         Buchfahrplan_dict = Zusi_dict.get("Buchfahrplan",{})
         if Buchfahrplan_dict=={}:
             return False
         ZugNummer = Buchfahrplan_dict.get("@Nummer","")
+        Pendelzug_Flag = "_" in ZugNummer
+        #if Pendelzug_Flag:
+        #    print(ZugNummer,"Pendelzug")  
         ZugGattung = Buchfahrplan_dict.get("@Gattung","")
         ZugLok = Buchfahrplan_dict.get("@BR","")
         if ZugGattung == "X-Deko" and not define_stations:
@@ -1333,7 +1343,7 @@ class TimeTableGraphCommon():
         if Datei_trn_dict == {}:
             return False
         trn_dateiname = Datei_trn_dict.get("@Dateiname","")
-        train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname)
+        train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag)
         train_stop_idx = 0
         FplRglGgl_str = self.controller.getConfigData("FplRglGgl")
         #showstationonly = not self.controller.getConfigData("ExtraShowAlleZFS")
@@ -1342,17 +1352,10 @@ class TimeTableGraphCommon():
         else:
             self.FplRglGgl = []
         FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
+        FplRichtungswechsel_flag = False
         stationdistance = 0
         last_km = 0
         station_idx = 0
-        #self.teilstrecke_flag = self.controller.getConfigData("TeilStreckeCheckButton")
-        #self.addStation = True #not self.teilstrecke_flag
-        #self.StartStation = self.controller.getConfigData("StartStation")
-        #self.StartStation = self.StartStation.replace("_"," ")
-        #self.EndStation = self.controller.getConfigData("EndStation")
-        #self.EndStation = self.EndStation.replace("_"," ")
-        #if self.StartStation == "":
-        #    self.addStation = True
         self.select_stationlist  = self.controller.get_macroparam_val("SpecialConfigurationPage","StationChooser") #self.controller.getConfigData("StationChooser")
         if FplZeile_list=={}:
             logging.info("timetable.xml file error: %s",trn_dateiname )
@@ -1371,15 +1374,18 @@ class TimeTableGraphCommon():
             try:
                 FplSprung = self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplSprung",default="")
                 Fplkm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@km",default=0))
-
                 if (Fplkm == 0):
                     continue # kein km Eintrag, nicht bearbeiten
                 if last_km == 0:
                         # first entry
                     last_km=Fplkm
+                FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
+                if FplName == "" and FplSprung == "":
+                        continue                             
                 if FplSprung == "":
                     stationdistance = stationdistance + abs(Fplkm - last_km)
                     last_km = Fplkm
+                    Neukm=0
                 else:
                     stationdistance = stationdistance + abs(Fplkm - last_km)
                     Neukm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplkmNeu",default=0))
@@ -1387,12 +1393,12 @@ class TimeTableGraphCommon():
                         print("ERROR: Neukm Eintrag fehlt",ZugGattung,ZugNummer,"-",repr(FplZeile_dict))
                     else:
                         last_km = Neukm
-                        
+                    #if FplName== "":
+                    #   FplName = "* ("+str(Fplkm)+"-"+str(Neukm)+")"                    
                 if Fplkm<0:
                     Fplkm = 0.0
-
                 FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
-                if FplAbf == "":
+                if FplAbf == "" and FplSprung == "":
                     continue # only use station with "Abf"-Entry
                 if FplAbf != "":
                     FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
@@ -1405,18 +1411,21 @@ class TimeTableGraphCommon():
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
                 else:
                     FplAnk_min = 0
-                FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
+                #FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
                 if FplName == "":
                     continue
                 if self.schedule_stationIdx_write_next == 0:
                     stationdistance = 0
                 Fpldistance = stationdistance # abs(kmStart - Fplkm)
+                FplRichtungswechsel_flag = FplZeile_dict.get("FplRichtungswechsel","") == None and train_stop_idx > 0
                 if define_stations:
-                    station_idx = self.enter_station(FplName,Fpldistance,Fplkm)
+                    station_idx = self.enter_station(FplName,Fpldistance,Fplkm,neukm=Neukm)
+                    if FplRichtungswechsel_flag and Pendelzug_Flag:
+                        break
                 else:
                     station_idx = self.search_station(FplName)
                     if station_idx != -1:
-                        train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min)
+                        train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min,Richtungswechsel=FplRichtungswechsel_flag)
                     else:
                         if train_stop_idx == 0:
                             # train is comming from another station
@@ -1440,12 +1449,15 @@ class TimeTableGraphCommon():
             if ZugGattung == "X-Deko":
                 return
             Zuglauf = zusi_trn_dict.get("@Zuglauf","")
+            Pendelzug_Flag = "_" in ZugNummer
+            #if Pendelzug_Flag:
+            #    print(ZugNummer,"Pendelzug")            
             Datei_fpn_dict = zusi_trn_dict.get("Datei",{})
             if Datei_fpn_dict == {}:
                 return
             fpn_dateiname = Datei_fpn_dict.get("@Dateiname","")
             self.schedule_dict["Name"] = fpn_dateiname
-            train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname)
+            train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag)
             train_stop_idx = 0
             FplZeile_list = zusi_trn_dict.get("FahrplanEintrag",{})
             if FplZeile_list=={}:
@@ -1476,10 +1488,11 @@ class TimeTableGraphCommon():
                             FahrplanSignal += " "+signal.get("@FahrplanSignal","")+" "
                 FplName = FplZeile_dict.get("@Betrst","")
                 if FplName == "":
-                    continue                
+                    continue
                 station_idx = self.search_station(FplName)
                 if station_idx != -1:
-                    train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min,signal=FahrplanSignal)
+                    FplRichtungswechsel_flag = FplZeile_dict.get("@FzgVerbandAktion","") == "2"
+                    train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min,signal=FahrplanSignal,Richtungswechsel=FplRichtungswechsel_flag)
                 else:
                     if train_stop_idx == 0:
                         # train is comming from another station
@@ -2076,11 +2089,14 @@ class TimeTableGraphCommon():
         self.monitor_start = False        
         TCPPageFrame = self.controller.getFramebyName("TCPConfigPage")
         if TCPPageFrame.connect_to_ZUSI_server():
-            self.monitor_check_ZUSI_connection_alife()
+            TCPPageFrame.cb_connection_status(status="Connected")
+            pass
+            #self.monitor_check_ZUSI_connection_alife()
     
     def edit_disconnect_ZUSI(self,objectid):
         TCPPageFrame = self.controller.getFramebyName("TCPConfigPage")
-        TCPPageFrame.disconnect_from_ZUSI_server()    
+        TCPPageFrame.disconnect_from_ZUSI_server()
+        TCPPageFrame.cb_connection_status(status="Not Connected")
         
     def monitor_set_time(self,hour,minute,second):
         self.monitor_zusi_life_status = True
@@ -2130,6 +2146,14 @@ class TimeTableGraphCommon():
                 self.monitor_currdist_str = str(dist)
                 self.update_monitor_panel()
                 
+    def monitor_determine_last_station_distance(self,train_dict,train_stops):
+        pendelstations = train_dict.get("Pendelstops",[])
+        if pendelstations != []:
+            return self.get_stationdistance_from_StopDict(train_stops.get(pendelstations[0],{}))
+        else:
+            last_station_idx = len(train_stops)-1
+            return self.get_stationdistance_from_StopDict(train_stops.get(last_station_idx,{}))
+                
     def monitor_set_timetable_updated(self):
         """
         if monitor_start:
@@ -2142,8 +2166,8 @@ class TimeTableGraphCommon():
         if not self.monitor_start:
             trainName = self.monitor_determine_trainnumber()
             trainIdx = self.get_train_idx_from_Name(trainName)
-            train = self.schedule_trains_dict.get(trainIdx,{})
-            train_stops = train.get("Stops",{})
+            train_dict = self.schedule_trains_dict.get(trainIdx,{})
+            train_stops = train_dict.get("Stops",{})
             if train_stops=={}:
                 return ""
             stopstationName = self.get_stationName_from_StopDict(train_stops.get(0,{}))
@@ -2219,11 +2243,11 @@ class TimeTableGraphCommon():
                 except BaseException as e:
                     logging.debug("FplZeile conversion Error %s %s",trainName +"-"+repr(FplZeile_dict),e)
                     continue # entry format wrong
+            self.pendelstations = train_dict.get("Pendelstops",[])
             self.monitor_curr_train_distance_to_first_station = stationdistance
             self.monitor_curr_train_direction_of_travel = self.determine_DirectionofTravel2(train_stops, 0)
             self.monitor_distance_of_first_station = self.get_stationdistance_from_StopDict(train_stops.get(0,{}))
-            last_station_idx = len(train_stops)-1
-            self.monitor_distance_of_last_station = self.get_stationdistance_from_StopDict(train_stops.get(last_station_idx,{}))
+            self.monitor_distance_of_last_station = self.monitor_determine_last_station_distance(train_dict,train_stops) #self.get_stationdistance_from_StopDict(train_stops.get(last_station_idx,{}))
             self.monitor_timetable_updated = True
             self.monitor_curr_trainline_objectid = -1
                 
@@ -2246,7 +2270,7 @@ class TimeTableGraphCommon():
             self.monitor_start = False
         else:
             self.update_monitor_status_panel()
-            self.monitor_update_train_pos()
+            #self.monitor_update_train_pos()
             
     def monitor_set_connection_status(self, status, message):
         self.monitor_zusi_life_status = True
@@ -2297,10 +2321,30 @@ class TimeTableGraphCommon():
                 train_pos_on_timetable = distance_of_first_station + curr_distance_from_first_station
                 if train_pos_on_timetable >= distance_of_first_station and train_pos_on_timetable <=self.monitor_distance_of_last_station:
                     train_pos_in_range = True
+                else:
+                    if train_pos_on_timetable > self.monitor_distance_of_last_station and self.pendelstations != []: # Pendelzug returns
+                        if self.monitor_curr_train_distance_to_first_station-200 < distance_of_curr_train_from_start: # at first stop ignore direction change
+                            self.monitor_curr_train_direction_of_travel = "up"
+                        last_station_distance = self.monitor_distance_of_last_station
+                        self.monitor_curr_train_distance_to_first_station = distance_of_curr_train_from_start # start is current station
+                        self.monitor_distance_of_last_station = self.monitor_distance_of_first_station
+                        self.monitor_distance_of_first_station = last_station_distance
+                        
+                        train_pos_in_range = True
             else:
                 train_pos_on_timetable = distance_of_first_station - curr_distance_from_first_station
                 if train_pos_on_timetable <= distance_of_first_station and train_pos_on_timetable >=self.monitor_distance_of_last_station:
                     train_pos_in_range = True
+                else:
+                    if train_pos_on_timetable < self.monitor_distance_of_last_station and self.pendelstations != []: # Pendelzug returns
+                        if self.monitor_curr_train_distance_to_first_station-200 < distance_of_curr_train_from_start: # at first stop ignore direction change
+                            self.monitor_curr_train_direction_of_travel = "down"                       
+                        last_station_distance = self.monitor_distance_of_last_station
+                        self.monitor_curr_train_distance_to_first_station = distance_of_curr_train_from_start # start is current station
+                        self.monitor_distance_of_last_station = self.monitor_distance_of_first_station
+                        self.monitor_distance_of_first_station = last_station_distance
+                        
+                        train_pos_in_range = True                
         curr_simu_time = self.monitor_time
         y = self.calculateTimePos(curr_simu_time)
         if curr_simu_time >= self.monitor_start_time and train_pos_in_range:
@@ -2393,7 +2437,7 @@ class Timetable_main(Frame):
                     xml_text = fd.read()
                     tt_xml_timetable_dict = parse(xml_text)
                     #enter train-timetable
-                    result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict,trn_filepathname=trn_filepathname)
+                    result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict,trn_filepathname=trn_filepathname,fpn_filename=self.fpl_filename)
             except BaseException as e:
                 logging.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",tt_xml__filepathname,e)
                 self.controller.set_statusmessage("Fehler beim öfnen der Datei \n" + tt_xml__filepathname)
@@ -2532,6 +2576,9 @@ class Timetable_main(Frame):
             if betrst != "":
                 if not (betrst in station_list):
                     station_list.append(betrst)
+                richtungswechsel = FplEintrag.get("@FzgVerbandAktion","") == "2"
+                if richtungswechsel:
+                    break
         return station_list
     
     def create_zusi_trn_list_from_zug_dict(self,trn_zug_dict, trn_filepath):
@@ -2664,7 +2711,7 @@ class Timetable_main(Frame):
         self.timetable = TimeTableGraphCommon(self.controller, True, self.height, self.width,xml_filename=self.xml_filename,fpn_filename=self.fpl_filename,ttmain_page=self,tt_page=self.ttpage)
         self.timetable.set_tt_traintype_prop(self.main_traintype_prop_dict)
         #define stops via selected train-timetable
-        result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(zusi_timetable_dict,define_stations=True)
+        result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(zusi_timetable_dict,define_stations=True,fpn_filename=self.fpl_filename)
         if  not result_ok:
             return
         result_ok = self.open_zusi_master_schedule(fpn_filename=self.fpl_filename)

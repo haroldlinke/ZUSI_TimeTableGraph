@@ -228,7 +228,7 @@ class ZUSI_TCP():
             if len(self._incommingData)>=pos+3:
                 data = struct.unpack("<l",self._incommingData[pos:pos+4])
             else:
-                print("Error _readIntegerInRawAtPos: ",repr(self._incommingData))
+                logging.debug("Error _readIntegerInRawAtPos: ",repr(self._incommingData))
                 return 0
             return data[0]
         except:

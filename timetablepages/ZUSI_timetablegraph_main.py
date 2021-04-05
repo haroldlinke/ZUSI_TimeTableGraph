@@ -157,10 +157,6 @@ class TimeTableGraphMain(tk.Tk):
         style.map("palette.TFrame", relief=[('focus', 'sunken')],
                   bordercolor=[('focus', "#4D4D4D")])
         self.configure(background=style.lookup("TFrame", "background"))
-         
-         
-        #self.editFlag = tk.BooleanVar()
-        #self.editFlag.set(False)
                 
         menu = tk.Menu(self)
         self.config(menu=menu)
@@ -179,6 +175,10 @@ class TimeTableGraphMain(tk.Tk):
         #filemenu2.add_checkbutton(label="Bearbeiten", onvalue=1, offvalue=0, variable=self.editFlag)
         filemenu2.add_separator()
         filemenu2.add_command(label="Alle Änderungen in .trn speichern", command=self.export_all_changes_to_trnfiles)
+        filemenu3 = tk.Menu(menu)
+        menu.add_cascade(label="ZUSI Server", menu=filemenu3)
+        filemenu3.add_command(label="Verbinden", command=self.Connect_ZUSI_server)
+        filemenu3.add_command(label="Trennen", command=self.Disconnect_ZUSI_server)
         #filemenu.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
         #colormenu = tk.Menu(menu)
         #menu.add_cascade(label="Farbpalette", menu=colormenu)
@@ -289,6 +289,17 @@ class TimeTableGraphMain(tk.Tk):
             frame = self.getFramebyName("TimeTablePage")
             # save postscipt image
             frame.save_as_image(filepath)
+            
+    def Connect_ZUSI_server(self):
+        if self.timetable_activ:
+            TimetablePageFrame = self.getFramebyName("TimeTablePage")
+            TimetablePageFrame.timetable_main.timetable.edit_connect_ZUSI(-1)
+        
+    def Disconnect_ZUSI_server(self):
+        if self.timetable_activ:
+            TimetablePageFrame = self.getFramebyName("TimeTablePage")
+            TimetablePageFrame.timetable_main.timetable.edit_disconnect_ZUSI(-1)
+            
 
     def About(self):
         tk.messagebox.showinfo("ZUSI Timetablegraph by Harold Linke")
