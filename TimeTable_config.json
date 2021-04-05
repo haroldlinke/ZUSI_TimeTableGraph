@@ -1,9 +1,9 @@
 {
     "startpagename": "StartPage",
-    "pos_x": 1,
-    "pos_y": 23,
-    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn",
-    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\E2539.timetable.xml",
+    "pos_x": -1928,
+    "pos_y": -8,
+    "Bfp_filename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Lehrte_Harburg/Lehrte-Harburg_2017_04Uhr-14Uhr.fpn",
+    "Bfp_trainfilename": "D:/Zusi3/_ZusiData/Timetables/Deutschland/Lehrte_Harburg\\Lehrte-Harburg_2017_04Uhr-14Uhr\\ICE581.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
     "EndStation": "Bft_Leuchtenbergring",
@@ -209,6 +209,17 @@
             "Bfp_TrainTypeLabel_No": 2,
             "Bfp_TrainTypeLabelSize": 8,
             "Bfp_TrainType": "*"
+        },
+        "999": {
+            "Bfp_TrainTypeAll": "",
+            "Bfp_TrainTypeColor": "#000080",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Anfang , Ende",
+            "Bfp_TrainTypeLabel_No": 2,
+            "Bfp_TrainTypeLabelSize": 8,
+            "Bfp_TrainType": "*"
         }
     },
     "TLFileType": ".timetable.xml",
@@ -241,7 +252,7 @@
     "TCP_IP_Port": "1436",
     "Monitoring_Checkbutton": true,
     "Monit_train_LineColor": "red",
-    "Monit_train_LineWidth": 8,
+    "Monit_train_LineWidth": 4,
     "Monit_train_LineDashed": " ",
     "Monit_train_LineDashed_No": 0,
     "Monit_time_LineColor": "#ff8000",

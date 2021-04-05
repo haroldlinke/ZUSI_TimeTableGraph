@@ -55,6 +55,7 @@ class TCPConfigPage(ConfigPagetemplate):
         self.monitor_fpn_filepathname= ""
         self.monitor_trainNumber = ""
         self.monitor_ladepause = False
+        self.monitor_zusi_life_status  = False
         return
     
     def connect_to_ZUSI_server(self):
@@ -66,11 +67,15 @@ class TCPConfigPage(ConfigPagetemplate):
         self.controller.ZUSI_TCP_var.addcallbackforNeededFunctions(0x000C,(0x03,),self.cb_status,valuetype="Byte")
         if self.controller.ZUSI_TCP_var.open_connection(callback=self.cb_connection_status):
             self.after(1000,self.controller.ZUSI_TCP_var.sendNeededData)
+            self.connection_open = True
+            self.monitor_zusi_life_status  = True
+            self.check_ZUSI_connection_alife()
             return True
         else:
             return False
         
     def disconnect_from_ZUSI_server(self):
+        self.connection_open = False
         self.controller.ZUSI_TCP_var.close_connection()
         
     def cancel(self):
@@ -82,8 +87,9 @@ class TCPConfigPage(ConfigPagetemplate):
         self.controller.timetable_main.timetable.monitor_set_connection_status(status, message)
         
     def cb_time(self,event):
+        self.set_monitor_zusi_life_status()
         if self.controller.ZUSI_monitoring_started and self.controller.timetable_activ:
-            print("cb_time:", repr(event))
+            #print("cb_time:", repr(event))
             if event["Attribute"]== 16: # hour
                 self.monitor_hour = int(event["Value"])
             elif event["Attribute"]== 17: # minute
@@ -93,8 +99,9 @@ class TCPConfigPage(ConfigPagetemplate):
                 self.controller.timetable_main.timetable.monitor_set_time(self.monitor_hour,self.monitor_minute,self.monitor_second)
     
     def cb_distance(self,event):
+        self.set_monitor_zusi_life_status()
         if self.controller.ZUSI_monitoring_started and self.controller.timetable_activ:
-            print("cb_distance:", repr(event))
+            #print("cb_distance:", repr(event))
             if event["Attribute"]== 25: # distance
                 self.monitor_dist = int(event["Value"])
                 self.controller.timetable_main.timetable.monitor_set_dist(self.monitor_dist)   
@@ -103,14 +110,16 @@ class TCPConfigPage(ConfigPagetemplate):
                 self.controller.timetable_main.timetable.monitor_set_km(self.monitor_km) 
                 
     def cb_speed(self,event):
+        self.set_monitor_zusi_life_status()
         if self.controller.ZUSI_monitoring_started and self.controller.timetable_activ:
-            print("cb_speed:", repr(event))
+            #print("cb_speed:", repr(event))
             self.monitor_speed = event["Value"]
             self.controller.timetable_main.timetable.monitor_set_speed(self.monitor_speed)   
     
     def cb_status(self,event):
+        self.set_monitor_zusi_life_status()
         if self.controller.ZUSI_monitoring_started:
-            print("cb_status:", repr(event))
+            #print("cb_status:", repr(event))
             if event["Attribute"]== 1: #
                 self.monitor_fpn_filepathname= event["Value"]
             elif event["Attribute"]== 2: # 
@@ -127,5 +136,21 @@ class TCPConfigPage(ConfigPagetemplate):
                     self.controller.simu_timetable_dict = parse(timetable_str)
                     self.controller.timetable_main.timetable.monitor_set_timetable_updated()   
             self.controller.timetable_main.timetable.monitor_set_status(self.monitor_fpn_filepathname,self.monitor_trainNumber,self.monitor_ladepause)
-                
+            
+    def check_ZUSI_connection_alife(self):
+        if self.connection_open:
+            if self.monitor_zusi_life_status == False:
+                self.monitor_conn_status = "Connection Timeout"
+                self.cb_connection_status(status=self.monitor_conn_status)
+            else:
+                self.monitor_conn_status = "Connected"
+            self.monitor_zusi_life_status = False
+            self.after(3000,self.check_ZUSI_connection_alife)    
+    
+    def set_monitor_zusi_life_status(self):
+        self.monitor_zusi_life_status = True
+        if self.monitor_conn_status == "Connection Timeout":
+            self.monitor_conn_status = "Connected"
+            self.cb_connection_status(status=self.monitor_conn_status)
+        
         
