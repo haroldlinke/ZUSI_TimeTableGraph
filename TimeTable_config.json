@@ -240,8 +240,8 @@
     "Bfp_TH_LineProp": 0,
     "Bfp_TM_LineProp": 0,
     "Bfp_TrainLine_Distance_from_Stationline": 0,
-    "Edit_Permission": "Fast_Edit_allowed",
-    "Edit_Permission_No": 1,
+    "Edit_Permission": "Edit_blocked",
+    "Edit_Permission_No": 0,
     "Bfp_show_train_dir": "all",
     "Bfp_show_train_dir_No": 0,
     "w_height": 997,
@@ -250,7 +250,7 @@
     "TCP_Connect_Checkbutton": true,
     "TCP_IP_Adress": "127.0.0.1",
     "TCP_IP_Port": "1436",
-    "Monitoring_Checkbutton": true,
+    "Monitoring_Checkbutton": false,
     "Monit_train_LineColor": "red",
     "Monit_train_LineWidth": 4,
     "Monit_train_LineDashed": " ",
@@ -261,160 +261,160 @@
     "Monit_time_LineDashed_No": 2,
     "TrainNamePosProp": {
         "0": {
-            "TrainNamePos_Names": "E3190",
-            "TrainNamePos_Stops": "5,3,8,12"
+            "TrainNamePos_Names": "S6949",
+            "TrainNamePos_Stops": "3"
         },
         "1": {
-            "TrainNamePos_Names": "E",
-            "TrainNamePos_Stops": "2,-2"
+            "TrainNamePos_Names": "S6938",
+            "TrainNamePos_Stops": "5"
         },
         "2": {
-            "TrainNamePos_Names": "E2943",
-            "TrainNamePos_Stops": "9,10,1"
+            "TrainNamePos_Names": "S6944",
+            "TrainNamePos_Stops": "17,19"
         },
         "3": {
-            "TrainNamePos_Names": "E3491",
-            "TrainNamePos_Stops": "5,7"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "4": {
-            "TrainNamePos_Names": "Dsts88235",
+            "TrainNamePos_Names": "",
             "TrainNamePos_Stops": ""
         },
         "5": {
-            "TrainNamePos_Names": "Lz88518",
+            "TrainNamePos_Names": "",
             "TrainNamePos_Stops": ""
         },
         "6": {
-            "TrainNamePos_Names": "E3480",
-            "TrainNamePos_Stops": "9"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "7": {
-            "TrainNamePos_Names": "E3683",
-            "TrainNamePos_Stops": "5,1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "8": {
-            "TrainNamePos_Names": "Lr33721_N6480",
-            "TrainNamePos_Stops": "13"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "9": {
-            "TrainNamePos_Names": "ExprE14830",
-            "TrainNamePos_Stops": "9"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "10": {
-            "TrainNamePos_Names": "N6482",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "11": {
-            "TrainNamePos_Names": "Lz87670",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "12": {
-            "TrainNamePos_Names": "ExprE14271",
-            "TrainNamePos_Stops": "10,5"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "13": {
-            "TrainNamePos_Names": "Lr33723",
-            "TrainNamePos_Stops": "5"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "14": {
-            "TrainNamePos_Names": "ExprD14130",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "15": {
-            "TrainNamePos_Names": "E2836",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "16": {
-            "TrainNamePos_Names": "E2025",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "17": {
-            "TrainNamePos_Names": "E3103",
-            "TrainNamePos_Stops": "1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "18": {
-            "TrainNamePos_Names": "E3107",
-            "TrainNamePos_Stops": "1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "19": {
-            "TrainNamePos_Names": "D17441",
-            "TrainNamePos_Stops": "5"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "20": {
-            "TrainNamePos_Names": "D848",
-            "TrainNamePos_Stops": "2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "21": {
-            "TrainNamePos_Names": "D715",
-            "TrainNamePos_Stops": "2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "22": {
-            "TrainNamePos_Names": "E3194",
-            "TrainNamePos_Stops": "16"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "23": {
-            "TrainNamePos_Names": "E3109",
-            "TrainNamePos_Stops": "1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "24": {
-            "TrainNamePos_Names": "RE57920",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "25": {
-            "TrainNamePos_Names": "S6963",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "26": {
-            "TrainNamePos_Names": "S6938",
-            "TrainNamePos_Stops": "5,1,7"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "27": {
-            "TrainNamePos_Names": "S6149",
-            "TrainNamePos_Stops": "15"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "28": {
-            "TrainNamePos_Names": "S6951",
-            "TrainNamePos_Stops": "19,2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "29": {
-            "TrainNamePos_Names": "S6153",
-            "TrainNamePos_Stops": "15"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "30": {
-            "TrainNamePos_Names": "S6155",
-            "TrainNamePos_Stops": "15"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "31": {
-            "TrainNamePos_Names": "RE4066",
-            "TrainNamePos_Stops": "7,1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "32": {
-            "TrainNamePos_Names": "RE57916",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "33": {
-            "TrainNamePos_Names": "S6949",
-            "TrainNamePos_Stops": "4,2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "34": {
-            "TrainNamePos_Names": "S6940",
-            "TrainNamePos_Stops": "2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "35": {
-            "TrainNamePos_Names": "S6953",
-            "TrainNamePos_Stops": "2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "36": {
-            "TrainNamePos_Names": "S6942",
-            "TrainNamePos_Stops": "2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "37": {
-            "TrainNamePos_Names": "S6944",
-            "TrainNamePos_Stops": "19"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "38": {
-            "TrainNamePos_Names": "RE57918",
-            "TrainNamePos_Stops": "2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "39": {
             "TrainNamePos_Names": "",
