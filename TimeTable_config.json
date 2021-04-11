@@ -261,12 +261,12 @@
     "Monit_time_LineDashed_No": 2,
     "TrainNamePosProp": {
         "0": {
-            "TrainNamePos_Names": "S6949",
-            "TrainNamePos_Stops": "2,4"
+            "TrainNamePos_Names": "S",
+            "TrainNamePos_Stops": "2,Mü-Moosach"
         },
         "1": {
-            "TrainNamePos_Names": "S6938",
-            "TrainNamePos_Stops": "5"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "2": {
             "TrainNamePos_Names": "S6944",
