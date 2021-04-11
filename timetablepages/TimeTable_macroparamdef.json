@@ -1323,7 +1323,7 @@
         "Input Text": "Zugname(n)",
         "ReadOnly": "",
         "ParamEntryWidth": "40",
-        "Hint": "Zugname(n), für die die Position festgelegt werden soll (N1234,N2345)",
+        "Hint": "Zugname(n), für die die Position festgelegt werden soll (N1234,N2345,E,N12) - komplett oder nur der Anfang",
         "Implementation comment": ""
     },
     "TrainNamePos_Stops": {
@@ -1336,7 +1336,7 @@
         "Input Text": "Segment(e) / Betriebsstellen",
         "ReadOnly": "",
         "ParamEntryWidth": "20",
-        "Hint": "Segmentnummern oder Betriebsstellen, an denen der Zugname angezeigt werden soll (1,5,9,Arnsberg,Kassel Hbf)",
+        "Hint": "Segmentnummern oder Betriebsstellen, an denen der Zugname angezeigt werden soll (1,2,-1,-2,Arnsberg,Kassel Hbf) - negative Werte zählen von Hinten",
         "Implementation comment": ""
     }
 }
