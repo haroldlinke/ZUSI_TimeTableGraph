@@ -42,6 +42,7 @@ from timetablepages.TimetablePage import TimeTablePage
 from timetablepages.StartPage import StartPage
 from timetablepages.SpecialConfigurationPage import SpecialConfigurationPage
 from timetablepages.TCPConfigPage import TCPConfigPage
+from timetablepages.TrainNamePosConfigPage import TrainNamePosConfigPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
 from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
 CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, shortCutDict
@@ -62,9 +63,9 @@ from timetablepages.ZUSI_TCP_class import ZUSI_TCP
 
 # ------------------------------
 
-tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,SpecialConfigurationPage,TCPConfigPage)
+tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,SpecialConfigurationPage,TCPConfigPage,TrainNamePosConfigPage)
 
-configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage","TCPConfigPage")
+configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage","TCPConfigPage","TrainNamePosConfigPage")
 
 defaultStartPage = "StartPage"
 
@@ -484,6 +485,16 @@ class TimeTableGraphMain(tk.Tk):
             if configdatakey_dict != {}:
                 value = configdatakey_dict.get(configdatakey,None)
         return value
+    
+    def setConfigData_multiple(self, configdatakey,paramkey,index,value):
+        index_str = str(index)
+        paramkey_dict = self.ConfigData.data.get(paramkey,{})
+        if paramkey_dict != 0:
+            configdatakey_dict = paramkey_dict.get(index_str,{})
+            if configdatakey_dict != {}:
+                configdatakey_dict[configdatakey] = value
+        mp_macro = "TrainNamePosConfigPage"+"." + paramkey + "." + str(index)
+        self.set_macroparam_val(mp_macro, configdatakey, value)        
             
     def readConfigData(self):
         logging.debug("readConfigData")

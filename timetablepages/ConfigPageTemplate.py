@@ -78,12 +78,20 @@ class ConfigPagetemplate(tk.Frame):
         config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=1,startrow =10,style="CONFIGPage",generic_methods=generic_methods)  
         # --- Buttons
         self.button_frame = ttk.Frame(self.main_frame)
-        button1_text = macrodata.get("Button_1",self.tabClassName)
-        self.update_button = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
-        self.update_button.pack(side="right", padx=10)
         self.button_frame2 = ttk.Frame(self.main_frame)
-        self.update_button2 = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
-        self.update_button2.pack(side="right", padx=10)        
+        
+        button1_text = macrodata.get("Button_1",self.tabClassName)
+        self.update_button1a = ttk.Button(self.button_frame, text=button1_text, command=self.save_config)
+        self.update_button1a.pack(side="right", padx=10)
+        self.update_button1b = ttk.Button(self.button_frame2, text=button1_text, command=self.save_config)
+        self.update_button1b.pack(side="right", padx=10)
+        
+        button2_text = macrodata.get("Button_2",self.tabClassName)
+        if button2_text != "":
+            self.update_button2a = ttk.Button(self.button_frame, text=button2_text, command=self.button2_command)
+            self.update_button2a.pack(side="right", padx=10)
+            self.update_button2b = ttk.Button(self.button_frame2, text=button1_text, command=self.button2_command)
+            self.update_button2b.pack(side="right", padx=10)       
         #self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
         #self.update_tree_button.pack(side="left", padx=10)        
         #self.tree_frame = ttk.Frame(self.main_frame)
@@ -94,7 +102,7 @@ class ConfigPagetemplate(tk.Frame):
         self.scroll_main_frame.grid(row=0,column=0,sticky="nesw")
         # scroll_main_frame
         self.main_frame.grid(row=0,column=0)
-        # main_frame        
+        # main_frame
         title_frame.grid(row=0, column=0, pady=10, padx=10)
         self.button_frame.grid(row=1, column=0,pady=10, padx=10)
         config_frame.grid(row=2, column=0, pady=10, padx=10, sticky="nesw")
@@ -179,6 +187,9 @@ class ConfigPagetemplate(tk.Frame):
         self.store_old_config()
         self.controller.SaveConfigData()
         logging.debug("SaveConfig: %s - %s",self.tabname,repr(self.controller.ConfigData.data))
+        
+    def button2_command(self):
+        pass
 
     def store_old_config(self):
         self.old_param_values_dict = self.get_macroparam_var_values(self.tabClassName)
