@@ -262,7 +262,7 @@
     "TrainNamePosProp": {
         "0": {
             "TrainNamePos_Names": "S6949",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Stops": "2,4"
         },
         "1": {
             "TrainNamePos_Names": "S6938",
@@ -273,8 +273,8 @@
             "TrainNamePos_Stops": "17,19"
         },
         "3": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
+            "TrainNamePos_Names": "RE57916",
+            "TrainNamePos_Stops": "3"
         },
         "4": {
             "TrainNamePos_Names": "",
@@ -420,5 +420,6 @@
             "TrainNamePos_Names": "",
             "TrainNamePos_Stops": ""
         }
-    }
+    },
+    "TrainNamePos_Checkbutton": true
 }

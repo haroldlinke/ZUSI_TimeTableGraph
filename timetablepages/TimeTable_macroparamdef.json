@@ -1285,6 +1285,18 @@
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
+    "TrainNamePos_Checkbutton": {
+        "ParName": "TrainNamePos_Checkbutton",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "TrainNamePos_Checkbutton",
+        "Hide": "",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Individuelle Zugnamenposition erlauben",
+        "Hint": "Individuelle Zugnamenposition erlauben"
+    },
     "TrainNamePosProp": {
         "ParName": "TrainNamePosProp",
         "Cnt": "",
