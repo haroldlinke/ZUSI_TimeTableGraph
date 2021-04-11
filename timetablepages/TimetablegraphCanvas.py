@@ -126,12 +126,12 @@ class RightClickMenu(tk.Frame):
             #self.right_click_menu.add_command(label="Von ZUSI Server trennen", command=self.edit_disconnect_ZUSI)    
             self.right_click_menu.add_command(label="Zug in ZUSI starten (mit Fahrplanneustart)", command=self.edit_run_schedule)
             self.right_click_menu.add_separator()
-            self.right_click_menu.add_command(label="Zugnummer in diesem Segment anzeigen", command=self.show_trainNum_here)       
+        self.right_click_menu.add_command(label="Zugnummer in diesem Segment anzeigen", command=self.show_trainNum_here)       
         
 
     def popup_text(self,event,cvobject):
-        if not self.master.editflag and not self.master.controller.ZUSI_monitoring_started:
-            return
+        #if not self.master.editflag and not self.master.controller.ZUSI_monitoring_started:
+        #    return
         self.objectid = cvobject
         self.event = event
         self.right_click_menu.post(event.x_root, event.y_root)
