@@ -126,12 +126,13 @@ class RightClickMenu(tk.Frame):
             #self.right_click_menu.add_command(label="Von ZUSI Server trennen", command=self.edit_disconnect_ZUSI)    
             self.right_click_menu.add_command(label="Zug in ZUSI starten (mit Fahrplanneustart)", command=self.edit_run_schedule)
             self.right_click_menu.add_separator()
-        self.right_click_menu.add_command(label="Zugnummer in diesem Segment anzeigen", command=self.show_trainNum_here)       
+        if self.master.controller.edit_TrainNamePos:    
+            self.right_click_menu.add_command(label="Zugnummer in diesem Segment anzeigen", command=self.show_trainNum_here)       
         
 
     def popup_text(self,event,cvobject):
-        #if not self.master.editflag and not self.master.controller.ZUSI_monitoring_started:
-        #    return
+        if not self.master.editflag and not self.master.controller.ZUSI_monitoring_started and not self.master.controller.edit_TrainNamePos:
+            return
         self.objectid = cvobject
         self.event = event
         self.right_click_menu.post(event.x_root, event.y_root)
@@ -188,6 +189,8 @@ class RightClickMenu_TrainName(tk.Frame):
         self.right_click_menu.add_command(label="Zugnummer entfernen", command=self.edit_remove_trainnum)
 
     def popup_text(self,event,cvobject):
+        if not self.master.controller.edit_TrainNamePos:
+            return        
         self.objectid = cvobject
         self.event = event
         self.right_click_menu.post(event.x_root, event.y_root)
@@ -362,6 +365,7 @@ class TimeTableGraphCommon():
         self.monitor_time = 0
         self.monitor_currspeed = 0
         self.controller.ZUSI_monitoring_started = self.controller.getConfigData("Monitoring_Checkbutton")
+        self.controller.edit_TrainNamePos = self.controller.getConfigData("TrainNamePos_Checkbutton")
         self.monitor_curr_trainline_objectid = -1
         self.monitor_curr_timeline_objectid = -1
         self.monitor_start_time = 0
@@ -756,6 +760,8 @@ class TimeTableGraphCommon():
         return number
     
     def determine_trainNameLabel_indiv_pos_stops(self,trainName):
+        if not self.controller.edit_TrainNamePos:
+            return []            
         config_trainNameLabel_prop_dict = self.controller.getConfigData("TrainNamePosProp")
         if config_trainNameLabel_prop_dict:
             # search for complete name

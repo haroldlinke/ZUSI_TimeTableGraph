@@ -1,429 +1,751 @@
-14:28:12: ZUSI-TimetableGraph started V03.04 11.04.2021
-14:28:12:  Platform: Windows-10-10.0.19041-SP0
-14:28:12: Localfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
-14:28:12: Callfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph
-14:28:12: readConfigData
-14:28:12: ReadConfig: {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn', 'Bfp_trainfilename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1850, 'Bfp_height': 2000, 'Bfp_start': 9, 'Bfp_duration': 3, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': False, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Edit_blocked', 'Edit_Permission_No': 0, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436', 'Monitoring_Checkbutton': False, 'Monit_train_LineColor': 'red', 'Monit_train_LineWidth': 4, 'Monit_train_LineDashed': ' ', 'Monit_train_LineDashed_No': 0, 'Monit_time_LineColor': '#ff8000', 'Monit_time_LineWidth': 2, 'Monit_time_LineDashed': '.', 'Monit_time_LineDashed_No': 2, 'TrainNamePosProp': {'0': {'TrainNamePos_Names': 'E3190', 'TrainNamePos_Stops': '5,3,8,12'}, '1': {'TrainNamePos_Names': 'E', 'TrainNamePos_Stops': '2,-2'}, '2': {'TrainNamePos_Names': 'E2943', 'TrainNamePos_Stops': '9,10,1'}, '3': {'TrainNamePos_Names': 'E3491', 'TrainNamePos_Stops': '5,7'}, '4': {'TrainNamePos_Names': 'Dsts88235', 'TrainNamePos_Stops': ''}, '5': {'TrainNamePos_Names': 'Lz88518', 'TrainNamePos_Stops': ''}, '6': {'TrainNamePos_Names': 'E3480', 'TrainNamePos_Stops': '9'}, '7': {'TrainNamePos_Names': 'E3683', 'TrainNamePos_Stops': '5,1'}, '8': {'TrainNamePos_Names': 'Lr33721_N6480', 'TrainNamePos_Stops': '13'}, '9': {'TrainNamePos_Names': 'ExprE14830', 'TrainNamePos_Stops': '9'}, '10': {'TrainNamePos_Names': 'N6482', 'TrainNamePos_Stops': '3'}, '11': {'TrainNamePos_Names': 'Lz87670', 'TrainNamePos_Stops': '3'}, '12': {'TrainNamePos_Names': 'ExprE14271', 'TrainNamePos_Stops': '10,5'}, '13': {'TrainNamePos_Names': 'Lr33723', 'TrainNamePos_Stops': '5'}, '14': {'TrainNamePos_Names': 'ExprD14130', 'TrainNamePos_Stops': '3'}, '15': {'TrainNamePos_Names': 'E2836', 'TrainNamePos_Stops': '3'}, '16': {'TrainNamePos_Names': 'E2025', 'TrainNamePos_Stops': '3'}, '17': {'TrainNamePos_Names': 'E3103', 'TrainNamePos_Stops': '1'}, '18': {'TrainNamePos_Names': 'E3107', 'TrainNamePos_Stops': '1'}, '19': {'TrainNamePos_Names': 'D17441', 'TrainNamePos_Stops': '5'}, '20': {'TrainNamePos_Names': 'D848', 'TrainNamePos_Stops': '2'}, '21': {'TrainNamePos_Names': 'D715', 'TrainNamePos_Stops': '2'}, '22': {'TrainNamePos_Names': 'E3194', 'TrainNamePos_Stops': '16'}, '23': {'TrainNamePos_Names': 'E3109', 'TrainNamePos_Stops': '1'}, '24': {'TrainNamePos_Names': 'RE57920', 'TrainNamePos_Stops': '3'}, '25': {'TrainNamePos_Names': 'S6963', 'TrainNamePos_Stops': '3'}, '26': {'TrainNamePos_Names': 'S6938', 'TrainNamePos_Stops': '5,1,7'}, '27': {'TrainNamePos_Names': 'S6149', 'TrainNamePos_Stops': '15'}, '28': {'TrainNamePos_Names': 'S6951', 'TrainNamePos_Stops': '19,2'}, '29': {'TrainNamePos_Names': 'S6153', 'TrainNamePos_Stops': '15'}, '30': {'TrainNamePos_Names': 'S6155', 'TrainNamePos_Stops': '15'}, '31': {'TrainNamePos_Names': 'RE4066', 'TrainNamePos_Stops': '7,1'}, '32': {'TrainNamePos_Names': 'RE57916', 'TrainNamePos_Stops': '3'}, '33': {'TrainNamePos_Names': 'S6949', 'TrainNamePos_Stops': '4,2'}, '34': {'TrainNamePos_Names': 'S6940', 'TrainNamePos_Stops': '2'}, '35': {'TrainNamePos_Names': 'S6953', 'TrainNamePos_Stops': '2'}, '36': {'TrainNamePos_Names': 'S6942', 'TrainNamePos_Stops': '2'}, '37': {'TrainNamePos_Names': 'S6944', 'TrainNamePos_Stops': '19'}, '38': {'TrainNamePos_Names': 'RE57918', 'TrainNamePos_Stops': '2'}, '39': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}}}
-14:28:12: Read MACRODEF: TimeTable_macrodef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
-14:28:12: Read MACROPARAMDEF: TimeTable_macroparamdef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
-14:28:12: Init ZUSI_fpn:  :  
-14:28:12: Screenwidth: 2560 Screenheight: 1440
-14:28:12: TabClass: <class 'timetablepages.StartPage.StartPage'> 
-14:28:12: Init Page StartPage 
-14:28:12: Open Photo1 Bildfahrplan1.png 
-14:28:12: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
-14:28:12: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
-14:28:12: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
-14:28:12: Create Tab: StartPage
-14:28:12: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
-14:28:12: Create Tab: TimeTablePage
-14:28:12: TabClass: <class 'timetablepages.StationsConfigurationPage.StationsConfigurationPage'> 
-14:28:12: StationsConfigurationPage - Generic
-14:28:13: open_zusi_trn_zug_dict - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
+14:48:26: ZUSI-TimetableGraph started V03.04 11.04.2021
+14:48:26:  Platform: Windows-10-10.0.19041-SP0
+14:48:26: Localfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+14:48:26: Callfolder D:\data\doc\GitHub\ZUSI_TimeTableGraph
+14:48:26: readConfigData
+14:48:26: ReadConfig: {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn', 'Bfp_trainfilename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1850, 'Bfp_height': 2000, 'Bfp_start': 9, 'Bfp_duration': 3, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': False, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Edit_blocked', 'Edit_Permission_No': 0, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436', 'Monitoring_Checkbutton': False, 'Monit_train_LineColor': 'red', 'Monit_train_LineWidth': 4, 'Monit_train_LineDashed': ' ', 'Monit_train_LineDashed_No': 0, 'Monit_time_LineColor': '#ff8000', 'Monit_time_LineWidth': 2, 'Monit_time_LineDashed': '.', 'Monit_time_LineDashed_No': 2, 'TrainNamePosProp': {'0': {'TrainNamePos_Names': 'S6949', 'TrainNamePos_Stops': '2'}, '1': {'TrainNamePos_Names': 'S6938', 'TrainNamePos_Stops': '5'}, '2': {'TrainNamePos_Names': 'S6944', 'TrainNamePos_Stops': '17,19'}, '3': {'TrainNamePos_Names': 'RE57916', 'TrainNamePos_Stops': '3'}, '4': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '5': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '6': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '7': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '8': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '9': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '10': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '11': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '12': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '13': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '14': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '15': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '16': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '17': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '18': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '19': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '20': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '21': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '22': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '23': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '24': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '25': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '26': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '27': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '28': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '29': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '30': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '31': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '32': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '33': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '34': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '35': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '36': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '37': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '38': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '39': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}}, 'TrainNamePos_Checkbutton': True}
+14:48:26: Read MACRODEF: TimeTable_macrodef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+14:48:26: Read MACROPARAMDEF: TimeTable_macroparamdef.json D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages
+14:48:26: Init ZUSI_fpn:  :  
+14:48:26: Screenwidth: 2560 Screenheight: 1440
+14:48:26: TabClass: <class 'timetablepages.StartPage.StartPage'> 
+14:48:26: Init Page StartPage 
+14:48:26: Open Photo1 Bildfahrplan1.png 
+14:48:26: Open Photo2 D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+14:48:26: Open Photo D:\data\doc\GitHub\ZUSI_TimeTableGraph\timetablepages\Bildfahrplan1.png 
+14:48:26: Open Content {'ZUSI Bildfahrplan': 'Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n'} 
+14:48:26: Create Tab: StartPage
+14:48:26: TabClass: <class 'timetablepages.TimetablePage.TimeTablePage'> 
+14:48:26: Create Tab: TimeTablePage
+14:48:26: TabClass: <class 'timetablepages.StationsConfigurationPage.StationsConfigurationPage'> 
+14:48:26: StationsConfigurationPage - Generic
+14:48:27: open_zusi_trn_zug_dict - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
  [Errno 2] No such file or directory: 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S1234.trn'
-14:28:13: SaveConfig: Fahrplan und Strecke - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn', 'Bfp_trainfilename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1850, 'Bfp_height': 2000, 'Bfp_start': 9, 'Bfp_duration': 3, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': False, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Edit_blocked', 'Edit_Permission_No': 0, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436', 'Monitoring_Checkbutton': False, 'Monit_train_LineColor': 'red', 'Monit_train_LineWidth': 4, 'Monit_train_LineDashed': ' ', 'Monit_train_LineDashed_No': 0, 'Monit_time_LineColor': '#ff8000', 'Monit_time_LineWidth': 2, 'Monit_time_LineDashed': '.', 'Monit_time_LineDashed_No': 2, 'TrainNamePosProp': {'0': {'TrainNamePos_Names': 'E3190', 'TrainNamePos_Stops': '5,3,8,12'}, '1': {'TrainNamePos_Names': 'E', 'TrainNamePos_Stops': '2,-2'}, '2': {'TrainNamePos_Names': 'E2943', 'TrainNamePos_Stops': '9,10,1'}, '3': {'TrainNamePos_Names': 'E3491', 'TrainNamePos_Stops': '5,7'}, '4': {'TrainNamePos_Names': 'Dsts88235', 'TrainNamePos_Stops': ''}, '5': {'TrainNamePos_Names': 'Lz88518', 'TrainNamePos_Stops': ''}, '6': {'TrainNamePos_Names': 'E3480', 'TrainNamePos_Stops': '9'}, '7': {'TrainNamePos_Names': 'E3683', 'TrainNamePos_Stops': '5,1'}, '8': {'TrainNamePos_Names': 'Lr33721_N6480', 'TrainNamePos_Stops': '13'}, '9': {'TrainNamePos_Names': 'ExprE14830', 'TrainNamePos_Stops': '9'}, '10': {'TrainNamePos_Names': 'N6482', 'TrainNamePos_Stops': '3'}, '11': {'TrainNamePos_Names': 'Lz87670', 'TrainNamePos_Stops': '3'}, '12': {'TrainNamePos_Names': 'ExprE14271', 'TrainNamePos_Stops': '10,5'}, '13': {'TrainNamePos_Names': 'Lr33723', 'TrainNamePos_Stops': '5'}, '14': {'TrainNamePos_Names': 'ExprD14130', 'TrainNamePos_Stops': '3'}, '15': {'TrainNamePos_Names': 'E2836', 'TrainNamePos_Stops': '3'}, '16': {'TrainNamePos_Names': 'E2025', 'TrainNamePos_Stops': '3'}, '17': {'TrainNamePos_Names': 'E3103', 'TrainNamePos_Stops': '1'}, '18': {'TrainNamePos_Names': 'E3107', 'TrainNamePos_Stops': '1'}, '19': {'TrainNamePos_Names': 'D17441', 'TrainNamePos_Stops': '5'}, '20': {'TrainNamePos_Names': 'D848', 'TrainNamePos_Stops': '2'}, '21': {'TrainNamePos_Names': 'D715', 'TrainNamePos_Stops': '2'}, '22': {'TrainNamePos_Names': 'E3194', 'TrainNamePos_Stops': '16'}, '23': {'TrainNamePos_Names': 'E3109', 'TrainNamePos_Stops': '1'}, '24': {'TrainNamePos_Names': 'RE57920', 'TrainNamePos_Stops': '3'}, '25': {'TrainNamePos_Names': 'S6963', 'TrainNamePos_Stops': '3'}, '26': {'TrainNamePos_Names': 'S6938', 'TrainNamePos_Stops': '5,1,7'}, '27': {'TrainNamePos_Names': 'S6149', 'TrainNamePos_Stops': '15'}, '28': {'TrainNamePos_Names': 'S6951', 'TrainNamePos_Stops': '19,2'}, '29': {'TrainNamePos_Names': 'S6153', 'TrainNamePos_Stops': '15'}, '30': {'TrainNamePos_Names': 'S6155', 'TrainNamePos_Stops': '15'}, '31': {'TrainNamePos_Names': 'RE4066', 'TrainNamePos_Stops': '7,1'}, '32': {'TrainNamePos_Names': 'RE57916', 'TrainNamePos_Stops': '3'}, '33': {'TrainNamePos_Names': 'S6949', 'TrainNamePos_Stops': '4,2'}, '34': {'TrainNamePos_Names': 'S6940', 'TrainNamePos_Stops': '2'}, '35': {'TrainNamePos_Names': 'S6953', 'TrainNamePos_Stops': '2'}, '36': {'TrainNamePos_Names': 'S6942', 'TrainNamePos_Stops': '2'}, '37': {'TrainNamePos_Names': 'S6944', 'TrainNamePos_Stops': '19'}, '38': {'TrainNamePos_Names': 'RE57918', 'TrainNamePos_Stops': '2'}, '39': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}}}
-14:28:13: Create Tab: StationsConfigurationPage
-14:28:13: TabClass: <class 'timetablepages.ConfigurationPage.ConfigurationPage'> 
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ConfigurationPage - Multipleparams
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
-14:28:13: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
-14:28:13: Create Tab: ConfigurationPage
-14:28:13: TabClass: <class 'timetablepages.SpecialConfigurationPage.SpecialConfigurationPage'> 
-14:28:13: SpecialConfigurationPage - Multipleparams
-14:28:13: SpecialConfigurationPage - Multipleparams
-14:28:13: Create Tab: SpecialConfigurationPage
-14:28:13: TabClass: <class 'timetablepages.TCPConfigPage.TCPConfigPage'> 
-14:28:13: TCPConfigPage - Multipleparams
-14:28:13: TCPConfigPage - Multipleparams
-14:28:13: Create Tab: TCPConfigPage
-14:28:13: TabClass: <class 'timetablepages.TrainNamePosConfigPage.TrainNamePosConfigPage'> 
-14:28:13: TrainNamePosConfigPage - Multipleparams
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
-14:28:13: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
-14:28:13: Create Tab: TrainNamePosConfigPage
-14:28:13: Tabselected: Start
-14:28:13: Start
-14:28:13: TabChanged  - .!notebook.!startpage
-14:28:18: Tabunselected: Start
-14:28:18: Tabselected: Bildfahrplan
-14:28:18: Bildfahrplan
-14:28:18: Timetablepage - tabselected - Canvas_height 2000, width 1850
-14:28:18: open_zusi_trn_zug_dict - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
+14:48:27: SaveConfig: Fahrplan und Strecke - {'startpagename': 'StartPage', 'pos_x': -1928, 'pos_y': -8, 'Bfp_filename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn', 'Bfp_trainfilename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1850, 'Bfp_height': 2000, 'Bfp_start': 9, 'Bfp_duration': 3, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': False, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Edit_blocked', 'Edit_Permission_No': 0, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436', 'Monitoring_Checkbutton': False, 'Monit_train_LineColor': 'red', 'Monit_train_LineWidth': 4, 'Monit_train_LineDashed': ' ', 'Monit_train_LineDashed_No': 0, 'Monit_time_LineColor': '#ff8000', 'Monit_time_LineWidth': 2, 'Monit_time_LineDashed': '.', 'Monit_time_LineDashed_No': 2, 'TrainNamePosProp': {'0': {'TrainNamePos_Names': 'S6949', 'TrainNamePos_Stops': '2'}, '1': {'TrainNamePos_Names': 'S6938', 'TrainNamePos_Stops': '5'}, '2': {'TrainNamePos_Names': 'S6944', 'TrainNamePos_Stops': '17,19'}, '3': {'TrainNamePos_Names': 'RE57916', 'TrainNamePos_Stops': '3'}, '4': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '5': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '6': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '7': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '8': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '9': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '10': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '11': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '12': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '13': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '14': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '15': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '16': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '17': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '18': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '19': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '20': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '21': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '22': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '23': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '24': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '25': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '26': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '27': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '28': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '29': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '30': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '31': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '32': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '33': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '34': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '35': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '36': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '37': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '38': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '39': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}}, 'TrainNamePos_Checkbutton': True}
+14:48:27: Create Tab: StationsConfigurationPage
+14:48:27: TabClass: <class 'timetablepages.ConfigurationPage.ConfigurationPage'> 
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ConfigurationPage - Multipleparams
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypePropDefault', '0']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '0']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '1']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '2']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '3']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '4']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '5']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '6']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '7']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '8']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '9']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '10']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '11']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '12']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '13']
+14:48:27: ['ConfigurationPage', 'Bfp_TrainTypeProp', '14']
+14:48:27: Create Tab: ConfigurationPage
+14:48:27: TabClass: <class 'timetablepages.SpecialConfigurationPage.SpecialConfigurationPage'> 
+14:48:27: SpecialConfigurationPage - Multipleparams
+14:48:27: SpecialConfigurationPage - Multipleparams
+14:48:27: Create Tab: SpecialConfigurationPage
+14:48:27: TabClass: <class 'timetablepages.TCPConfigPage.TCPConfigPage'> 
+14:48:27: TCPConfigPage - Multipleparams
+14:48:27: TCPConfigPage - Multipleparams
+14:48:27: Create Tab: TCPConfigPage
+14:48:27: TabClass: <class 'timetablepages.TrainNamePosConfigPage.TrainNamePosConfigPage'> 
+14:48:27: TrainNamePosConfigPage - Multipleparams
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:48:27: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:48:27: Create Tab: TrainNamePosConfigPage
+14:48:27: Tabselected: Start
+14:48:27: Start
+14:48:27: TabChanged  - .!notebook.!startpage
+14:48:29: Tabunselected: Start
+14:48:29: Tabselected: Zugnamen Position Konfiguration
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:48:29: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:48:29: TabChanged .!notebook.!startpage - .!notebook.!trainnameposconfigpage
+14:48:31: Tabunselected: Zugnamen Position Konfiguration
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:48:31: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:48:31: Tabselected: Bildfahrplan
+14:48:31: Bildfahrplan
+14:48:31: Timetablepage - tabselected - Canvas_height 2000, width 1850
+14:48:32: open_zusi_trn_zug_dict - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
  [Errno 2] No such file or directory: 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S1234.trn'
-14:28:18: Regenerate_CANVAS - Canvas_height 2000, width 1850
-14:28:18: Input File, D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn.
-14:28:24: open_zusi_trn_file - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
+14:48:32: Regenerate_CANVAS - Canvas_height 2000, width 1850
+14:48:32: Input File, D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn.
+14:48:37: open_zusi_trn_file - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
  [Errno 2] No such file or directory: 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S1234.trn'
-14:28:24: Print Incoming-Station: SS6149 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6153 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6155 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6745 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6747 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6749 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6751 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6753 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6755 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6343 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6345 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6347 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6349 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6351 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Incoming-Station: SS6353 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6342 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6344 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6346 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6348 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6350 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6352 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6442 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:24: Print Outgoing-Station: SS6444 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6446 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6448 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6450 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6452 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6445 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6447 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6449 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6451 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6453 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6455 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6645 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6647 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6649 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6651 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6653 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6642 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6644 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6646 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6648 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6650 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6652 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6845 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6847 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6849 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6851 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6853 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: SS6855 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6840 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6842 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6844 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6846 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6848 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6850 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Outgoing-Station: SS6852 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: RERE57913 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:25: Print Incoming-Station: RERE57915 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:26: Print Incoming-Station: RERE4066 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:26: Print Incoming-Station: RERE4068 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:26: Print Incoming-Station: RERE4856 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:26: TabChanged .!notebook.!startpage - .!notebook.!timetablepage
-14:28:29: show_trainNum_here: %s %s, trainName,trainStops_str
-14:28:34: Tabunselected: Bildfahrplan
-14:28:34: Tabselected: Zugnamen Position Konfiguration
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
-14:28:34: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
-14:28:34: TabChanged .!notebook.!timetablepage - .!notebook.!trainnameposconfigpage
-14:28:41: Tabunselected: Zugnamen Position Konfiguration
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
-14:28:41: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
-14:28:41: Config-Data changed
-14:28:41: Config_data changed - request save or cancel
-14:28:43: Config_data changed - answer: Yes
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
-14:28:43: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
-14:28:43: SaveConfigData
-14:28:43: SaveConfig: Zugnamen Position Konfiguration - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn', 'Bfp_trainfilename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1850, 'Bfp_height': 2000, 'Bfp_start': 9, 'Bfp_duration': 3, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}, 999: {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': False, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Edit_blocked', 'Edit_Permission_No': 0, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436', 'Monitoring_Checkbutton': False, 'Monit_train_LineColor': 'red', 'Monit_train_LineWidth': 4, 'Monit_train_LineDashed': ' ', 'Monit_train_LineDashed_No': 0, 'Monit_time_LineColor': '#ff8000', 'Monit_time_LineWidth': 2, 'Monit_time_LineDashed': '.', 'Monit_time_LineDashed_No': 2, 'TrainNamePosProp': {'0': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '1': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '2': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '3': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '4': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '5': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '6': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '7': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '8': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '9': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '10': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '11': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '12': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '13': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '14': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '15': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '16': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '17': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '18': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '19': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '20': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '21': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '22': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '23': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '24': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '25': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '26': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '27': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '28': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '29': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '30': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '31': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '32': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '33': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '34': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '35': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '36': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '37': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '38': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '39': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}}}
-14:28:43: Tabselected: Bildfahrplan
-14:28:43: Bildfahrplan
-14:28:43: Timetablepage - tabselected - Canvas_height 2000, width 1850
-14:28:43: open_zusi_trn_zug_dict - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
+14:48:38: Print Incoming-Station: SS6149 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6153 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6155 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6745 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6747 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6749 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6751 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6753 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6755 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6343 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6345 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6347 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6349 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6351 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6353 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6342 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6344 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6346 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6348 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6350 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6352 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6442 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6444 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6446 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6448 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6450 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Outgoing-Station: SS6452 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6445 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6447 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6449 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6451 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6453 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6455 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6645 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6647 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6649 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6651 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:38: Print Incoming-Station: SS6653 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6642 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6644 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6646 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6648 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6650 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6652 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: SS6845 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: SS6847 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: SS6849 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: SS6851 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: SS6853 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: SS6855 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6840 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6842 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6844 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6846 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6848 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6850 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Outgoing-Station: SS6852 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: RERE57913 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: RERE57915 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: RERE4066 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: RERE4068 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: Print Incoming-Station: RERE4856 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:39: TabChanged .!notebook.!trainnameposconfigpage - .!notebook.!timetablepage
+14:48:41: show_trainNum_here: %s %s, trainName,trainStops_str
+14:48:44: show_trainNum_here: %s %s, trainName,trainStops_str
+14:48:46: remove trainname: 4253 S6949 3
+14:48:47: Tabunselected: Bildfahrplan
+14:48:47: Tabselected: Zugnamen Position Konfiguration
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:48:47: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:48:47: TabChanged .!notebook.!timetablepage - .!notebook.!trainnameposconfigpage
+14:48:49: Tabunselected: Zugnamen Position Konfiguration
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:48:49: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:48:49: Config-Data changed
+14:48:49: Config_data changed - request save or cancel
+14:48:51: Config_data changed - answer: Yes
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:48:51: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:48:51: SaveConfigData
+14:48:51: SaveConfig: Zugnamen Position Konfiguration - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn', 'Bfp_trainfilename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1850, 'Bfp_height': 2000, 'Bfp_start': 9, 'Bfp_duration': 3, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}, 999: {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': False, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Edit_blocked', 'Edit_Permission_No': 0, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436', 'Monitoring_Checkbutton': False, 'Monit_train_LineColor': 'red', 'Monit_train_LineWidth': 4, 'Monit_train_LineDashed': ' ', 'Monit_train_LineDashed_No': 0, 'Monit_time_LineColor': '#ff8000', 'Monit_time_LineWidth': 2, 'Monit_time_LineDashed': '.', 'Monit_time_LineDashed_No': 2, 'TrainNamePosProp': {'0': {'TrainNamePos_Names': 'S6949', 'TrainNamePos_Stops': '2,4'}, '1': {'TrainNamePos_Names': 'S6938', 'TrainNamePos_Stops': '5'}, '2': {'TrainNamePos_Names': 'S6944', 'TrainNamePos_Stops': '17,19'}, '3': {'TrainNamePos_Names': 'RE57916', 'TrainNamePos_Stops': '3'}, '4': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '5': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '6': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '7': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '8': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '9': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '10': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '11': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '12': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '13': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '14': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '15': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '16': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '17': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '18': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '19': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '20': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '21': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '22': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '23': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '24': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '25': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '26': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '27': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '28': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '29': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '30': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '31': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '32': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '33': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '34': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '35': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '36': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '37': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '38': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '39': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}}, 'TrainNamePos_Checkbutton': False}
+14:48:51: Tabselected: Bildfahrplan
+14:48:51: Bildfahrplan
+14:48:51: Timetablepage - tabselected - Canvas_height 2000, width 1850
+14:48:51: open_zusi_trn_zug_dict - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
  [Errno 2] No such file or directory: 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S1234.trn'
-14:28:44: Regenerate_CANVAS - Canvas_height 2000, width 1850
-14:28:44: Input File, D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn.
-14:28:49: open_zusi_trn_file - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
+14:48:51: Regenerate_CANVAS - Canvas_height 2000, width 1850
+14:48:52: Input File, D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn.
+14:48:57: open_zusi_trn_file - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
  [Errno 2] No such file or directory: 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S1234.trn'
-14:28:49: Print Incoming-Station: SS6149 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6153 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6155 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6745 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6747 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6749 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6751 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6753 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6755 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:49: Print Incoming-Station: SS6343 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6345 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6347 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6349 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6351 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6353 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6342 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6344 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6346 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6348 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6350 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6352 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6442 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6444 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6446 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6448 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6450 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6452 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6445 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6447 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6449 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6451 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6453 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6455 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6645 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6647 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6649 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6651 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6653 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6642 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6644 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6646 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6648 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6650 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6652 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6845 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6847 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6849 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6851 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6853 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Incoming-Station: SS6855 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6840 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6842 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6844 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6846 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6848 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6850 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:50: Print Outgoing-Station: SS6852 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:51: Print Incoming-Station: RERE57913 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:51: Print Incoming-Station: RERE57915 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:51: Print Incoming-Station: RERE4066 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:51: Print Incoming-Station: RERE4068 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:51: Print Incoming-Station: RERE4856 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
-14:28:51: TabChanged .!notebook.!trainnameposconfigpage - .!notebook.!timetablepage
-14:28:53: show_trainNum_here: %s %s, trainName,trainStops_str
-14:29:01: show_trainNum_here: %s %s, trainName,trainStops_str
-14:29:06: show_trainNum_here: %s %s, trainName,trainStops_str
-14:29:09: show_trainNum_here: %s %s, trainName,trainStops_str
-14:29:13: Cancel
-14:29:13: Cancel_without_save
-14:29:13: Cancel_without_save2
-14:29:13: Close_notification
-14:29:13: SaveConfigData
+14:48:57: Print Incoming-Station: SS6149 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6153 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6155 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6745 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6747 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6749 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6751 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6753 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6755 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6343 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6345 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6347 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:57: Print Incoming-Station: SS6349 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6351 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6353 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6342 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6344 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6346 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6348 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6350 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6352 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6442 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6444 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6446 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6448 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6450 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6452 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6445 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6447 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6449 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6451 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6453 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6455 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6645 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6647 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6649 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6651 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6653 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6642 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6644 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6646 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6648 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6650 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6652 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6845 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6847 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6849 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6851 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6853 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: SS6855 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6840 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6842 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6844 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6846 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6848 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6850 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Outgoing-Station: SS6852 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: RERE57913 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: RERE57915 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: RERE4066 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: RERE4068 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:58: Print Incoming-Station: RERE4856 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:48:59: TabChanged .!notebook.!trainnameposconfigpage - .!notebook.!timetablepage
+14:49:02: Tabunselected: Bildfahrplan
+14:49:02: Tabselected: Zugnamen Position Konfiguration
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:49:02: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:49:02: TabChanged .!notebook.!timetablepage - .!notebook.!trainnameposconfigpage
+14:49:04: Tabunselected: Zugnamen Position Konfiguration
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:49:04: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:49:04: Config-Data changed
+14:49:04: Config_data changed - request save or cancel
+14:49:05: Config_data changed - answer: Yes
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '0']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '1']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '2']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '3']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '4']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '5']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '6']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '7']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '8']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '9']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '10']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '11']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '12']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '13']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '14']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '15']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '16']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '17']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '18']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '19']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '20']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '21']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '22']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '23']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '24']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '25']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '26']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '27']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '28']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '29']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '30']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '31']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '32']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '33']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '34']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '35']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '36']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '37']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '38']
+14:49:05: ['TrainNamePosConfigPage', 'TrainNamePosProp', '39']
+14:49:05: SaveConfigData
+14:49:05: SaveConfig: Zugnamen Position Konfiguration - {'startpagename': 'StartPage', 'pos_x': 1, 'pos_y': 23, 'Bfp_filename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn', 'Bfp_trainfilename': 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml', 'TeilStreckeCheckButton': False, 'StartStation': '', 'EndStation': 'Bft_Leuchtenbergring', 'TLDirection': 'horizontal', 'TLDirection_No': 0, 'Bfp_width': 1850, 'Bfp_height': 2000, 'Bfp_start': 9, 'Bfp_duration': 3, 'Bfp_S_LineColor': '#ff8040', 'Bfp_S_LineWidth': 2, 'Bfp_S_LineDashed': ' ', 'Bfp_S_LineDashed_No': 0, 'Bfp_S_LineLabelSize': 9, 'Bfp_S_LineLabelDir': 'Diagonal', 'Bfp_S_LineLabelDir_No': 2, 'Bfp_ZFS_LineColor': '#ff8040', 'Bfp_ZFS_LineWidth': 1, 'Bfp_ZFS_LineDashed': '-', 'Bfp_ZFS_LineDashed_No': 1, 'Bfp_TH_LineColor': '#ff8040', 'Bfp_TH_LineWidth': 2, 'Bfp_TH_LineDashed': ' ', 'Bfp_TH_LineDashed_No': 0, 'Bfp_TH_LineLabelSize': 8, 'Bfp_TM_LineColor': '#ff8040', 'Bfp_TM_LineWidth': 1, 'Bfp_TM_LineDashed': '-', 'Bfp_TM_LineDashed_No': 1, 'Bfp_TM_LineDistance': 15, 'Bfp_TrainMinuteSize': 8, 'Bfp_TrainTypePropDefault': {'0': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'Bfp_TrainTypeProp': {'0': {'Bfp_TrainType': 'D, DZ', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '1': {'Bfp_TrainType': 'E,N', 'Bfp_TrainTypeColor': '#008000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '2': {'Bfp_TrainType': 'IC,ICE', 'Bfp_TrainTypeColor': '#ff0000', 'Bfp_TrainTypeWidth': 2, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '3': {'Bfp_TrainType': 'S', 'Bfp_TrainTypeColor': '#0000ff', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8}, '4': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': '-.', 'Bfp_TrainTypeLineDashed_No': 3, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '5': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '6': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '7': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '8': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '9': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '10': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '11': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '12': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '13': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '14': {'Bfp_TrainType': '', 'Bfp_TrainTypeColor': 'black', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Alle Segmente', 'Bfp_TrainTypeLabel_No': 0, 'Bfp_TrainTypeLabelSize': 10}, '999': {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}, 999: {'Bfp_TrainTypeAll': '', 'Bfp_TrainTypeColor': '#000080', 'Bfp_TrainTypeWidth': 1, 'Bfp_TrainTypeLineDashed': ' ', 'Bfp_TrainTypeLineDashed_No': 0, 'Bfp_TrainTypeLabel': 'Anfang', 'Bfp_TrainTypeLabel_No': 3, 'Bfp_TrainTypeLabelSize': 8, 'Bfp_TrainType': '*'}}, 'TLFileType': '.timetable.xml', 'TLFileType_No': 1, 'Bfp_ZFS_Id': 'Sbk,Abzw,Asig,Esig', 'InOutBoundTrainsShow': True, 'InOutBoundTrainsNoOneStop': False, 'InOutBoundTrainsNoStartStation': False, 'InOutBoundTrainsNoEndStation': False, 'FplRglGgl': '1,2', 'StationChooser': [], 'Bfp_TreeView': 0, 'Teilstrecke': 0, 'Bfp_CanvasSize': 0, 'Bfp_TimeRange': 0, 'Bfp_S_LineProp': 0, 'Bfp_ZFS_LineProp': 0, 'Bfp_TH_LineProp': 0, 'Bfp_TM_LineProp': 0, 'Bfp_TrainLine_Distance_from_Stationline': 0, 'Edit_Permission': 'Edit_blocked', 'Edit_Permission_No': 0, 'Bfp_show_train_dir': 'all', 'Bfp_show_train_dir_No': 0, 'w_height': 997, 'w_width': 1920, 'SO_remove_leading_Zero': False, 'TCP_Connect_Checkbutton': True, 'TCP_IP_Adress': '127.0.0.1', 'TCP_IP_Port': '1436', 'Monitoring_Checkbutton': False, 'Monit_train_LineColor': 'red', 'Monit_train_LineWidth': 4, 'Monit_train_LineDashed': ' ', 'Monit_train_LineDashed_No': 0, 'Monit_time_LineColor': '#ff8000', 'Monit_time_LineWidth': 2, 'Monit_time_LineDashed': '.', 'Monit_time_LineDashed_No': 2, 'TrainNamePosProp': {'0': {'TrainNamePos_Names': 'S6949', 'TrainNamePos_Stops': '2,4'}, '1': {'TrainNamePos_Names': 'S6938', 'TrainNamePos_Stops': '5'}, '2': {'TrainNamePos_Names': 'S6944', 'TrainNamePos_Stops': '17,19'}, '3': {'TrainNamePos_Names': 'RE57916', 'TrainNamePos_Stops': '3'}, '4': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '5': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '6': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '7': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '8': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '9': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '10': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '11': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '12': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '13': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '14': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '15': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '16': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '17': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '18': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '19': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '20': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '21': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '22': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '23': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '24': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '25': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '26': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '27': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '28': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '29': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '30': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '31': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '32': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '33': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '34': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '35': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '36': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '37': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '38': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}, '39': {'TrainNamePos_Names': '', 'TrainNamePos_Stops': ''}}, 'TrainNamePos_Checkbutton': True}
+14:49:05: Tabselected: Bildfahrplan
+14:49:05: Bildfahrplan
+14:49:05: Timetablepage - tabselected - Canvas_height 2000, width 1850
+14:49:06: open_zusi_trn_zug_dict - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
+ [Errno 2] No such file or directory: 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S1234.trn'
+14:49:06: Regenerate_CANVAS - Canvas_height 2000, width 1850
+14:49:06: Input File, D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn.
+14:49:11: open_zusi_trn_file - Error open file D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\S1_Ostbahnhof_Flughafen_Freising\S1234.trn 
+ [Errno 2] No such file or directory: 'D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S1234.trn'
+14:49:12: Print Incoming-Station: SS6149 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6153 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6155 Abzw Neuf Nord Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6745 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6747 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6749 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6751 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6753 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6755 Abzw Mü-Heimeran Hp Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6343 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6345 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6347 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6349 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6351 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Incoming-Station: SS6353 Bft Mü-Pasing Bft Mü Ost Pbf Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6342 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6344 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6346 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6348 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6350 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6352 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6442 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6444 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6446 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6448 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6450 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:12: Print Outgoing-Station: SS6452 Mü-Laim Pbf Zvsig, Zsig Ri W Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6445 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6447 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6449 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6451 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6453 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6455 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6645 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6647 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6649 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6651 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6653 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6642 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6644 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6646 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6648 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6650 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6652 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6845 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6847 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6849 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6851 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6853 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: SS6855 Bft Mü-Pasing Bft Leuchtenbergring Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6840 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6842 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6844 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6846 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6848 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6850 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Outgoing-Station: SS6852 Mü-Laim Pbf Asig Ri H Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: RERE57913 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: RERE57915 Abzw Neuf Nord Bft Flh Mü Terminal Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: RERE4066 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: RERE4068 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: Print Incoming-Station: RERE4856 Hauptbahnhof Neufahrn (bei Fr) Bft Flh Mü Terminal Bft Leuchtenbergring
+14:49:13: TabChanged .!notebook.!trainnameposconfigpage - .!notebook.!timetablepage
+14:49:25: Cancel
+14:49:25: Cancel_without_save
+14:49:25: Cancel_without_save2
+14:49:25: Close_notification
+14:49:25: SaveConfigData

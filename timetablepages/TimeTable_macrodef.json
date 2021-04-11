@@ -139,6 +139,7 @@
         "Kurzbeschreibung": "Einstellungen für Zugnamen Position",
         "MacroDescLines": "2",
         "Params": [
+            "TrainNamePos_Checkbutton",
             "TrainNamePosProp"
             ]
     }
