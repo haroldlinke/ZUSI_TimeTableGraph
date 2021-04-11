@@ -5,7 +5,7 @@
         "MTabName": "Ansicht-Einstellungen",
         "Title": "Ansicht-Einstellungen",
         "Button_1": "Geänderte Einstellungen übernehmen",
-        "Button_2": "n",
+        "Button_2": "",
         "Button_3": "",
         "Kurzbeschreibung": "Einstellungsparameter",
         "Ausführliche Beschreibung": "Bildfahrplan Einstellungen\n\r\n\rHier können Sie die Grundeinstellungen für das Programm an Ihre Wünsche anpassen.",
@@ -28,7 +28,7 @@
         "MTabName": "Experten Einstellungen",
         "Title": "Experten Einstellungen",
         "Button_1": "Geänderte Einstellungen übernehmen",
-        "Button_2": "n",
+        "Button_2": "",
         "Button_3": "",
         "Kurzbeschreibung": "Einstellungsparameter",
         "Ausführliche Beschreibung": "Bildfahrplan Einstellungen für experten - Bitte nur ändern, wenn Sie wissen, was Sie tun!\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
@@ -126,6 +126,21 @@
             "PWC_TrainNumbers",
             "PWC_DeltaTime"
         ]
+    },
+    "TrainNamePosConfigPage": {
+        "Typ": "TrainNamePosConfigPage",
+        "Name": "TrainNamePosConfigPage",
+        "MTabName": "Zugnamen Position Konfiguration",
+        "Title": "Zugnamen Position Konfiguration",
+        "Button_1": "Geänderte Einstellungen übernehmen",
+        "Button_2": "Alle Tabelleneinträge entfernen ",
+        "Button_3": "",
+        "Ausführliche Beschreibung": "Zugnamen Position individuell einstellen",
+        "Kurzbeschreibung": "Einstellungen für Zugnamen Position",
+        "MacroDescLines": "2",
+        "Params": [
+            "TrainNamePosProp"
+            ]
     }
     
 }

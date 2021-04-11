@@ -1216,7 +1216,7 @@
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
-        "Monit_time_LineProp": {
+    "Monit_time_LineProp": {
         "ParName": "Monit_time_LineProp",
         "Cnt": "",
         "Type": "Multipleparams",
@@ -1284,5 +1284,47 @@
         "ParamFontStd": "True",
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
+    },
+    "TrainNamePosProp": {
+        "ParName": "TrainNamePosProp",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "40",
+        "Input Text": "Einstellungen für Zugnamenpositionen",
+        "Hint": "Einstellungen für Zugnamenpositionen",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "TrainNamePos_Names",
+            "TrainNamePos_Stops"
+        ]
+    },
+    "TrainNamePos_Names": {
+        "ParName": "TrainNamePos_Names",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "",
+        "Input Text": "Zugname(n)",
+        "ReadOnly": "",
+        "ParamEntryWidth": "40",
+        "Hint": "Zugname(n), für die die Position festgelegt werden soll (N1234,N2345)",
+        "Implementation comment": ""
+    },
+    "TrainNamePos_Stops": {
+        "ParName": "TrainNamePos_Stops",
+        "Cnt": "1",
+        "Type": "BigEntry",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "",
+        "Input Text": "Segment(e) / Betriebsstellen",
+        "ReadOnly": "",
+        "ParamEntryWidth": "20",
+        "Hint": "Segmentnummern oder Betriebsstellen, an denen der Zugname angezeigt werden soll (1,5,9,Arnsberg,Kassel Hbf)",
+        "Implementation comment": ""
     }
 }
