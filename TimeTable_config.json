@@ -1,9 +1,9 @@
 {
     "startpagename": "StartPage",
-    "pos_x": -1928,
+    "pos_x": -8,
     "pos_y": -8,
-    "Bfp_filename": "D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen/S1_Ostbahnhof_Flughafen_Freising.fpn",
-    "Bfp_trainfilename": "D:/Zusi_Professional/__S-Bahn_Muenchen/Timetables/S-Bahn M/S1_Flughafen\\S1_Ostbahnhof_Flughafen_Freising\\S6951.timetable.xml",
+    "Bfp_filename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
+    "Bfp_trainfilename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D246.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
     "EndStation": "Bft_Leuchtenbergring",
@@ -11,8 +11,8 @@
     "TLDirection_No": 0,
     "Bfp_width": 1850,
     "Bfp_height": 2000,
-    "Bfp_start": 9,
-    "Bfp_duration": 3,
+    "Bfp_start": 14,
+    "Bfp_duration": 2,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineDashed": " ",
@@ -42,8 +42,8 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Anfang",
-            "Bfp_TrainTypeLabel_No": 3,
+            "Bfp_TrainTypeLabel": "Mitte",
+            "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8,
             "Bfp_TrainType": "*"
         }
@@ -55,8 +55,8 @@
             "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Anfang",
-            "Bfp_TrainTypeLabel_No": 3,
+            "Bfp_TrainTypeLabel": "Mitte",
+            "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8
         },
         "1": {
@@ -65,8 +65,8 @@
             "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Anfang",
-            "Bfp_TrainTypeLabel_No": 3,
+            "Bfp_TrainTypeLabel": "Mitte",
+            "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8
         },
         "2": {
@@ -75,8 +75,8 @@
             "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Anfang",
-            "Bfp_TrainTypeLabel_No": 3,
+            "Bfp_TrainTypeLabel": "Mitte",
+            "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8
         },
         "3": {
@@ -85,8 +85,8 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Anfang",
-            "Bfp_TrainTypeLabel_No": 3,
+            "Bfp_TrainTypeLabel": "Mitte",
+            "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8
         },
         "4": {
@@ -205,8 +205,8 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Anfang",
-            "Bfp_TrainTypeLabel_No": 3,
+            "Bfp_TrainTypeLabel": "Mitte",
+            "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8,
             "Bfp_TrainType": "*"
         },
@@ -216,14 +216,14 @@
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Anfang",
-            "Bfp_TrainTypeLabel_No": 3,
+            "Bfp_TrainTypeLabel": "Mitte",
+            "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8,
             "Bfp_TrainType": "*"
         }
     },
-    "TLFileType": ".timetable.xml",
-    "TLFileType_No": 1,
+    "TLFileType": ".trn",
+    "TLFileType_No": 0,
     "Bfp_ZFS_Id": "Sbk,Abzw,Asig,Esig",
     "InOutBoundTrainsShow": true,
     "InOutBoundTrainsNoOneStop": false,
@@ -244,13 +244,13 @@
     "Edit_Permission_No": 0,
     "Bfp_show_train_dir": "all",
     "Bfp_show_train_dir_No": 0,
-    "w_height": 997,
-    "w_width": 1920,
+    "w_height": 1357,
+    "w_width": 2560,
     "SO_remove_leading_Zero": false,
     "TCP_Connect_Checkbutton": true,
     "TCP_IP_Adress": "127.0.0.1",
     "TCP_IP_Port": "1436",
-    "Monitoring_Checkbutton": false,
+    "Monitoring_Checkbutton": true,
     "Monit_train_LineColor": "red",
     "Monit_train_LineWidth": 4,
     "Monit_train_LineDashed": " ",
@@ -261,20 +261,20 @@
     "Monit_time_LineDashed_No": 2,
     "TrainNamePosProp": {
         "0": {
-            "TrainNamePos_Names": "S",
-            "TrainNamePos_Stops": "2,Mü-Moosach"
+            "TrainNamePos_Names": "Tfz",
+            "TrainNamePos_Stops": "1"
         },
         "1": {
             "TrainNamePos_Names": "",
             "TrainNamePos_Stops": ""
         },
         "2": {
-            "TrainNamePos_Names": "S6944",
-            "TrainNamePos_Stops": "17,19"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "3": {
-            "TrainNamePos_Names": "RE57916",
-            "TrainNamePos_Stops": "3"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "4": {
             "TrainNamePos_Names": "",

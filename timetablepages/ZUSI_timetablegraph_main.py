@@ -189,6 +189,7 @@ class TimeTableGraphMain(tk.Tk):
         helpmenu = tk.Menu(menu)
         menu.add_cascade(label="Hilfe", menu=helpmenu)
         helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
+        helpmenu.add_command(label="Logfile öffnen", command=self.OpenLogFile)
         helpmenu.add_command(label="Über...", command=self.About)
 
         # --- define container for tabs
@@ -307,6 +308,10 @@ class TimeTableGraphMain(tk.Tk):
 
     def OpenHelp(self):
         self.call_helppage()
+        
+    def OpenLogFile(self):
+        os.startfile(LOG_FILENAME)
+        
 
     def ExitProg(self):
         self.cancel()
@@ -1192,9 +1197,14 @@ class TimeTableGraphMain(tk.Tk):
     def _button_cmd(self, macrokey="",button=""):
         """Respond to user click on a button"""
         logging.debug("Button Pressed: %s - %s",macrokey,button)
-        page_frame = self.getFramebyName(macrokey)
+        mainmacro_list=macrokey.split(".")
+        if mainmacro_list != []:
+            key = mainmacro_list[0]
+        else:
+            key = macrokey
+        page_frame = self.getFramebyName(key)
         if page_frame:        
-            button_command = "page_frame" + "." +button+"()"
+            button_command = "page_frame" + "." +button+"(macrokey='"+macrokey+"')"
             eval(button_command)
  
     def determine_fg_color(self,hex_str):
@@ -1330,7 +1340,7 @@ class TimeTableGraphMain(tk.Tk):
         FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
         if FplZeile_list=={}:
             logging.info("timetable.xml file error: %s",tt_xml_filename )
-            self.controller.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+tt_xml_filename)            
+            self.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+tt_xml_filename)            
             return {}
         stationlist = []
         for FplZeile_dict in FplZeile_list:

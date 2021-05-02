@@ -60,3 +60,9 @@ class TrainNamePosConfigPage(ConfigPagetemplate):
             mp_macro = "TrainNamePosConfigPage"+"." + "TrainNamePosProp" + "." + str(i)
             self.controller.set_macroparam_val(mp_macro, "TrainNamePos_Stops", "")
             self.controller.set_macroparam_val(mp_macro, "TrainNamePos_Names", "")
+            
+    def ButtonPlus(self,macrokey=""):
+        print("Button PLus")
+        
+    def ButtonMinus(self,macrokey=""):
+        print("Button Minus")        

@@ -1310,7 +1310,9 @@
         "Implementation comment": "",
         "MultipleParams": [
             "TrainNamePos_Names",
-            "TrainNamePos_Stops"
+            "TrainNamePos_Stops",
+            "ButtonPlus",
+            "ButtonMinus"
         ]
     },
     "TrainNamePos_Names": {
@@ -1338,5 +1340,29 @@
         "ParamEntryWidth": "20",
         "Hint": "Segmentnummern oder Betriebsstellen, an denen der Zugname angezeigt werden soll (1,2,-1,-2,Arnsberg,Kassel Hbf) - negative Werte zählen von Hinten",
         "Implementation comment": ""
+    },
+    "ButtonPlus": {
+        "ParName": "ButtonPlus",
+        "Cnt": "1",
+        "Type": "Button",
+        "Function": "ButtonPlus",
+        "Min": "0",
+        "Max": "255",
+        "Default": "1",
+        "ParamLabelWidth": "1",
+        "Input Text": "+",
+        "Hint": "Zeile hinzufügen"
+    },
+    "ButtonMinus": {
+        "ParName": "ButtonMinus",
+        "Cnt": "1",
+        "Type": "Button",
+        "Function": "ButtonMinus",
+        "Min": "0",
+        "Max": "255",
+        "Default": "1",
+        "ParamLabelWidth": "1",
+        "Input Text": "-",
+        "Hint": "Zeile löschen"
     }
 }
