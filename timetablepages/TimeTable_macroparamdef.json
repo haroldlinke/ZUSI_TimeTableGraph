@@ -168,6 +168,17 @@
         "Hint": "Einstellungen für alle Zuggattungen, die nicht unten genannt sind",
         "Implementation comment": ""
     },
+    "Bfp_TrainTypePropRepeat": {
+        "ParName": "Bfp_TrainTypePropRepeat",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_TrainTypePropRepeat",
+        "Min": "0",
+        "Max": "9999",
+        "Default": "40",
+        "Input Text": "Anzahl Tabelleneinträge",
+        "Hint": "Anzahl der Tabelleneinträge (nach Neustart des Programms)"
+    },
     "Bfp_TrainTypeProp": {
         "ParName": "Bfp_TrainTypeProp",
         "Cnt": "",
@@ -184,6 +195,7 @@
             "Bfp_TrainTypeLineDashed": " "
             },
         "Repeat": "15",
+        "RepeatVar": "Bfp_TrainTypePropRepeat",
         "!ParamDescription": "Linieneigenschaften für eine oder mehrere Zuggattungen festlegen. z.B. <D> oder <IC>.",
         "!ParamDescLines": "2",
         "Input Text": "Einstellungen für Zuggattungen",
@@ -796,11 +808,12 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Spezialoptionen",
-        "Hint": "Spetielle Optionen",
+        "Input Text": "Zugnummer Spezialoptionen",
+        "Hint": "Spezielle Optionen für die Darstellung der Zugnummer bei derAusgabe im Bildfahrplan",
         "Implementation comment": "",
         "MultipleParams": [
-            "SO_remove_leading_Zero"
+            "SO_remove_leading_Zero",
+            "SO_TN_add_blank"
         ]
     },
     "SO_remove_leading_Zero": {
@@ -813,6 +826,17 @@
         "Default": "",
         "Input Text": "Führende Nullen löschen",
         "Hint": "Bei der Anzeige von Zugnamen, führende Nullen in den Zugnummern unterdrücken"
+    },
+    "SO_TN_add_blank": {
+        "ParName": "SO_TN_add_blank",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "SO_TN_add_blank",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Leerzeichen einfügen",
+        "Hint": "Leerzeichen zwischen Zuggattung und Zugnummer bei der Ausgabe einfügen"
     },
 
     "InOutBoundTrainsProp": {
@@ -1297,6 +1321,17 @@
         "Input Text": "Individuelle Zugnamenposition erlauben",
         "Hint": "Individuelle Zugnamenposition erlauben"
     },
+    "TrainNamePosPropRepeat": {
+        "ParName": "TrainNamePosPropRepeat",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "TrainNamePosPropRepeat",
+        "Min": "0",
+        "Max": "9999",
+        "Default": "40",
+        "Input Text": "Anzahl Tabelleneinträge",
+        "Hint": "Anzahl der Tabelleneinträge (nach Neustart des Programms)"
+    },
     "TrainNamePosProp": {
         "ParName": "TrainNamePosProp",
         "Cnt": "",
@@ -1305,14 +1340,13 @@
         "Max": "",
         "Default": "",
         "Repeat": "40",
+        "RepeatVar": "TrainNamePosPropRepeat",
         "Input Text": "Einstellungen für Zugnamenpositionen",
         "Hint": "Einstellungen für Zugnamenpositionen",
         "Implementation comment": "",
         "MultipleParams": [
             "TrainNamePos_Names",
-            "TrainNamePos_Stops",
-            "ButtonPlus",
-            "ButtonMinus"
+            "TrainNamePos_Stops"
         ]
     },
     "TrainNamePos_Names": {

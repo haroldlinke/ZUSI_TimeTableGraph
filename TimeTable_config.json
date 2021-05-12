@@ -1,9 +1,9 @@
 {
     "startpagename": "StartPage",
-    "pos_x": -8,
-    "pos_y": -8,
-    "Bfp_filename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
-    "Bfp_trainfilename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_12Uhr-19Uhr\\D246.timetable.xml",
+    "pos_x": 1,
+    "pos_y": 23,
+    "Bfp_filename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_17Uhr-22Uhr.fpn",
+    "Bfp_trainfilename": "D:/data/doc/ZUSI_timetablegraph_test/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_17Uhr-22Uhr\\Dg53934.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
     "EndStation": "Bft_Leuchtenbergring",
@@ -11,8 +11,8 @@
     "TLDirection_No": 0,
     "Bfp_width": 1850,
     "Bfp_height": 2000,
-    "Bfp_start": 14,
-    "Bfp_duration": 2,
+    "Bfp_start": 17,
+    "Bfp_duration": 3,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineDashed": " ",
@@ -190,6 +190,16 @@
             "Bfp_TrainTypeLabelSize": 10
         },
         "14": {
+            "Bfp_TrainType": "Tend",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "15": {
             "Bfp_TrainType": "",
             "Bfp_TrainTypeColor": "black",
             "Bfp_TrainTypeWidth": 1,
@@ -199,16 +209,145 @@
             "Bfp_TrainTypeLabel_No": 0,
             "Bfp_TrainTypeLabelSize": 10
         },
-        "999": {
-            "Bfp_TrainTypeAll": "",
-            "Bfp_TrainTypeColor": "#000080",
+        "16": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
             "Bfp_TrainTypeWidth": 1,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "17": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "18": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "19": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "20": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "21": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "22": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "23": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "24": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "25": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "26": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "27": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "28": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
+        },
+        "29": {
+            "Bfp_TrainType": "",
+            "Bfp_TrainTypeColor": "black",
+            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeLineDashed": " ",
+            "Bfp_TrainTypeLineDashed_No": 0,
+            "Bfp_TrainTypeLabel": "Alle Segmente",
+            "Bfp_TrainTypeLabel_No": 0,
+            "Bfp_TrainTypeLabelSize": 10
         },
         "999": {
             "Bfp_TrainTypeAll": "",
@@ -261,8 +400,8 @@
     "Monit_time_LineDashed_No": 2,
     "TrainNamePosProp": {
         "0": {
-            "TrainNamePos_Names": "Tfz",
-            "TrainNamePos_Stops": "1"
+            "TrainNamePos_Names": "t1",
+            "TrainNamePos_Stops": ""
         },
         "1": {
             "TrainNamePos_Names": "",
@@ -417,9 +556,92 @@
             "TrainNamePos_Stops": ""
         },
         "39": {
+            "TrainNamePos_Names": "Tend",
+            "TrainNamePos_Stops": ""
+        },
+        "40": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "41": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "42": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "43": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "44": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "45": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "46": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "47": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "48": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "49": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "50": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "51": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "52": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "53": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "54": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "55": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "56": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "57": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "58": {
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
+        },
+        "59": {
             "TrainNamePos_Names": "",
             "TrainNamePos_Stops": ""
         }
     },
-    "TrainNamePos_Checkbutton": true
+    "TrainNamePos_Checkbutton": true,
+    "TrainNamePosPropRepeat": 40,
+    "Bfp_TrainTypePropRepeat": 15,
+    "SO_TN_add_blank": false
 }

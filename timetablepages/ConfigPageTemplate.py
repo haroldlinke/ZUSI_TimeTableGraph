@@ -90,7 +90,7 @@ class ConfigPagetemplate(tk.Frame):
         if button2_text != "":
             self.update_button2a = ttk.Button(self.button_frame, text=button2_text, command=self.button2_command)
             self.update_button2a.pack(side="right", padx=10)
-            self.update_button2b = ttk.Button(self.button_frame2, text=button1_text, command=self.button2_command)
+            self.update_button2b = ttk.Button(self.button_frame2, text=button2_text, command=self.button2_command)
             self.update_button2b.pack(side="right", padx=10)       
         #self.update_tree_button = ttk.Button(self.button_frame, text="Update Tree", command=self.update_tree)
         #self.update_tree_button.pack(side="left", padx=10)        

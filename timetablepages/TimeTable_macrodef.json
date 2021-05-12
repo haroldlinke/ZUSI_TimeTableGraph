@@ -19,6 +19,7 @@
             "Bfp_TM_LineProp",
             "Bfp_TrainMinuteSize",
             "Bfp_TrainTypePropDefault",
+            "Bfp_TrainTypePropRepeat",
             "Bfp_TrainTypeProp"
         ]
     },
@@ -140,6 +141,7 @@
         "MacroDescLines": "2",
         "Params": [
             "TrainNamePos_Checkbutton",
+            "TrainNamePosPropRepeat",
             "TrainNamePosProp"
             ]
     }
