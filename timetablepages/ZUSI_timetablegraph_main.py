@@ -78,8 +78,9 @@ class TimeTableGraphMain(tk.Tk):
     # ----------------------------------------------------------------
     # TimeTableGraphMain __init__
     # ----------------------------------------------------------------
-    def __init__(self, mainfiledir, *args, **kwargs):
+    def __init__(self, mainfiledir, logfilename, *args, **kwargs):
         self.exefile_dir = mainfiledir # directory of the .exe file
+        self.logfilename = logfilename
         self.localfile_dir = os.path.dirname(os.path.realpath(__file__)) # location of timetablepages directory
         self.start_ok = True
         if not self.readConfigData():
@@ -311,7 +312,8 @@ class TimeTableGraphMain(tk.Tk):
         self.call_helppage()
         
     def OpenLogFile(self):
-        os.startfile(LOG_FILENAME)
+        logging.debug("Open logfile: %s",self.logfilename)
+        os.startfile(self.logfilename)
 
     def OpenXMLErrorLogFile(self):
         os.startfile(XML_ERROR_LOG_FILENAME)        
@@ -1497,7 +1499,7 @@ def main(mainfiledir):
         COMMAND_LINE_ARG_DICT["startpagename"]="StartPage"
     
     try:
-        app = TimeTableGraphMain(mainfiledir)
+        app = TimeTableGraphMain(mainfiledir,logfilename)
         if app.start_ok:
             app.setroot(app)
             app.protocol("WM_DELETE_WINDOW", app.cancel)
