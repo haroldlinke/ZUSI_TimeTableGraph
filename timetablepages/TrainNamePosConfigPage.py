@@ -52,7 +52,11 @@ class TrainNamePosConfigPage(ConfigPagetemplate):
         
         paramconfig_dict = self.controller.MacroParamDef.data.get("TrainNamePosProp",{})
         mp_repeat  = paramconfig_dict.get("Repeat","")
-
+        repeat_var = paramconfig_dict.get("RepeatVar","")
+        if repeat_var != "":
+            repeat_var_value  = self.controller.getConfigData(repeat_var)
+            if repeat_var_value != None and repeat_var_value != "":
+                mp_repeat = repeat_var_value         
         for i in range(int(mp_repeat)):
             #self.controller.setConfigData_multiple("TrainNamePos_Stops","TrainNamePosProp",i,"")
             #self.controller.setConfigData_multiple("TrainNamePos_Names","TrainNamePosProp",i,"")

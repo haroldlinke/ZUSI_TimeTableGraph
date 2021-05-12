@@ -45,7 +45,7 @@ from timetablepages.TCPConfigPage import TCPConfigPage
 from timetablepages.TrainNamePosConfigPage import TrainNamePosConfigPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
 from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
-CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, shortCutDict
+CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, XML_ERROR_LOG_FILENAME, shortCutDict
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,ScrolledFrame,HorizontalScrolledFrame
 from tkcolorpicker.limitvar import LimitVar
 from tkcolorpicker.spinbox import Spinbox
@@ -190,6 +190,7 @@ class TimeTableGraphMain(tk.Tk):
         menu.add_cascade(label="Hilfe", menu=helpmenu)
         helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
         helpmenu.add_command(label="Logfile öffnen", command=self.OpenLogFile)
+        helpmenu.add_command(label="XML_Error-Logfile öffnen", command=self.OpenXMLErrorLogFile)
         helpmenu.add_command(label="Über...", command=self.About)
 
         # --- define container for tabs
@@ -311,7 +312,9 @@ class TimeTableGraphMain(tk.Tk):
         
     def OpenLogFile(self):
         os.startfile(LOG_FILENAME)
-        
+
+    def OpenXMLErrorLogFile(self):
+        os.startfile(XML_ERROR_LOG_FILENAME)        
 
     def ExitProg(self):
         self.cancel()
@@ -1051,6 +1054,11 @@ class TimeTableGraphMain(tk.Tk):
                         row=row+3
                     else:
                         repeat_number_int = int(repeat_number)
+                        repeat_var = paramconfig_dict.get("RepeatVar","")
+                        if repeat_var != "":
+                            repeat_var_value  = self.getConfigData(repeat_var)
+                            if repeat_var_value != None and repeat_var_value != "":
+                                repeat_number_int = int(repeat_var_value)
                         repeat_max_columns = 10
                         labelcolumn=0
                         for i in range(repeat_number_int):
@@ -1380,6 +1388,11 @@ class TimeTableGraphMain(tk.Tk):
             if param_type == "Multipleparams":
                 mparamlist = paramconfig_dict.get("MultipleParams",[])
                 mp_repeat  = paramconfig_dict.get("Repeat","")
+                repeat_var = paramconfig_dict.get("RepeatVar","")
+                if repeat_var != "":
+                    repeat_var_value  = self.getConfigData(repeat_var)
+                    if repeat_var_value != None and repeat_var_value != "":
+                        mp_repeat = repeat_var_value                 
                 if mp_repeat == "":
                     for mparamkey in mparamlist:
                         configdatakey = self.getConfigDatakey(mparamkey)

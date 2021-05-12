@@ -35,7 +35,7 @@ import tkinter as tk
 from tkinter import Tk, Canvas, Frame, font
 from tools.xmltodict import parse
 from datetime import datetime
-from timetablepages.DefaultConstants import LARGE_STD_FONT
+from timetablepages.DefaultConstants import LARGE_STD_FONT,XML_ERROR_LOG_FILENAME
 from timetablepages.ZUSI_fpn_class import ZUSI_fpn
 import os
 import logging
@@ -43,6 +43,12 @@ import math
 import xml.etree.ElementTree as ET
 import os
 from timetablepages.PopupWinClone import popup_win_clone
+from logging import FileHandler
+from logging import Formatter
+
+LOG_FORMAT = (
+            "%(asctime)s [%(levelname)s]: %(message)s in %(pathname)s:%(lineno)d")
+LOG_LEVEL = logging.DEBUG
 
 class Point:
     def __init__(self, x, y):
@@ -271,6 +277,14 @@ class TimeTableGraphCommon():
         self.monitor_distance_of_last_station = 0
         self.monitor_curr_train_distance_to_first_station = 0
         self.monitor_curr_train_direction_of_travel = ""
+        
+        # xml_error_logger logger
+        self.xml_error_logger = logging.getLogger("XML_Error")
+        self.xml_error_logger.setLevel(LOG_LEVEL)
+        self.xml_error_logger_file_handler = FileHandler(XML_ERROR_LOG_FILENAME)
+        self.xml_error_logger_file_handler.setLevel(LOG_LEVEL)
+        self.xml_error_logger_file_handler.setFormatter(Formatter(LOG_FORMAT))
+        self.xml_error_logger.addHandler(self.xml_error_logger_file_handler)        
         
     def define_key_bindings(self):
         self.key_to_method_dict = { "onTimeDecMinute"       : self.onTimeDecMinute,
@@ -750,14 +764,16 @@ class TimeTableGraphCommon():
             self.process_train(self.trainIdx)
         #self.controller.set_statusmessage("") 
         
-    def remove_leading_zeros(self,number):
+    def format_PrintTrainNumber(self,number_str):
         if self.controller.getConfigData("SO_remove_leading_Zero"):
-            for i in range(0,len(number)):
-                if number[0] == "0":
-                    number=number[1:]
+            for i in range(0,len(number_str)):
+                if number_str[0] == "0":
+                    number_str=number_str[1:]
                 else:
                     break
-        return number
+        if self.controller.getConfigData("SO_TN_add_blank"):
+            number_str = " "+number_str
+        return number_str
     
     def determine_trainNameLabel_indiv_pos_stops(self,trainName):
         if not self.controller.edit_TrainNamePos:
@@ -795,7 +811,7 @@ class TimeTableGraphCommon():
         self.trainType = train_dict.get("TrainType","X-Deko")
         self.trainNumber = train_dict.get("TrainName","0000")
         self.trainName = self.trainType + self.trainNumber
-        self.trainPrintName = self.trainType + self.remove_leading_zeros(self.trainNumber)
+        self.trainPrintName = self.trainType + self.format_PrintTrainNumber(self.trainNumber)
         self.trainLineName = train_dict.get("TrainLineName","")
         self.trainEngine = train_dict.get("TrainEngine","")
         self.trainOutgoingStation = train_dict.get("Outgoing_Station","")
@@ -1447,6 +1463,7 @@ class TimeTableGraphCommon():
             logging.info("timetable.xml file error: %s",trn_dateiname )
             self.controller.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+trn_dateiname)
             self.open_error = "Error: ZUSI entry not found in fpl-file: "+trn_dateiname
+            self.xml_error_logger.debug("Error: ZUSI entry not found in fpl-file: "+trn_dateiname)
             return False
         self.train_line_interrupted = False
         for FplZeile_dict in FplZeile_list:
@@ -2232,6 +2249,11 @@ class TimeTableGraphCommon():
         
         paramconfig_dict = self.controller.MacroParamDef.data.get("TrainNamePosProp",{})
         mp_repeat  = paramconfig_dict.get("Repeat","")
+        repeat_var = paramconfig_dict.get("RepeatVar","")
+        if repeat_var != "":
+            repeat_var_value  = self.controller.getConfigData(repeat_var)
+            if repeat_var_value != None and repeat_var_value != "":
+                mp_repeat = repeat_var_value 
         trainName_found = False
         trainName_index = -1
         for i in range(int(mp_repeat)):
@@ -2279,6 +2301,11 @@ class TimeTableGraphCommon():
         
         paramconfig_dict = self.controller.MacroParamDef.data.get("TrainNamePosProp",{})
         mp_repeat  = paramconfig_dict.get("Repeat","")
+        repeat_var = paramconfig_dict.get("RepeatVar","")
+        if repeat_var != "":
+            repeat_var_value  = self.controller.getConfigData(repeat_var)
+            if repeat_var_value != None and repeat_var_value != "":
+                mp_repeat = repeat_var_value       
         trainName_found = False
         trainName_index = -1
         for i in range(int(mp_repeat)):
@@ -2615,6 +2642,14 @@ class Timetable_main(Frame):
         self.starthour = self.controller.getConfigData("Bfp_start")
         self.duration = self.controller.getConfigData("Bfp_duration")
         
+        # xml_error_logger logger
+        self.xml_error_logger = logging.getLogger("XML_Error")
+        self.xml_error_logger.setLevel(LOG_LEVEL)
+        self.xml_error_logger_file_handler = FileHandler(XML_ERROR_LOG_FILENAME,mode="w")
+        self.xml_error_logger_file_handler.setLevel(LOG_LEVEL)
+        self.xml_error_logger_file_handler.setFormatter(Formatter(LOG_FORMAT))
+        self.xml_error_logger.addHandler(self.xml_error_logger_file_handler)                
+        
     def edit_train_schedule(self,objectid,mode):
         self.timetable.edit_train_schedule(objectid,mode)
         
@@ -2675,9 +2710,10 @@ class Timetable_main(Frame):
                     #enter train-timetable
                     result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict,trn_filepathname=trn_filepathname,fpn_filename=self.fpl_filename)
             except BaseException as e:
-                logging.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",tt_xml__filepathname,e)
+                logging.debug("open_zusi_trn_zug_dict - Error open file %s - %s",tt_xml__filepathname,e)
                 self.controller.set_statusmessage("Fehler beim Öffnen der Datei \n" + tt_xml__filepathname)
-                self.open_error = "Fehler beim Öffnen der Datei (Details siehe logfile.log)\n" + tt_xml__filepathname
+                self.open_error = "Fehler in XML-Datei (Details siehe xml_error_logfile.log)\n" + tt_xml__filepathname
+                self.xml_error_logger.debug("open_zusi_trn_zug_dict - Error open file %s - %s",tt_xml__filepathname,e)
                 pass
         else:
             self.timetable.convert_trn_dict_to_schedule_dict(trn_zug_dict,trn_filepathname=trn_filepathname)        
@@ -2691,9 +2727,10 @@ class Timetable_main(Frame):
             trn_zug_dict = trn_zusi_dict.get("Zug",{})        
             self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filepathname,trn_filepathname=trn_filepathname)
         except BaseException as e:
-            logging.debug("open_zusi_trn_file - Error open file %s \n %s",trn_filepathname,e)
+            logging.debug("open_zusi_trn_file - Error open file %s - %s",trn_filepathname,e)
+            self.xml_error_logger.debug("open_zusi_trn_file - Error open file %s - %s",trn_filepathname,e)
             self.controller.set_statusmessage("Fehler beim Öffnen der Datei \n" + trn_filepathname)
-            self.open_error = "Fehler beim Öffnen der Datei (Details siehe logfile.log)\n" + trn_filepathname
+            self.open_error = "Fehler in XML-Datei (Details siehe xml_error_logfile.log)\n" + trn_filepathname
             pass
             
 
@@ -2710,12 +2747,14 @@ class Timetable_main(Frame):
         zusi_dict = self.zusi_master_timetable_dict.get("Zusi",{})
         if zusi_dict == {}:
             logging.info("ZUSI Entry not found")
+            self.xml_error_logger.debug("ZUSI Entry not found")
             self.controller.set_statusmessage("Error: ZUSI entry not found in file: "+fpn_filename)
             self.open_error = "Error: ZUSI entry not found in file: "+fpn_filename
             return False
         fahrplan_dict = zusi_dict.get("Fahrplan",{})
         if fahrplan_dict == {}:
             logging.info("Fahrplan Entry not found")
+            self.xml_error_logger.debug("Fahrplan Entry not found")
             self.controller.set_statusmessage("Error: Fahrplan entry not found in fpl-file: "+fpn_filename)
             self.open_error = "Error: Fahrplan entry not found in fpl-file: "+fpn_filename
             return False
@@ -2785,6 +2824,7 @@ class Timetable_main(Frame):
             FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
             if FplZeile_list=={}:
                 logging.info("timetable.xml file error: %s",trn_dateiname )
+                self.xml_error_logger.debug("timetable.xml file error: %s",trn_dateiname )
                 self.controller.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+trn_dateiname)
                 self.open_error = "Error: ZUSI entry not found in fpl-file: "+trn_dateiname
                 return False
@@ -2841,6 +2881,7 @@ class Timetable_main(Frame):
             Bfpl_filepathname = os.path.join(trn_filepath,asc_zugGattung+zugNummer+".timetable.xml")                
             if not os.path.exists(Bfpl_filepathname):
                 logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
+                self.xml_error_logger.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
                 self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
                 self.open_error = "Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath
                 return              
@@ -2867,13 +2908,15 @@ class Timetable_main(Frame):
                 trn_dict = parse(xml_text)
         except BaseException as e:
             logging.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",trn_filepathname,e)
+            self.xml_error_logger.info("open_zusi_trn_zug_dict - Error open file %s \n %s",trn_filepathname,e)
             self.controller.set_statusmessage("Fehler beim Öffnen der Datei \n" + trn_filepathname)
-            self.open_error = "Fehler beim Öffnen der Datei (Details siehe logfile.log)\n" + trn_filepathname
+            self.open_error = "Fehler in XML-Datei (Details siehe xml_error_logfile.log)\n" + trn_filepathname
             return
         trn_filepath, trn_filename = os.path.split(trn_filepathname)
         trn_zusi_dict = trn_dict.get("Zusi")
         if trn_zusi_dict == {}:
             logging.info("ZUSI Entry not found")
+            self.xml_error_logger.info("ZUSI Entry not found")
             self.controller.set_statusmessage("Error: ZUSI entry not found in trn-file: "+trn_filepathname)
             self.open_error = "Error: ZUSI entry not found in trn-file: "+trn_filepathname
             return
@@ -2891,12 +2934,14 @@ class Timetable_main(Frame):
                 self.zusi_master_timetable_dict = parse(xml_text)
         except BaseException as e:
             logging.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",fpn_filename,e)
+            self.xml_error_logger.debug("open_zusi_trn_zug_dict - Error open file %s \n %s",fpn_filename,e)
             self.controller.set_statusmessage("Fehler beim Öffnen der Datei \n" + fpn_filename)
-            self.open_error = "Fehler beim Öffnen der Datei (Details siehe logfile.log)\n" + fpn_filename
+            self.open_error = "Fehler in XML-Datei (Details siehe xml_error_logfile.log)\n" + fpn_filename
             return
         zusi_dict = self.zusi_master_timetable_dict.get("Zusi")
         if zusi_dict == {}:
             logging.info("ZUSI Entry not found")
+            self.xml_error_logger.info("ZUSI Entry not found")
             self.controller.set_statusmessage("Error: ZUSI entry not found in fpn-file: "+fpn_filename)
             self.open_error = "Error: ZUSI entry not found in fpn-file: "+fpn_filename
             return {}
@@ -2904,6 +2949,7 @@ class Timetable_main(Frame):
         zug_list = fahrplan_dict.get("Zug",{})
         if fahrplan_dict == {}:
             logging.info("Fahrplan Entry not found")
+            self.xml_error_logger.info("Fahrplan Entry not found")
             self.controller.set_statusmessage("Error: Fahrplan entry not found in fpn-file: "+fpn_filename)
             self.open_error = "Error: Fahrplan entry not found in fpn-file: "+fpn_filename
             return {}
