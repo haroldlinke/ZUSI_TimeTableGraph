@@ -279,9 +279,10 @@ class TimeTableGraphCommon():
         self.monitor_curr_train_direction_of_travel = ""
         
         # xml_error_logger logger
+        xml_logfilename = os.path.join(self.controller.exefile_dir, XML_ERROR_LOG_FILENAME)
         self.xml_error_logger = logging.getLogger("XML_Error")
         self.xml_error_logger.setLevel(LOG_LEVEL)
-        self.xml_error_logger_file_handler = FileHandler(XML_ERROR_LOG_FILENAME)
+        self.xml_error_logger_file_handler = FileHandler(xml_logfilename)
         self.xml_error_logger_file_handler.setLevel(LOG_LEVEL)
         self.xml_error_logger_file_handler.setFormatter(Formatter(LOG_FORMAT))
         self.xml_error_logger.addHandler(self.xml_error_logger_file_handler)        
@@ -2643,9 +2644,10 @@ class Timetable_main(Frame):
         self.duration = self.controller.getConfigData("Bfp_duration")
         
         # xml_error_logger logger
+        xml_logfilename = os.path.join(self.controller.exefile_dir, XML_ERROR_LOG_FILENAME)
         self.xml_error_logger = logging.getLogger("XML_Error")
         self.xml_error_logger.setLevel(LOG_LEVEL)
-        self.xml_error_logger_file_handler = FileHandler(XML_ERROR_LOG_FILENAME,mode="w")
+        self.xml_error_logger_file_handler = FileHandler(xml_logfilename,mode="w")
         self.xml_error_logger_file_handler.setLevel(LOG_LEVEL)
         self.xml_error_logger_file_handler.setFormatter(Formatter(LOG_FORMAT))
         self.xml_error_logger.addHandler(self.xml_error_logger_file_handler)                
@@ -2833,8 +2835,8 @@ class Timetable_main(Frame):
                     FplRglGgl=FplZeile_dict.get("@FplRglGgl","")
                 except:
                     print("Error:",repr(FplZeile_dict))
-                    if not (FplRglGgl in self.FplRglGgl):
-                        continue # keine Umwege über Gegengleis
+                if (FplRglGgl !="") and not (FplRglGgl in self.FplRglGgl):
+                    continue # keine Umwege über Gegengleis
                 try:
                     FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
                     if FplAbf == "":

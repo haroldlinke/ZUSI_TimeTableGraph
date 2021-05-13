@@ -316,7 +316,8 @@ class TimeTableGraphMain(tk.Tk):
         os.startfile(self.logfilename)
 
     def OpenXMLErrorLogFile(self):
-        os.startfile(XML_ERROR_LOG_FILENAME)        
+        xml_logfilename = os.path.join(self.exefile_dir, XML_ERROR_LOG_FILENAME)
+        os.startfile(xml_logfilename)        
 
     def ExitProg(self):
         self.cancel()
