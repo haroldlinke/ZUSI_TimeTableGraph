@@ -43,7 +43,9 @@
             "Bfp_TrainLine_Distance_from_Stationline",
             "!ExtraShowAlleZFS",
             "Bfp_show_train_dir",
-            "StationChooser"
+            "StationChooser",
+            "Bfp_ZUSI_Dir_official",
+            "Bfp_ZUSI_Dir_privat"
         ]
     },
     "StartPage": {
