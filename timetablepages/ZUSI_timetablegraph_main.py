@@ -316,7 +316,8 @@ class TimeTableGraphMain(tk.Tk):
         os.startfile(self.logfilename)
 
     def OpenXMLErrorLogFile(self):
-        os.startfile(XML_ERROR_LOG_FILENAME)        
+        xml_logfilename = os.path.join(self.exefile_dir, XML_ERROR_LOG_FILENAME)
+        os.startfile(xml_logfilename)        
 
     def ExitProg(self):
         self.cancel()
@@ -632,7 +633,7 @@ class TimeTableGraphMain(tk.Tk):
                 valuedict[param_configname_list[0]] = value
             if param_configname_list[1] != "":
                 valuedict[param_configname_list[1]] = current_index
-        elif param_type in ["Entry","BigEntry","ChooseFileName","ChooseColor","String"]:
+        elif param_type in ["Entry","BigEntry","ChooseFileName","ChooseDirectory","ChooseColor","String"]:
             value = var.get()
             param_configname = paramconfig_dict.get("ConfigName",var.key)
             valuedict[param_configname] = value
@@ -1117,7 +1118,30 @@ class TimeTableGraphMain(tk.Tk):
                     column = column + deltacolumn
                     if column > maxcolumns:
                         column = 0
-                        row=row+deltarow                
+                        row=row+deltarow
+                elif param_type == "ChooseDirectory": # parameter AskDirectory
+                    param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
+                    param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH*3))                      
+                    param_label_height = int(paramconfig_dict.get("ParamLabelHeight","2"))
+                    self.filechooserlabel = tk.Button(parent_frame, text=param_title, width=param_label_width, height=param_label_height, padx=2, pady=2, wraplength=PARAMLABELWRAPL, font=self.fontbutton,command=lambda macrokey=macro,paramkey=paramkey: self.choosedirectory(macrokey=macrokey,paramkey=paramkey))
+                    #label=tk.Label(parent_frame, text=param_title,width=PARAMLABELWIDTH,height=2,wraplength = PARAMLABELWRAPL,bg=param_default,borderwidth=1)
+                    self.filechooserlabel.grid(row=row+titlerow, column=column+titlecolumn, sticky=STICKY, padx=10, pady=10)
+                    self.ToolTip(self.filechooserlabel, text=param_tooltip)
+                    paramvar_strvar = tk.StringVar()
+                    paramvar_strvar.set("")
+                    paramvar = tk.Entry(parent_frame,width=param_entry_width,font=self.fontentry,textvariable=paramvar_strvar)
+                    paramvar.delete(0, 'end')
+                    paramvar.insert(0, param_default)
+                    paramvar.grid(row=row+valuerow, column=column+valuecolumn, sticky=STICKY, padx=2, pady=2)
+                    paramvar_strvar.key = paramkey
+                    #paramvar_strvar.filetypes = paramconfig_dict.get("FileTypes","*")
+                    paramvar_strvar.text = param_title
+                    #paramvar_strvar.trace_add("write", lambda nm, indx, mode,macrokey=macro,paramkey=paramkey: self.filenamevar_changed(nm,indx,mode,macrokey=macrokey,paramkey=paramkey)) #self.colorvar_changed)
+                    self.set_macroparam_var(macro, paramkey, paramvar_strvar)                
+                    column = column + deltacolumn
+                    if column > maxcolumns:
+                        column = 0
+                        row=row+deltarow                                
                 elif param_type == "Button": # Text value param
                     param_label_width = int(paramconfig_dict.get("ParamLabelWidth",PARAMLABELWIDTH))
                     param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))                      
@@ -1273,6 +1297,13 @@ class TimeTableGraphMain(tk.Tk):
         filename = filedialog.askopenfilename(title=paramvar_strvar.text,initialfile=old_filename,filetypes=filetype_list) # ("Zusi-Master-Fahrplan","*.fpn"),("all files","*.*")
         if filename != "":
             paramvar_strvar.set(filename)
+            
+    def choosedirectory(self,paramkey="",macrokey=""):
+        paramvar_strvar = self.macroparams_var[macrokey][paramkey]
+        old_directory=paramvar_strvar.get()
+        directory = filedialog.askdirectory(title=paramvar_strvar.text,initialdir=old_directory) # ("Zusi-Master-Fahrplan","*.fpn"),("all files","*.*")
+        if directory != "":
+            paramvar_strvar.set(directory)
             
     def checkbuttonvar_changed(self,var,indx,mode,macrokey="",paramkey=""):
         #print("colorvar_changed",var,indx,mode)
