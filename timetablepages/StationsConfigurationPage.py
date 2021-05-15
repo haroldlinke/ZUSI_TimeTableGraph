@@ -72,7 +72,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
     def bfpl_filename_updated(self, *args):
         fpl_filename = self.controller.get_macroparam_val("StationsConfigurationPage","Bfp_filename")
         if not os.path.isfile(fpl_filename):
-            self.controller.set_statusmessage("ZUSI Fahrplan <"+ fpl_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+            self.controller.set_statusmessage("ZUSI Fahrplan <"+ fpl_filename + "> nicht gefunden. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> richtig einstellen")
             return
         self.fpl_filename = fpl_filename 
         self.update_tree()
@@ -83,7 +83,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
         xml_filename = self.controller.get_macroparam_val("StationsConfigurationPage","Bfp_trainfilename")
         self.xml_filename = xml_filename
         if not os.path.isfile(xml_filename):
-            self.controller.set_statusmessage("ZUSI Buchfahrplan <"+ xml_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+            self.controller.set_statusmessage("ZUSI Buchfahrplan <"+ xml_filename + "> nicht gefunden. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> richtig einstellen")
             return              
         pass
     

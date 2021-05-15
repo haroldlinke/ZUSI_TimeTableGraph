@@ -321,24 +321,24 @@ class TimeTablePage(tk.Frame):
             self.create_train_type_to_color_dict()
             self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
             if fpl_filename == "":
-                self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
+                self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> auswählen")
                 return
             else:
                 if not os.path.isfile(fpl_filename):
-                    self.controller.set_statusmessage("ZUSI Fahrplan <"+ fpl_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+                    self.controller.set_statusmessage("ZUSI Fahrplan <"+ fpl_filename + "> nicht gefunden. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> richtig einstellen")
                     return                    
             if xml_filename == "":
-                self.controller.set_statusmessage("Kein ZUSI Buchfahrplann eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
+                self.controller.set_statusmessage("Kein ZUSI Buchfahrplann eingestellt. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> auswählen")
                 return
             else:
                 if not os.path.isfile(xml_filename):
-                    self.controller.set_statusmessage("ZUSI Buchfahrplan <"+ xml_filename + "> nicht gefunden. Bitte auf der Seite <Bahnhof-Einstellungen> richtig einstellen")
+                    self.controller.set_statusmessage("ZUSI Buchfahrplan <"+ xml_filename + "> nicht gefunden. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> richtig einstellen")
                     return                      
             if starthour == "" or starthour==None:
-                self.controller.set_statusmessage("Keine Startzeit für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
+                self.controller.set_statusmessage("Keine Startzeit für den Bildfahrplan eingestellt. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> einstellen")
                 return
             if duration == "" or duration==None:
-                self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> einstellen")
+                self.controller.set_statusmessage("Kein Zeitraum für den Bildfahrplan eingestellt. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> einstellen")
                 return        
             self.timetable_main.create_zusi_zug_liste(fpl_filename)
             if self.controller.check_if_config_data_changed() or self.firstcall:
