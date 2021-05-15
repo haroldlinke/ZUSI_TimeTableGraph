@@ -334,6 +334,7 @@
         "Min": "",
         "Max": "",
         "Default": "",
+
         "Default_from_registry": "HKEY_LOCAL_MACHINE:SOFTWARE\\WOW6432Node\\Zusi3:DatenverzeichnisOffiziell",
         "ParamDescription": "",
         "Kurzbeschreibung": "ZUSI Arbeitsverzeichnis offizielle Daten",
@@ -351,7 +352,9 @@
         "Min": "",
         "Max": "",
         "Default": "",
+
         "Default_from_registry": "HKEY_LOCAL_MACHINE:SOFTWARE\\WOW6432Node\\Zusi3:Datenverzeichnis",
+
         "ParamDescription": "",
         "Kurzbeschreibung": "ZUSI Arbeitsverzeichnis eigene Daten",
         "ParamDescLines": "2",

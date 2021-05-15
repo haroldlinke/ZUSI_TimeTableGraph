@@ -33,6 +33,7 @@
 # ***************************************************************************
 
 PROG_VERSION ="V03.10 15.05.2021"
+
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
