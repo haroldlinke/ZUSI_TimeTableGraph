@@ -2776,6 +2776,22 @@ class Timetable_main(Frame):
                 trn_filename = datei_dict.get("@Dateiname")
                 trn_filename_comp = trn_filename.split("\\")
                 trn_file_and_path = os.path.join(fpl_path,trn_filename_comp[-2],trn_filename_comp[-1])
+                found=False
+                if not os.path.isfile(trn_file_and_path):
+                    # check in private ZUSI directory
+                    zusi_private_path = self.controller.getConfigData("Bfp_ZUSI_Dir_privat")
+                    if zusi_private_path:
+                        trn_file_and_path_pr = os.path.join(zusi_private_path,trn_filename)
+                        if os.path.isfile(trn_file_and_path_pr):
+                            trn_file_and_path = trn_file_and_path_pr
+                            found = True
+                    if not found:
+                        # check in official ZUSI directory
+                        zusi_official_path = self.controller.getConfigData("Bfp_ZUSI_Dir_official")
+                        if zusi_official_path:
+                            trn_file_and_path_of = os.path.join(zusi_official_path,trn_filename)
+                            if os.path.isfile(trn_file_and_path_of):
+                                trn_file_and_path = trn_file_and_path_of
                 self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+trn_file_and_path)
                 self.controller.update()
                 self.open_zusi_trn_file(trn_file_and_path,fpn_filename)
