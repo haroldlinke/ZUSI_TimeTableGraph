@@ -280,8 +280,18 @@ class TimeTablePage(tk.Frame):
         self.train_type_prop_dict = {}
         self.train_type_to_width_dict = {}
         config_traintype_prop_dict = self.getConfigData("Bfp_TrainTypeProp")
-        config_traintype_prop_default_dict = self.getConfigData("Bfp_TrainTypePropDefault")
-        config_traintype_prop_default_dict["0"]["Bfp_TrainType"]="*"
+        config_traintype_prop_default_dict = self.getConfigData("Bfp_TrainTypePropDefault",default={})
+        if config_traintype_prop_default_dict:
+            config_traintype_prop_default_dict["0"]["Bfp_TrainType"]="*"
+        else:
+            config_traintype_prop_default_dict["0"]={"Bfp_TrainType": "*",
+                                                     "Bfp_TrainTypeColor": "black",
+                                                     "Bfp_TrainTypeWidth": 1,
+                                                     "Bfp_TrainTypeLabel": "Alle Segmente",
+                                                     "Bfp_TrainTypeLabel_No": 0,
+                                                     "Bfp_TrainTypeLabelSize": 10,
+                                                     "Bfp_TrainTypeLineDashed": ""
+                                                     }
         if config_traintype_prop_dict == None:
             config_traintype_prop_dict = config_traintype_prop_default_dict
         else:
@@ -321,7 +331,7 @@ class TimeTablePage(tk.Frame):
             self.create_train_type_to_color_dict()
             self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
             if fpl_filename == "":
-                self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> auswählen")
+                self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
                 return
             else:
                 if not os.path.isfile(fpl_filename):
@@ -383,8 +393,8 @@ class TimeTablePage(tk.Frame):
         logging.info("SerialMonitorPage - update_value: %s",paramkey)
         message = self.controller.get_macroparam_val(self.tabClassName, "SerialMonitorInput")+"\r\n" #self.input.get() +"\r\n"
 
-    def getConfigData(self, key):
-        return self.controller.getConfigData(key)
+    def getConfigData(self, key,default=None):
+        return self.controller.getConfigData(key,default=default)
     
     def readConfigData(self):
         self.controller.readConfigData()

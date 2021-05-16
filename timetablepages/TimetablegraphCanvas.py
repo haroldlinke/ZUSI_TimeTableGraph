@@ -312,8 +312,8 @@ class TimeTableGraphCommon():
     def determine_headersize(self):
         if self.draw_stations_vertical: 
             return 140
-        s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize")
-        s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No")
+        s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize",default="")
+        s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No",default="")
         self.s_font = font.Font(family="SANS_SERIF", size=int(s_labelsize))             
         stationNameLengthMax = self.determine_stationNameLength()
         if s_labeldir==0:
@@ -341,7 +341,7 @@ class TimeTableGraphCommon():
         if len(self.schedule_stations_dict) == 0:
             logging.debug("Error - no stations in list")
             return
-        TLDirection = self.controller.getConfigData("TLDirection")
+        TLDirection = self.controller.getConfigData("TLDirection",default="")
         self.draw_stations_vertical = (TLDirection=="vertical")                
         self.tt_canvas = canvas
         self.canvas_dimHeight =self.tt_canvas.winfo_reqheight()
@@ -359,14 +359,14 @@ class TimeTableGraphCommon():
         self.graphBottom = self.graphTop + self.graphHeight
         self.graphLeft = self.graphLeftbordersize
         self.graphWidth = self.canvas_dimWidth - self.graphLeft - self.graphRightbordersize
-        self.TrainMinuteSize = self.controller.getConfigData("Bfp_TrainMinuteSize")
+        self.TrainMinuteSize = self.controller.getConfigData("Bfp_TrainMinuteSize",default="")
         self.TrainMinuteFont = font.Font(family="SANS_SERIF", size=int(self.TrainMinuteSize))
         self.TrainMinuteShow = self.TrainMinuteSize > 0
-        self.InOutBoundTrainsShow = self.controller.getConfigData("InOutBoundTrainsShow")
-        self.InOutBoundTrainsNoOneStop = self.controller.getConfigData("InOutBoundTrainsNoOneStop")
-        self.InOutBoundTrainsNoStartStation = self.controller.getConfigData("InOutBoundTrainsNoStartStation")
-        self.InOutBoundTrainsNoEndStation = self.controller.getConfigData("InOutBoundTrainsNoEndStation")
-        self.InOutBoundTrainsShowMinutes = self.controller.getConfigData("InOutBoundTrainsShowMinutes")
+        self.InOutBoundTrainsShow = self.controller.getConfigData("InOutBoundTrainsShow",default="")
+        self.InOutBoundTrainsNoOneStop = self.controller.getConfigData("InOutBoundTrainsNoOneStop",default="")
+        self.InOutBoundTrainsNoStartStation = self.controller.getConfigData("InOutBoundTrainsNoStartStation",default="")
+        self.InOutBoundTrainsNoEndStation = self.controller.getConfigData("InOutBoundTrainsNoEndStation",default="")
+        self.InOutBoundTrainsShowMinutes = self.controller.getConfigData("InOutBoundTrainsShowMinutes",default="")
         self.startstationName = self.schedule_stations_dict[0]["StationName"]
         self.stationsCntMax = len(self.schedule_stations_dict)-1
         self.endstationName = self.schedule_stations_dict[self.stationsCntMax]["StationName"]
@@ -379,8 +379,8 @@ class TimeTableGraphCommon():
         self.monitor_currkm = 0
         self.monitor_time = 0
         self.monitor_currspeed = 0
-        self.controller.ZUSI_monitoring_started = self.controller.getConfigData("Monitoring_Checkbutton")
-        self.controller.edit_TrainNamePos = self.controller.getConfigData("TrainNamePos_Checkbutton")
+        self.controller.ZUSI_monitoring_started = self.controller.getConfigData("Monitoring_Checkbutton",default="")
+        self.controller.edit_TrainNamePos = self.controller.getConfigData("TrainNamePos_Checkbutton",default="")
         self.monitor_curr_trainline_objectid = -1
         self.monitor_curr_timeline_objectid = -1
         self.monitor_start_time = 0
@@ -424,7 +424,7 @@ class TimeTableGraphCommon():
         self.controller.timetable_activ = True
 
     def determine_xy_point(self, stop, time):
-        delta=self.controller.getConfigData("Bfp_TrainLine_Distance_from_Stationline")
+        delta=self.controller.getConfigData("Bfp_TrainLine_Distance_from_Stationline",default=0)
         if self.draw_stations_vertical:
             x = self.calculateTimePos(time)
             y = self.stationGrid.get(stop.get("StationIdx",0),0)
@@ -457,8 +457,8 @@ class TimeTableGraphCommon():
         if self.trainLineFirstStationIdx == -1:
             self.trainLineFirstStationIdx = stationIdx
         self.trainLineLastStationIdx = stationIdx
-        s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize")
-        s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No")
+        s_labelsize=self.controller.getConfigData("Bfp_S_LineLabelSize",default="10")
+        s_labeldir=self.controller.getConfigData("Bfp_S_LineLabelDir_No",default=0)
         self.s_font = font.Font(family="SANS_SERIF", size=int(s_labelsize))
         x, y=self.determine_station_xy_point(stationName, distance)
         textwidth = self.s_font.measure(stationName)
@@ -518,7 +518,7 @@ class TimeTableGraphCommon():
 
     def print_hour(self, i, currentHour):
         self.coord_null_item = self.tt_canvas.create_text(0,0, text = "0,0")
-        th_labelsize=self.controller.getConfigData("Bfp_TH_LineLabelSize")
+        th_labelsize=self.controller.getConfigData("Bfp_TH_LineLabelSize",default="10")
         th_font = font.Font(family="SANS_SERIF", size=int(th_labelsize))
         hourString = str(currentHour)+":00"
         hOffset = self.stdFont.measure(hourString) / 2
@@ -624,7 +624,7 @@ class TimeTableGraphCommon():
         self.tt_canvas.create_text(10, 10, text="ZUSI Bildfahrplan", font=self.bigFont, anchor="nw")
         self.tt_canvas.create_text(10, 40, text="Fahrplan:"+scheduleName, font=self.stdFont, anchor="nw")
         self.tt_canvas.create_text(10, 55, text="Buchfahrplanstrecke:"+self.xml_filename, font=self.stdFont, anchor="nw")
-        self.tt_canvas.create_text(10, 70, text="Zugfahrplandateien:"+ self.controller.getConfigData("TLFileType"), font=self.stdFont, anchor="nw");
+        self.tt_canvas.create_text(10, 70, text="Zugfahrplandateien:"+ self.controller.getConfigData("TLFileType",default=""), font=self.stdFont, anchor="nw");
 
     def check_stationtypeZFS(self,stationName):
         # check if statiotype is ZugFolgeStelle
@@ -639,7 +639,7 @@ class TimeTableGraphCommon():
             self.maxDistance = self.schedule_stations_dict[stationIdx_last].get("Distance",100)
             self.stationGrid = {}
             self.stationTypeZFS_list = []
-            zfs_id_str=self.controller.getConfigData("Bfp_ZFS_Id")
+            zfs_id_str=self.controller.getConfigData("Bfp_ZFS_Id",default="")
             zfs_id_str = zfs_id_str.replace(" ","")
             if zfs_id_str =="":
                 self.zfs_id_list=[]
@@ -678,9 +678,9 @@ class TimeTableGraphCommon():
                 
     def get_line_properties(self,line_code):
         line_prop={}
-        line_prop["Color"]=self.controller.getConfigData(line_code+"_LineColor")
-        line_prop["Width"]=self.controller.getConfigData(line_code+"_LineWidth")
-        line_prop["Dashed"]=self.controller.getConfigData(line_code+"_LineDashed")
+        line_prop["Color"]=self.controller.getConfigData(line_code+"_LineColor",default="")
+        line_prop["Width"]=self.controller.getConfigData(line_code+"_LineWidth",default="")
+        line_prop["Dashed"]=self.controller.getConfigData(line_code+"_LineDashed",default="")
         return line_prop
     
     def create_line(self,point_list,line_prop):
@@ -694,19 +694,19 @@ class TimeTableGraphCommon():
         # Print the graph box
         self.tt_canvas.create_rectangle(self.graphLeft, self.graphTop, self.graphLeft+self.graphWidth, self.graphTop + self.graphHeight)
         # Print the grid lines
-        s_color=self.controller.getConfigData("Bfp_S_LineColor")
-        s_width=self.controller.getConfigData("Bfp_S_LineWidth")
-        s_linedashed=self.controller.getConfigData("Bfp_S_LineDashed")
-        zfs_color=self.controller.getConfigData("Bfp_ZFS_LineColor")
-        zfs_width=self.controller.getConfigData("Bfp_ZFS_LineWidth")
-        zfs_linedashed=self.controller.getConfigData("Bfp_ZFS_LineDashed")
-        th_color=self.controller.getConfigData("Bfp_TH_LineColor")
-        th_width=self.controller.getConfigData("Bfp_TH_LineWidth")
-        th_linedashed=self.controller.getConfigData("Bfp_TH_LineDashed")
-        tm_color=self.controller.getConfigData("Bfp_TM_LineColor")
-        tm_width=self.controller.getConfigData("Bfp_TM_LineWidth")
-        tm_linedashed=self.controller.getConfigData("Bfp_TM_LineDashed")
-        tm_distance=int(self.controller.getConfigData("Bfp_TM_LineDistance"))
+        s_color=self.controller.getConfigData("Bfp_S_LineColor",default="")
+        s_width=self.controller.getConfigData("Bfp_S_LineWidth",default="")
+        s_linedashed=self.controller.getConfigData("Bfp_S_LineDashed",default="")
+        zfs_color=self.controller.getConfigData("Bfp_ZFS_LineColor",default="")
+        zfs_width=self.controller.getConfigData("Bfp_ZFS_LineWidth",default="")
+        zfs_linedashed=self.controller.getConfigData("Bfp_ZFS_LineDashed",default="")
+        th_color=self.controller.getConfigData("Bfp_TH_LineColor",default="")
+        th_width=self.controller.getConfigData("Bfp_TH_LineWidth",default="")
+        th_linedashed=self.controller.getConfigData("Bfp_TH_LineDashed",default="")
+        tm_color=self.controller.getConfigData("Bfp_TM_LineColor",default="")
+        tm_width=self.controller.getConfigData("Bfp_TM_LineWidth",default="")
+        tm_linedashed=self.controller.getConfigData("Bfp_TM_LineDashed",default="")
+        tm_distance=int(self.controller.getConfigData("Bfp_TM_LineDistance",default=""))
         if self.draw_stations_vertical:
             for stationidx,y in self.stationGrid.items():
                 if self.stationTypeZFS_list[stationidx]:
@@ -1448,9 +1448,9 @@ class TimeTableGraphCommon():
         trn_dateiname = Datei_trn_dict.get("@Dateiname","")
         train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag)
         train_stop_idx = 0
-        FplRglGgl_str = self.controller.getConfigData("FplRglGgl")
+        FplRglGgl_str = self.controller.getConfigData("FplRglGgl",default="")
         #showstationonly = not self.controller.getConfigData("ExtraShowAlleZFS")
-        if FplRglGgl_str !="":
+        if FplRglGgl_str and FplRglGgl_str !="":
             self.FplRglGgl = FplRglGgl_str.split(",")
         else:
             self.FplRglGgl = []
@@ -2683,7 +2683,7 @@ class Timetable_main(Frame):
         self.timetable.edit_remove_trainnum(objectid)    
         
     def open_zusi_trn_zug_dict(self,trn_zug_dict,fpn_filepathname,trn_filepathname=""):
-        TLFileType = self.controller.getConfigData("TLFileType")
+        TLFileType = self.controller.getConfigData("TLFileType",default="")
         if TLFileType == ".timetable.xml":
             fahrplan_gruppe = trn_zug_dict.get("@FahrplanGruppe","")
             zugGattung = trn_zug_dict.get("@Gattung","")
@@ -2834,7 +2834,7 @@ class Timetable_main(Frame):
                 return False
             trn_dateiname = Datei_trn_dict.get("@Dateiname","")
             
-            FplRglGgl_str = self.controller.getConfigData("FplRglGgl")
+            FplRglGgl_str = self.controller.getConfigData("FplRglGgl",default="")
             if FplRglGgl_str =="":
                 FplRglGgl_str = "1,2"
             self.FplRglGgl = FplRglGgl_str.split(",")
@@ -3032,8 +3032,8 @@ class Timetable_main(Frame):
         result_ok = self.open_zusi_master_schedule(fpn_filename=self.fpl_filename)
         if not result_ok:
             return
-        self.editflag = self.controller.getConfigData("Edit_Permission") in ("Edit_allowed","Fast_Edit_allowed")
-        self.fast_editflag = self.controller.getConfigData("Edit_Permission") == "Fast_Edit_allowed"
+        self.editflag = self.controller.getConfigData("Edit_Permission",default="") in ("Edit_allowed","Fast_Edit_allowed")
+        self.fast_editflag = self.controller.getConfigData("Edit_Permission",default="") == "Fast_Edit_allowed"
         self.timetable.doPaint(self.canvas,starthour=self.starthour,duration=self.duration)
         if self.controller.ZUSI_monitoring_started:
             self.edit_connect_ZUSI(0)

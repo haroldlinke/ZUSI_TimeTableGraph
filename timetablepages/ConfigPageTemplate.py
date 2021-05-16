@@ -144,8 +144,8 @@ class ConfigPagetemplate(tk.Frame):
     def getConfigPageParams(self):
         pass
     
-    def getConfigData(self, key):
-        return self.controller.getConfigData(key)
+    def getConfigData(self, key,default=None):
+        return self.controller.getConfigData(key,default=default)
     
     def readConfigData(self):
         self.controller.readConfigData()

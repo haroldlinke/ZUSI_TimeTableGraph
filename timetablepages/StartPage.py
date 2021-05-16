@@ -147,8 +147,8 @@ class StartPage(tk.Frame):
     def TabChanged(self,_event=None):
         pass    
 
-    def getConfigData(self, key):
-        return self.controller.getConfigData(key)
+    def getConfigData(self, key,default=None):
+        return self.controller.getConfigData(key,default=default)
     
     def readConfigData(self):
         self.controller.readConfigData()
