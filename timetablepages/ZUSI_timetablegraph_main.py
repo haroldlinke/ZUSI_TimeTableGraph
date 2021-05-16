@@ -264,7 +264,7 @@ class TimeTableGraphMain(tk.Tk):
         self.timetable_activ = False
         
     def set_statusmessage(self,status_text,fg="black"):
-        logging.debug("set_statusmessage: %s",status_text)
+        #logging.debug("set_statusmessage: %s",status_text)
         self.statusmessage.configure(text=status_text,fg=fg)
 
     def get_font(self,fontname):
@@ -484,9 +484,9 @@ class TimeTableGraphMain(tk.Tk):
         else:
             webbrowser.open_new_tab(helppageurl)
 
-    def getConfigData(self, key):
+    def getConfigData(self, key,default=None):
         #logging.debug("GetConfigData Key: %s",key)
-        return self.ConfigData.data.get(key,DEFAULT_CONFIG.get(key,None))
+        return self.ConfigData.data.get(key,DEFAULT_CONFIG.get(key,default))
     
     def getConfigData_multiple(self, configdatakey,paramkey,index):
         value = None
@@ -801,7 +801,6 @@ class TimeTableGraphMain(tk.Tk):
                 param_title = paramconfig_dict.get("Input Text","")
                 param_tooltip = paramconfig_dict.get("Hint","")
                 param_configname = paramconfig_dict.get("ConfigName",paramkey)
-                
                 param_allow_value_entry = (paramconfig_dict.get("AllowValueEntry","False") == "True")
                 param_hide = (paramconfig_dict.get("Hide","False") == "True")
                 param_value_change_event = (paramconfig_dict.get("ValueChangeEvent","False") == "True")
@@ -810,14 +809,14 @@ class TimeTableGraphMain(tk.Tk):
                 param_label_height = int(paramconfig_dict.get("ParamLabelWidth","2"))
                 param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))
                 param_entry_height = int(paramconfig_dict.get("ParamEntryHeight","2"))
+                param_persistent = (paramconfig_dict.get("Persistent","False") == "True")
                 
                 param_default = paramconfig_dict.get("Default","")
-                param_persistent = (paramconfig_dict.get("Persistent","False") == "True")
                 if param_persistent:
                     configData = self.getConfigData(paramkey)
-                    if configData != "":
+                    if configData and configData != "":
                         param_default = configData
-                
+                    
                 param_default_from_registry = paramconfig_dict.get("Default_from_registry","")
                 if param_default_from_registry != "":
                     # example: read ZUSI registry entry from HKEY_LOCAL_MACHINE:SOFTWARE\WOW6432Node\Zusi3:Datenverzeichnis
@@ -830,8 +829,7 @@ class TimeTableGraphMain(tk.Tk):
                         if default_value != "":
                             param_default = default_value
                     except:
-                        pass
-                
+                        pass                        
                 param_readonly = (paramconfig_dict.get("ReadOnly","False") == "True")
                 param_type = paramconfig_dict.get("Type","")
         

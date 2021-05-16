@@ -8,7 +8,7 @@
 # * Informatzion about ZUSI can be found here: https://www.zusi.de/
 # *
 # *
-# * Version: 0.08
+# * Version: 3.12
 # * Author: Harold Linke
 # * Date: February 5th, 2021
 # * 
@@ -32,8 +32,8 @@
 # * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ***************************************************************************
 
-PROG_VERSION ="V03.10 15.05.2021"
 
+PROG_VERSION ="V03.12 16.05.2021"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -65,7 +65,8 @@ DEFAULT_CONFIG = {
                     "pos_y": 100,
                     "startpage": 1,
                     "startpagename" : "StartPage",
-                    "StationChooser": ""
+                    "StationChooser": "",
+                    "TLFileType": ""
                 }
 
 def get_shortcut(activity,type,action):
