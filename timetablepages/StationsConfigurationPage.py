@@ -146,7 +146,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
     def create_zusi_zug_treeframe(self,parent):
         # Setup Data
         self.max_value_width = 0
-        self.max_key_width = 0
+        self.max_key_width = 1000
         fpl_filename = self.get_macroparam_var_val("Bfp_filename")
         # Setup the Frames
         TreeFrame = ttk.Frame(parent, padding="3")
