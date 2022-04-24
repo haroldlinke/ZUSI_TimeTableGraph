@@ -814,10 +814,14 @@ class TimeTableGraphCommon():
         self.trainName = self.trainType + self.trainNumber
         self.trainPrintName = self.trainType + self.format_PrintTrainNumber(self.trainNumber)
         self.trainLineName = train_dict.get("TrainLineName","")
+        self.trainFahrplangruppe = train_dict.get("Fahrplangruppe","")
         self.trainEngine = train_dict.get("TrainEngine","")
         self.trainOutgoingStation = train_dict.get("Outgoing_Station","")
         self.trainIncomingStation = train_dict.get("Incoming_Station","") 
-        self.trainLineProp = self.canvas_traintype_prop_dict.get(self.trainType,self.default_trainprop)
+        self.trainLineProp = self.canvas_traintype_prop_dict.get(self.trainEngine,None)
+        if self.trainLineProp==None:
+            self.trainLineProp = self.canvas_traintype_prop_dict.get(self.trainType,self.default_trainprop)        
+        #self.trainLineProp = self.canvas_traintype_prop_dict.get(self.trainType,self.default_trainprop)
         self.trainColor = self.trainLineProp.get("Bfp_TrainTypeColor","Black")
         self.trainLineWidth = int(self.trainLineProp.get("Bfp_TrainTypeWidth","2"))
         self.TrainLabelPos = self.trainLineProp.get("Bfp_TrainTypeLabel_No","")
@@ -1211,7 +1215,8 @@ class TimeTableGraphCommon():
                     self.trainLine_dict_idx += 1
                 if self.TrainLineDashed != "no line":
                     train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,dash=self.TrainLineDashed,tags=(self.trainName,"L_"+self.trainName,str(self.trainIdx)))
-                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, button_1=True)
+                    #self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, button_1=True)
+                    self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\n"+self.trainFahrplangruppe+"\nBR "+self.trainEngine, button_1=True)
                     self.bind_right_click_menu_to_trainline(train_line_objid)
             arrowwidth = self.trainLineWidth
             if arrowwidth<4:
@@ -1312,11 +1317,13 @@ class TimeTableGraphCommon():
             return -1
         return self.schedule_stationIdx_write_next - 1
 
-    def enter_schedule_trainLine_data(self,trainNumber,trainType,ZugLauf,ZugLok,trn_filepathname="",pendelzug=False):
+    #def enter_schedule_trainLine_data(self,trainNumber,trainType,ZugLauf,ZugLok,trn_filepathname="",pendelzug=False):
+    def enter_schedule_trainLine_data(self,trainNumber,trainType,ZugLauf,ZugLok,trn_filepathname="",pendelzug=False,trn_fahrplangruppe=""):
         color = self.canvas_traintype_prop_dict.get(trainType,"black")
         width = self.trainType_to_Width_dict.get(trainType,"1")
         self.schedule_trains_dict[self.schedule_trainIdx_write_next] = {"TrainName"     : trainNumber,
                                                                         "trn_filename"  : trn_filepathname,
+                                                                        "Fahrplangruppe" : trn_fahrplangruppe,
                                                                         "TrainType"     : trainType,
                                                                         "TrainLineName" : ZugLauf,
                                                                         "TrainEngine"   : ZugLok,
@@ -1423,7 +1430,8 @@ class TimeTableGraphCommon():
             result = default
         return result
 
-    def convert_tt_xml_dict_to_schedule_dict(self, tt_xml_dict, define_stations=False,trn_filepathname="",fpn_filename=""):
+    #def convert_tt_xml_dict_to_schedule_dict(self, tt_xml_dict, define_stations=False,trn_filepathname="",fpn_filename=""):
+    def convert_tt_xml_dict_to_schedule_dict(self, tt_xml_dict, define_stations=False,trn_filepathname="",fpn_filename="",trn_fahrplangruppe=""):
         Zusi_dict = tt_xml_dict.get("Zusi")
         Buchfahrplan_dict = Zusi_dict.get("Buchfahrplan",{})
         if Buchfahrplan_dict=={}:
@@ -1446,7 +1454,8 @@ class TimeTableGraphCommon():
         if Datei_trn_dict == {}:
             return False
         trn_dateiname = Datei_trn_dict.get("@Dateiname","")
-        train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag)
+        #train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag)
+        train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag,trn_fahrplangruppe=trn_fahrplangruppe)
         train_stop_idx = 0
         FplRglGgl_str = self.controller.getConfigData("FplRglGgl",default="")
         #showstationonly = not self.controller.getConfigData("ExtraShowAlleZFS")
@@ -1551,6 +1560,7 @@ class TimeTableGraphCommon():
         try:
             if zusi_trn_dict=={}:
                 return
+            trn_fahrplangruppe = zusi_trn_dict.get("@FahrplanGruppe","")
             ZugNummer = zusi_trn_dict.get("@Nummer","")
             ZugGattung = zusi_trn_dict.get("@Gattung","")
             ZugLok = zusi_trn_dict.get("@BR","")
@@ -1565,7 +1575,8 @@ class TimeTableGraphCommon():
                 return
             fpn_dateiname = Datei_fpn_dict.get("@Dateiname","")
             self.schedule_dict["Name"] = fpn_dateiname
-            train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag)
+            #train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag)
+            train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag,trn_fahrplangruppe=trn_fahrplangruppe)
             train_stop_idx = 0
             FplZeile_list = zusi_trn_dict.get("FahrplanEintrag",{})
             if FplZeile_list=={}:
@@ -2432,6 +2443,9 @@ class TimeTableGraphCommon():
             if Buchfahrplan_dict=={}:
                 return ""
             km_start = Buchfahrplan_dict.get("@kmStart","")
+            datei_fpn_dict = Buchfahrplan_dict.get("Datei_fpn",{})
+            datei_fpn = datei_fpn_dict.get("@Dateiname","")
+            print(datei_fpn)
             FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
             stationdistance = 0
             if km_start != "":
@@ -2710,7 +2724,8 @@ class Timetable_main(Frame):
                     xml_text = fd.read()
                     tt_xml_timetable_dict = parse(xml_text)
                     #enter train-timetable
-                    result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict,trn_filepathname=trn_filepathname,fpn_filename=self.fpl_filename)
+                    #result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict,trn_filepathname=trn_filepathname,fpn_filename=self.fpl_filename)
+                    result_ok = self.timetable.convert_tt_xml_dict_to_schedule_dict(tt_xml_timetable_dict,trn_filepathname=trn_filepathname,fpn_filename=self.fpl_filename,trn_fahrplangruppe=fahrplan_gruppe)
             except BaseException as e:
                 logging.debug("open_zusi_trn_zug_dict - Error open file %s - %s",tt_xml__filepathname,e)
                 self.controller.set_statusmessage("Fehler beim Öffnen der Datei \n" + tt_xml__filepathname)
