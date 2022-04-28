@@ -37,9 +37,15 @@ import os
 
 def main_entry():
     mainfile_dir = os.path.dirname(os.path.realpath(__file__))
-    main(mainfile_dir)
+    pythonfile_name = os.path.basename(os.path.realpath(__file__))
+    pythonfile_pathame = os.path.join(os.path.dirname(mainfile_dir),pythonfile_name)
+    execfile_pathame = os.path.splitext(pythonfile_pathame)[0]+".exe"
+    main(mainfile_dir,execfile_pathame)
 
 if __name__ == "__main__":
     mainfile_dir = os.path.dirname(os.path.realpath(__file__))
-    main(mainfile_dir)
+    pythonfile_name = os.path.basename(os.path.realpath(__file__))
+    pythonfile_pathame = os.path.join(os.path.dirname(mainfile_dir),pythonfile_name)
+    execfile_pathame = os.path.splitext(pythonfile_pathame)[0]+".exe"
+    main(mainfile_dir,execfile_pathame)
 
