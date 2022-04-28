@@ -60,6 +60,8 @@ import argparse
 from tools.xmltodict import parse
 from timetablepages.ZUSI_TCP_class import ZUSI_TCP
 #from datetime import datetime
+import zipfile
+import urllib
 
 
 # ------------------------------
@@ -70,6 +72,96 @@ configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfi
 
 defaultStartPage = "StartPage"
 
+vbOK = 1  # OK button pressed
+vbCancel = 2  # Cancel button pressed
+vbAbort = 3  # Abort button pressed
+vbRetry = 4  # Retry button pressed
+vbIgnore = 5  # Ignore button pressed
+vbYes = 6  # Yes button pressed
+vbNo = 7  # No button pressed    
+vbOKOnly = 0  # OK button only (default)
+vbOKCancel = 1  # OK and Cancel buttons
+vbAbortRetryIgnore = 2  # Abort, Retry, and Ignore buttons
+vbYesNoCancel = 3  # Yes, No, and Cancel buttons
+vbYesNo = 4  # Yes and No buttons
+vbRetryCancel = 5  # Retry and Cancel buttons
+vbCritical = 16  # Critical message
+vbQuestion = 32  # Warning query
+vbExclamation = 48  # Warning message
+vbInformation = 64  # Information message        
+    
+def MsgBox(ErrorMessage:str, msg_type:int, ErrorTitle:str):
+    if msg_type == vbQuestion + vbYesNoCancel or msg_type == vbYesNoCancel:
+        res=tk.messagebox.askyesnocancel(title=ErrorTitle, message=ErrorMessage)
+        if res == None:
+            return vbCancel
+        if res:
+            return vbYes
+        else:
+            return vbNo
+    elif msg_type == vbQuestion + vbYesNo or msg_type == vbYesNo:
+        res=tk.messagebox.askyesno(title=ErrorTitle, message=ErrorMessage)
+        if res == None:
+            return vbCancel
+        if res:
+            return vbYes
+        else:
+            return vbNo        
+    elif msg_type == vbOKCancel:
+        res=tk.messagebox.askokcancel(title=ErrorTitle, message=ErrorMessage)
+        if res == None:
+            return vbCancel
+        if res:
+            return vbOK
+        else:
+            return vbCancel
+    elif msg_type == vbOKOnly:
+        res=tk.messagebox.showinfo(title=ErrorTitle, message=ErrorMessage)
+
+    elif msg_type == vbInformation:
+        res=tk.messagebox.showinfo(title=ErrorTitle, message=ErrorMessage)
+
+    elif msg_type == vbCritical:
+        res=tk.messagebox.showerror(title=ErrorTitle, message=ErrorMessage)
+
+    elif msg_type == vbCritical + vbYesNo:
+        res=tk.messagebox.askyesno(title=ErrorTitle, message=ErrorMessage)
+        if res == None:
+            return vbCancel
+        if res:
+            return vbYes
+        else:
+            return vbNo
+    else:
+        logging.debug("P01_MSGBox: Unknown Messagetype:"+str(msg_type))
+        res=tk.messagebox.askyesnocancel(title=ErrorTitle, message=ErrorMessage)
+        if res == None:
+            return vbCancel
+        if res:
+            return vbYes
+
+    return vbNo
+
+def UnzipAFile(zippedFileFullName, unzipToPath):
+    #ShellApp = Object()
+    #-------------------------------------------------------------------------------------------------------
+    # The Destination directory must exist
+    # The Arguments must be "byVal" and "Variant" otherwise the program fails
+    #Copy the files & folders from the zip into a folder
+    #ShellApp = CreateObject(r'Shell.Application')
+    # VB2PY (UntranslatedCode) On Error GoTo ErrMsg
+    #ShellApp.Namespace(unzipToPath).CopyHere(ShellApp.Namespace(zippedFileFullName).Items)
+    # VB2PY (UntranslatedCode) On Error GoTo 0
+    
+    zip = zipfile.ZipFile(zippedFileFullName)
+
+    zip.extractall(path=unzipToPath)    
+    
+    fn_return_value = True
+    return fn_return_value
+
+
+
 # ----------------------------------------------------------------
 # Class TimeTableGraphMain
 # ----------------------------------------------------------------
@@ -79,8 +171,9 @@ class TimeTableGraphMain(tk.Tk):
     # ----------------------------------------------------------------
     # TimeTableGraphMain __init__
     # ----------------------------------------------------------------
-    def __init__(self, mainfiledir, logfilename, *args, **kwargs):
+    def __init__(self, mainfiledir, logfilename, execfile_pathname, *args, **kwargs):
         self.exefile_dir = mainfiledir # directory of the .exe file
+        self.execfile_pathname = execfile_pathname
         self.logfilename = logfilename
         self.localfile_dir = os.path.dirname(os.path.realpath(__file__)) # location of timetablepages directory
         self.start_ok = True
@@ -192,6 +285,7 @@ class TimeTableGraphMain(tk.Tk):
         menu.add_cascade(label="Hilfe", menu=helpmenu)
         helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
         helpmenu.add_command(label="Logfile öffnen", command=self.OpenLogFile)
+        helpmenu.add_command(label="Update TimetableGraph Programm", command=self.Updateprogram)
         helpmenu.add_command(label="XML_Error-Logfile öffnen", command=self.OpenXMLErrorLogFile)
         helpmenu.add_command(label="Über...", command=self.About)
 
@@ -315,6 +409,81 @@ class TimeTableGraphMain(tk.Tk):
     def OpenLogFile(self):
         logging.debug("Open logfile: %s",self.logfilename)
         os.startfile(self.logfilename)
+        
+    def Unload(UserForm):
+        UserForm.destroy() 
+    
+    def show_download_status(self,a,b,c):
+            
+        '''''Callback function 
+        @a:Downloaded data block 
+        @b:Block size 
+        @c:Size of the remote file 
+        '''  
+        per=100.0*a*b/c  
+        if per>100:  
+            per=100  
+        #print '%.2f%%' % per
+        self.set_statusmessage("Download TimeTableGraph Programm:" + str(a*b))
+        self.update()
+        
+    
+        #StatusMsg_UserForm.Set_ActSheet_Label(P01.Format(int(time.time()) - M37.Update_Time, 'hh:mm:ss')+"\n"+str(a*b))    
+
+    def Updateprogram(self):
+        
+        if MsgBox('Soll das ZUSI TimeTableGraph Programm aktualisiert werden?', vbQuestion + vbYesNo, 'Aktualisieren des Programms') != vbYes:
+            return
+        #F00.StatusMsg_UserForm.ShowDialog(M09.Get_Language_Str('Aktualisiere Python MobaLedLib Programm'), '')
+        URL= "https://github.com/haroldlinke/ZUSI_TimeTableGraph/archive/refs/heads/master.zip"
+        try:
+            
+            workbookpath = self.exefile_dir
+            workbookpath2 = os.path.dirname(workbookpath)
+            workbookpath3 = os.path.dirname(workbookpath2)
+            zipfilenamepath = workbookpath3+"/timetablegraph.zip"
+            #F00.StatusMsg_UserForm.Set_Label("Download ZUSI TimeTableGraph Programm ")
+            urllib.request.urlretrieve(URL, zipfilenamepath,self.show_download_status)
+            
+            #F00.StatusMsg_UserForm.Set_Label("Entpacken ZUSI TimeTableGraph Programm ")
+            UnzipAFile(zipfilenamepath,workbookpath3)
+            srcpath = workbookpath3+"/ZUSI_TimeTableGraph-master"
+            dstpath = workbookpath
+            if not dstpath.startswith(r"D:\data\doc\GitHub"): # do not copy when destination is development folder
+                #F00.StatusMsg_UserForm.Set_Label("Kopieren des ZUSI TimeTableGraph Programms")
+                logging.debug("Update Program - copytree: "+srcpath+"->"+dstpath)
+                self.copytree(srcpath,dstpath)
+            
+            
+            if MsgBox(' Python MobaLedLib wurde aktualisiert. Soll neu gestartet werden?', vbQuestion + vbYesNo, 'Aktualisieren der Python MobaLedLib') == vbYes:
+                # shutdown and restart
+                self.restart()
+            
+        except BaseException as e:
+            logging.debug("Update TimetabelGraph exception:",e)
+            MsgBox('Fehler beim Download oder Installieren?',vbInformation, 'Aktualisieren vom TimeTableGraph')
+   
+        #Unload(F00.StatusMsg_UserForm)
+        
+    # ----------------------------------------------------------------
+    #  restart program
+    # ----------------------------------------------------------------
+    def restart(self):
+        logging.debug("Restart requested")
+        
+        answer = tk.messagebox.askyesnocancel ('Das Programm wird beendet und neu gestartet','Daten wurden verändert. Sollen die Daten gesichert werden?',default='no')
+        if answer == None:
+            return # no cancelation
+        if answer:
+            self.cancel_with_save() 
+        else:
+            self.cancel_without_save()
+        #restart program
+        logging.debug("Restart: "+ self.execfile_pathname+" "+ repr(sys.argv))
+        #os.execv(sys.executable, sys.argv)
+        os.execv(self.execfile_pathname, sys.argv)
+        
+        #############################################        
 
     def OpenXMLErrorLogFile(self):
         xml_logfilename = os.path.join(self.exefile_dir, XML_ERROR_LOG_FILENAME)
@@ -1500,7 +1669,7 @@ def img_resource_path(relative_path):
 #-------------------------------------------
 COMMAND_LINE_ARG_DICT = {}
 
-def main(mainfiledir):
+def main(mainfiledir,execfile_pathname):
     global COMMAND_LINE_ARG_DICT
     if sys.hexversion < 0x30700F0:
         tk.messagebox.showerror("Wrong Python Version","You need Python Version > 3.7 to run this Program")
@@ -1546,7 +1715,7 @@ def main(mainfiledir):
         COMMAND_LINE_ARG_DICT["startpagename"]="StartPage"
     
     try:
-        app = TimeTableGraphMain(mainfiledir,logfilename)
+        app = TimeTableGraphMain(mainfiledir,logfilename, execfile_pathname)
         if app.start_ok:
             app.setroot(app)
             app.protocol("WM_DELETE_WINDOW", app.cancel)
