@@ -48,7 +48,7 @@ SIZEFACTOR = 1 # 720/1280
 # all filenames are relativ to the location of the main program pyProg_generator_MobaLedLib.py
 MAIN_PROG_NAME = "TimeTable"
 
-LOG_FILENAME = 'logfile.log'
+LOG_FILENAME = '../logfile.log'
 XML_ERROR_LOG_FILENAME = 'xml_error_logfile.log'
 
 PARAM_FILENAME = MAIN_PROG_NAME + '_param.json'

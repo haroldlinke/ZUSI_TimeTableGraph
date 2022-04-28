@@ -453,6 +453,7 @@ class TimeTableGraphMain(tk.Tk):
                 #F00.StatusMsg_UserForm.Set_Label("Kopieren des ZUSI TimeTableGraph Programms")
                 logging.debug("Update Program - copytree: "+srcpath+"->"+dstpath)
                 self.copytree(srcpath,dstpath)
+                logging.debug("Update Program - copytree ok: "+srcpath+"->"+dstpath)
             
             
             if MsgBox(' Python MobaLedLib wurde aktualisiert. Soll neu gestartet werden?', vbQuestion + vbYesNo, 'Aktualisieren der Python MobaLedLib') == vbYes:
@@ -460,6 +461,7 @@ class TimeTableGraphMain(tk.Tk):
                 self.restart()
             
         except BaseException as e:
+            print("Update TimetabelGraph exception:",e)
             logging.debug("Update TimetabelGraph exception:",e)
             MsgBox('Fehler beim Download oder Installieren?',vbInformation, 'Aktualisieren vom TimeTableGraph')
    
