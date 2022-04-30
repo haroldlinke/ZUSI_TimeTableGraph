@@ -97,7 +97,7 @@
         "Cnt": "1",
         "Type": "ChooseFileName",
         "ConfigName": "Bfp_trainfilename",
-        "FileTypes" : "Zusi-Buchfahrplan, .xml ,all files, *.*",
+        "FileTypes" : "Zusi-Buchfahrplan, .xml ,Zusi-Zugfahrplan, .trn, all files, *.*",
         "Min": "",
         "Max": "",
         "Default": "",
