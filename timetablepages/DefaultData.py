@@ -56,7 +56,7 @@
 # * License: http://creativecommons.org/licenses/by-sa/3.0/
 # ***************************************************************************
 
-VERSION ="V01.17 - 25.12.2019"
+VERSION ="V04.01 - 17.08.2023"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 SMALL_FONT= ("Verdana", 8)

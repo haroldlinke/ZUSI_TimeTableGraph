@@ -33,7 +33,7 @@
 # ***************************************************************************
 
 
-PROG_VERSION ="V03.14c 28.04.2022"
+PROG_VERSION ="V04.01 27.08.2023"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -66,7 +66,8 @@ DEFAULT_CONFIG = {
                     "startpage": 1,
                     "startpagename" : "StartPage",
                     "StationChooser": "",
-                    "TLFileType": ""
+                    "TLFileType": "",
+                    "TrainNamePos_Checkbutton":""
                 }
 
 def get_shortcut(activity,type,action):
@@ -80,13 +81,13 @@ shortCutDict =  { "MouseButton":
                       "Motion_Min"       : "<B1-Motion>",
                       "Motion_Sec"       : "<Alt-B1-Motion>"                      
                       },
-                     "MouseWheel" :
+                  "MouseWheel" :
                      {"Zoom" : "<Control-MouseWheel>",
                       "onAltMouseWheel"  : "<Alt-MouseWheel>",
                       "onMouseWheel"     : "<MouseWheel>",
                       "onShiftMouseWheel":"<Shift-MouseWheel>"                      
                       },
-                     "Key":
+                 "Key":
                      {"onRestoreZoom"         : "<Home>", 
                       "onMoveCanvasUp"        : "<Up>",
                       "onMoveCanvasDown"      : "<Down>",

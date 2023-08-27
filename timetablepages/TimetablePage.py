@@ -37,7 +37,11 @@ from tkinter import ttk
 import os
 import logging
 import timetablepages.TimetablegraphCanvas
-from PIL import Image, EpsImagePlugin
+try:
+    
+    from PIL import Image, EpsImagePlugin
+except:
+    pass
 
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
@@ -46,6 +50,7 @@ SMALL_FONT= ("Verdana", 8)
 class TimeTablePage(tk.Frame):
     def __init__(self, parent, controller):
         self.tabClassName = "TimeTablePage"
+        self.canvas=None
         tk.Frame.__init__(self,parent)
         self.controller = controller
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
@@ -73,24 +78,30 @@ class TimeTablePage(tk.Frame):
         #self.canvas_bindings()
         self.block_Canvas_movement_flag = False
         self.canvas_init = True
+        
  
     def create_canvas(self):
         if self.cv_frame:
-            self.cv_frame.destroy()
-        self.cv_frame = ttk.Frame(self.frame)
+            #self.cv_frame.destroy()
+            pass
+        else:
+            self.cv_frame = ttk.Frame(self.frame)
         self.cv_frame.grid(row=0,column=0,sticky="nesw")
         self.cv_frame.grid_columnconfigure(0,weight=1)
-        self.cv_frame.grid_rowconfigure(0,weight=1)                        
-        canvas=tk.Canvas(self.cv_frame,width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height),bg="white")
-        hbar=tk.Scrollbar(self.cv_frame,orient=tk.HORIZONTAL)
-        hbar.pack(side=tk.BOTTOM,fill=tk.X)
-        hbar.config(command=canvas.xview)
-        vbar=tk.Scrollbar(self.cv_frame,orient=tk.VERTICAL)
-        vbar.pack(side=tk.RIGHT,fill=tk.Y)
-        vbar.config(command=canvas.yview)
-        canvas.config(width=self.canvas_width,height=self.canvas_height)
-        canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
-        canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
+        self.cv_frame.grid_rowconfigure(0,weight=1)
+        if self.canvas:
+            canvas = self.canvas
+        else:
+            canvas=tk.Canvas(self.cv_frame,width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height),bg="white")
+            hbar=tk.Scrollbar(self.cv_frame,orient=tk.HORIZONTAL)
+            hbar.pack(side=tk.BOTTOM,fill=tk.X)
+            hbar.config(command=canvas.xview)
+            vbar=tk.Scrollbar(self.cv_frame,orient=tk.VERTICAL)
+            vbar.pack(side=tk.RIGHT,fill=tk.Y)
+            vbar.config(command=canvas.yview)
+            canvas.config(width=self.canvas_width,height=self.canvas_height)
+            canvas.config(xscrollcommand=hbar.set, yscrollcommand=vbar.set)
+            canvas.pack(side=tk.LEFT,expand=True,fill=tk.BOTH)
         self.canvas = canvas
         self.canvas_bindings()
         return canvas
@@ -232,6 +243,18 @@ class TimeTablePage(tk.Frame):
             key_str = self.controller.get_key_for_action(action)
             self.canvas.bind(key_str,method)
         return
+    
+    def canvas_unbind(self):
+        self.canvas.unbind('<Shift-ButtonPress-1>')
+        self.canvas.unbind('<Shift-B1-Motion>')
+        self.canvas.unbind("<Control-MouseWheel>")
+        self.canvas.unbind("<Alt-MouseWheel>")
+        self.canvas.unbind("<MouseWheel>")
+        self.canvas.unbind("<Shift-MouseWheel>")
+        for action,method in self.key_to_method_dict.items():
+            key_str = self.controller.get_key_for_action(action)
+            self.canvas.unbind(key_str)
+        return    
 
     def save_as_pdf(self, fileName):
         # save postscipt image 
@@ -272,6 +295,13 @@ class TimeTablePage(tk.Frame):
             logging.debug("Error while generating image-file\n %s",e)
             self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
             pass
+        
+
+            
+    def import_Fahrtenschreiber(self, fileNames):
+        # save postscipt image
+        for fileName in fileNames:
+            self.timetable_main.import_one_Fahrtenschreiber(fileName)
         
     def edit_export_to_all_trn(self):
         self.timetable_main.edit_export_to_all_trn()
@@ -330,6 +360,7 @@ class TimeTablePage(tk.Frame):
             duration = self.getConfigData("Bfp_duration")
             self.create_train_type_to_color_dict()
             self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
+            self.controller.allow_TRN_files = self.controller.getConfigData("SCP_AllowTRN",default="")
             if fpl_filename == "":
                 self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
                 return

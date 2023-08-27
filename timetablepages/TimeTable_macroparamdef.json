@@ -639,7 +639,7 @@
         "Max": "1000",
         "Default": "",
         "Input Text": "Definition der Zugfolgestellen",
-        "ParamEntryWidth": "20",
+        "ParamEntryWidth": "40",
         "Hint": "Liste von Bezeichnern für Zugfolgestellen z.b. Abzw,Sbk",
         "Implementation comment": ""
     },
@@ -664,6 +664,75 @@
         "ConfigName": [
             "Bfp_ZFS_LineDashed",
             "Bfp_ZFS_LineDashed_No"
+        ],
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "ParamFontStd": "True",
+        "Input Text": "Linientyp",
+        "Hint": "Typ der Linie"
+    },
+    "Bfp_TL_LineProp": {
+        "ParName": "Bfp_TL_LineProp",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Eigenschaften Gleisschemalinie",
+        "Hint": "Einstellungen für die Gleisschemalinie",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_TL_LineColor",
+            "Bfp_TL_LineWidth",
+            "Bfp_TL_LineDashed"
+        ]
+    },
+    "Bfp_TL_LineColor": {
+        "ParName": "Bfp_TL_LineColor",
+        "Cnt": "1",
+        "Type": "ChooseColor",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "black",
+        "ParamEntryWidth": "9",
+        "Input Text": "Farbe-ZFS",
+        "Hint": "Farbe, die für die Gleisschemalinie verwendet werden soll",
+        "Implementation comment": ""
+    },
+    "Bfp_TL_LineWidth": {
+        "ParName": "Bfp_TL_LineWidth",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_TL_LineWidth",
+        "Min": "0",
+        "Max": "20",
+        "Default": "2",
+        "Input Text": "Linienbreite",
+        "Hint": "Breite der Linien"
+    },
+    "Bfp_TL_LineDashed": {
+        "ParName": "Bfp_TL_LineDashed",
+        "Cnt": "1",
+        "Type": "Combo",
+        "Values": [
+            " ",
+            "-",
+            ".",
+            "-.",
+            "no line"
+        ],
+        "ValuesText": [
+            "—————",
+            "— — — — —",
+            ". . . . . .",
+            "-.-.-.-.-.-",
+            "Keine Linie"
+        ],
+        "ConfigName": [
+            "Bfp_TL_LineDashed",
+            "Bfp_TL_LineDashed_No"
         ],
         "Min": "0",
         "Max": "255",
@@ -1342,6 +1411,19 @@
         "ParamFontStd": "True",
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
+    },
+    
+    "SCP_AllowTRN": {
+        "ParName": "SCP_AllowTRN",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "SCP_AllowTRN",
+        "Hide": "",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "TRN-Datei für Streckendefinition",
+        "Hint": "Erlaube das auch eine TRN-Datei für die Streckendefinition verwendet werden kann"
     },
     "TrainNamePos_Checkbutton": {
         "ParName": "TrainNamePos_Checkbutton",
