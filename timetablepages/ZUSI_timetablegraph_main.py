@@ -63,6 +63,7 @@ from timetablepages.ZUSI_TCP_class import ZUSI_TCP
 import zipfile
 import urllib
 import shutil
+import requests
 
 
 # ------------------------------
@@ -194,6 +195,8 @@ class TimeTableGraphMain(tk.Tk):
         self.ZUSI_monitoring_started = False
         self.simu_timetable_dict = {}
         
+        self.allow_TRN_files = self.getConfigData("SCP_AllowTRN",default=False)
+        
         self.fontlabel = self.get_font("FontLabel")
         self.fontspinbox = self.get_font("FontSpinbox")
         self.fonttext = self.get_font("FontText")
@@ -276,6 +279,9 @@ class TimeTableGraphMain(tk.Tk):
         menu.add_cascade(label="ZUSI Server", menu=filemenu3)
         filemenu3.add_command(label="Verbinden", command=self.Connect_ZUSI_server)
         filemenu3.add_command(label="Trennen", command=self.Disconnect_ZUSI_server)
+        filemenu4 = tk.Menu(menu)
+        menu.add_cascade(label="Fahrtenschreiber", menu=filemenu4)
+        filemenu4.add_command(label="importieren", command=self.import_Fahrtenschreiber)
         #filemenu.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
         #colormenu = tk.Menu(menu)
         #menu.add_cascade(label="Farbpalette", menu=colormenu)
@@ -390,6 +396,18 @@ class TimeTableGraphMain(tk.Tk):
             # save postscipt image
             frame.save_as_image(filepath)
             
+    def import_Fahrtenschreiber(self):
+        filepath = filedialog.askopenfilenames(filetypes=[("xml","*.xml")],defaultextension=".xml")
+        if not filepath:
+            return
+        else:
+            repr(filepath)
+            
+        if filepath:
+            frame = self.getFramebyName("TimeTablePage")
+            # save postscipt image
+            frame.import_Fahrtenschreiber(filepath)
+            
     def Connect_ZUSI_server(self):
         if self.timetable_activ:
             TimetablePageFrame = self.getFramebyName("TimeTablePage")
@@ -474,10 +492,14 @@ class TimeTableGraphMain(tk.Tk):
 
     def Updateprogram(self):
         
-        if MsgBox('Soll das ZUSI TimeTableGraph Programm aktualisiert werden?', vbQuestion + vbYesNo, 'Aktualisieren des Programms') != vbYes:
+        response = requests.get("https://api.github.com/repos/haroldlinke/ZUSI_TimeTableGraph/releases/latest")
+        response_dict = response.json()
+        #print(response_dict["name"],repr(response_dict))       
+        
+        if MsgBox('Soll das ZUSI TimeTableGraph Programm mit '+ response_dict["name"]+' aktualisiert werden?', vbQuestion + vbYesNo, 'Aktualisieren des Programms') != vbYes:
             return
         #F00.StatusMsg_UserForm.ShowDialog(M09.Get_Language_Str('Aktualisiere Python MobaLedLib Programm'), '')
-        URL= "https://github.com/haroldlinke/ZUSI_TimeTableGraph/archive/refs/heads/master.zip"
+        URL_zipball= response_dict["zipball_url"]   #"https://api.github.com/repos/haroldlinke/ZUSI_TimeTableGraph/zipball/V03.12" #"https://github.com/haroldlinke/ZUSI_TimeTableGraph/archive/refs/heads/master.zip"
         try:
             
             workbookpath = self.exefile_dir
@@ -485,11 +507,17 @@ class TimeTableGraphMain(tk.Tk):
             workbookpath3 = os.path.dirname(workbookpath2)
             zipfilenamepath = workbookpath3+"/timetablegraph.zip"
             #F00.StatusMsg_UserForm.Set_Label("Download ZUSI TimeTableGraph Programm ")
+            
+            response1 = requests.get(URL_zipball)
+            response_dict1 = response1.json()
+            message = response_dict1["message"]
+            URL = message.split(",")[1]
+            logging.debug("URLretrieve:"+ URL +" -> "+ zipfilenamepath)
             urllib.request.urlretrieve(URL, zipfilenamepath,self.show_download_status)
             
             #F00.StatusMsg_UserForm.Set_Label("Entpacken ZUSI TimeTableGraph Programm ")
-            UnzipAFile(zipfilenamepath,workbookpath3)
-            srcpath = workbookpath3+"/ZUSI_TimeTableGraph-master"
+            UnzipAFile(zipfilenamepath,workbookpath3+"/dummy")
+            srcpath = workbookpath3+"/dummy/ZUSI_TimeTableGraph-master"
             dstpath = workbookpath
             if not dstpath.startswith(r"D:\data\doc\GitHub"): # do not copy when destination is development folder
                 #F00.StatusMsg_UserForm.Set_Label("Kopieren des ZUSI TimeTableGraph Programms")
@@ -523,9 +551,14 @@ class TimeTableGraphMain(tk.Tk):
         else:
             self.cancel_without_save()
         #restart program
-        logging.debug("Restart: "+ self.execfile_pathname+" "+ repr(sys.argv))
-        #os.execv(sys.executable, sys.argv)
-        os.execv(self.execfile_pathname, sys.argv)
+        if self.execfile_pathname=="":
+            # program called by Python
+            logging.debug("Restart Python: "+ repr(sys.argv))
+            os.execv(sys.executable, ["python"]+sys.argv)
+        else:
+            logging.debug("Restart: "+ self.execfile_pathname+" "+ repr(sys.argv))
+            #os.execv(sys.executable, sys.argv)
+            os.execv(self.execfile_pathname, sys.argv)
         
         #############################################        
 
@@ -986,7 +1019,7 @@ class TimeTableGraphMain(tk.Tk):
             PARAMCOMBOWIDTH = 16
          
             STICKY = "w"
-            ANCHOR = "e"
+            ANCHOR = "w"
             
         if extratitleline:
             titlerow=0
@@ -1193,9 +1226,9 @@ class TimeTableGraphMain(tk.Tk):
                     param_entry_width = int(paramconfig_dict.get("ParamEntryWidth",PARAMENTRWIDTH))                      
                     paramvar = tk.IntVar()
                     paramvar.key = paramkey
-                    label=tk.Checkbutton(parent_frame, text=param_title,width=param_label_width,wraplength = PARAMLABELWRAPL*2,variable=paramvar,font=self.fontlabel,justify=tk.LEFT)
-                    label.grid(row=row+valuerow, column=column, columnspan=2,sticky="ew",padx=2, pady=2)
-                    self.ToolTip(label, text=param_tooltip)                
+                    label=tk.Checkbutton(parent_frame, text=param_title,width=param_label_width,wraplength = PARAMLABELWRAPL*2,variable=paramvar,font=self.fontlabel,anchor="w",justify=tk.LEFT)
+                    label.grid(row=row+valuerow, column=column, columnspan=2,sticky="w",padx=2, pady=2)
+                    self.ToolTip(label, text=param_tooltip)
                     self.set_macroparam_var(macro, paramkey, paramvar)
                     paramvar.trace_add("write", lambda nm, indx, mode,macrokey=macro,paramkey=paramkey: self.checkbuttonvar_changed(nm,indx,mode,macrokey=macrokey,paramkey=paramkey))
                     column = column + deltacolumn

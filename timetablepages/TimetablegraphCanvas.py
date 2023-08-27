@@ -233,6 +233,7 @@ class TimeTableGraphCommon():
         self.largeFont = font.Font(family="SANS_SERIF", size=12)
         self.stdFont = font.Font(family="SANS_SERIF", size=10)
         self.smallFont = font.Font(family="SANS_SERIF", size=8)
+        self.controller.allow_TRN_files = self.controller.getConfigData("SCP_AllowTRN",default="")
         self.trainLineStops = []
         # ------------ global variables ------------
         self.stationGrid = {0: 0.01 }
@@ -453,7 +454,7 @@ class TimeTableGraphCommon():
             y = self.graphTop - 10                        
         return x,y
     
-    def print_station(self, stationIdx, stationName, distance, stationkm,neukm=0):
+    def print_station(self, stationIdx, stationName, distance, stationkm,neukm=0,FplRglGgl=""):
         if self.trainLineFirstStationIdx == -1:
             self.trainLineFirstStationIdx = stationIdx
         self.trainLineLastStationIdx = stationIdx
@@ -497,11 +498,28 @@ class TimeTableGraphCommon():
                         self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)                                
                 else:
                     s_labelangle=45
-                    self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)            
+                    self.tt_canvas.itemconfig(s_obj, angle=s_labelangle)
+                    
+            # draw trackline (1 or 2 tracks)
+    
+            tl_color=self.controller.getConfigData("Bfp_TL_LineColor",default="#ff8000")
+            tl_width=self.controller.getConfigData("Bfp_TL_LineWidth",default=2)
+            tl_linedashed=self.controller.getConfigData("Bfp_TL_LineDashed",default="")
+            if self.last_station_x>0:
+                yline1=y-5
+                yline2=y
+                if tl_linedashed !="no line":
+                    objid = self.tt_canvas.create_line(self.last_station_x, yline1, x, yline1, width=tl_width, fill=tl_color,dash=tl_linedashed)
+                    if FplRglGgl != "1": # line has 2nd track
+                        objid = self.tt_canvas.create_line(self.last_station_x, yline2, x, yline2, width=tl_width, fill=tl_color,dash=tl_linedashed)
+            self.last_station_x = x
+            
             yKm = y + 12
             km_str = str(f"{stationkm:.1f}")
             if neukm != 0:
                 km_str = km_str +"\n"+ str(f"{abs(neukm):.1f}")
+            
+            #km_str = km_str + "("+ FplRglGgl +")"
             km_obj=self.tt_canvas.create_text(x, yKm, text=km_str, anchor="center",font=self.s_font,tags=("Station",stationName))
             if self.test_overlap(km_obj):
                 self.tt_canvas.delete(km_obj)
@@ -644,20 +662,22 @@ class TimeTableGraphCommon():
             if zfs_id_str =="":
                 self.zfs_id_list=[]
             else:
-                self.zfs_id_list = zfs_id_str.split(",")            
+                self.zfs_id_list = zfs_id_str.split(",")
+            self.last_station_x = 0
             for stationIdx in self.schedule_stations_dict:
                 station = self.schedule_stations_dict.get(stationIdx,{})
                 stationName = station.get("StationName","")
                 stationkm = station.get("StationKm",0.00)
                 neukm = station.get("Neukm",0)
                 distance = station.get("Distance",0.00)
+                FplRglGgl = station.get("FplRglGgl","")
                 if stationkm == None:
                     print("Error: Stationkm = None - ",stationName)
                     stationkm = 0
                 #stationName = stationName# + " (km "+str(f"{stationkm:.2f}")+")"
                 stationType_ZFS=self.check_stationtypeZFS(stationName)
                 self.stationTypeZFS_list.append(stationType_ZFS)
-                self.print_station(stationIdx, stationName, distance, stationkm,neukm=neukm)
+                self.print_station(stationIdx, stationName, distance, stationkm,neukm=neukm,FplRglGgl=FplRglGgl)
 
     def drawHours(self):
         currentHour = self.schedule_startHour
@@ -849,37 +869,44 @@ class TimeTableGraphCommon():
         return
 
     def process_trainStops(self):
+        self.stationName = ""
+        self.stopStation = {}
         for self.stopIdx,stop_dict in self.trainLineStops.items():
             self.arriveTime = stop_dict.get("ArriveTime",0)
             self.departTime = stop_dict.get("DepartTime",0)
-            if self.departTime == 0:
-                continue
             station_dict = self.schedule_stations_dict.get(stop_dict.get("StationIdx"))
             self.stationName = station_dict.get("StationName")
             self.signal = stop_dict.get("Signal")
             self.stopStation  = stop_dict
-            if (self.stopIdx > 0): 
-                self.trainLineFirstStop_Flag = False
+            #if (self.stopIdx > 0): 
+                #self.trainLineFirstStop_Flag = False
             if (self.stopIdx == self.trainLineStopCnt - 1): 
                 self.trainLineLastStop_Flag = True
+            if self.departTime == 0 and self.arriveTime == 0:
+                continue                    
             if self.check_time_in_range(self.departTime):
                 if (self.trainLineFirstStop_Flag):
                     self.setBegin(self.stopStation,self.stationName)
+                    self.trainLineFirstStop_Flag = False
                     if (self.trainLineLastStop_Flag):
                         # One stop route or only one stop in current segment
-                        self.setEnd(self.stopStation, self.stationName)
+                        #self.setEnd(self.stopStation, self.stationName)
                         break
                     continue
                 self.drawLine(self.stopStation)
             if (self.trainLineLastStop_Flag):
                 # At the end, do the end process
-                self.setEnd(self.stopStation, self.stationName)
+                #self.setEnd(self.stopStation, self.stationName)
                 break
+        if (self.trainLineLastStop_Flag):
+            self.setEnd(self.stopStation, self.stationName)
+            self.trainLineLastStop_Flag = False
 
     def drawTrainTime(self, time,  mode,  x,  y):
         if (not self.TrainMinuteShow):
             return
-        if not (int(time) in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)):
+        if not self.check_time_in_range(time):
+        #if not (int(time) in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)):
             return
         minutes = "{:02d}".format(int(time % 60))
         hours = "{:02d}".format(int(time/60))
@@ -1018,6 +1045,15 @@ class TimeTableGraphCommon():
                     return trainIdx
         return -1
     
+    def get_train_idx_from_TrainNumber(self,trainNumber):
+        for trainIdx in self.schedule_trains_dict:
+            train = self.schedule_trains_dict.get(trainIdx,{})
+            search_trainName = train.get("TrainName","0000")
+            if search_trainName == trainNumber:
+                if train.get("Stops",{}) != {}:
+                    return trainIdx
+        return -1
+    
     def get_trainline_station_data(self,trainName,stationName):
         self.trainIdx = self.get_train_idx_from_Name(trainName)
         train = self.schedule_trains_dict.get(self.trainIdx,{})
@@ -1099,7 +1135,14 @@ class TimeTableGraphCommon():
         return Station
     
     def check_time_in_range(self,time):
-        return int(time) in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)
+        
+        time_ok = int(time) in range(self.schedule_startTime_min,self.schedule_startTime_min + self.schedule_duration * 60)
+        
+        if time_ok==False:
+            if self.schedule_startTime_min + self.schedule_duration * 60 > 24 * 60: # check if time frame is over 0:00
+                time_ok = int(time) in range(0,self.schedule_startTime_min + self.schedule_duration * 60 - 24*60)
+        return time_ok
+    
 
     def setBegin(self, stop,stationName):
         self.determine_DirectionofTravel()
@@ -1299,7 +1342,7 @@ class TimeTableGraphCommon():
         self.tt_canvas.create_rectangle(rectangle[0]+1,rectangle[1]+1,rectangle[2]-1,rectangle[3]-1,fill=fill,outline=fill,tags=tags,width=0)
         self.tt_canvas.tag_raise(objId)
                     
-    def enter_station(self,stationName, distance, stationKm,neukm=0):
+    def enter_station(self,stationName, distance, stationKm,neukm=0,FplRglGgl=""):
         if stationKm == None:
             print("Error: km=None -",stationName)
             stationKm = 0
@@ -1311,7 +1354,8 @@ class TimeTableGraphCommon():
             self.schedule_stations_dict[self.schedule_stationIdx_write_next] = {"StationName"     : stationName, 
                                                                                 "Distance"        : distance,
                                                                                 "StationKm"       : stationKm,
-                                                                                "Neukm"           : neukm}
+                                                                                "Neukm"           : neukm,
+                                                                                "FplRglGgl"       : FplRglGgl}
             self.schedule_stationIdx_write_next +=1
         else:
             return -1
@@ -1436,7 +1480,17 @@ class TimeTableGraphCommon():
         Buchfahrplan_dict = Zusi_dict.get("Buchfahrplan",{})
         if Buchfahrplan_dict=={}:
             return False
-        ZugNummer = Buchfahrplan_dict.get("@Nummer","")
+        try:
+            ZugNummer = Buchfahrplan_dict.get("@Nummer","")
+        except BaseException as e: # Buchfahrplan_dict containes a list of Buchfahrpläne. Only the first is used here (need to be updated)'
+            logging.debug("open_zusi_trn_zug_dict - Buchfahrplan: Error open file %s - %s",trn_filepathname,e)
+            self.controller.set_statusmessage("Buchfahrplan: Fehler beim Öffnen der Datei \n" + trn_filepathname)
+            self.open_error = "Fehler in XML-Datei (Details siehe xml_error_logfile.log)\n" + trn_filepathname
+            self.xml_error_logger.debug("open_zusi_trn_zug_dict - Buchfahrplan: Error open file %s - %s",trn_filepathname,e)
+            
+            Buchfahrplan_dict = Buchfahrplan_dict[0]
+            ZugNummer = Buchfahrplan_dict.get("@Nummer","")
+            
         Pendelzug_Flag = "_" in ZugNummer
         #if Pendelzug_Flag:
         #    print(ZugNummer,"Pendelzug")  
@@ -1458,7 +1512,7 @@ class TimeTableGraphCommon():
         train_idx = self.enter_schedule_trainLine_data(ZugNummer,ZugGattung,Zuglauf,ZugLok,trn_filepathname=trn_filepathname,pendelzug=Pendelzug_Flag,trn_fahrplangruppe=trn_fahrplangruppe)
         train_stop_idx = 0
         FplRglGgl_str = self.controller.getConfigData("FplRglGgl",default="")
-        #showstationonly = not self.controller.getConfigData("ExtraShowAlleZFS")
+        donotshowall = not self.controller.getConfigData("ExtraShowAlleZFS")
         if FplRglGgl_str and FplRglGgl_str !="":
             self.FplRglGgl = FplRglGgl_str.split(",")
         else:
@@ -1476,6 +1530,7 @@ class TimeTableGraphCommon():
             self.xml_error_logger.debug("Error: ZUSI entry not found in fpl-file: "+trn_dateiname)
             return False
         self.train_line_interrupted = False
+        lastFplRglGgl = ""
         for FplZeile_dict in FplZeile_list:
             try:
                 FplRglGgl=FplZeile_dict.get("@FplRglGgl","")
@@ -1486,6 +1541,7 @@ class TimeTableGraphCommon():
                 if not (FplRglGgl in self.FplRglGgl):
                     continue # keine Umwege über Gegengleis
              #determine distance between station - detect KmSprung
+                lastFplRglGgl = FplRglGgl
             try:
                 FplSprung = self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplSprung",default="")
                 Fplkm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@km",default=0))
@@ -1513,8 +1569,7 @@ class TimeTableGraphCommon():
                 if Fplkm<0:
                     Fplkm = 0.0
                 FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
-                if FplAbf == "" and FplSprung == "":
-                    continue # only use station with "Abf"-Entry
+
                 if FplAbf != "":
                     FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
                     FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
@@ -1526,6 +1581,8 @@ class TimeTableGraphCommon():
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
                 else:
                     FplAnk_min = 0
+                if FplAbf == "" and FplAnk=="" and FplSprung == "" and donotshowall:
+                    continue # only use station with "Abf"or "Ank" -Entry                
                 #FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
                 if FplName == "":
                     continue
@@ -1534,7 +1591,7 @@ class TimeTableGraphCommon():
                 Fpldistance = stationdistance # abs(kmStart - Fplkm)
                 FplRichtungswechsel_flag = FplZeile_dict.get("FplRichtungswechsel","") == None and train_stop_idx > 0
                 if define_stations:
-                    station_idx = self.enter_station(FplName,Fpldistance,Fplkm,neukm=Neukm)
+                    station_idx = self.enter_station(FplName,Fpldistance,Fplkm,neukm=Neukm,FplRglGgl=lastFplRglGgl)
                     if FplRichtungswechsel_flag and Pendelzug_Flag:
                         break
                 else:
@@ -2452,82 +2509,85 @@ class TimeTableGraphCommon():
             if train_stops=={}:
                 return ""
             stopstationName = self.get_stationName_from_StopDict(train_stops.get(0,{}))
-            Zusi_dict = self.controller.simu_timetable_dict.get("Zusi",{})
-            Buchfahrplan_dict = Zusi_dict.get("Buchfahrplan",{})
-            if Buchfahrplan_dict=={}:
-                return ""
-            km_start = Buchfahrplan_dict.get("@kmStart","")
-            datei_fpn_dict = Buchfahrplan_dict.get("Datei_fpn",{})
-            datei_fpn = datei_fpn_dict.get("@Dateiname","")
-            print(datei_fpn)
-            FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
-            stationdistance = 0
-            if km_start != "":
-                last_km = float(km_start)
-            else:
-                last_km = 0
-            if FplZeile_list=={}:
-                logging.info("timetable.xml file error: %s",trainName )
-                self.controller.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+trainName)
-                self.open_error = "Error: ZUSI entry not found in fpl-file: "+trainName
-                return False
-            for FplZeile_dict in FplZeile_list:
-                try:
-                    FplRglGgl=FplZeile_dict.get("@FplRglGgl","")
-                except:
-                    print("Error:",trainName," ",repr(FplZeile_dict))
-                    FplRglGgl = ""
-                if FplRglGgl != "":
-                    if not (FplRglGgl in self.FplRglGgl):
-                        continue # keine Umwege über Gegengleis
-                 #determine distance between station - detect KmSprung
-                try:
-                    FplSprung = self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplSprung",default="")
-                    Fplkm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@km",default=0))
-                    if (Fplkm == 0):
-                        continue # kein km Eintrag, nicht bearbeiten
-                    if last_km == 0:
-                            # first entry
-                        last_km=Fplkm
-                    FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
-                    if FplName == "" and FplSprung == "":
-                            continue                    
-                    if FplSprung == "":
-                        stationdistance = stationdistance + abs(Fplkm - last_km)
-                        last_km = Fplkm
-                    else:
-                        stationdistance = stationdistance + abs(Fplkm - last_km)
-                        Neukm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplkmNeu",default=0))
-                        if Neukm == 0:
-                            print("ERROR: Neukm Eintrag fehlt",trainName,"-",repr(FplZeile_dict))
+            if self.controller.simu_timetable_dict != {}:
+                Zusi_dict = self.controller.simu_timetable_dict.get("Zusi",{})
+                Buchfahrplan_dict = Zusi_dict.get("Buchfahrplan",{})
+                if Buchfahrplan_dict=={}:
+                    return ""
+                km_start = Buchfahrplan_dict.get("@kmStart","")
+                datei_fpn_dict = Buchfahrplan_dict.get("Datei_fpn",{})
+                datei_fpn = datei_fpn_dict.get("@Dateiname","")
+                print(datei_fpn)
+                FplZeile_list = Buchfahrplan_dict.get("FplZeile",{})
+                stationdistance = 0
+                if km_start != "":
+                    last_km = float(km_start)
+                else:
+                    last_km = 0
+                if FplZeile_list=={}:
+                    logging.info("timetable.xml file error: %s",trainName )
+                    self.controller.set_statusmessage("Error: ZUSI entry not found in fpl-file: "+trainName)
+                    self.open_error = "Error: ZUSI entry not found in fpl-file: "+trainName
+                    return False
+                for FplZeile_dict in FplZeile_list:
+                    try:
+                        FplRglGgl=FplZeile_dict.get("@FplRglGgl","")
+                    except:
+                        print("Error:",trainName," ",repr(FplZeile_dict))
+                        FplRglGgl = ""
+                    if FplRglGgl != "":
+                        if not (FplRglGgl in self.FplRglGgl):
+                            continue # keine Umwege über Gegengleis
+                     #determine distance between station - detect KmSprung
+                    try:
+                        FplSprung = self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplSprung",default="")
+                        Fplkm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@km",default=0))
+                        if (Fplkm == 0):
+                            continue # kein km Eintrag, nicht bearbeiten
+                        if last_km == 0:
+                                # first entry
+                            last_km=Fplkm
+                        FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
+                        if FplName == "" and FplSprung == "":
+                                continue                    
+                        if FplSprung == "":
+                            stationdistance = stationdistance + abs(Fplkm - last_km)
+                            last_km = Fplkm
                         else:
-                            last_km = Neukm
-                    if Fplkm<0:
-                        Fplkm = 0.0
-                    FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
-                    if FplAbf == "":
-                        continue # only use station with "Abf"-Entry
-                    if FplAbf != "":
-                        FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
-                        FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
-                        self.monitor_start_time = FplAbf_min
-                    else:
-                        FplAbf_min = 0
-                    FplAnk = self.get_fplZeile_entry(FplZeile_dict, "FplAnk","@Ank")
-                    if FplAnk!="":
-                        FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
-                        FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
-                        self.monitor_start_time = FplAnk_min
-                    else:
-                        FplAnk_min = 0                    
-                    FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
-                    if FplName == "":
-                        continue
-                    if FplName == stopstationName:
-                        break
-                except BaseException as e:
-                    logging.debug("FplZeile conversion Error %s %s",trainName +"-"+repr(FplZeile_dict),e)
-                    continue # entry format wrong
+                            stationdistance = stationdistance + abs(Fplkm - last_km)
+                            Neukm = float(self.get_fplZeile_entry(FplZeile_dict,"Fplkm","@FplkmNeu",default=0))
+                            if Neukm == 0:
+                                print("ERROR: Neukm Eintrag fehlt",trainName,"-",repr(FplZeile_dict))
+                            else:
+                                last_km = Neukm
+                        if Fplkm<0:
+                            Fplkm = 0.0
+                        FplAbf = self.get_fplZeile_entry(FplZeile_dict, "FplAbf","@Abf")
+                        if FplAbf == "":
+                            continue # only use station with "Abf"-Entry
+                        if FplAbf != "":
+                            FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
+                            FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
+                            self.monitor_start_time = FplAbf_min
+                        else:
+                            FplAbf_min = 0
+                        FplAnk = self.get_fplZeile_entry(FplZeile_dict, "FplAnk","@Ank")
+                        if FplAnk!="":
+                            FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
+                            FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
+                            self.monitor_start_time = FplAnk_min
+                        else:
+                            FplAnk_min = 0                    
+                        FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
+                        if FplName == "":
+                            continue
+                        if FplName == stopstationName:
+                            break
+                    except BaseException as e:
+                        logging.debug("FplZeile conversion Error %s %s",trainName +"-"+repr(FplZeile_dict),e)
+                        continue # entry format wrong
+            else:
+                stationdistance = 0 # dummy
             self.pendelstations = train_dict.get("Pendelstops",[])
             self.monitor_curr_train_distance_to_first_station = stationdistance
             self.monitor_curr_train_direction_of_travel = self.determine_DirectionofTravel2(train_stops, 0)
@@ -2925,7 +2985,7 @@ class Timetable_main(Frame):
             Bfpl_filepathname = os.path.join(trn_filepath,Bfpl_file_name)
             if not os.path.exists(Bfpl_filepathname):
                 logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
-                if trn_filepathname!=None:
+                if trn_filepathname!=None and self.controller.allow_TRN_files:
                     Bfpl_filepathname = trn_filepathname
                     logging.info("Bfpl_FilePathName %s ", trn_filepathname)
 
@@ -3043,8 +3103,9 @@ class Timetable_main(Frame):
         self.controller.timetable_activ = False
         #first_call = True
         if not self.ttpage.canvas_init:
-            #self.canvas.delete("all")
-            self.canvas.destroy()
+            self.canvas.delete("all")
+            #self.ttpage.canvas_unbind()
+            #self.canvas.destroy()
             self.canvas = self.ttpage.create_canvas()
             self.controller.tooltip_var_dict={}
         self.ttpage.canvas_init = False
@@ -3094,3 +3155,133 @@ class Timetable_main(Frame):
 
     def set_traintype_prop(self,traintype_prop_dict):
         self.main_traintype_prop_dict = traintype_prop_dict
+        
+    def FS_calculate_distance(self,FS_km):
+        print(FS_km)
+        print(self.FS_laststationIdx,self.FS_laststationname)
+        FS_km_value = float(FS_km)
+        laststationkm = self.timetable.schedule_stations_dict[self.FS_laststationIdx].get("StationKm",-1)
+        neukm = self.timetable.schedule_stations_dict[self.FS_laststationIdx].get("Neukm",-1)
+        if neukm > 0: 
+            laststationkm = neukm
+        laststationdistance = self.timetable.schedule_stations_dict[self.FS_laststationIdx].get("Distance",-1)
+        nextstationkm = self.timetable.schedule_stations_dict[self.FS_nextstationIdx].get("StationKm",-1)
+        distance = -1
+        if FS_km_value >= laststationkm:
+            if FS_km_value <= nextstationkm:
+                distance = laststationdistance + FS_km_value-laststationkm
+        else:
+            if FS_km_value >= nextstationkm:
+                distance = laststationdistance + laststationkm - FS_km_value
+        return distance
+        
+    def import_one_Fahrtenschreiber(self,fileName):
+        try:
+            
+            with open(fileName,mode="r",encoding="utf-8") as fd:
+                xml_text = fd.read()
+                zusi_Fahrtenschreiber_dict = parse(xml_text)
+                #repr(zusi_Fahrtenschreiber_dict)
+        except BaseException as e:
+            logging.debug("import_one_Fahrtenschreiber - Error open file %s \n %s",fileName,e)
+            self.xml_error_logger.debug("import_one_Fahrtenschreiber - Error open file %s \n %s",fileName,e)
+            self.controller.set_statusmessage("Fehler beim Öffnen der Datei \n" + fileName)
+            self.open_error = "Fehler in XML-Datei (Details siehe xml_error_logfile.log)\n" + fileName
+            return
+        zusi_dict = zusi_Fahrtenschreiber_dict.get("Zusi")
+        if zusi_dict == {}:
+            logging.info("ZUSI Entry not found")
+            self.xml_error_logger.info("ZUSI Entry not found")
+            self.controller.set_statusmessage("Error: ZUSI entry not found in Fahrtenschreiber-file: "+fileName)
+            self.open_error = "Error: ZUSI entry not found in Fahrtenschreiber-file: "+fileName
+            return {}
+        info_dict = zusi_dict.get("Info")
+        print(repr(info_dict))
+        result_dict = zusi_dict.get("result")
+        print(repr(result_dict))
+        self.FS_trainNumber = result_dict.get("@Zugnummer",0)
+        print("Zugnummer:",self.FS_trainNumber)
+        self.FS_trainIdx = self.timetable.get_train_idx_from_TrainNumber(self.FS_trainNumber)
+        self.FS_train_stops = self.timetable.get_trainline_data(self.FS_trainIdx, "Stops")
+        print(repr(self.FS_train_stops))
+        timetable = self.timetable
+        FahrtEintrag_list = result_dict.get("FahrtEintrag",{})
+        if FahrtEintrag_list == {}:
+            logging.info("FahrEintrag Entry not found")
+            self.xml_error_logger.info("FahrtEintrag Entry not found")
+            self.controller.set_statusmessage("Error: FahrtEintrag entry not found in fpn-file: "+fileName)
+            self.open_error = "Error: FahrtEintrag entry not found in fpn-file: "+fileName
+            return {}
+        
+        # init monitoring data
+        timetable.monitor_start = False
+        timetable.monitor_timetable_updated = False
+        timetable.monitor_distance_of_first_station = 0
+        timetable.monitor_distance_of_last_station = 0
+        timetable.monitor_curr_train_distance_to_first_station = 0
+        timetable.monitor_curr_train_direction_of_travel = ""        
+        timetable.monitor_currdist = 0
+        timetable.monitor_currkm = 0
+        timetable.monitor_time = 0
+        timetable.monitor_currspeed = 0
+        timetable.controller.ZUSI_monitoring_started = True
+        timetable.monitor_curr_trainline_objectid = -1
+        timetable.monitor_curr_timeline_objectid = -1
+        timetable.monitor_start_time = 0
+        timetable.monitor_panel_con_status_objectid = -1
+        timetable.monitor_panel_currfpn_objectid  = -1
+
+        self.controller.simu_timetable_dict = {}
+        self.controller.timetable_main.timetable.monitor_set_timetable_updated()
+        
+        #dummy lines
+        #timetable.monitor_set_time(self.monitor_hour,self.monitor_minute,self.monitor_second)
+        
+        #timetable.monitor_set_dist(self.monitor_dist) 
+        
+        #timetable.monitor_set_km(self.monitor_km) 
+        
+        #timetable.monitor_set_status(self.monitor_fpn_filepathname,self.monitor_trainNumber,self.monitor_ladepause)
+        
+        #timetable_str = timetable_str[xml_start:]
+        #print("timetable_str:",timetable_str)
+        #self.controller.simu_timetable_dict = parse(timetable_str)
+        #self.controller.timetable_main.timetable.monitor_set_timetable_updated()               
+        
+        print(repr(self.timetable.schedule_stations_dict))
+        
+        
+        
+        for FahrtEintrag in FahrtEintrag_list:
+            print(repr(FahrtEintrag))
+            FahrtTyp = FahrtEintrag.get("@FahrtTyp",{})
+            if FahrtTyp:
+                if FahrtTyp=="2":
+                    self.FS_laststationname = FahrtEintrag.get("@FahrtText",{})
+                    temp_laststationIdx = -1
+                    for train_stop_idx in self.FS_train_stops:
+                        train_stop_dict = self.FS_train_stops.get(train_stop_idx,{})
+                        if train_stop_dict != {}:
+                            stopidx = train_stop_dict.get("StationIdx",-1)
+                            if stopidx != -1:
+                                stopname = self.timetable.schedule_stations_dict[stopidx].get("StationName","")
+                            if stopname == self.FS_laststationname:
+                                temp_laststationIdx = train_stop_idx
+                                break
+                    print(self.FS_laststationname, temp_laststationIdx)
+                    if temp_laststationIdx >-1:
+                        self.FS_laststationIdx = temp_laststationIdx
+                        self.FS_nextstationIdx = len(self.timetable.schedule_stations_dict)-1
+                        for station_idx in range(temp_laststationIdx+1,len(self.timetable.schedule_stations_dict)):
+                            neukm = self.timetable.schedule_stations_dict[station_idx].get("Neukm",-1)
+                            if neukm >0:
+                                self.FS_nextstationIdx = station_idx
+                                break
+            else:
+                FahrtZeit = FahrtEintrag.get("@FahrtZeit",{})
+                Fahrtkm  = FahrtEintrag.get("@Fahrtkm",{})
+                print("FahrtZeit:",FahrtZeit)
+                print("Fahrtkm:",Fahrtkm)
+                FahrtDistance = self.FS_calculate_distance(Fahrtkm)
+                print("Distanz:",FahrtDistance)
+               

@@ -2,17 +2,17 @@
     "startpagename": "StartPage",
     "pos_x": -1928,
     "pos_y": -8,
-    "Bfp_filename": "D:/data/Zusi3/Timetables/Deutschland/Salzkotten_Kassel_Ruhrtalbahn/Salzkotten_Bestwig-Kassel_Fahrplan1981_12Uhr-19Uhr.fpn",
-    "Bfp_trainfilename": "D:/data/Zusi3/Timetables/Deutschland/Salzkotten_Kassel_Ruhrtalbahn\\Salzkotten_Bestwig-Kassel_Fahrplan1981_12Uhr-19Uhr\\E3010.timetable.xml",
+    "Bfp_filename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Rund_ums_Weserbergland/Weserbergland_1996_5-11Uhr.fpn",
+    "Bfp_trainfilename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Rund_ums_Weserbergland\\Weserbergland_1996_5-11Uhr\\Lt74691.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
     "EndStation": "Bft_Leuchtenbergring",
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
-    "Bfp_width": 1850,
-    "Bfp_height": 2000,
-    "Bfp_start": 11,
-    "Bfp_duration": 7,
+    "Bfp_width": 1900,
+    "Bfp_height": 1000,
+    "Bfp_start": 6,
+    "Bfp_duration": 4,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineDashed": " ",
@@ -39,7 +39,7 @@
         "0": {
             "Bfp_TrainTypeAll": "",
             "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
             "Bfp_TrainTypeLabel": "Mitte",
@@ -82,7 +82,7 @@
         "3": {
             "Bfp_TrainType": "S",
             "Bfp_TrainTypeColor": "#0000ff",
-            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
             "Bfp_TrainTypeLabel": "Mitte",
@@ -202,7 +202,7 @@
         "999": {
             "Bfp_TrainTypeAll": "",
             "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 1,
+            "Bfp_TrainTypeWidth": 2,
             "Bfp_TrainTypeLineDashed": " ",
             "Bfp_TrainTypeLineDashed_No": 0,
             "Bfp_TrainTypeLabel": "Mitte",
@@ -211,9 +211,9 @@
             "Bfp_TrainType": "*"
         }
     },
-    "TLFileType": ".trn",
-    "TLFileType_No": 0,
-    "Bfp_ZFS_Id": "Sbk,Abzw,Asig,Esig",
+    "TLFileType": ".timetable.xml",
+    "TLFileType_No": 1,
+    "Bfp_ZFS_Id": "Sbk,Abzw,Asig,Esig,Bksig,LZB,-,VA,VE",
     "InOutBoundTrainsShow": true,
     "InOutBoundTrainsNoOneStop": false,
     "InOutBoundTrainsNoStartStation": false,
@@ -228,7 +228,7 @@
     "Bfp_ZFS_LineProp": 0,
     "Bfp_TH_LineProp": 0,
     "Bfp_TM_LineProp": 0,
-    "Bfp_TrainLine_Distance_from_Stationline": 0,
+    "Bfp_TrainLine_Distance_from_Stationline": 4,
     "Edit_Permission": "Edit_blocked",
     "Edit_Permission_No": 0,
     "Bfp_show_train_dir": "all",
@@ -250,8 +250,8 @@
     "Monit_time_LineDashed_No": 2,
     "TrainNamePosProp": {
         "0": {
-            "TrainNamePos_Names": "t1",
-            "TrainNamePos_Stops": ""
+            "TrainNamePos_Names": "RE10918",
+            "TrainNamePos_Stops": "1"
         },
         "1": {
             "TrainNamePos_Names": "",
@@ -406,86 +406,6 @@
             "TrainNamePos_Stops": ""
         },
         "39": {
-            "TrainNamePos_Names": "Tend",
-            "TrainNamePos_Stops": ""
-        },
-        "40": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "41": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "42": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "43": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "44": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "45": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "46": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "47": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "48": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "49": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "50": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "51": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "52": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "53": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "54": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "55": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "56": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "57": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "58": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
-        },
-        "59": {
             "TrainNamePos_Names": "",
             "TrainNamePos_Stops": ""
         }
@@ -494,6 +414,12 @@
     "TrainNamePosPropRepeat": 40,
     "Bfp_TrainTypePropRepeat": 15,
     "SO_TN_add_blank": false,
-    "Bfp_ZUSI_Dir_official": "D:/Zusi3/_ZusiData",
-    "Bfp_ZUSI_Dir_privat": "D:/data/Zusi3"
+    "Bfp_ZUSI_Dir_official": "C:/Program Files/Zusi3/_ZusiData",
+    "Bfp_ZUSI_Dir_privat": "D:/data/Zusi3",
+    "SCP_AllowTRN": false,
+    "Bfp_TL_LineColor": "#ff8040",
+    "Bfp_TL_LineWidth": 2,
+    "Bfp_TL_LineDashed": " ",
+    "Bfp_TL_LineDashed_No": 0,
+    "ExtraShowAlleZFS": true
 }
