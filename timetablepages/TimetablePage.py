@@ -295,13 +295,11 @@ class TimeTablePage(tk.Frame):
             logging.debug("Error while generating image-file\n %s",e)
             self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
             pass
-        
-
             
     def import_Fahrtenschreiber(self, fileNames):
-        # save postscipt image
         for fileName in fileNames:
             self.timetable_main.import_one_Fahrtenschreiber(fileName)
+        self.controller.set_statusmessage("Import der Fahrtenschreiber beendet") 
         
     def edit_export_to_all_trn(self):
         self.timetable_main.edit_export_to_all_trn()

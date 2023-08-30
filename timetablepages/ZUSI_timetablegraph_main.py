@@ -272,6 +272,8 @@ class TimeTableGraphMain(tk.Tk):
         filemenu2.add_command(label="Speichern als EPS", command=self.Save_Bfp_as_EPS)
         filemenu2.add_command(label="Speichern als PDF", command=self.Save_Bfp_as_PDF)
         filemenu2.add_command(label="Speichern als Bild", command=self.Save_Bfp_as_Image)
+        filemenu2.add_separator()
+        filemenu2.add_command(label="Refresh Bildfahrplan (F5)", command=self.refresh_Bfp)
         #filemenu2.add_checkbutton(label="Bearbeiten", onvalue=1, offvalue=0, variable=self.editFlag)
         filemenu2.add_separator()
         filemenu2.add_command(label="Alle Änderungen in .trn speichern", command=self.export_all_changes_to_trnfiles)
@@ -395,6 +397,10 @@ class TimeTableGraphMain(tk.Tk):
             frame = self.getFramebyName("TimeTablePage")
             # save postscipt image
             frame.save_as_image(filepath)
+            
+    def refresh_Bfp(self):
+        TimetablePageFrame = self.getFramebyName("TimeTablePage")
+        TimetablePageFrame.timetable_main.regenerate_canvas()
             
     def import_Fahrtenschreiber(self):
         filepath = filedialog.askopenfilenames(filetypes=[("xml","*.xml")],defaultextension=".xml")

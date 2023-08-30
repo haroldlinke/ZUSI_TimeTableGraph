@@ -18,6 +18,8 @@
             "Bfp_TL_LineProp",
             "Bfp_TH_LineProp",
             "Bfp_TM_LineProp",
+            "Monit_train_LineProp",
+            "Monit_time_LineProp",
             "Bfp_TrainMinuteSize",
             "Bfp_TrainTypePropDefault",
             "Bfp_TrainTypePropRepeat",
@@ -109,9 +111,7 @@
             "TCP_Connect_Checkbutton",
             "TCP_IP_Adress",
             "TCP_IP_Port",
-            "Monitoring_Checkbutton",
-            "Monit_train_LineProp",
-            "Monit_time_LineProp"
+            "Monitoring_Checkbutton"
             ]
     },
     "PopupWinClone": {
