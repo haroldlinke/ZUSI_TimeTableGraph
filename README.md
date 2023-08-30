@@ -23,6 +23,7 @@ Zur Erstellung eines Bildfahrplans geht man folgendermassen vor:
 History of Changes:
 V04.02: 
 - Import Fahrtenschreiber (Beta)
+
 V04.01:
 new:
 - schematic trackline
