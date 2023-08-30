@@ -278,6 +278,7 @@ class TimeTableGraphCommon():
         self.monitor_distance_of_last_station = 0
         self.monitor_curr_train_distance_to_first_station = 0
         self.monitor_curr_train_direction_of_travel = ""
+        self.monitor_tooltiptext = ""
         
         # xml_error_logger logger
         xml_logfilename = os.path.join(self.controller.exefile_dir, XML_ERROR_LOG_FILENAME)
@@ -703,12 +704,14 @@ class TimeTableGraphCommon():
         line_prop["Dashed"]=self.controller.getConfigData(line_code+"_LineDashed",default="")
         return line_prop
     
-    def create_line(self,point_list,line_prop):
+    def monitor_create_line(self,point_list,line_prop):
         if line_prop["Dashed"]!="no line":
-            objid = self.tt_canvas.create_line(point_list, width=line_prop["Width"], fill=line_prop["Color"],dash=line_prop["Dashed"])
+            train_line_objid = self.tt_canvas.create_line(point_list, width=line_prop["Width"], fill=line_prop["Color"],activewidth=line_prop["Width"]*2,dash=line_prop["Dashed"],tags=(self.trainName,"M_"+self.trainName,str(self.trainIdx)))
+            #train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,dash=self.TrainLineDashed,tags=(self.trainName,"L_"+self.trainName,str(self.trainIdx)))
+            self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text=self.monitor_tooltiptext, button_1=True)            
         else:
-            objid = -1
-        return objid
+            train_line_objid = -1
+        return train_line_objid
 
     def drawGraphGrid(self):
         # Print the graph box
@@ -1386,7 +1389,7 @@ class TimeTableGraphCommon():
                 return stationIdx
         return -1
 
-    def enter_trainLine_stop(self, train_idx, trainstop_idx, FplName, FplAnk_min, FplAbf_min,signal="",Richtungswechsel=False):
+    def enter_trainLine_stop(self, train_idx, trainstop_idx, FplName, FplAnk_min, FplAbf_min,signal="",Richtungswechsel=False,FPLDistance=-1):
         #print("enter_trainline_stop:", train_idx, FplName, FplAnk_min, FplAbf_min)
         train_dict = self.schedule_trains_dict.get(train_idx)
         if Richtungswechsel:
@@ -1419,7 +1422,8 @@ class TimeTableGraphCommon():
                                               "DepartTime"      : departTime,
                                               "DepartTimeOrig"  : departTime,
                                               "Signal"          : signal,
-                                              "Richtungswechsel": Richtungswechsel
+                                              "Richtungswechsel": Richtungswechsel,
+                                              "FplDistance"     : FPLDistance
                                            }
         return trainstop_idx + 1
         
@@ -1574,13 +1578,13 @@ class TimeTableGraphCommon():
                     FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
                     FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
                 else:
-                    FplAbf_min = 0
+                    FplAbf_min = -99999
                 FplAnk = self.get_fplZeile_entry(FplZeile_dict, "FplAnk","@Ank")
                 if FplAnk!="":
                     FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
                 else:
-                    FplAnk_min = 0
+                    FplAnk_min = -99999
                 if FplAbf == "" and FplAnk=="" and FplSprung == "" and donotshowall:
                     continue # only use station with "Abf"or "Ank" -Entry                
                 #FplName = self.get_fplZeile_entry(FplZeile_dict,"FplName","@FplNameText",default="")
@@ -1597,7 +1601,7 @@ class TimeTableGraphCommon():
                 else:
                     station_idx = self.search_station(FplName)
                     if station_idx != -1:
-                        train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min,Richtungswechsel=FplRichtungswechsel_flag)
+                        train_stop_idx = self.enter_trainLine_stop(train_idx, train_stop_idx, FplName,FplAnk_min,FplAbf_min,Richtungswechsel=FplRichtungswechsel_flag,FPLDistance=Fpldistance)
                         self.train_line_interrupted = False
                     else:
                         self.train_line_interrupted = True
@@ -1657,7 +1661,7 @@ class TimeTableGraphCommon():
                     FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
                 else:
-                    FplAnk_min = 0
+                    FplAnk_min = -99999
                 FahrplanSignal = None
                 Fpl_SignalEintrag_dict = FplZeile_dict.get("FahrplanSignalEintrag",None)
                 if Fpl_SignalEintrag_dict:
@@ -2492,7 +2496,7 @@ class TimeTableGraphCommon():
             last_station_idx = len(train_stops)-1
             return self.get_stationdistance_from_StopDict(train_stops.get(last_station_idx,{}))
                 
-    def monitor_set_timetable_updated(self):
+    def monitor_set_timetable_updated(self, trainIdx=None):
         """
         if monitor_start:
             determine_train_number_from_curr_timetable_dict
@@ -2502,8 +2506,10 @@ class TimeTableGraphCommon():
         """        
         self.monitor_zusi_life_status = True
         if not self.monitor_start:
-            trainName = self.monitor_determine_trainnumber()
-            trainIdx = self.get_train_idx_from_Name(trainName)
+            if trainIdx==None:
+                trainName = self.monitor_determine_trainnumber()
+                trainIdx = self.get_train_idx_from_Name(trainName)
+
             train_dict = self.schedule_trains_dict.get(trainIdx,{})
             train_stops = train_dict.get("Stops",{})
             if train_stops=={}:
@@ -2587,7 +2593,9 @@ class TimeTableGraphCommon():
                         logging.debug("FplZeile conversion Error %s %s",trainName +"-"+repr(FplZeile_dict),e)
                         continue # entry format wrong
             else:
-                stationdistance = 0 # dummy
+                firststop = train_stops.get(0,{})
+                stationdistance = firststop.get("FplDistance",0)
+                
             self.pendelstations = train_dict.get("Pendelstops",[])
             self.monitor_curr_train_distance_to_first_station = stationdistance
             self.monitor_curr_train_direction_of_travel = self.determine_DirectionofTravel2(train_stops, 0)
@@ -2639,7 +2647,7 @@ class TimeTableGraphCommon():
         y1 = y + r
         return canvasName.create_oval(x0, y0, x1, y1,fill="red",outline="red")
     
-    def monitor_update_train_pos(self):
+    def monitor_update_train_pos(self, train_idx=None, showtimeline=True):
         """
         if firstcall:
             determine_train_number_from_curr_timetable_dict
@@ -2654,7 +2662,7 @@ class TimeTableGraphCommon():
         draw_point_at_distance_and_time
         """
         trainName = self.monitor_determine_trainnumber()
-        if trainName == "":
+        if trainName == "" and train_idx ==None:
             return
         distance_of_curr_train_from_start = self.monitor_currdist/1000
         distance_of_first_station = self.monitor_distance_of_first_station
@@ -2698,7 +2706,7 @@ class TimeTableGraphCommon():
                 self.monitor_points_count = 0
                 self.monitor_trainLine_prop = self.get_line_properties("Monit_train")
                 #self.monitor_curr_trainline_objectid = self.tt_canvas.create_line(x,y,x,y,fill="red",width=4)
-                self.monitor_curr_trainline_objectid = self.create_line((x,y,x,y), self.monitor_trainLine_prop)
+                self.monitor_curr_trainline_objectid = self.monitor_create_line((x,y,x,y), self.monitor_trainLine_prop)
             else:
                 line_coords = self.tt_canvas.coords(self.monitor_curr_trainline_objectid)
                 self.monitor_points_count +=1
@@ -2707,11 +2715,12 @@ class TimeTableGraphCommon():
                     line_coords = line_coords[:-18] # remove last 9 entries
                 line_coords.extend([x,y])
                 self.tt_canvas.coords(self.monitor_curr_trainline_objectid,line_coords)
-        if self.monitor_curr_timeline_objectid == -1:
-            self.monitor_timeLine_prop = self.get_line_properties("Monit_time")
-            self.monitor_curr_timeline_objectid = self.create_line((0,y,self.graphRight,y), self.monitor_timeLine_prop)
-        else:
-            self.tt_canvas.coords(self.monitor_curr_timeline_objectid,(self.graphLeft,y,self.graphRight,y))
+        if showtimeline:
+            if self.monitor_curr_timeline_objectid == -1:
+                self.monitor_timeLine_prop = self.get_line_properties("Monit_time")
+                self.monitor_curr_timeline_objectid = self.monitor_create_line((0,y,self.graphRight,y), self.monitor_timeLine_prop)
+            else:
+                self.tt_canvas.coords(self.monitor_curr_timeline_objectid,(self.graphLeft,y,self.graphRight,y))
             
                 
         
@@ -3177,7 +3186,6 @@ class Timetable_main(Frame):
         
     def import_one_Fahrtenschreiber(self,fileName):
         try:
-            
             with open(fileName,mode="r",encoding="utf-8") as fd:
                 xml_text = fd.read()
                 zusi_Fahrtenschreiber_dict = parse(xml_text)
@@ -3196,19 +3204,24 @@ class Timetable_main(Frame):
             self.open_error = "Error: ZUSI entry not found in Fahrtenschreiber-file: "+fileName
             return {}
         info_dict = zusi_dict.get("Info")
-        print(repr(info_dict))
+        #print(repr(info_dict))
         result_dict = zusi_dict.get("result")
-        print(repr(result_dict))
+        #print(repr(result_dict))
         self.FS_trainNumber = result_dict.get("@Zugnummer",0)
         print("Zugnummer:",self.FS_trainNumber)
         self.FS_trainIdx = self.timetable.get_train_idx_from_TrainNumber(self.FS_trainNumber)
+        if self.FS_trainIdx == -1:
+            print(self.FS_trainNumber, "not found in trainlist")
+            return
         self.FS_train_stops = self.timetable.get_trainline_data(self.FS_trainIdx, "Stops")
-        print(repr(self.FS_train_stops))
+        FS_train_stops=self.FS_train_stops
+        #print(repr(self.FS_train_stops))
         timetable = self.timetable
         FahrtEintrag_list = result_dict.get("FahrtEintrag",{})
+        self.controller.set_statusmessage("Importiere Fahrtenschreiber - "+ fileName) 
         if FahrtEintrag_list == {}:
-            logging.info("FahrEintrag Entry not found")
-            self.xml_error_logger.info("FahrtEintrag Entry not found")
+            logging.info("FahrEintrag Entry not found"+fileName)
+            self.xml_error_logger.info("FahrtEintrag Entry not found" +fileName)
             self.controller.set_statusmessage("Error: FahrtEintrag entry not found in fpn-file: "+fileName)
             self.open_error = "Error: FahrtEintrag entry not found in fpn-file: "+fileName
             return {}
@@ -3230,35 +3243,47 @@ class Timetable_main(Frame):
         timetable.monitor_start_time = 0
         timetable.monitor_panel_con_status_objectid = -1
         timetable.monitor_panel_currfpn_objectid  = -1
-
+        timetable.monitor_start = True
+        timetable.trainName = self.FS_trainNumber
+        timetable.monitor_tooltiptext = "Fahrtenschreiber Zug:"+ self.FS_trainNumber
+        
+        firststopdistance = -1
+        
+        train_stop_dict = self.FS_train_stops.get(0,{})
+        stopidx = train_stop_dict.get("StationIdx",-1)
+        if stopidx != -1:
+            stopname = self.timetable.schedule_stations_dict[stopidx].get("StationName","")
+            stopdistance = self.timetable.schedule_stations_dict[stopidx].get("Distance","")
+            
+            firststopdistance=stopdistance
+            timetable.monitor_distance_of_first_station = firststopdistance
+        train_stop_dict = self.FS_train_stops.get(len(self.FS_train_stops)-1,{})
+        stopidx = train_stop_dict.get("StationIdx",-1)
+        if stopidx != -1:
+            stopname = self.timetable.schedule_stations_dict[stopidx].get("StationName","")
+            stopdistance = self.timetable.schedule_stations_dict[stopidx].get("Distance","")
+            
+            laststopdistance=stopdistance
+            timetable.monitor_distance_of_last_station = laststopdistance                
+        
         self.controller.simu_timetable_dict = {}
-        self.controller.timetable_main.timetable.monitor_set_timetable_updated()
+        fahrtwegstart = None
         
-        #dummy lines
-        #timetable.monitor_set_time(self.monitor_hour,self.monitor_minute,self.monitor_second)
+        timetable.monitor_set_status(fileName, self.FS_trainNumber, False)
+        timetable.monitor_set_timetable_updated(trainIdx=self.FS_trainIdx)
         
-        #timetable.monitor_set_dist(self.monitor_dist) 
+        #print(repr(self.timetable.schedule_stations_dict))
         
-        #timetable.monitor_set_km(self.monitor_km) 
-        
-        #timetable.monitor_set_status(self.monitor_fpn_filepathname,self.monitor_trainNumber,self.monitor_ladepause)
-        
-        #timetable_str = timetable_str[xml_start:]
-        #print("timetable_str:",timetable_str)
-        #self.controller.simu_timetable_dict = parse(timetable_str)
-        #self.controller.timetable_main.timetable.monitor_set_timetable_updated()               
-        
-        print(repr(self.timetable.schedule_stations_dict))
-        
-        
-        
+
         for FahrtEintrag in FahrtEintrag_list:
-            print(repr(FahrtEintrag))
+            #print(repr(FahrtEintrag))
             FahrtTyp = FahrtEintrag.get("@FahrtTyp",{})
+            self.FS_laststationIdx = -1
             if FahrtTyp:
-                if FahrtTyp=="2":
+                if FahrtTyp=="x": #2":
                     self.FS_laststationname = FahrtEintrag.get("@FahrtText",{})
                     temp_laststationIdx = -1
+                    
                     for train_stop_idx in self.FS_train_stops:
                         train_stop_dict = self.FS_train_stops.get(train_stop_idx,{})
                         if train_stop_dict != {}:
@@ -3267,8 +3292,12 @@ class Timetable_main(Frame):
                                 stopname = self.timetable.schedule_stations_dict[stopidx].get("StationName","")
                             if stopname == self.FS_laststationname:
                                 temp_laststationIdx = train_stop_idx
+                                stopdistance = self.timetable.schedule_stations_dict[stopidx].get("Distance","")
+                                if firststopdistance == -1:
+                                    firststopdistance=stopdistance
+                                    timetable.monitor_distance_of_first_station = firststopdistance
                                 break
-                    print(self.FS_laststationname, temp_laststationIdx)
+                    #print(self.FS_laststationname, temp_laststationIdx)
                     if temp_laststationIdx >-1:
                         self.FS_laststationIdx = temp_laststationIdx
                         self.FS_nextstationIdx = len(self.timetable.schedule_stations_dict)-1
@@ -3278,10 +3307,37 @@ class Timetable_main(Frame):
                                 self.FS_nextstationIdx = station_idx
                                 break
             else:
-                FahrtZeit = FahrtEintrag.get("@FahrtZeit",{})
-                Fahrtkm  = FahrtEintrag.get("@Fahrtkm",{})
-                print("FahrtZeit:",FahrtZeit)
-                print("Fahrtkm:",Fahrtkm)
-                FahrtDistance = self.FS_calculate_distance(Fahrtkm)
-                print("Distanz:",FahrtDistance)
+                if firststopdistance > -1:
+                    
+                    if fahrtwegstart==None:
+                        fahrtwegstart = float(FahrtEintrag.get("@FahrtWeg",{}))
+                    FahrtZeit_str = FahrtEintrag.get("@FahrtZeit",{})
+                    Fahrtkm  = FahrtEintrag.get("@Fahrtkm",{})
+                    Fahrtweg = float(FahrtEintrag.get("@FahrtWeg",{}))
+                    timetable.monitor_dist = Fahrtweg -fahrtwegstart
+                    #print("FahrtZeit:",FahrtZeit_str, " - Delta Fahrtweg:", timetable.monitor_dist, "- First_stop_distance:", firststopdistance)
+                    #print("Fahrtkm:",Fahrtkm)
+                    FahrtDistance = 0 #self.FS_calculate_distance(Fahrtkm)
+                    #print("Distanz:",FahrtDistance)
+                    #print("Fahrtweg:",Fahrtweg)
+                    
+                    #print("Delta Fahrtweg:", timetable.monitor_dist)
+                    
+                    dt = datetime.strptime(FahrtZeit_str, "%Y-%m-%d %H:%M:%S")
+                    
+                    timetable.monitor_hour = dt.hour
+                    timetable.monitor_minute = dt.minute
+                    timetable.monitor_second = dt.second
+                    
+                    timetable.monitor_set_time(timetable.monitor_hour,timetable.monitor_minute,timetable.monitor_second)
+                    
+                    timetable.monitor_set_dist(timetable.monitor_dist)
+                    
+                    timetable.monitor_update_train_pos(train_idx=self.FS_trainIdx,showtimeline=False)
+                    
+                    timetable.monitor_start = False
+        
+        timetable.tt_canvas.update()
+                    
+                     
                

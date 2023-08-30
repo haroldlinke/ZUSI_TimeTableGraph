@@ -1213,8 +1213,8 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften Monitor Zuglinie",
-        "Hint": "Einstellungen für die Monitor Zuglinie",
+        "Input Text": "Fahrtenschreiber Zuglinie",
+        "Hint": "Einstellungen für die Fahrtenschreiber Zuglinie",
         "Implementation comment": "",
         "MultipleParams": [
             "Monit_train_LineColor",
@@ -1231,7 +1231,7 @@
         "Default": "red",
         "ParamEntryWidth": "9",
         "Input Text": "Farbe-Zuglinie",
-        "Hint": "Farbe, die für die Monitorzuglinie verwendet werden soll",
+        "Hint": "Farbe, die für die Fahrtenschreiberzuglinie verwendet werden soll",
         "Implementation comment": ""
     },
     "Monit_train_LineWidth": {
@@ -1282,8 +1282,8 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften der Monitorzeitlinie",
-        "Hint": "Einstellungen für die Monitorzeitlinie",
+        "Input Text": "Fahrtenschreiber Zeitlinie",
+        "Hint": "Einstellungen für die Fahrtenschreiberzeitlinie",
         "Implementation comment": "",
         "MultipleParams": [
             "Monit_time_LineColor",
@@ -1300,7 +1300,7 @@
         "Default": "black",
         "ParamEntryWidth": "9",
         "Input Text": "Farbe",
-        "Hint": "Farbe, die für die Monitorzeitlinie verwendet werden soll",
+        "Hint": "Farbe, die für die Fahrtenschreiberzeitlinie verwendet werden soll",
         "Implementation comment": ""
     },
     "Monit_time_LineWidth": {
@@ -1343,46 +1343,7 @@
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
-    "Monit_time_LineProp": {
-        "ParName": "Monit_time_LineProp",
-        "Cnt": "",
-        "Type": "Multipleparams",
-        "Min": "",
-        "Max": "",
-        "Default": "",
-        "Repeat": "",
-        "Input Text": "Eigenschaften Monitor Zeitlinie",
-        "Hint": "Einstellungen für die Monitorzeitlinie",
-        "Implementation comment": "",
-        "MultipleParams": [
-            "Monit_time_LineColor",
-            "Monit_time_LineWidth",
-            "Monit_time_LineDashed"
-        ]
-    },
-    "Monit_time_LineColor": {
-        "ParName": "Monit_time_LineColor",
-        "Cnt": "1",
-        "Type": "ChooseColor",
-        "Min": "0",
-        "Max": "1000",
-        "Default": "black",
-        "ParamEntryWidth": "9",
-        "Input Text": "Farbe-Minuten",
-        "Hint": "Farbe, die für die Minutenlinie verwendet werden soll",
-        "Implementation comment": ""
-    },
-    "Monit_time_LineWidth": {
-        "ParName": "Monit_time_LineWidth",
-        "Cnt": "1",
-        "Type": "",
-        "ConfigName": "Monit_time_LineWidth",
-        "Min": "0",
-        "Max": "20",
-        "Default": "2",
-        "Input Text": "Linienbreite",
-        "Hint": "Breite der Linien"
-    },
+
     "Monit_loc_LineDashed": {
         "ParName": "Monit_loc_LineDashed",
         "Cnt": "1",
