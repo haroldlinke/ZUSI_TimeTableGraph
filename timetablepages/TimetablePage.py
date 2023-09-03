@@ -70,7 +70,7 @@ class TimeTablePage(tk.Frame):
         self.define_key_bindings()
         self.canvas = self.create_canvas()
         self.timetable_main = timetablepages.TimetablegraphCanvas.Timetable_main(self.controller, self.canvas, self)
-        self.scalefactorunit = 0.75
+        self.scalefactorunit = 0.95
         self.controller.total_scalefactor = 1
         self.old_scalefactor = 1
         self.controller.timetable_main = self.timetable_main
@@ -89,7 +89,7 @@ class TimeTablePage(tk.Frame):
         self.cv_frame.grid(row=0,column=0,sticky="nesw")
         self.cv_frame.grid_columnconfigure(0,weight=1)
         self.cv_frame.grid_rowconfigure(0,weight=1)
-        if self.canvas:
+        if self.canvas and self.canvas != None:
             canvas = self.canvas
         else:
             canvas=tk.Canvas(self.cv_frame,width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height),bg="white")

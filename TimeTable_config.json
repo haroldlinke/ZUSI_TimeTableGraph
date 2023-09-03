@@ -1,9 +1,9 @@
 {
     "startpagename": "StartPage",
-    "pos_x": -1928,
-    "pos_y": -8,
-    "Bfp_filename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Marschbahn/Eiderbruecke-Westerland2004_14Uhr-01Uhr.fpn",
-    "Bfp_trainfilename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Marschbahn\\Eiderbruecke-Westerland2004_14Uhr-01Uhr\\DPE321.timetable.xml",
+    "pos_x": 33,
+    "pos_y": 11,
+    "Bfp_filename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn/Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr.fpn",
+    "Bfp_trainfilename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Ruhrtalbahn\\Hagen-Kassel_Fahrplan1981_04Uhr-12Uhr\\D17441.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
     "EndStation": "Bft_Leuchtenbergring",
@@ -11,8 +11,8 @@
     "TLDirection_No": 0,
     "Bfp_width": 1900,
     "Bfp_height": 1000,
-    "Bfp_start": 22,
-    "Bfp_duration": 3,
+    "Bfp_start": 4,
+    "Bfp_duration": 4,
     "Bfp_S_LineColor": "#ff8040",
     "Bfp_S_LineWidth": 2,
     "Bfp_S_LineDashed": " ",
@@ -44,8 +44,7 @@
             "Bfp_TrainTypeLineDashed_No": 0,
             "Bfp_TrainTypeLabel": "Mitte",
             "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
+            "Bfp_TrainTypeLabelSize": 8
         }
     },
     "Bfp_TrainTypeProp": {
@@ -198,17 +197,6 @@
             "Bfp_TrainTypeLabel": "Alle Segmente",
             "Bfp_TrainTypeLabel_No": 0,
             "Bfp_TrainTypeLabelSize": 10
-        },
-        "999": {
-            "Bfp_TrainTypeAll": "",
-            "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 2,
-            "Bfp_TrainTypeLineDashed": " ",
-            "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
         }
     },
     "TLFileType": ".timetable.xml",
@@ -233,8 +221,8 @@
     "Edit_Permission_No": 0,
     "Bfp_show_train_dir": "all",
     "Bfp_show_train_dir_No": 0,
-    "w_height": 997,
-    "w_width": 1920,
+    "w_height": 993,
+    "w_width": 1916,
     "SO_remove_leading_Zero": false,
     "TCP_Connect_Checkbutton": true,
     "TCP_IP_Adress": "127.0.0.1",
@@ -254,20 +242,20 @@
             "TrainNamePos_Stops": "1"
         },
         "1": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
+            "TrainNamePos_Names": "Gag47095",
+            "TrainNamePos_Stops": "2"
         },
         "2": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
+            "TrainNamePos_Names": "Lr35294",
+            "TrainNamePos_Stops": "7"
         },
         "3": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
+            "TrainNamePos_Names": "Dsts88596",
+            "TrainNamePos_Stops": "1"
         },
         "4": {
-            "TrainNamePos_Names": "",
-            "TrainNamePos_Stops": ""
+            "TrainNamePos_Names": "Dsts88461",
+            "TrainNamePos_Stops": "4,4,1"
         },
         "5": {
             "TrainNamePos_Names": "",
@@ -421,5 +409,5 @@
     "Bfp_TL_LineWidth": 2,
     "Bfp_TL_LineDashed": " ",
     "Bfp_TL_LineDashed_No": 0,
-    "ExtraShowAlleZFS": true
+    "ExtraShowAlleZFS": false
 }
