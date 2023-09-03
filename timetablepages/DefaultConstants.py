@@ -33,7 +33,7 @@
 # ***************************************************************************
 
 
-PROG_VERSION ="V04.02 30.08.2023"
+PROG_VERSION ="V04.03 02.03.2023"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)

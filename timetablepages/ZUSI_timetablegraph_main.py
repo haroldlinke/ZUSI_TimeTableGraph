@@ -33,6 +33,7 @@
 # ***************************************************************************
 
 import tkinter as tk
+import winreg as wr
 from tkinter import ttk,filedialog, colorchooser
 from timetablepages.configfile import ConfigFile
 from timetablepages.dictFile import saveDicttoFile
@@ -500,8 +501,7 @@ class TimeTableGraphMain(tk.Tk):
         
         response = requests.get("https://api.github.com/repos/haroldlinke/ZUSI_TimeTableGraph/releases/latest")
         response_dict = response.json()
-        #print(response_dict["name"],repr(response_dict))       
-        
+        #print(response_dict["name"],repr(response_dict))
         if MsgBox('Soll das ZUSI TimeTableGraph Programm mit '+ response_dict["name"]+' aktualisiert werden?', vbQuestion + vbYesNo, 'Aktualisieren des Programms') != vbYes:
             return
         #F00.StatusMsg_UserForm.ShowDialog(M09.Get_Language_Str('Aktualisiere Python MobaLedLib Programm'), '')
@@ -1761,6 +1761,8 @@ def main(mainfiledir,execfile_pathname):
     parser.add_argument('--loglevel',choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],help="Logginglevel to be printed inot the logfile")
     parser.add_argument('--logfile',help="Logfilename")
     parser.add_argument('--startpage',choices=['StartPage', 'StationsConfigurationPage', 'ConfigurationPage'],help="Name of the first page shown after start")
+    parser.add_argument('--FPL',help="Fahrplanfilename")
+    parser.add_argument('--TRN',help="TRNfilename")
     args = parser.parse_args()
     format = "%(asctime)s: %(message)s"
     filedir = os.path.dirname(os.path.realpath(__file__))
@@ -1796,7 +1798,7 @@ def main(mainfiledir,execfile_pathname):
         COMMAND_LINE_ARG_DICT["startpagename"]=args.startpage
     else:
         COMMAND_LINE_ARG_DICT["startpagename"]="StartPage"
-    
+        
     try:
         app = TimeTableGraphMain(mainfiledir,logfilename, execfile_pathname)
         if app.start_ok:
