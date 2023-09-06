@@ -225,6 +225,7 @@ class TimeTableGraphCommon():
         self.schedule_stations_dict  = self.schedule_dict.get("Stations",{})
         self.schedule_startTime_min = self.schedule_startHour * 60
         self.schedule_stationIdx_write_next = 0
+        self.schedule_stations_list = []
         self.schedule_trains_dict = self.schedule_dict.get("Trains",{}) 
         self.schedule_trainIdx_write_next = 0
         self.canvas_dimHeight = height
@@ -1369,6 +1370,7 @@ class TimeTableGraphCommon():
                                                                                 "Neukm"           : neukm,
                                                                                 "FplRglGgl"       : FplRglGgl}
             self.schedule_stationIdx_write_next +=1
+            self.schedule_stations_list.append(stationName)
         else:
             return -1
         return self.schedule_stationIdx_write_next - 1
@@ -1389,17 +1391,29 @@ class TimeTableGraphCommon():
                                                                         "Color"         : color,
                                                                         "Width"         : width,
                                                                         "Pendelzug"     : pendelzug,
-                                                                        "Stops"         : {}
+                                                                        "Stops"         : {},
+                                                                        "Stoplist"      : []
                                                                         }
         self.schedule_trainIdx_write_next += 1
         return self.schedule_trainIdx_write_next-1
 
     def search_station(self, stationName):
-        for stationIdx in self.schedule_stations_dict:
-            iter_stationName=self.get_stationName(stationIdx)
-            if iter_stationName == stationName:
-                return stationIdx
-        return -1
+        try:
+            stationlistIdx = self.schedule_stations_list.index(stationName)
+        except:
+            stationlistIdx = -1
+        
+        return stationlistIdx
+    
+        #for stationIdx in self.schedule_stations_dict:
+        #    iter_stationName=self.get_stationName(stationIdx)
+        #    if iter_stationName == stationName:
+        #        if stationlistIdx != stationIdx:
+        #            print("search station error:", stationName,repr(self.schedule_stations_list),stationIdx,stationlistIdx)
+        #        return stationIdx
+        #if stationlistIdx != -1:
+        #    print("search station error:", stationName,repr(self.schedule_stations_list),stationIdx,stationlistIdx)        
+        #return -1
 
     def enter_trainLine_stop(self, train_idx, trainstop_idx, FplName, FplAnk_min, FplAbf_min,signal="",Richtungswechsel=False,FPLDistance=-1):
         #print("enter_trainline_stop:", train_idx, FplName, FplAnk_min, FplAbf_min)
@@ -1437,6 +1451,7 @@ class TimeTableGraphCommon():
                                               "Richtungswechsel": Richtungswechsel,
                                               "FplDistance"     : FPLDistance
                                            }
+            train_dict["Stoplist"].append(FplName)
         return trainstop_idx + 1
         
     def set_trainline_data(self,trainIdx, key, data):
@@ -3207,6 +3222,14 @@ class Timetable_main(Frame):
         return distance
         
     def import_one_Fahrtenschreiber(self,fileName):
+        logging.info("import_one_Fahrtenschreiber - %s\n",fileName)
+        try:
+            timetable = self.timetable
+        except:
+            tk.messagebox.showerror("Fahrtenschreiber Import - Fehler", "Es wurde noch kein Bildfahrplan erstellt, in den die Fahrtenschreiber importiert werden können")
+            logging.info("Fahrtenschreiber Import - Fehler: Es wurde noch kein Bildfahrplan erstellt, in den die Fahrtenschreiber importiert werden können")
+            return
+        
         try:
             with open(fileName,mode="r",encoding="utf-8") as fd:
                 xml_text = fd.read()
@@ -3225,9 +3248,15 @@ class Timetable_main(Frame):
             self.controller.set_statusmessage("Error: ZUSI entry not found in Fahrtenschreiber-file: "+fileName)
             self.open_error = "Error: ZUSI entry not found in Fahrtenschreiber-file: "+fileName
             return {}
-        info_dict = zusi_dict.get("Info")
+        #info_dict = zusi_dict.get("Info")
         #print(repr(info_dict))
         result_dict = zusi_dict.get("result")
+        if result_dict == {}:
+            logging.info("Result Entry not found")
+            self.xml_error_logger.info("Result Entry not found")
+            self.controller.set_statusmessage("Error: Result entry not found in Fahrtenschreiber-file: "+fileName)
+            self.open_error = "Error: Result entry not found in Fahrtenschreiber-file: "+fileName
+            return {}        
         #print(repr(result_dict))
         self.FS_trainNumber = result_dict.get("@Zugnummer",0)
         print("Zugnummer:",self.FS_trainNumber)
@@ -3236,11 +3265,13 @@ class Timetable_main(Frame):
             print(self.FS_trainNumber, "not found in trainlist")
             logging.info("Fahrtenschreiber: Trainnumber not found in current Trainlist:"+self.FS_trainNumber)
             self.controller.set_statusmessage("Fahrtenschreiber: Trainnumber not found in current Trainlist:"+self.FS_trainNumber)
+            timetable.tt_canvas.update()
             return
         self.FS_train_stops = self.timetable.get_trainline_data(self.FS_trainIdx, "Stops")
+        FS_stoplist = self.timetable.get_trainline_data(self.FS_trainIdx, "Stoplist")
         FS_train_stops=self.FS_train_stops
         #print(repr(self.FS_train_stops))
-        timetable = self.timetable
+
         FahrtEintrag_list = result_dict.get("FahrtEintrag",{})
         self.controller.set_statusmessage("Importiere Fahrtenschreiber - "+ fileName) 
         if FahrtEintrag_list == {}:
@@ -3248,6 +3279,7 @@ class Timetable_main(Frame):
             self.xml_error_logger.info("FahrtEintrag Entry not found" +fileName)
             self.controller.set_statusmessage("Error: FahrtEintrag entry not found in fpn-file: "+fileName)
             self.open_error = "Error: FahrtEintrag entry not found in fpn-file: "+fileName
+            timetable.tt_canvas.update()
             return {}
         
         # init monitoring data
@@ -3274,26 +3306,33 @@ class Timetable_main(Frame):
         firststopdistance = -1
         FS_startstation_idx = 0
         
+        fahrtwegstart = None
+        
         #determine_start_station_idx
         for FahrtEintrag in FahrtEintrag_list:
             #print(repr(FahrtEintrag))
-            FahrtTyp = FahrtEintrag.get("@FahrtTyp",{})
+            FahrtTyp = FahrtEintrag.get("@FahrtTyp","")
             self.FS_laststationIdx = -1
-            if FahrtTyp:
+            if FahrtTyp!="":
                 if FahrtTyp=="2":
-                    FS_startstation_name = FahrtEintrag.get("@FahrtText",{})
-                    for train_stop_idx in self.FS_train_stops:
-                        train_stop_dict = self.FS_train_stops.get(train_stop_idx,{})
-                        if train_stop_dict != {}:
-                            startstation_idx = train_stop_dict.get("StationIdx",-1)
-                            if startstation_idx != -1:
-                                stopname = self.timetable.schedule_stations_dict[startstation_idx].get("StationName","")
-                            if stopname == FS_startstation_name:
-                                FS_startstation_idx = train_stop_idx
-                                break
-                    break # only check the first Fahrttyp 2 entry
+                    fahrtweg = float(FahrtEintrag.get("@FahrtWeg",-1))
+                    if fahrtweg == -1:
+                        FS_startstation_name = FahrtEintrag.get("@FahrtText",{})
+                        #for train_stop_idx in self.FS_train_stops:
+                        #    train_stop_dict = self.FS_train_stops.get(train_stop_idx,{})
+                        #    if train_stop_dict != {}:
+                        #        startstation_idx = train_stop_dict.get("StationIdx",-1)
+                        #        if startstation_idx != -1:
+                        #            stopname = self.timetable.schedule_stations_dict[startstation_idx].get("StationName","")
+                        #        if stopname == FS_startstation_name:
+                        #            FS_startstation_idx = train_stop_idx
+                        #            break
+                        try:
+                            FS_startstation_idx = FS_stoplist.index(FS_startstation_name)
+                        except:
+                            FS_startstation_idx = 0
+                        break # only check the first Fahrttyp 2 entry
 
-        
         train_stop_dict = self.FS_train_stops.get(FS_startstation_idx,{})
         stopidx = train_stop_dict.get("StationIdx",-1)
         if stopidx != -1:
@@ -3310,7 +3349,7 @@ class Timetable_main(Frame):
             timetable.monitor_distance_of_last_station = laststopdistance                
         
         self.controller.simu_timetable_dict = {}
-        fahrtwegstart = None
+        
         
         timetable.monitor_set_status(fileName, self.FS_trainNumber, False)
         timetable.monitor_set_timetable_updated(trainIdx=self.FS_trainIdx)
@@ -3322,14 +3361,15 @@ class Timetable_main(Frame):
 
         for FahrtEintrag in FahrtEintrag_list:
             #print(repr(FahrtEintrag))
-            FahrtTyp = FahrtEintrag.get("@FahrtTyp",{})
+            FahrtTyp = FahrtEintrag.get("@FahrtTyp","")
             self.FS_laststationIdx = -1
-            if FahrtTyp:
+            if FahrtTyp!="":
+                tooltip_message = "Fahrttyp: " + FahrtTyp + "\nFahrtkm: " + FahrtEintrag.get("@Fahrtkm","") + "\nFahrtWeg: " + FahrtEintrag.get("@FahrtWeg","")+ "\nFahrtText: "+ FahrtEintrag.get("@FahrtText","")
                 if lastfahrtext =="":
-                    lastfahrtext= "Fahrttyp:" + FahrtTyp + " FahrtText:"+ FahrtEintrag.get("@FahrtText","")
+                    lastfahrtext= tooltip_message
                 else:
                     try:
-                        lastfahrtext= lastfahrtext + "\n" + "Fahrttyp:" + FahrtTyp + " FahrtText:"+ FahrtEintrag.get("@FahrtText","")
+                        lastfahrtext= lastfahrtext + "\n---------------------------\n" + tooltip_message
                     except:
                         print(repr(FahrtEintrag.get("@FahrtText","")))
                 if FahrtTyp=="x": #2":
@@ -3391,6 +3431,7 @@ class Timetable_main(Frame):
                     timetable.monitor_start = False
         
         timetable.tt_canvas.update()
+        logging.info("import_one_Fahrtenschreiber finished - %s \n",fileName)
                     
                      
                

@@ -297,10 +297,23 @@ class TimeTablePage(tk.Frame):
             pass
             
     def import_Fahrtenschreiber(self, fileNames):
-        for fileName in fileNames:
-            self.timetable_main.import_one_Fahrtenschreiber(fileName)
-        self.controller.set_statusmessage("Import der Fahrtenschreiber beendet") 
-        
+        logging.info("import_Fahrtenschreiber - %s \n",fileNames)
+        try:
+            for fileName in fileNames:
+                
+                try:
+                    self.timetable_main.import_one_Fahrtenschreiber(fileName)
+                except BaseException as e:
+                    logging.debug("import_one_Fahrtenschreiber - Fehler: %s \n %s",fileName,e)
+                    self.controller.set_statusmessage("Fehler beim Importieren von \n" + fileName)
+                    
+            self.controller.set_statusmessage("Import der Fahrtenschreiber beendet")
+            logging.info("import_Fahrtenschreiber beendet")
+
+        except BaseException as e:
+            logging.debug("import_Fahrtenschreiber - Fehler %s \n %s",fileNames,e)
+            self.controller.set_statusmessage("Fehler beim Import")
+       
     def edit_export_to_all_trn(self):
         self.timetable_main.edit_export_to_all_trn()
         
