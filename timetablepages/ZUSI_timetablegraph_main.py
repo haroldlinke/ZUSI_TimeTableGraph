@@ -379,6 +379,7 @@ class TimeTableGraphMain(tk.Tk):
             return ("Verdana", int(font_size))
 
     def Save_Bfp_as_PDF(self):
+        logging.info("Menu: save Bfp as PDF")
         filepath = filedialog.asksaveasfilename(filetypes=[("PDF files","*.pdf")],defaultextension=".pdf")
         if filepath:
             frame = self.getFramebyName("TimeTablePage")
@@ -386,6 +387,7 @@ class TimeTableGraphMain(tk.Tk):
             frame.save_as_pdf(filepath)        
 
     def Save_Bfp_as_EPS(self):
+        logging.info("Menu: save Bfp as EPS")
         filepath = filedialog.asksaveasfilename(filetypes=[("EPS files","*.eps")],defaultextension=".eps")
         if filepath:
             frame = self.getFramebyName("TimeTablePage")
@@ -393,6 +395,7 @@ class TimeTableGraphMain(tk.Tk):
             frame.save_as_eps(filepath)    
 
     def Save_Bfp_as_Image(self):
+        logging.info("Menu: save Bfp as Image")
         filepath = filedialog.asksaveasfilename(filetypes=[("png","*.png"),("jpg","*.jpg"),("tiff","*.tiff")],defaultextension=".jpg")
         if filepath:
             frame = self.getFramebyName("TimeTablePage")
@@ -400,10 +403,12 @@ class TimeTableGraphMain(tk.Tk):
             frame.save_as_image(filepath)
             
     def refresh_Bfp(self):
+        logging.info("Menu: refresh_Bfp")
         TimetablePageFrame = self.getFramebyName("TimeTablePage")
         TimetablePageFrame.timetable_main.regenerate_canvas()
             
     def import_Fahrtenschreiber(self):
+        logging.info("Menu: import_Fahrtenschreiber")
         filepath = filedialog.askopenfilenames(filetypes=[("xml","*.xml")],defaultextension=".xml")
         if not filepath:
             return
@@ -416,11 +421,13 @@ class TimeTableGraphMain(tk.Tk):
             frame.import_Fahrtenschreiber(filepath)
             
     def Connect_ZUSI_server(self):
+        logging.info("Menu: Connect ZUSI server")
         if self.timetable_activ:
             TimetablePageFrame = self.getFramebyName("TimeTablePage")
             TimetablePageFrame.timetable_main.timetable.edit_connect_ZUSI(-1)
         
     def Disconnect_ZUSI_server(self):
+        logging.info("Menu: DisConnect ZUSI server")
         if self.timetable_activ:
             TimetablePageFrame = self.getFramebyName("TimeTablePage")
             TimetablePageFrame.timetable_main.timetable.edit_disconnect_ZUSI(-1)
