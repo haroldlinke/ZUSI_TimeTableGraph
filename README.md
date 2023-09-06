@@ -21,6 +21,10 @@ Zur Erstellung eines Bildfahrplans geht man folgendermassen vor:
 
 
 History of Changes:
+V04.04:
+
+- added several Errormessage for Fahrtenschreiber import
+- added logging messages for Fahrtenschreiber import
 
 V04.03:
 - Corrected Zoom Function
