@@ -33,7 +33,6 @@
 # ***************************************************************************
 
 import tkinter as tk
-import winreg as wr
 from tkinter import ttk,filedialog, colorchooser
 from timetablepages.configfile import ConfigFile
 from timetablepages.dictFile import saveDicttoFile
@@ -53,7 +52,6 @@ from tkcolorpicker.spinbox import Spinbox
 import platform
 import os
 import sys
-import winreg
 #import time
 import logging
 import webbrowser
@@ -65,7 +63,8 @@ import zipfile
 import urllib
 import shutil
 import requests
-
+if os.name == 'nt':
+    import winreg
 
 # ------------------------------
 
