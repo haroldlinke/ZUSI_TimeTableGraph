@@ -33,6 +33,7 @@
 # ***************************************************************************
 
 import tkinter as tk
+import winreg as wr
 from tkinter import ttk,filedialog, colorchooser
 from timetablepages.configfile import ConfigFile
 from timetablepages.dictFile import saveDicttoFile
@@ -45,13 +46,18 @@ from timetablepages.TCPConfigPage import TCPConfigPage
 from timetablepages.TrainNamePosConfigPage import TrainNamePosConfigPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
 from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
-CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, XML_ERROR_LOG_FILENAME, shortCutDict
+CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, XML_ERROR_LOG_FILENAME, shortCutDict,temp_path
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,ScrolledFrame,HorizontalScrolledFrame
 from tkcolorpicker.limitvar import LimitVar
 from tkcolorpicker.spinbox import Spinbox
 import platform
 import os
 import sys
+try:
+    no_winreg = False
+    import winreg
+except:
+    no_winreg = True
 #import time
 import logging
 import webbrowser
@@ -63,8 +69,7 @@ import zipfile
 import urllib
 import shutil
 import requests
-if os.name == 'nt':
-    import winreg
+
 
 # ------------------------------
 
@@ -179,9 +184,42 @@ class TimeTableGraphMain(tk.Tk):
         self.logfilename = logfilename
         self.localfile_dir = os.path.dirname(os.path.realpath(__file__)) # location of timetablepages directory
         self.start_ok = True
+        self.usetrain_starttime = False
         if not self.readConfigData():
             self.start_ok = False
             return
+        self.zusi_official_path = self.getConfigData("Bfp_ZUSI_Dir_official")
+        self.arg_fpn = COMMAND_LINE_ARG_DICT.get("arg_fpn","")
+        if self.arg_fpn.startswith("_"):
+            self.arg_fpn = self.arg_fpn[1:]        
+        if self.arg_fpn.startswith("fpn="):
+            self.arg_fpn = self.arg_fpn[4:]
+            #self.arg_fpn = self.arg_fpn.replace("\\\\","\\")
+            #self.arg_fpn = self.arg_fpn.replace("\\\\","\\")
+        self.arg_trn = COMMAND_LINE_ARG_DICT.get("arg_trn","")
+        if self.arg_trn.startswith("_"):
+            self.arg_trn = self.arg_trn[1:]
+        if self.arg_trn.startswith("trn="):
+            self.arg_trn = self.arg_trn[4:]
+            #self.arg_trn = self.arg_trn.replace("\\\\","\\")
+            #self.arg_trn = self.arg_trn.replace("\\\\","\\")
+       
+        self.arg_zn = COMMAND_LINE_ARG_DICT.get("arg_zn","")
+        if self.arg_zn.startswith("_"):
+            self.arg_zn = self.arg_zn[1:]
+        if self.arg_zn.startswith("#="):
+            self.arg_zn = self.arg_zn[4:]
+                        
+        if self.arg_fpn!="":
+            self.arg_fpn = self.zusi_official_path + "\\" + self.arg_fpn
+            self.setConfigData("Bfp_filename", self.arg_fpn)
+            if self.arg_trn != "":
+                self.arg_trn = self.zusi_official_path + "\\" + self.arg_trn
+                timetable_filename = self.arg_trn[:-3]+"timetable.xml"
+                self.setConfigData("Bfp_trainfilename", timetable_filename)
+                COMMAND_LINE_ARG_DICT["startpagename"] = "TimeTablePage"
+                self.usetrain_starttime = True
+        
         self.macroparams_value = {}
         self.macroparams_var = {"dummy": {}}
         self.persistent_param_dict = {}
@@ -213,6 +251,11 @@ class TimeTableGraphMain(tk.Tk):
             self.ghostscript_path_rel = r"gs9.53.3\bin\gswin32c.exe"
             
         self.ghostscript_path = os.path.join(self.exefile_dir,self.ghostscript_path_rel)
+        
+        self.imagemagick_path_rel = "Imagemagick"
+        self.imagemagick_path = os.path.join(self.exefile_dir,self.imagemagick_path_rel)
+        
+        self.temp_path = temp_path
 
         #macrodata = self.MacroDef.data.get("StartPage",{})
         
@@ -294,7 +337,7 @@ class TimeTableGraphMain(tk.Tk):
         menu.add_cascade(label="Hilfe", menu=helpmenu)
         helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
         helpmenu.add_command(label="Logfile öffnen", command=self.OpenLogFile)
-        helpmenu.add_command(label="Update TimetableGraph Programm", command=self.Updateprogram)
+        #helpmenu.add_command(label="Update TimetableGraph Programm", command=self.Updateprogram)
         helpmenu.add_command(label="XML_Error-Logfile öffnen", command=self.OpenXMLErrorLogFile)
         helpmenu.add_command(label="Über...", command=self.About)
 
@@ -383,7 +426,7 @@ class TimeTableGraphMain(tk.Tk):
         if filepath:
             frame = self.getFramebyName("TimeTablePage")
             # save postscipt image
-            frame.save_as_pdf(filepath)        
+            frame.save_as_pdf(filepath)
 
     def Save_Bfp_as_EPS(self):
         logging.info("Menu: save Bfp as EPS")
@@ -446,7 +489,6 @@ class TimeTableGraphMain(tk.Tk):
         UserForm.destroy() 
     
     def show_download_status(self,a,b,c):
-            
         '''''Callback function 
         @a:Downloaded data block 
         @b:Block size 
@@ -458,7 +500,6 @@ class TimeTableGraphMain(tk.Tk):
         #print '%.2f%%' % per
         self.set_statusmessage("Download TimeTableGraph Programm:" + str(a*b))
         self.update()
-        
     
         #StatusMsg_UserForm.Set_ActSheet_Label(P01.Format(int(time.time()) - M37.Update_Time, 'hh:mm:ss')+"\n"+str(a*b))  
         
@@ -501,7 +542,7 @@ class TimeTableGraphMain(tk.Tk):
         except OSError as why:
             errors.extend((src, dst, str(why)))
         if errors:
-            raise Error(errors)     
+            raise Error(errors)
 
     def Updateprogram(self):
         
@@ -510,10 +551,11 @@ class TimeTableGraphMain(tk.Tk):
         #print(response_dict["name"],repr(response_dict))
         if MsgBox('Soll das ZUSI TimeTableGraph Programm mit '+ response_dict["name"]+' aktualisiert werden?', vbQuestion + vbYesNo, 'Aktualisieren des Programms') != vbYes:
             return
+        self.set_statusmessage("Aktualisiere TimeTableGraph Programm:")
+        self.update()        
         #F00.StatusMsg_UserForm.ShowDialog(M09.Get_Language_Str('Aktualisiere Python MobaLedLib Programm'), '')
         URL_zipball= response_dict["zipball_url"]   #"https://api.github.com/repos/haroldlinke/ZUSI_TimeTableGraph/zipball/V03.12" #"https://github.com/haroldlinke/ZUSI_TimeTableGraph/archive/refs/heads/master.zip"
         try:
-            
             workbookpath = self.exefile_dir
             workbookpath2 = os.path.dirname(workbookpath)
             workbookpath3 = os.path.dirname(workbookpath2)
@@ -526,8 +568,10 @@ class TimeTableGraphMain(tk.Tk):
             URL = message.split(",")[1]
             logging.debug("URLretrieve:"+ URL +" -> "+ zipfilenamepath)
             urllib.request.urlretrieve(URL, zipfilenamepath,self.show_download_status)
-            
+
             #F00.StatusMsg_UserForm.Set_Label("Entpacken ZUSI TimeTableGraph Programm ")
+            self.set_statusmessage("Entpacken ZUSI TimeTableGraph Programm")
+            self.update()
             UnzipAFile(zipfilenamepath,workbookpath3+"/dummy")
             srcpath = workbookpath3+"/dummy/ZUSI_TimeTableGraph-master"
             dstpath = workbookpath
@@ -536,8 +580,6 @@ class TimeTableGraphMain(tk.Tk):
                 logging.debug("Update Program - copytree: "+srcpath+"->"+dstpath)
                 self.copytree(srcpath,dstpath)
                 logging.debug("Update Program - copytree ok: "+srcpath+"->"+dstpath)
-            
-            
             if MsgBox(' Python MobaLedLib wurde aktualisiert. Soll neu gestartet werden?', vbQuestion + vbYesNo, 'Aktualisieren der Python MobaLedLib') == vbYes:
                 # shutdown and restart
                 self.restart()
@@ -546,8 +588,8 @@ class TimeTableGraphMain(tk.Tk):
             print("Update TimetabelGraph exception:",e)
             logging.debug("Update TimetabelGraph exception:",e)
             MsgBox('Fehler beim Download oder Installieren?',vbInformation, 'Aktualisieren vom TimeTableGraph')
-   
-        #Unload(F00.StatusMsg_UserForm)
+        
+
         
     # ----------------------------------------------------------------
     #  restart program
@@ -1754,6 +1796,25 @@ def img_resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+def create_ZUSI_menu_entry(exec_filepathname):
+    if no_winreg: # no windows
+        return
+    
+    winreg.DisableReflectionKey(winreg.HKEY_CURRENT_USER)
+    keyVal = 'Software\\Zusi3\\Fahrsim\\Einstellungen\\MenuBildfahrplan1'
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+    except:
+        key = winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, keyVal,0,(winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+        winreg.SetValueEx(key, "BezeichnerSprache0", 0, winreg.REG_SZ, "Deutsch")
+        winreg.SetValueEx(key, "BezeichnerText0", 0, winreg.REG_SZ, "&Bildfahrplan")
+        winreg.SetValueEx(key, "Vatermenu", 0, winreg.REG_SZ, "SpTBXSubmenuItemFahrplanerstellung")
+        winreg.SetValueEx(key, "MenuIndex", 0, winreg.REG_DWORD, 5)
+        winreg.SetValueEx(key, "Datei", 0, winreg.REG_SZ, exec_filepathname+"/TimetableGraphProject.exe")
+        winreg.SetValueEx(key, "Parameter", 0, winreg.REG_SZ, "-fpn ""_fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@""")
+
+    winreg.CloseKey(key)
+    winreg.EnableReflectionKey(winreg.HKEY_CURRENT_USER)
 
 #-------------------------------------------
 COMMAND_LINE_ARG_DICT = {}
@@ -1767,8 +1828,9 @@ def main(mainfiledir,execfile_pathname):
     parser.add_argument('--loglevel',choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],help="Logginglevel to be printed inot the logfile")
     parser.add_argument('--logfile',help="Logfilename")
     parser.add_argument('--startpage',choices=['StartPage', 'StationsConfigurationPage', 'ConfigurationPage'],help="Name of the first page shown after start")
-    parser.add_argument('--FPL',help="Fahrplanfilename")
-    parser.add_argument('--TRN',help="TRNfilename")
+    parser.add_argument('-fpn',help="Fahrplanfilename")
+    parser.add_argument('-trn',help="TRNfilename")
+    parser.add_argument('-zn',help="Trainnumber")
     args = parser.parse_args()
     format = "%(asctime)s: %(message)s"
     filedir = os.path.dirname(os.path.realpath(__file__))
@@ -1805,7 +1867,27 @@ def main(mainfiledir,execfile_pathname):
     else:
         COMMAND_LINE_ARG_DICT["startpagename"]="StartPage"
         
+    if args.fpn:
+        COMMAND_LINE_ARG_DICT["arg_fpn"]=args.fpn
+    else:
+        COMMAND_LINE_ARG_DICT["arg_fpn"]=""
+        
+    if args.trn:
+        COMMAND_LINE_ARG_DICT["arg_trn"]=args.trn
+    else:
+        COMMAND_LINE_ARG_DICT["arg_trn"]=""        
+
+    if args.zn:
+        COMMAND_LINE_ARG_DICT["arg_zn"]=args.zn
+    else:
+        COMMAND_LINE_ARG_DICT["arg_zn"]=""
+    
+    print (repr(COMMAND_LINE_ARG_DICT))
+    logging.info("ARGS:" + repr(args))
+    logging.info("Commandlineargs:" + repr(COMMAND_LINE_ARG_DICT))
+    
     try:
+        create_ZUSI_menu_entry(execfile_pathname)
         app = TimeTableGraphMain(mainfiledir,logfilename, execfile_pathname)
         if app.start_ok:
             app.setroot(app)

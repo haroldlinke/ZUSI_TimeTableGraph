@@ -492,7 +492,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften Stationen",
+        "Input Text": "Stationslinien",
         "Hint": "Einstellungen für die Stationslinien",
         "Implementation comment": "",
         "MultipleParams": [
@@ -511,7 +511,7 @@
         "Max": "1000",
         "Default": "black",
         "ParamEntryWidth": "9",
-        "Input Text": "Farbe-Stationen",
+        "Input Text": "Linienfarbe",
         "Hint": "Farbe, die für die Linie verwendet werden soll",
         "Implementation comment": ""
     },
@@ -591,6 +591,113 @@
         "Input Text": "Linientyp",
         "Hint": "Typ der Linie"
     },
+    "Bfp_ST_LineProp": {
+        "ParName": "Bfp_ST_LineProp",
+        "Cnt": "",
+        "Type": "Multipleparams",
+        "Min": "",
+        "Max": "",
+        "Default": "",
+        "Repeat": "",
+        "Input Text": "Station-Gleislinen",
+        "Hint": "Einstellungen für die Stationsgleislinien",
+        "Implementation comment": "",
+        "MultipleParams": [
+            "Bfp_ST_LineColor",
+            "Bfp_ST_LineWidth",
+            "Bfp_ST_LineDashed",
+            "!Bfp_ST_LineLabelSize",
+            "!Bfp_ST_LineLabelDir"
+        ]
+    },
+    "Bfp_ST_LineColor": {
+        "ParName": "Bfp_ST_LineColor",
+        "Cnt": "1",
+        "Type": "ChooseColor",
+        "Min": "0",
+        "Max": "1000",
+        "Default": "black",
+        "ParamEntryWidth": "9",
+        "Input Text": "Linienfarbe",
+        "Hint": "Farbe, die für die Linie verwendet werden soll",
+        "Implementation comment": ""
+    },
+    "Bfp_ST_LineWidth": {
+        "ParName": "Bfp_ST_LineWidth",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_ST_LineWidth",
+        "Min": "0",
+        "Max": "20",
+        "Default": "2",
+        "Input Text": "Linienbreite",
+        "Hint": "Breite der Linien"
+    },
+    "Bfp_ST_LineLabelDir": {
+        "ParName": "Bfp_ST_LineLabelDir",
+        "Cnt": "1",
+        "Type": "Combo",
+        "Values": [
+            "Waagerecht",
+            "Senkrecht",
+            "Diagonal"
+        ],
+        "ValuesText": [
+            "Waagerecht",
+            "Senkrecht",
+            "Diagonal"
+        ],
+        "ConfigName": [
+            "Bfp_ST_LineLabelDir",
+            "Bfp_ST_LineLabelDir_No"
+        ],
+        "Min": "0",
+        "Max": "255",
+        "Default": "0",
+        "ParamEntryWidth": "26",
+        "Input Text": "Richtung der Beschriftung",
+        "Hint": "Richtung der Beschriftung"
+    },
+    "Bfp_ST_LineLabelSize": {
+        "ParName": "Bfp_ST_LineLabelSize",
+        "Cnt": "1",
+        "Type": "",
+        "ConfigName": "Bfp_ST_LineLabelSize",
+        "Min": "0",
+        "Max": "20",
+        "Default": "10",
+        "Input Text": "Beschriftung Schriftgröße",
+        "Hint": "Größe der Beschriftung in Punkt"
+    },
+    "Bfp_ST_LineDashed": {
+        "ParName": "Bfp_ST_LineDashed",
+        "Cnt": "1",
+        "Type": "Combo",
+        "Values": [
+            " ",
+            "-",
+            ".",
+            "-.",
+            "no line"
+        ],
+        "ValuesText": [
+            "—————",
+            "— — — — —",
+            ". . . . . .",
+            "-.-.-.-.-.-",
+            "Keine Linie"
+        ],
+        "ConfigName": [
+            "Bfp_ST_LineDashed",
+            "Bfp_ST_LineDashed_No"
+        ],
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "ParamFontStd": "True",
+        "Input Text": "Linientyp",
+        "Hint": "Typ der Linie"
+    },
     "Bfp_ZFS_LineProp": {
         "ParName": "Bfp_ZFS_LineProp",
         "Cnt": "",
@@ -599,7 +706,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften Zugfolgestelle",
+        "Input Text": "Zugfolgestellelinie",
         "Hint": "Einstellungen für die Zugfolgestellelinien",
         "Implementation comment": "",
         "MultipleParams": [
@@ -616,7 +723,7 @@
         "Max": "1000",
         "Default": "black",
         "ParamEntryWidth": "9",
-        "Input Text": "Farbe-ZFS",
+        "Input Text": "Linienfarbe",
         "Hint": "Farbe, die für die Zugfolgestellelinie verwendet werden soll",
         "Implementation comment": ""
     },
@@ -680,7 +787,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften Gleisschemalinie",
+        "Input Text": "Gleisschemalinie",
         "Hint": "Einstellungen für die Gleisschemalinie",
         "Implementation comment": "",
         "MultipleParams": [
@@ -697,7 +804,7 @@
         "Max": "1000",
         "Default": "black",
         "ParamEntryWidth": "9",
-        "Input Text": "Farbe-ZFS",
+        "Input Text": "Linienfarbe",
         "Hint": "Farbe, die für die Gleisschemalinie verwendet werden soll",
         "Implementation comment": ""
     },
@@ -749,7 +856,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften Stundenlinien",
+        "Input Text": "Stundenlinien",
         "Hint": "Einstellungen für die Stundenlinien",
         "Implementation comment": "",
         "MultipleParams": [
@@ -767,7 +874,7 @@
         "Max": "1000",
         "Default": "black",
         "ParamEntryWidth": "9",
-        "Input Text": "Farbe-Stunden",
+        "Input Text": "Linienfarbe",
         "Hint": "Farbe, die für die Stundenlinie verwendet werden soll",
         "Implementation comment": ""
     },
@@ -830,7 +937,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Eigenschaften der Minutenlinien",
+        "Input Text": "Minutenlinien",
         "Hint": "Einstellungen für die Minutenlinien",
         "Implementation comment": "",
         "MultipleParams": [
@@ -848,7 +955,7 @@
         "Max": "1000",
         "Default": "black",
         "ParamEntryWidth": "9",
-        "Input Text": "Farbe-Minuten",
+        "Input Text": "Linienfarbe",
         "Hint": "Farbe, die für die Minutenlinie verwendet werden soll",
         "Implementation comment": ""
     },

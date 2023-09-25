@@ -45,6 +45,7 @@ import os
 from timetablepages.PopupWinClone import popup_win_clone
 from logging import FileHandler
 from logging import Formatter
+import inspect
 
 LOG_FORMAT = (
             "%(asctime)s [%(levelname)s]: %(message)s in %(pathname)s:%(lineno)d")
@@ -227,6 +228,7 @@ class TimeTableGraphCommon():
         self.schedule_stationIdx_write_next = 0
         self.schedule_stations_list = []
         self.schedule_trains_dict = self.schedule_dict.get("Trains",{}) 
+        self.FPL_starttime = -1
         self.schedule_trainIdx_write_next = 0
         self.canvas_dimHeight = height
         self.canvas_dimWidth  = width
@@ -389,6 +391,7 @@ class TimeTableGraphCommon():
         self.monitor_start_time = 0
         self.monitor_panel_con_status_objectid = -1
         self.monitor_panel_currfpn_objectid  = -1
+        self.station_delta_table = {}
         
         if self.showTrainDir == None:
             self.showTrainDir = "all"
@@ -415,19 +418,44 @@ class TimeTableGraphCommon():
         else:
             self.graphTop = self.graphHeadersize + 10
             self.graphHeight = self.canvas_dimHeight - self.graphTop - self.graphBottomsize
-            self.graphBottom = self.graphTop + self.graphHeight            
+            self.graphBottom = self.graphTop + self.graphHeight
         self.graphRight = self.graphLeft + self.graphWidth
         self.drawHours()
         self.drawGraphGrid()
         self.drawTrains()
+        self.drawstation_tracks()
         self.edit_panel_currtime_objectid = -1
         self.edit_panel_stationName_objectid = -1
         self.edit_panel_trainName_objectid = -1
         self.print_edit_panel()
         self.controller.timetable_activ = True
+        
+    def determine_station_delta(self, stop, time):
+        delta = self.controller.getConfigData("Bfp_TrainLine_Distance_from_Stationline",default=0)
+        signal_str = stop.get("Signal","")
+        if signal_str == "" or signal_str==None:
+            return delta
+        signal_list = signal_str.split("-")
+        if len(signal_list)>1:
+            signal = signal_list[1]
+        else:
+            signal = signal_list[0]
+        station_idx = stop.get("StationIdx",0)
+
+        search_str = str(station_idx)+self.direction 
+        signal_list = self.station_delta_table.get(search_str,[])
+        if signal in signal_list:
+            delta_factor = signal_list.index(signal)+1
+        else:
+            signal_list.append(signal)
+            self.station_delta_table[search_str] = signal_list
+            delta_factor=len(signal_list)
+        delta_update=delta_factor*delta
+
+        return delta_update
 
     def determine_xy_point(self, stop, time):
-        delta=self.controller.getConfigData("Bfp_TrainLine_Distance_from_Stationline",default=0)
+        delta=0; self.determine_station_delta(stop, time)
         if self.draw_stations_vertical:
             x = self.calculateTimePos(time)
             y = self.stationGrid.get(stop.get("StationIdx",0),0)
@@ -445,6 +473,26 @@ class TimeTableGraphCommon():
         x = x*self.controller.total_scalefactor
         y = y*self.controller.total_scalefactor
         return x,y
+    
+    def determine_xy_point_with_delta(self, stop, time):
+        delta=self.determine_station_delta(stop, time)
+        if self.draw_stations_vertical:
+            x = self.calculateTimePos(time)
+            y = self.stationGrid.get(stop.get("StationIdx",0),0)
+            if self.direction=="down":
+                y+=delta
+            else:
+                y-=delta
+        else:
+            y = self.calculateTimePos(time)
+            x = self.stationGrid.get(stop.get("StationIdx",0),0)
+            if self.direction=="down":
+                x+=delta
+            else:
+                x-=delta
+        x = x*self.controller.total_scalefactor
+        y = y*self.controller.total_scalefactor
+        return x,y    
 
     def determine_station_xy_point(self, stationName, distance):
         self.infoColWidth = max(self.infoColWidth, self.s_font.measure(stationName) + 5)
@@ -735,39 +783,73 @@ class TimeTableGraphCommon():
             for stationidx,y in self.stationGrid.items():
                 if self.stationTypeZFS_list[stationidx]:
                     if zfs_linedashed !="no line":
-                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=zfs_width, fill=zfs_color,dash=zfs_linedashed)
+                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=zfs_width, fill=zfs_color,dash=zfs_linedashed,tag="Grid")
                 else:
                     if s_linedashed !="no line":
-                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color,dash=s_linedashed)
+                        objid = self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=s_width, fill=s_color,dash=s_linedashed,tag="Grid")
                 self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx),button_1=True)
             for x in self.hourGrid:
                 if th_linedashed !="no line":
-                    self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color,dash=th_linedashed)
+                    self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=th_width, fill=th_color,dash=th_linedashed,tag="Grid")
                 if tm_width > 0 and x != self.hourGrid[-1]:
                     number_of_min_lines = int(60/tm_distance)-1
                     distance_per_line = tm_distance * self.hourWidth/60
                     for min_line in range(0,number_of_min_lines):
                         if tm_linedashed !="no line":
-                            self.tt_canvas.create_line(x+distance_per_line*(min_line+1), self.graphTop, x+distance_per_line*(min_line+1), self.graphBottom, width=tm_width, fill=tm_color,dash=tm_linedashed)
+                            self.tt_canvas.create_line(x+distance_per_line*(min_line+1), self.graphTop, x+distance_per_line*(min_line+1), self.graphBottom, width=tm_width, fill=tm_color,dash=tm_linedashed,tag="Grid")
         else:
             for y in self.hourGrid:
                 if th_linedashed  !="no line":
-                    self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=th_width, fill=th_color,dash=th_linedashed)
+                    self.tt_canvas.create_line(self.graphLeft, y, self.graphRight, y, width=th_width, fill=th_color,dash=th_linedashed,tag="Grid")
                 if tm_width > 0 and y != self.hourGrid[-1]:
                     number_of_min_lines = int(60/tm_distance)-1
                     distance_per_line = tm_distance * self.hourWidth/60
                     for min_line in range(0,number_of_min_lines):
                         if tm_linedashed !="no line":
-                            self.tt_canvas.create_line(self.graphLeft, y+distance_per_line*(min_line+1), self.graphRight, y+distance_per_line*(min_line+1), width=tm_width, fill=tm_color,dash=tm_linedashed)
+                            self.tt_canvas.create_line(self.graphLeft, y+distance_per_line*(min_line+1), self.graphRight, y+distance_per_line*(min_line+1), width=tm_width, fill=tm_color,dash=tm_linedashed,tag="Grid")
                         
             for stationidx,x in self.stationGrid.items():
                 if self.stationTypeZFS_list[stationidx]:
                     if zfs_linedashed  !="no line":
-                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=zfs_width, fill=zfs_color,dash=zfs_linedashed)
+                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=zfs_width, fill=zfs_color,dash=zfs_linedashed,tag="Grid")
                 else:
                     if s_linedashed  !="no line":
-                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=s_width, fill=s_color,dash=s_linedashed)
+                        objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=s_width, fill=s_color,dash=s_linedashed,tag="Grid")
                     self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx),button_1=True)
+        self.tt_canvas.tag_lower("Grid","Station")
+        
+    def drawstation_tracks(self):
+        delta = self.controller.getConfigData("Bfp_TrainLine_Distance_from_Stationline",default=0)
+        if delta>0:
+            s_color=self.controller.getConfigData("Bfp_ST_LineColor",default="")
+            s_width=self.controller.getConfigData("Bfp_ST_LineWidth",default="")
+            s_linedashed=self.controller.getConfigData("Bfp_ST_LineDashed",default="")
+            if s_linedashed !="no line":
+                if self.draw_stations_vertical:
+                    for station_idx,y in self.stationGrid.items():
+                        for direction in ["up","down"]:
+                            search_str = str(station_idx)+direction
+                            signal_list = self.station_delta_table.get(search_str,[])
+                            for signal in signal_list:
+                                delta_factor = signal_list.index(signal)+1
+                                delta_update=delta_factor*delta                    
+                                objid = self.tt_canvas.create_line(self.graphLeft, y+delta_update, self.graphRight, y+delta_update, width=s_width, activewidth=s_width*2,fill=s_color,dash=s_linedashed,tag="Grid")
+                                self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(station_idx)+"\nSignal:"+signal,button_1=True)
+                else:
+                    for station_idx,x in self.stationGrid.items():
+                        for direction in ["up","down"]:
+                            search_str = str(station_idx)+direction
+                            signal_list = self.station_delta_table.get(search_str,[])
+                            for signal in signal_list:
+                                delta_factor = signal_list.index(signal)+1
+                                delta_update=delta_factor*delta
+                                if direction == "down":
+                                    x_update = x+delta_update
+                                else:
+                                    x_update = x-delta_update
+                                objid = self.tt_canvas.create_line(x_update, self.graphTop, x_update, self.graphBottom, width=s_width, activewidth=s_width*2, fill=s_color,dash=s_linedashed,tag="Grid")
+                                self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(station_idx)+"\nSignal:"+signal,button_1=True)
+                self.tt_canvas.tag_lower("Grid","Station")    
 
     def drawTrains(self):
         self.baseTime = self.schedule_startHour * 60
@@ -1178,8 +1260,16 @@ class TimeTableGraphCommon():
             self.trainLine_dict = [xa, ya]
             self.trainLine_dict_idx = 0
             self.arriveTime = stop.get("ArriveTime",0)
+            xa_delta,ya_delta = self.determine_xy_point_with_delta(stop,self.arriveTime)
+            if xa != xa_delta or ya != ya_delta:
+                self.trainLine_dict.extend([xa_delta, ya_delta])
+                self.trainLine_dict_idx += 1            
             if not(self.trainLineLastStop_Flag) and show_arrive_time:
                 self.drawTrainTime(self.arriveTime, "begin", xa, ya)
+            xd_delta,yd_delta = self.determine_xy_point_with_delta(stop,self.departTime)
+            if xd != xd_delta or yd != yd_delta:
+                self.trainLine_dict.extend([xd_delta, yd_delta])
+                self.trainLine_dict_idx += 1                     
             self.trainLine_dict.extend([xd, yd])
             self.trainLine_dict_idx += 1
         else:
@@ -1205,6 +1295,9 @@ class TimeTableGraphCommon():
                 else:              
                     self.trainLine_dict.extend([xa, ya])
                     self.trainLine_dict_idx += 1
+                xa_delta,ya_delta = self.determine_xy_point_with_delta(stop,self.arriveTime)
+                self.trainLine_dict.extend([xa_delta, ya_delta])
+                self.trainLine_dict_idx += 1
                 self.drawTrainTime(self.arriveTime, "arrive", xa, ya)
                 self.segment_count += 1
                 if (len(self.trainLine_dict)>3) and ya!=None:
@@ -1213,8 +1306,11 @@ class TimeTableGraphCommon():
                     xd,yd = self.determine_xy_point(stop,self.departTime)
                     if yd==None:
                         return
+                    xd_delta,yd_delta = self.determine_xy_point_with_delta(stop,self.departTime)
+                    self.trainLine_dict.extend([xd_delta, yd_delta])                                        
                     self.trainLine_dict.extend([xd, yd])
                     self.trainLine_dict_idx += 1
+
                     if not self.trainLineLastStop_Flag:
                         self.drawTrainTime(self.departTime, "depart", xd, yd)
         else:
@@ -1267,8 +1363,9 @@ class TimeTableGraphCommon():
                     logging.debug("SetEnd Error: %s %s",self.trainType+self.trainName,repr(stop))
                     return
                 if self.showTrainDir == "all" or self.showTrainDir == self.direction:
-                    self.trainLine_dict.extend([x, y])
-                    self.trainLine_dict_idx += 1
+                    if self.departTime == 0:
+                        self.trainLine_dict.extend([x, y])
+                        self.trainLine_dict_idx += 1
                 if self.TrainLineDashed != "no line":
                     train_line_objid = self.tt_canvas.create_line(self.trainLine_dict,fill=self.trainColor,width=self.trainLineWidth,activewidth=self.trainLineWidth*2,dash=self.TrainLineDashed,tags=(self.trainName,"L_"+self.trainName,str(self.trainIdx)))
                     #self.controller.ToolTip_canvas(self.tt_canvas, train_line_objid, text="Zug: "+self.trainName+"\n"+self.trainLineName+"\nBR "+self.trainEngine, button_1=True)
@@ -1392,10 +1489,19 @@ class TimeTableGraphCommon():
                                                                         "Width"         : width,
                                                                         "Pendelzug"     : pendelzug,
                                                                         "Stops"         : {},
-                                                                        "Stoplist"      : []
+                                                                        "Stoplist"      : [],
+                                                                        "Starttime"     : -1
                                                                         }
         self.schedule_trainIdx_write_next += 1
         return self.schedule_trainIdx_write_next-1
+    
+    def enter_schedule_trainLine_starttime(self,trainidx,starttime):
+        if self.controller.usetrain_starttime:
+            if self.schedule_trains_dict[trainidx]["Starttime"] == -1:
+                self.schedule_trains_dict[trainidx]["Starttime"] = starttime
+                self.controller.setConfigData("Bfp_start",starttime)
+
+
 
     def search_station(self, stationName):
         try:
@@ -1604,6 +1710,9 @@ class TimeTableGraphCommon():
                 if FplAbf != "":
                     FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
                     FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
+                    if self.FPL_starttime == -1:
+                        self.FPL_starttime = FplAbf_obj.hour
+                        self.enter_schedule_trainLine_starttime(train_idx,FplAbf_obj.hour)
                 else:
                     FplAbf_min = -99999
                 FplAnk = self.get_fplZeile_entry(FplZeile_dict, "FplAnk","@Ank")
@@ -1697,7 +1806,7 @@ class TimeTableGraphCommon():
                     except: # list instead of dict
                         FahrplanSignal = ""
                         for signal in Fpl_SignalEintrag_dict:
-                            FahrplanSignal += " "+signal.get("@FahrplanSignal","")+" "
+                            FahrplanSignal += "-"+signal.get("@FahrplanSignal","")+"-"
                 FplName = FplZeile_dict.get("@Betrst","")
                 if FplName == "":
                     continue
@@ -2832,6 +2941,11 @@ class Timetable_main(Frame):
             else:
                 asc_zugGattung = zugGattung.replace("Ü","Ue").replace("ü","ue").replace("Ä","Ae").replace("ä","ae").replace("Ö","Oe").replace("ö","oe")
                 trn_filecomp = trn_filepathname.split("\\")
+                if len(trn_filecomp)<2:
+                    logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
+                    self.controller.set_statusmessage("Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath)
+                    self.open_error = "Fehler: Kein BuchfahrplanRohDatei Element in der .trn Datei gefunden: "+zugGattung+zugNummer+"-"+trn_filepath
+                    return                    
                 tt_xml__filepathname = os.path.join(trn_filepath,trn_filecomp[-2],asc_zugGattung+zugNummer+".timetable.xml")                
                 if not os.path.exists(tt_xml__filepathname):
                     logging.info("Kein BuchfahrplanRohDatei Element gefunden %s%s %s", zugGattung,zugNummer,trn_filepath)
@@ -2871,69 +2985,76 @@ class Timetable_main(Frame):
             
 
     def open_zusi_master_schedule(self,fpn_filename=""):
-        self.open_error = ""
-        self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
-        self.controller.update()
-        if fpn_filename == "": return
-        fpl_path, fpl_file = os.path.split(fpn_filename)
-        logging.info('Input File, %s.' % fpn_filename)
-        with open(fpn_filename,mode="r",encoding="utf-8") as fd:
-            xml_text = fd.read()
-            self.zusi_master_timetable_dict = parse(xml_text)
-        zusi_dict = self.zusi_master_timetable_dict.get("Zusi",{})
-        if zusi_dict == {}:
-            logging.info("ZUSI Entry not found")
-            self.xml_error_logger.debug("ZUSI Entry not found")
-            self.controller.set_statusmessage("Error: ZUSI entry not found in file: "+fpn_filename)
-            self.open_error = "Error: ZUSI entry not found in file: "+fpn_filename
-            return False
-        fahrplan_dict = zusi_dict.get("Fahrplan",{})
-        if fahrplan_dict == {}:
-            logging.info("Fahrplan Entry not found")
-            self.xml_error_logger.debug("Fahrplan Entry not found")
-            self.controller.set_statusmessage("Error: Fahrplan entry not found in fpl-file: "+fpn_filename)
-            self.open_error = "Error: Fahrplan entry not found in fpl-file: "+fpn_filename
-            return False
-        zug_list = fahrplan_dict.get("Zug",{})
-        if zug_list == {}:
-            # integrated fpl file
+        try:
+            self.open_error = ""
             self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
-            for trn_zug_dict in fahrplan_dict.get("trn",{}):
-                self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filename)
+            self.controller.update()
+            if fpn_filename == "": return
+            fpl_path, fpl_file = os.path.split(fpn_filename)
+            logging.info('Input File, %s.' % fpn_filename)
+            with open(fpn_filename,mode="r",encoding="utf-8") as fd:
+                xml_text = fd.read()
+                self.zusi_master_timetable_dict = parse(xml_text)
+            zusi_dict = self.zusi_master_timetable_dict.get("Zusi",{})
+            if zusi_dict == {}:
+                logging.info("ZUSI Entry not found")
+                self.xml_error_logger.debug("ZUSI Entry not found")
+                self.controller.set_statusmessage("Error: ZUSI entry not found in file: "+fpn_filename)
+                self.open_error = "Error: ZUSI entry not found in file: "+fpn_filename
+                return False
+            fahrplan_dict = zusi_dict.get("Fahrplan",{})
+            if fahrplan_dict == {}:
+                logging.info("Fahrplan Entry not found")
+                self.xml_error_logger.debug("Fahrplan Entry not found")
+                self.controller.set_statusmessage("Error: Fahrplan entry not found in fpl-file: "+fpn_filename)
+                self.open_error = "Error: Fahrplan entry not found in fpl-file: "+fpn_filename
+                return False
+            zug_list = fahrplan_dict.get("Zug",{})
+            if zug_list == {}:
+                # integrated fpl file
                 self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
-        else:
-            for zug in zug_list:
-                try:
-                    datei_dict = zug.get("Datei")
-                except (AttributeError, TypeError):
-                    datei_dict = zug_list.get("Datei")
-                trn_filename = datei_dict.get("@Dateiname")
-                trn_filename_comp = trn_filename.split("\\")
-                trn_file_and_path = os.path.join(fpl_path,trn_filename_comp[-2],trn_filename_comp[-1])
-                found=False
-                if not os.path.isfile(trn_file_and_path):
-                    # check in private ZUSI directory
-                    zusi_private_path = self.controller.getConfigData("Bfp_ZUSI_Dir_privat")
-                    if zusi_private_path:
-                        trn_file_and_path_pr = os.path.join(zusi_private_path,trn_filename)
-                        if os.path.isfile(trn_file_and_path_pr):
-                            trn_file_and_path = trn_file_and_path_pr
-                            found = True
-                    if not found:
-                        # check in official ZUSI directory
-                        zusi_official_path = self.controller.getConfigData("Bfp_ZUSI_Dir_official")
-                        if zusi_official_path:
-                            trn_file_and_path_of = os.path.join(zusi_official_path,trn_filename)
-                            if os.path.isfile(trn_file_and_path_of):
-                                trn_file_and_path = trn_file_and_path_of
-                self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+trn_file_and_path)
-                self.controller.update()
-                self.open_zusi_trn_file(trn_file_and_path,fpn_filename)
-        if self.open_error == "":
-            self.controller.set_statusmessage(" ")
-        else:
-            self.controller.set_statusmessage(self.open_error)
-        return True
+                for trn_zug_dict in fahrplan_dict.get("trn",{}):
+                    self.open_zusi_trn_zug_dict(trn_zug_dict, fpn_filename)
+                    self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+fpn_filename)
+            else:
+                for zug in zug_list:
+                    try:
+                        datei_dict = zug.get("Datei")
+                    except (AttributeError, TypeError):
+                        datei_dict = zug_list.get("Datei")
+                    trn_filename = datei_dict.get("@Dateiname")
+                    trn_filename_comp = trn_filename.split("\\")
+                    trn_file_and_path = os.path.join(fpl_path,trn_filename_comp[-2],trn_filename_comp[-1])
+                    found=False
+                    if not os.path.isfile(trn_file_and_path):
+                        # check in private ZUSI directory
+                        zusi_private_path = self.controller.getConfigData("Bfp_ZUSI_Dir_privat")
+                        if zusi_private_path:
+                            trn_file_and_path_pr = os.path.join(zusi_private_path,trn_filename)
+                            if os.path.isfile(trn_file_and_path_pr):
+                                trn_file_and_path = trn_file_and_path_pr
+                                found = True
+                        if not found:
+                            # check in official ZUSI directory
+                            zusi_official_path = self.controller.getConfigData("Bfp_ZUSI_Dir_official")
+                            if zusi_official_path:
+                                trn_file_and_path_of = os.path.join(zusi_official_path,trn_filename)
+                                if os.path.isfile(trn_file_and_path_of):
+                                    trn_file_and_path = trn_file_and_path_of
+                    self.controller.set_statusmessage("Erzeuge ZUSI-Fahrplan - "+trn_file_and_path)
+                    self.controller.update()
+                    self.open_zusi_trn_file(trn_file_and_path,fpn_filename)
+            if self.open_error == "":
+                self.controller.set_statusmessage(" ")
+            else:
+                self.controller.set_statusmessage(self.open_error)
+            return True
+        
+        except BaseException as e:
+            v=inspect.trace()[-1]
+            logging.debug("open_zusi_master_schedule - Error open file %s - %s - Line: %s - Procedure: %s",fpn_filename,e, v[2],v[3])
+            self.xml_error_logger.debug("open_zusi_master_schedule - Error open file %s - %s",fpn_filename,e)
+            self.controller.set_statusmessage("Fehler beim Öffnen der Datei \n" + fpn_filename)
     
     def get_fplZeile_entry(self, FplZeile_dict, main_key, key, default=""):
         try:
@@ -3181,6 +3302,7 @@ class Timetable_main(Frame):
             return
         self.editflag = self.controller.getConfigData("Edit_Permission",default="") in ("Edit_allowed","Fast_Edit_allowed")
         self.fast_editflag = self.controller.getConfigData("Edit_Permission",default="") == "Fast_Edit_allowed"
+        self.starthour = self.controller.getConfigData("Bfp_start")
         self.timetable.doPaint(self.canvas,starthour=self.starthour,duration=self.duration)
         if self.controller.ZUSI_monitoring_started:
             self.edit_connect_ZUSI(0)

@@ -44,7 +44,6 @@ class TrainNamePosConfigPage(ConfigPagetemplate):
         
         self.tabClassName = "TrainNamePosConfigPage"
         super().__init__(parent, controller, self.tabClassName) 
-        
         return
     
     def button2_command(self):

@@ -33,7 +33,7 @@
 # ***************************************************************************
 
 
-PROG_VERSION ="V04.04 06.09.2023"
+PROG_VERSION ="V04.05 25.09.2023"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -50,6 +50,7 @@ MAIN_PROG_NAME = "TimeTable"
 
 LOG_FILENAME = '../logfile.log'
 XML_ERROR_LOG_FILENAME = 'xml_error_logfile.log'
+temp_path = "../temp"
 
 PARAM_FILENAME = MAIN_PROG_NAME + '_param.json'
 CONFIG_FILENAME = MAIN_PROG_NAME + '_config.json'
