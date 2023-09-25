@@ -38,7 +38,6 @@ import os
 import logging
 import timetablepages.TimetablegraphCanvas
 try:
-    
     from PIL import Image, EpsImagePlugin
 except:
     pass
@@ -215,9 +214,9 @@ class TimeTablePage(tk.Frame):
     def resize(self, event, scale):
         self.controller.total_scalefactor *= scale
         if self.controller.total_scalefactor > 1:
-            self.canvas.itemconfigure("Background",fill="",outline="")
+            self.canvas.itemconfigure("Background",fill="")#,outline="")
         else:
-            self.canvas.itemconfigure("Background",fill="white",outline="")
+            self.canvas.itemconfigure("Background",fill="white")#,outline="")
         if event == None:
             x=0
             y=0
@@ -256,10 +255,10 @@ class TimeTablePage(tk.Frame):
             self.canvas.unbind(key_str)
         return    
 
-    def save_as_pdf(self, fileName):
+    def save_as_pdf_orig(self, fileName):
         # save postscipt image 
         self.canvas.update()
-        self.canvas.postscript(file = fileName + 'tmp.eps',colormode='color',width=self.canvas_width,height=self.canvas_height) 
+        self.canvas.postscript(file = fileName + 'tmp.eps',colormode='color',width=self.canvas_width,height=self.canvas_height)
         EpsImagePlugin.gs_windows_binary =  self.controller.ghostscript_path  #r"D:\data\doc\GitHub\ZUSI_TimeTableGraph\gs9.53.3\bin\gswin32c.exe"  #r'C:\Program Files (x86)\gs\gs9.53.3\bin\gswin32c'
         logging.debug("Ghostscriptpath: %s", self.controller.ghostscript_path)
         img = Image.open(fileName + 'tmp.eps')
@@ -270,13 +269,28 @@ class TimeTablePage(tk.Frame):
         except BaseException as e:
             logging.debug("Error while generating pdf-file\n %s",e)
             self.controller.set_statusmessage("Error while generating pdf-file\n" + str(e))
+            
+    def save_as_pdf(self, fileName):
+        # save postscipt image 
+        self.canvas.update()
+        tmp_filename = fileName + '.tmp.eps'
+        self.canvas.postscript(file = tmp_filename,colormode='color',width=self.canvas_width,height=self.canvas_height)
+        try:
+            # convert -density 300 -alpha opaque ZUSI_test2.eps foo.bmp
+            convert_prog_path = self.controller.imagemagick_path + "/convert"
+            os.system(convert_prog_path + " -density 300 -alpha opaque "+ tmp_filename + " " + fileName)
+
+        except BaseException as e:
+            logging.debug("Error while generating image-file\n %s",e)
+            self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
+            pass    
         
     def save_as_eps(self, fileName):
         # save postscipt image 
         self.canvas.update()
         self.canvas.postscript(file = fileName,colormode='color',width=self.canvas_width,height=self.canvas_height)
         
-    def save_as_image(self, fileName):
+    def save_as_image_orig(self, fileName):
         # save postscipt image 
         self.canvas.update()
         tmp_filename = fileName + '.tmp.eps'
@@ -291,6 +305,21 @@ class TimeTablePage(tk.Frame):
             img.load(scale=8)
             size = img.size
             img.save(fileName)
+        except BaseException as e:
+            logging.debug("Error while generating image-file\n %s",e)
+            self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
+            pass    
+        
+    def save_as_image(self, fileName):
+        # save postscipt image 
+        self.canvas.update()
+        tmp_filename = fileName + '.tmp.eps'
+        self.canvas.postscript(file = tmp_filename,colormode='color',width=self.canvas_width,height=self.canvas_height)
+        try:
+            # convert -density 300 -alpha opaque ZUSI_test2.eps foo.bmp
+            convert_prog_path = self.controller.imagemagick_path + "/convert"
+            os.system(convert_prog_path + " -density 300 -alpha opaque "+ tmp_filename + " " + fileName)
+
         except BaseException as e:
             logging.debug("Error while generating image-file\n %s",e)
             self.controller.set_statusmessage("Error while generating image-file\n" + str(e))
