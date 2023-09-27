@@ -33,7 +33,7 @@
 # ***************************************************************************
 
 
-PROG_VERSION ="V04.05 25.09.2023"
+PROG_VERSION ="V04.06 26.09.2023"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -68,6 +68,7 @@ DEFAULT_CONFIG = {
                     "startpagename" : "StartPage",
                     "StationChooser": "",
                     "TLFileType": "",
+                    
                     "TrainNamePos_Checkbutton":""
                 }
 
