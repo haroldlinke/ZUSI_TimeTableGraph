@@ -1799,19 +1799,47 @@ def img_resource_path(relative_path):
 def create_ZUSI_menu_entry(exec_filepathname):
     if no_winreg: # no windows
         return
-    
+    logging.info("create_ZUSI_menu_entry started")
     winreg.DisableReflectionKey(winreg.HKEY_CURRENT_USER)
-    keyVal = 'Software\\Zusi3\\Fahrsim\\Einstellungen\\MenuBildfahrplan1'
+    #check for ZUSI version
+    no_zusi_entry = False
+    keyVal = 'Software\\Zusi3\\Fahrsim\\Einstellungen'
     try:
         key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+        logging.info("create_ZUSI_menu_entry key %s found",keyVal)
+        zusi_steam = False
     except:
+        zusi_steam = True
+    if zusi_steam:
+        try:
+            keyVal = 'Software\\Zusi3\\Fahrsimsteam'
+            key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+            logging.info("create_ZUSI_menu_entry key %s found",keyVal)
+            zusi_steam = True
+        except:
+            zusi_steam = False
+            no_zusi_entry = True
+    if no_zusi_entry:
+        winreg.CloseKey(key)
+        logging.info("create_ZUSI_menu_entry no ZUSI entry found")
+        return
+    if zusi_steam:
+        keyVal = 'Software\\Zusi3\\Fahrsimsteam\\Einstellungen\\MenuBildfahrplan'
+    else:
+        keyVal = 'Software\\Zusi3\\Fahrsim\\Einstellungen\\MenuBildfahrplan'
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+        logging.info("create_ZUSI_menu_entry key %s found",keyVal)
+    except:
+        logging.info("create_ZUSI_menu_entry key %s NOT found",keyVal)
         key = winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, keyVal,0,(winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
-        winreg.SetValueEx(key, "BezeichnerSprache0", 0, winreg.REG_SZ, "Deutsch")
-        winreg.SetValueEx(key, "BezeichnerText0", 0, winreg.REG_SZ, "&Bildfahrplan")
-        winreg.SetValueEx(key, "Vatermenu", 0, winreg.REG_SZ, "SpTBXSubmenuItemFahrplanerstellung")
-        winreg.SetValueEx(key, "MenuIndex", 0, winreg.REG_DWORD, 5)
-        winreg.SetValueEx(key, "Datei", 0, winreg.REG_SZ, exec_filepathname+"/TimetableGraphProject.exe")
-        winreg.SetValueEx(key, "Parameter", 0, winreg.REG_SZ, "-fpn ""_fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@""")
+    winreg.SetValueEx(key, "BezeichnerSprache0", 0, winreg.REG_SZ, "Deutsch")
+    winreg.SetValueEx(key, "BezeichnerText0", 0, winreg.REG_SZ, "&Bildfahrplan")
+    winreg.SetValueEx(key, "Vatermenu", 0, winreg.REG_SZ, "SpTBXSubmenuItemFahrplanerstellung")
+    winreg.SetValueEx(key, "MenuIndex", 0, winreg.REG_DWORD, 5)
+    winreg.SetValueEx(key, "Datei", 0, winreg.REG_SZ, exec_filepathname+"/TimetableGraphProject.exe")
+    winreg.SetValueEx(key, "Parameter", 0, winreg.REG_SZ, "-fpn ""_fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@""")
+    logging.info("create_ZUSI_menu_entry added key %s",keyVal)
 
     winreg.CloseKey(key)
     winreg.EnableReflectionKey(winreg.HKEY_CURRENT_USER)
@@ -1820,6 +1848,12 @@ def create_ZUSI_menu_entry(exec_filepathname):
 COMMAND_LINE_ARG_DICT = {}
 
 def main(mainfiledir,execfile_pathname):
+    try:
+        from ctypes import windll
+        windll.shcore.SetProcessDpiAwareness(1)
+    except:
+        pass
+    
     global COMMAND_LINE_ARG_DICT
     if sys.hexversion < 0x30700F0:
         tk.messagebox.showerror("Wrong Python Version","You need Python Version > 3.7 to run this Program")
@@ -1890,6 +1924,8 @@ def main(mainfiledir,execfile_pathname):
         create_ZUSI_menu_entry(execfile_pathname)
         app = TimeTableGraphMain(mainfiledir,logfilename, execfile_pathname)
         if app.start_ok:
+            tkversion = app.tk.call("info", "patchlevel")
+            logging.info("TK-Version: %s",tkversion)
             app.setroot(app)
             app.protocol("WM_DELETE_WINDOW", app.cancel)
             app.startup_system()

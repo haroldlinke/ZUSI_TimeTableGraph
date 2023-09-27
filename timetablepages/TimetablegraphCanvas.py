@@ -816,7 +816,7 @@ class TimeTableGraphCommon():
                     if s_linedashed  !="no line":
                         objid = self.tt_canvas.create_line(x, self.graphTop, x, self.graphBottom, width=s_width, fill=s_color,dash=s_linedashed,tag="Grid")
                     self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(stationidx),button_1=True)
-        self.tt_canvas.tag_lower("Grid","Station")
+        #self.tt_canvas.tag_lower("Grid","Station")
         
     def drawstation_tracks(self):
         delta = self.controller.getConfigData("Bfp_TrainLine_Distance_from_Stationline",default=0)

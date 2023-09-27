@@ -209,17 +209,6 @@
             "Bfp_TrainTypeLabel_No": 4,
             "Bfp_TrainTypeLabelSize": 8,
             "Bfp_TrainType": "*"
-        },
-        "999": {
-            "Bfp_TrainTypeAll": "",
-            "Bfp_TrainTypeColor": "#000080",
-            "Bfp_TrainTypeWidth": 2,
-            "Bfp_TrainTypeLineDashed": " ",
-            "Bfp_TrainTypeLineDashed_No": 0,
-            "Bfp_TrainTypeLabel": "Mitte",
-            "Bfp_TrainTypeLabel_No": 4,
-            "Bfp_TrainTypeLabelSize": 8,
-            "Bfp_TrainType": "*"
         }
     },
     "TLFileType": ".trn",
@@ -230,9 +219,7 @@
     "InOutBoundTrainsNoStartStation": false,
     "InOutBoundTrainsNoEndStation": false,
     "FplRglGgl": "1,2",
-    "StationChooser": [
-        "Schwerte"
-    ],
+    "StationChooser": [],
     "Bfp_TreeView": 0,
     "Teilstrecke": 0,
     "Bfp_CanvasSize": 0,
@@ -427,7 +414,7 @@
     "TrainNamePosPropRepeat": 40,
     "Bfp_TrainTypePropRepeat": 15,
     "SO_TN_add_blank": true,
-    "Bfp_ZUSI_Dir_official": "C:/Program Files/Zusi3/_ZusiData",
+    "Bfp_ZUSI_Dir_official": "D:/Zusi3/_ZusiData",
     "Bfp_ZUSI_Dir_privat": "D:/data/Zusi3",
     "SCP_AllowTRN": false,
     "Bfp_TL_LineColor": "#ff8040",
