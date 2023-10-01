@@ -1,12 +1,12 @@
 {
     "startpagename": "StartPage",
-    "pos_x": -1928,
-    "pos_y": -8,
+    "pos_x": 0,
+    "pos_y": 0,
     "Bfp_filename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen/Aachen-Uebach-Palenberg1979_04Uhr-13Uhr.fpn",
     "Bfp_trainfilename": "C:/Program Files/Zusi3/_ZusiData/Timetables/Deutschland/Grenzlandbahnen\\Aachen-Uebach-Palenberg1979_04Uhr-13Uhr\\D26318.timetable.xml",
     "TeilStreckeCheckButton": false,
     "StartStation": "",
-    "EndStation": "Bft_Leuchtenbergring",
+    "EndStation": "",
     "TLDirection": "horizontal",
     "TLDirection_No": 0,
     "Bfp_width": 1900,
@@ -250,24 +250,24 @@
     "Monit_time_LineDashed_No": 2,
     "TrainNamePosProp": {
         "0": {
-            "TrainNamePos_Names": "RE10918",
-            "TrainNamePos_Stops": "1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "1": {
-            "TrainNamePos_Names": "Gag47095",
-            "TrainNamePos_Stops": "2"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "2": {
-            "TrainNamePos_Names": "Lr35294",
-            "TrainNamePos_Stops": "7"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "3": {
-            "TrainNamePos_Names": "Dsts88596",
-            "TrainNamePos_Stops": "1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "4": {
-            "TrainNamePos_Names": "Dsts88461",
-            "TrainNamePos_Stops": "4,4,1"
+            "TrainNamePos_Names": "",
+            "TrainNamePos_Stops": ""
         },
         "5": {
             "TrainNamePos_Names": "",
@@ -414,18 +414,12 @@
     "TrainNamePosPropRepeat": 40,
     "Bfp_TrainTypePropRepeat": 15,
     "SO_TN_add_blank": true,
-    "Bfp_ZUSI_Dir_official": "D:/Zusi3/_ZusiData",
-    "Bfp_ZUSI_Dir_privat": "D:/data/Zusi3",
     "SCP_AllowTRN": false,
     "Bfp_TL_LineColor": "#ff8040",
     "Bfp_TL_LineWidth": 2,
     "Bfp_TL_LineDashed": " ",
     "Bfp_TL_LineDashed_No": 0,
     "ExtraShowAlleZFS": false,
-    "arg_fpl": "fpn=test",
-    "arg_trn": "",
-    "arg_zn": "",
-    "arg_fpn": "",
     "Bfp_ST_LineColor": "#ff8040",
     "Bfp_ST_LineWidth": 1,
     "Bfp_ST_LineDashed": ".",

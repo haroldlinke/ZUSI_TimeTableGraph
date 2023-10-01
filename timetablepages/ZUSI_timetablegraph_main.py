@@ -45,7 +45,7 @@ from timetablepages.SpecialConfigurationPage import SpecialConfigurationPage
 from timetablepages.TCPConfigPage import TCPConfigPage
 from timetablepages.TrainNamePosConfigPage import TrainNamePosConfigPage
 from timetablepages.tooltip import Tooltip,Tooltip_Canvas
-from timetablepages.DefaultConstants import DEFAULT_CONFIG, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
+from timetablepages.DefaultConstants import DEFAULT_CONFIG, DEFAULT_CONFIG_FILENAME, SMALL_FONT, VERY_LARGE_FONT, PROG_VERSION, SIZEFACTOR,\
 CONFIG_FILENAME, MACRODEF_FILENAME, MACROPARAMDEF_FILENAME,LOG_FILENAME, XML_ERROR_LOG_FILENAME, shortCutDict,temp_path
 from scrolledFrame.ScrolledFrame import VerticalScrolledFrame,ScrolledFrame,HorizontalScrolledFrame
 from tkcolorpicker.limitvar import LimitVar
@@ -180,6 +180,7 @@ class TimeTableGraphMain(tk.Tk):
     # ----------------------------------------------------------------
     def __init__(self, mainfiledir, logfilename, execfile_pathname, *args, **kwargs):
         self.exefile_dir = mainfiledir # directory of the .exe file
+        self.userfile_dir = get_userfiledir(mainfiledir)
         self.execfile_pathname = execfile_pathname
         self.logfilename = logfilename
         self.localfile_dir = os.path.dirname(os.path.realpath(__file__)) # location of timetablepages directory
@@ -412,7 +413,7 @@ class TimeTableGraphMain(tk.Tk):
     def set_statusmessage(self,status_text,fg="black"):
         #logging.debug("set_statusmessage: %s",status_text)
         self.statusmessage.configure(text=status_text,fg=fg)
-
+    
     def get_font(self,fontname):
         font_size = self.getConfigData(fontname)
         if font_size == None:
@@ -617,7 +618,7 @@ class TimeTableGraphMain(tk.Tk):
         #############################################        
 
     def OpenXMLErrorLogFile(self):
-        xml_logfilename = os.path.join(self.exefile_dir, XML_ERROR_LOG_FILENAME)
+        xml_logfilename = os.path.join(self.userfile_dir, XML_ERROR_LOG_FILENAME)
         os.startfile(xml_logfilename)        
 
     def ExitProg(self):
@@ -809,8 +810,12 @@ class TimeTableGraphMain(tk.Tk):
         self.set_macroparam_val(mp_macro, configdatakey, value)        
             
     def readConfigData(self):
-        logging.debug("readConfigData")
-        self.ConfigData = ConfigFile(DEFAULT_CONFIG, CONFIG_FILENAME,filedir=self.exefile_dir)
+        logging.debug("readConfigData: read default config %s %s",self.exefile_dir, DEFAULT_CONFIG_FILENAME)
+        # first read the default config
+        self.DEFAULT_CONFIG = ConfigFile(DEFAULT_CONFIG, DEFAULT_CONFIG_FILENAME,filedir=self.exefile_dir)
+        # then read the user config
+        logging.debug("readConfigData: read user config %s %s",self.userfile_dir, CONFIG_FILENAME, )
+        self.ConfigData = ConfigFile(self.DEFAULT_CONFIG.data, CONFIG_FILENAME,filedir=self.userfile_dir)
         self.ConfigData.data.update(COMMAND_LINE_ARG_DICT) # overwrite configdata mit commandline args
         logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
         try:
@@ -1803,16 +1808,19 @@ def create_ZUSI_menu_entry(exec_filepathname):
     winreg.DisableReflectionKey(winreg.HKEY_CURRENT_USER)
     #check for ZUSI version
     no_zusi_entry = False
+    zusi_steam = False
+    check_zusi_steam = False
     keyVal = 'Software\\Zusi3\\Fahrsim\\Einstellungen'
     try:
         key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
         logging.info("create_ZUSI_menu_entry key %s found",keyVal)
+        check_zusi_steam = False
         zusi_steam = False
     except:
-        zusi_steam = True
-    if zusi_steam:
+        check_zusi_steam = True
+    if check_zusi_steam:
         try:
-            keyVal = 'Software\\Zusi3\\Fahrsimsteam'
+            keyVal = 'Software\\Zusi3\\Fahrsimsteam\\Einstellungen'
             key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
             logging.info("create_ZUSI_menu_entry key %s found",keyVal)
             zusi_steam = True
@@ -1823,6 +1831,7 @@ def create_ZUSI_menu_entry(exec_filepathname):
         winreg.CloseKey(key)
         logging.info("create_ZUSI_menu_entry no ZUSI entry found")
         return
+    zusi_key_ok = True
     if zusi_steam:
         keyVal = 'Software\\Zusi3\\Fahrsimsteam\\Einstellungen\\MenuBildfahrplan'
     else:
@@ -1832,17 +1841,46 @@ def create_ZUSI_menu_entry(exec_filepathname):
         logging.info("create_ZUSI_menu_entry key %s found",keyVal)
     except:
         logging.info("create_ZUSI_menu_entry key %s NOT found",keyVal)
-        key = winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, keyVal,0,(winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
-    winreg.SetValueEx(key, "BezeichnerSprache0", 0, winreg.REG_SZ, "Deutsch")
-    winreg.SetValueEx(key, "BezeichnerText0", 0, winreg.REG_SZ, "&Bildfahrplan")
-    winreg.SetValueEx(key, "Vatermenu", 0, winreg.REG_SZ, "SpTBXSubmenuItemFahrplanerstellung")
-    winreg.SetValueEx(key, "MenuIndex", 0, winreg.REG_DWORD, 5)
-    winreg.SetValueEx(key, "Datei", 0, winreg.REG_SZ, exec_filepathname+"/TimetableGraphProject.exe")
-    winreg.SetValueEx(key, "Parameter", 0, winreg.REG_SZ, "-fpn ""_fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@""")
-    logging.info("create_ZUSI_menu_entry added key %s",keyVal)
+        try:
+            key = winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, keyVal,0,(winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+            logging.info("create_ZUSI_menu_entry key %s created",keyVal)
+        except Exception as e:
+            logging.info("Error in create_ZUSI_menu_entry %s",e)
+            logging.exception("create_ZUSI_menu_entry")
+            zusi_key_ok = False
+            
+    if zusi_key_ok==True:
+        try:
+            winreg.SetValueEx(key, "BezeichnerSprache0", 0, winreg.REG_SZ, "Deutsch")
+            winreg.SetValueEx(key, "BezeichnerText0", 0, winreg.REG_SZ, "&Bildfahrplan")
+            winreg.SetValueEx(key, "Vatermenu", 0, winreg.REG_SZ, "SpTBXSubmenuItemFahrplanerstellung")
+            winreg.SetValueEx(key, "MenuIndex", 0, winreg.REG_DWORD, 5)
+            winreg.SetValueEx(key, "Datei", 0, winreg.REG_SZ, exec_filepathname+"/TimetableGraphProject.exe")
+            winreg.SetValueEx(key, "Parameter", 0, winreg.REG_SZ, "-fpn ""_fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@""")
+            logging.info("create_ZUSI_menu_entry added key data %s",keyVal)
+        except Exception as e:
+            logging.info("Error in create_ZUSI_menu_entry_2 %s",e)
+            logging.exception("create_ZUSI_menu_entry_2")    
+        winreg.CloseKey(key)
+        winreg.EnableReflectionKey(winreg.HKEY_CURRENT_USER)
 
-    winreg.CloseKey(key)
-    winreg.EnableReflectionKey(winreg.HKEY_CURRENT_USER)
+def get_userfiledir(default_filedir):
+    user_dir = ""
+    try:
+        key_str = "HKEY_LOCAL_MACHINE:SOFTWARE\\WOW6432Node\\Zusi3:Datenverzeichnis"
+        key_list = key_str.split(":")
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ)#
+        # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
+        user_dir = winreg.QueryValueEx(key, key_list[2])[0]
+        if user_dir == "":
+            user_dir = default_filedir
+        else:
+            user_dir = user_dir+"_Tools\\ZusiBildfahrplan"
+            os.makedirs(user_dir,exist_ok=True)
+    except:
+        user_dir = default_filedir
+        
+    return user_dir
 
 #-------------------------------------------
 COMMAND_LINE_ARG_DICT = {}
@@ -1871,7 +1909,8 @@ def main(mainfiledir,execfile_pathname):
     if args.logfile:
         logfilename1=args.logfile
     else:
-        logfilename1=LOG_FILENAME
+        bildfahrplan_user_dir=get_userfiledir(mainfiledir)
+        logfilename1=os.path.join(bildfahrplan_user_dir,LOG_FILENAME)
     if logfilename1 == "stdout":
         logfilename=""
     else:

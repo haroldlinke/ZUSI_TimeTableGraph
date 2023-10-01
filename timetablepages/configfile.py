@@ -43,8 +43,8 @@ import logging
 class ConfigFile():
     """ Configuration File """
 
-    def __init__(self,default_config, filename,filedir="", altfiledir=""):
-        # type:
+    def __init__(self,default_config, filename,filedir=""):
+        
         """ Config Constructor Method (__init__)
 
         Arguments:
@@ -54,12 +54,9 @@ class ConfigFile():
         Raises:
             None
         """
+        self.default_config = default_config
         self.filepath = self.determine_filename(filename,filedir)
         self.readConfigData(self.filepath)
-        if self.data=={}:
-            # check for default data
-            altfilenamepath = self.determine_filename(filename,altfiledir)
-            self.readConfigData(altfilenamepath)            
         
     def determine_filename(self, filename, filedir):
         if filedir == "":
@@ -85,7 +82,7 @@ class ConfigFile():
                 logging.error(jsondata)
                 jsondata = {}
         try:
-            self.data = {}
+            self.data = self.default_config
             self.data.update(jsondata)
 
         except:
