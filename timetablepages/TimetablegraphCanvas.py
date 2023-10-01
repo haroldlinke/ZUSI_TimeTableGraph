@@ -284,7 +284,7 @@ class TimeTableGraphCommon():
         self.monitor_tooltiptext = ""
         
         # xml_error_logger logger
-        xml_logfilename = os.path.join(self.controller.exefile_dir, XML_ERROR_LOG_FILENAME)
+        xml_logfilename = os.path.join(self.controller.userfile_dir, XML_ERROR_LOG_FILENAME)
         self.xml_error_logger = logging.getLogger("XML_Error")
         self.xml_error_logger.setLevel(LOG_LEVEL)
         self.xml_error_logger_file_handler = FileHandler(xml_logfilename)
@@ -433,6 +433,8 @@ class TimeTableGraphCommon():
     def determine_station_delta(self, stop, time):
         delta = self.controller.getConfigData("Bfp_TrainLine_Distance_from_Stationline",default=0)
         signal_str = stop.get("Signal","")
+        self.signal = signal_str
+        self.signal_txt=""
         if signal_str == "" or signal_str==None:
             return delta
         signal_list = signal_str.split("-")
@@ -440,6 +442,7 @@ class TimeTableGraphCommon():
             signal = signal_list[1]
         else:
             signal = signal_list[0]
+        self.signal_txt = signal
         station_idx = stop.get("StationIdx",0)
 
         search_str = str(station_idx)+self.direction 
@@ -451,11 +454,10 @@ class TimeTableGraphCommon():
             self.station_delta_table[search_str] = signal_list
             delta_factor=len(signal_list)
         delta_update=delta_factor*delta
-
         return delta_update
 
     def determine_xy_point(self, stop, time):
-        delta=0; self.determine_station_delta(stop, time)
+        delta=0 # self.determine_station_delta(stop, time)
         if self.draw_stations_vertical:
             x = self.calculateTimePos(time)
             y = self.stationGrid.get(stop.get("StationIdx",0),0)
@@ -825,6 +827,8 @@ class TimeTableGraphCommon():
             s_width=self.controller.getConfigData("Bfp_ST_LineWidth",default="")
             s_linedashed=self.controller.getConfigData("Bfp_ST_LineDashed",default="")
             if s_linedashed !="no line":
+                self.controller.set_statusmessage("Erzeuge Gleisbelegungsanzeige")
+                self.controller.update()
                 if self.draw_stations_vertical:
                     for station_idx,y in self.stationGrid.items():
                         for direction in ["up","down"]:
@@ -849,7 +853,9 @@ class TimeTableGraphCommon():
                                     x_update = x-delta_update
                                 objid = self.tt_canvas.create_line(x_update, self.graphTop, x_update, self.graphBottom, width=s_width, activewidth=s_width*2, fill=s_color,dash=s_linedashed,tag="Grid")
                                 self.controller.ToolTip_canvas(self.tt_canvas, objid, text="Station: "+self.get_stationName(station_idx)+"\nSignal:"+signal,button_1=True)
-                self.tt_canvas.tag_lower("Grid","Station")    
+                self.tt_canvas.tag_lower("Grid","Station")
+                self.controller.set_statusmessage("")
+                self.controller.update()                
 
     def drawTrains(self):
         self.baseTime = self.schedule_startHour * 60
@@ -962,7 +968,7 @@ class TimeTableGraphCommon():
             self.departTime = stop_dict.get("DepartTime",0)
             station_dict = self.schedule_stations_dict.get(stop_dict.get("StationIdx"))
             self.stationName = station_dict.get("StationName")
-            self.signal = stop_dict.get("Signal")
+            self.signal = stop_dict.get("Signal","")
             self.stopStation  = stop_dict
             #if (self.stopIdx > 0): 
                 #self.trainLineFirstStop_Flag = False
@@ -1092,6 +1098,8 @@ class TimeTableGraphCommon():
         return time_min
                 
     def determine_time_str(self,time,timeformat="hh:mm:ss"):
+        if time <0:
+            return ""
         try:
             if timeformat == "hh:mm:ss":
                 self.mm_minutes = int(time % 60)
@@ -1251,7 +1259,7 @@ class TimeTableGraphCommon():
             show_arrive_time = False
         # Check for stop duration before depart
         self.departTime = stop.get("DepartTime",0)
-        xd,yd = self.determine_xy_point(stop,self.departTime)        
+        xd,yd = self.determine_xy_point(stop,self.departTime)
         if self.check_time_in_range(self.arriveTime):
             xa,ya = self.determine_xy_point(stop,self.arriveTime)
             if ya == None:
@@ -1272,13 +1280,14 @@ class TimeTableGraphCommon():
                 self.trainLine_dict_idx += 1                     
             self.trainLine_dict.extend([xd, yd])
             self.trainLine_dict_idx += 1
+            logging.info("Gleisbelegung;"+stationName+";"+self.signal_txt+";"+self.determine_time_str(self.arriveTime)+";"+self.determine_time_str(self.departTime)+";"+self.direction+";"+self.trainName+";"+self.signal)
         else:
             self.segment_count += 1
             self.trainLine_dict = [xd, yd]
             self.trainLine_dict_idx = 0            
         if not (self.trainLineLastStop_Flag):
             self.drawTrainTime(self.departTime, "depart", xd, yd)
-
+        
     def drawLine(self, stop):
         self.determine_DirectionofTravel()
         if self.showTrainDir != "all" and self.showTrainDir != self.direction:
@@ -1300,8 +1309,8 @@ class TimeTableGraphCommon():
                 self.trainLine_dict_idx += 1
                 self.drawTrainTime(self.arriveTime, "arrive", xa, ya)
                 self.segment_count += 1
-                if (len(self.trainLine_dict)>3) and ya!=None:
-                    self.draw_trainName_parallel(self.trainPrintName, self.trainLine_dict[-4],self.trainLine_dict[-3],xa, ya)
+                if (len(self.trainLine_dict)>5) and ya!=None:
+                    self.draw_trainName_parallel(self.trainPrintName, self.trainLine_dict[-6],self.trainLine_dict[-5],xa, ya)
                 if self.check_time_in_range(self.departTime):
                     xd,yd = self.determine_xy_point(stop,self.departTime)
                     if yd==None:
@@ -1313,11 +1322,19 @@ class TimeTableGraphCommon():
 
                     if not self.trainLineLastStop_Flag:
                         self.drawTrainTime(self.departTime, "depart", xd, yd)
+                try:
+                    logging.info("Gleisbelegung;"+self.stationName+";"+self.signal_txt+";"+self.determine_time_str(self.arriveTime)+";"+self.determine_time_str(self.departTime)+";"+self.direction+";"+self.trainName+";"+self.signal)
+                except BaseException as e:
+                    logging.debug("Gleisbelegung Fehler:",e)
+                    
         else:
             if self.check_time_in_range(self.departTime):
                 xd,yd = self.determine_xy_point(stop,self.departTime)
                 if yd==None:
                     return
+                self.trainLine_dict.extend([xd, yd])
+                xd_delta,yd_delta = self.determine_xy_point_with_delta(stop,self.departTime)
+                self.trainLine_dict.extend([xd_delta, yd_delta])
                 self.trainLine_dict.extend([xd, yd])
                 self.segment_count += 1
                 self.trainLine_dict_idx += 1
@@ -1325,7 +1342,11 @@ class TimeTableGraphCommon():
                     self.drawTrainTime(self.departTime, "depart", xd, yd)
                 if (len(self.trainLine_dict)>3) and yd!=None:
                     self.draw_trainName_parallel(self.trainPrintName, self.trainLine_dict[-4],self.trainLine_dict[-3],xd, yd)
-        
+                try:
+                    logging.info("Gleisbelegung;"+self.stationName+";"+self.signal_txt+";"+self.determine_time_str(self.arriveTime)+";"+self.determine_time_str(self.departTime)+";"+self.direction+";"+self.trainName+";"+self.signal)
+                except BaseException as e:
+                    logging.debug("Gleisbelegung Fehler:",e)
+            
         if self.old_direction != self.direction:
             self.drawTrainName_Flag = True
                     
@@ -1798,11 +1819,11 @@ class TimeTableGraphCommon():
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
                 else:
                     FplAnk_min = -99999
-                FahrplanSignal = None
+                FahrplanSignal = ""
                 Fpl_SignalEintrag_dict = FplZeile_dict.get("FahrplanSignalEintrag",None)
                 if Fpl_SignalEintrag_dict:
                     try:
-                        FahrplanSignal = Fpl_SignalEintrag_dict.get("@FahrplanSignal",None)
+                        FahrplanSignal = Fpl_SignalEintrag_dict.get("@FahrplanSignal","")
                     except: # list instead of dict
                         FahrplanSignal = ""
                         for signal in Fpl_SignalEintrag_dict:
@@ -2886,7 +2907,7 @@ class Timetable_main(Frame):
         self.duration = self.controller.getConfigData("Bfp_duration")
         
         # xml_error_logger logger
-        xml_logfilename = os.path.join(self.controller.exefile_dir, XML_ERROR_LOG_FILENAME)
+        xml_logfilename = os.path.join(self.controller.userfile_dir, XML_ERROR_LOG_FILENAME)
         self.xml_error_logger = logging.getLogger("XML_Error")
         self.xml_error_logger.setLevel(LOG_LEVEL)
         self.xml_error_logger_file_handler = FileHandler(xml_logfilename,mode="w")

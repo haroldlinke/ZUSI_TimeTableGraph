@@ -33,7 +33,7 @@
 # ***************************************************************************
 
 
-PROG_VERSION ="V04.06 26.09.2023"
+PROG_VERSION ="V04.07 01.10.2023"
 LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 NORMAL_FONT = ("Verdana", 10)
@@ -48,11 +48,12 @@ SIZEFACTOR = 1 # 720/1280
 # all filenames are relativ to the location of the main program pyProg_generator_MobaLedLib.py
 MAIN_PROG_NAME = "TimeTable"
 
-LOG_FILENAME = '../logfile.log'
+LOG_FILENAME = 'logfile.log'
 XML_ERROR_LOG_FILENAME = 'xml_error_logfile.log'
 temp_path = "../temp"
 
 PARAM_FILENAME = MAIN_PROG_NAME + '_param.json'
+DEFAULT_CONFIG_FILENAME = MAIN_PROG_NAME + '_default_config.json'
 CONFIG_FILENAME = MAIN_PROG_NAME + '_config.json'
 MACRODEF_FILENAME = MAIN_PROG_NAME + '_macrodef.json'
 MACROPARAMDEF_FILENAME = MAIN_PROG_NAME + '_macroparamdef.json'

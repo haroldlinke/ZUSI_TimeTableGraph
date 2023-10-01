@@ -599,8 +599,8 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Station-Gleislinen",
-        "Hint": "Einstellungen für die Stationsgleislinien",
+        "Input Text": "Station-Gleisbelegungs-Linie",
+        "Hint": "Einstellungen für die Stationsgleisbelegungslinien",
         "Implementation comment": "",
         "MultipleParams": [
             "Bfp_ST_LineColor",
@@ -706,7 +706,7 @@
         "Max": "",
         "Default": "",
         "Repeat": "",
-        "Input Text": "Zugfolgestellelinie",
+        "Input Text": "Zugfolgestelle Linie",
         "Hint": "Einstellungen für die Zugfolgestellelinien",
         "Implementation comment": "",
         "MultipleParams": [
@@ -1160,8 +1160,8 @@
         "Min": "0",
         "Max": "10",
         "Default": "0",
-        "Input Text": "Abstand von Stationslinie",
-        "Hint": "Um haltende Züge besser sichtbar zu machen kann hier der Abstand der Zuglinien von der Stationslinie geändert werden"
+        "Input Text": "Abstand der Gleislinie (Gleisbelegung)",
+        "Hint": "Um die Gleisbelegung haltender Züge  sichtbar zu machen, kann hier der Abstand der Gleislinien angegeben werden. Der Wert 0 schaltet die Funktion Gleisbelegungsanzeige aus.\n Voraussetzung: Filetype = .trn."
     },
     "Bfp_show_train_dir": {
         "ParName": "Bfp_show_train_dir",
