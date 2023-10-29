@@ -56,6 +56,9 @@ class ConfigPagetemplate(tk.Frame):
         tk.Frame.__init__(self,parent)
         self.tabClassName = tabname
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
+        if macrodata=={}:
+            int_tabname = self.tabClassName+"_"+self.controller.arg_mode
+            macrodata = self.controller.MacroDef.data.get(int_tabname,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
         self.title = macrodata.get("Title",self.tabClassName)
         self.startcmd_filename = ""

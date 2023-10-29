@@ -398,9 +398,11 @@ class TimeTablePage(tk.Frame):
             xml_filename = self.getConfigData("Bfp_trainfilename")
             starthour = self.getConfigData("Bfp_start")
             duration = self.getConfigData("Bfp_duration")
+            timeauto = self.getConfigData("Bfp_TimeAuto")
             self.create_train_type_to_color_dict()
             self.timetable_main.set_traintype_prop(self.train_type_prop_dict)
             self.controller.allow_TRN_files = self.controller.getConfigData("SCP_AllowTRN",default="")
+            self.controller.showalltrains = self.controller.getConfigData("Bfp_Showalltrains",default=False)
             if fpl_filename == "":
                 self.controller.set_statusmessage("Kein ZUSI Fahrplan eingestellt. Bitte auf der Seite <Bahnhof-Einstellungen> auswählen")
                 return
@@ -429,6 +431,7 @@ class TimeTablePage(tk.Frame):
                 self.fpl_filename = fpl_filename
                 self.starthour = starthour
                 self.duration = duration
+                self.timeauto = timeauto
                 self.timetable_main.redo_fpl_and_canvas(self.canvas_width,self.canvas_height,fpl_filename=fpl_filename,xml_filename=xml_filename,starthour=starthour,duration=duration)
             else:
                 self.controller.set_statusmessage(" ")

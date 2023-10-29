@@ -1,5 +1,5 @@
 {
-    "ConfigurationPage": {
+    "ConfigurationPage_SIMU": {
         "Typ": "ConfigurationPage",
         "Name": "ConfigurationPage",
         "MTabName": "Ansicht-Einstellungen",
@@ -12,7 +12,37 @@
         "Params": [
             "TLDirection",
             "Bfp_CanvasSize",
-            "Bfp_TimeRange",
+            "!Bfp_TimeRange",
+            "Bfp_Showalltrains",
+            "Bfp_S_LineProp",
+            "!Bfp_ST_LineProp",
+            "!Bfp_ZFS_LineProp",
+            "Bfp_TL_LineProp",
+            "Bfp_TH_LineProp",
+            "Bfp_TM_LineProp",
+            "Monit_train_LineProp",
+            "Monit_time_LineProp",
+            "Bfp_TrainMinuteSize",
+            "Bfp_TrainTypePropDefault",
+            "Bfp_TrainTypePropRepeat",
+            "Bfp_TrainTypeProp"
+        ]
+    },
+    "ConfigurationPage_FPL": {
+        "Typ": "ConfigurationPage",
+        "Name": "ConfigurationPage",
+        "MTabName": "Ansicht-Einstellungen",
+        "Title": "Ansicht-Einstellungen",
+        "Button_1": "Geänderte Einstellungen übernehmen",
+        "Button_2": "",
+        "Button_3": "",
+        "Kurzbeschreibung": "Einstellungsparameter",
+        "Ausführliche Beschreibung": "Bildfahrplan Einstellungen\n\r\n\rHier können Sie die Grundeinstellungen für das Programm an Ihre Wünsche anpassen.",
+        "Params": [
+            "TLDirection",
+            "Bfp_CanvasSize",
+            "!Bfp_TimeRange",
+            "Bfp_Showalltrains",
             "Bfp_S_LineProp",
             "Bfp_ST_LineProp",
             "Bfp_ZFS_LineProp",
@@ -36,7 +66,7 @@
         "Button_2": "",
         "Button_3": "",
         "Kurzbeschreibung": "Einstellungsparameter",
-        "Ausführliche Beschreibung": "Bildfahrplan Einstellungen für experten - Bitte nur ändern, wenn Sie wissen, was Sie tun!\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
+        "Ausführliche Beschreibung": "Bildfahrplan Einstellungen für Experten - Bitte nur ändern, wenn Sie wissen, was Sie tun!\n\r\n\rHier können Sie die Einstellungen für besondere Parameter für Spezialfälle vornehmen",
         "Params": [
             "TLFileType",
             "SCP_AllowTRN",
@@ -53,17 +83,30 @@
             "Bfp_ZUSI_Dir_privat"
         ]
     },
-    "StartPage": {
+    "StartPage_FPL": {
         "Typ": "StartPage",
         "Name": "StartPage",
         "MTabName": "Start",
-        "Title": "Start Seite",
-        "Kurzbeschreibung": "Start Seite",
+        "Title": "Start Seite Bildfahrplan",
+        "Kurzbeschreibung": "Start Seite Bildfahrplan",
         "HelpPageURL": "https://www.hlinke.de/dokuwiki/doku.php?id=de:zusi_sw",
         "Photo": "Bildfahrplan1.png",
         "Ausführliche Beschreibung": "",
         "Content": {
-            "ZUSI Bildfahrplan": "Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter http://www.zusi.de.\n\nEin Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.\n\nDas ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n\nWeitere Funktionen:\n* Import von Fahrtenschreiberdateien\n* Anzeige der Gleisbelegung"
+            "ZUSI Bildfahrplan": "Ein Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum. Das ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen.\n\nZur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n\nWeitere Funktionen:\n* Import von Fahrtenschreiberdateien\n* Anzeige der Gleisbelegung"
+        }
+    },
+    "StartPage_SIMU": {
+        "Typ": "StartPage",
+        "Name": "StartPage",
+        "MTabName": "Start",
+        "Title": "Start Seite - Zugstart via Bildfahrplan",
+        "Kurzbeschreibung": "Start Seite Zugstart",
+        "HelpPageURL": "https://www.hlinke.de/dokuwiki/doku.php?id=de:zusi_sw",
+        "Photo": "Bildfahrplan_SIMU.png",
+        "Ausführliche Beschreibung": "",
+        "Content": {
+        "ZUSI Zugstart mit Bildfahrplan": "Ein Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum. Das ZUSI Bildfahrplanprogramm kann ZUSI-Fahrplanszenarien als Bildfahrplan darstellen.\nMit Hilfe dieses Bildfahrplans ist es u.a. möglich einen Zug auszuwählen und direkt zu starten.\nDazu muß zuerst ein Bildfahrplan erstellt werden. Zur Erstellung eines Bildfahrplans geht man folgendermassen vor:\n\n1. Auf die Seite <Fahrplan und Strecke> wechseln\n2. Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).\n3. Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.\n4. Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden\n5. Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.\n6. Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.\n\nStarten eines Zuges:\n\n1. Mit der rechten Maustaste eine Zuglinie anklicken\n2. In dem erscheinenden Menu, die Option <Zug in ZUSI starten> auswählen\n\nVorraussetzung:\nZUSI läuft im Hintergrund\nDer ZUSI Server ist aktiviert"
         }
     },
     "StationsConfigurationPage": {
@@ -79,6 +122,8 @@
         "MacroDescLines": "2",
         "Params": [
             "Bfp_filename",
+            "Bfp_TimeRange",
+            "!Bfp_Showalltrains",
             "Bfp_TreeView",
             "Bfp_trainfilename"
         ]

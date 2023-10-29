@@ -28,7 +28,8 @@
         "Implementation comment": "",
         "MultipleParams": [
             "Bfp_Startzeit",
-            "Bfp_Dauer"
+            "Bfp_Dauer",
+            "Bfp_TimeAuto"
         ]
     },
     "Bfp_Breite": {
@@ -91,6 +92,28 @@
         "Default": "08",
         "Input Text": "Zeitraum in Stunden",
         "Hint": "Zeitraum in Stunden, der im Bildfahrplans angezeigt werden sollen"
+    },
+    "Bfp_TimeAuto": {
+        "ParName": "Bfp_TimeAuto",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "Bfp_TimeAuto",
+        "Min": "0",
+        "Max": "255",
+        "Default": "X",
+        "Input Text": "Zeitraum automatisch bestimmen",
+        "Hint": "Zeitraum automatisch aus dem Zugfahrplan bestimmen, damit der gesamte Fahrplan angezeigt wird"
+    },
+    "Bfp_Showalltrains": {
+        "ParName": "Bfp_Showalltrains",
+        "Cnt": "1",
+        "Type": "Checkbutton",
+        "ConfigName": "Bfp_Showalltrains",
+        "Min": "0",
+        "Max": "255",
+        "Default": "",
+        "Input Text": "Zeige alle Züge in der Zugliste",
+        "Hint": "Normalerweise wird immer nur ein Zug pro Streckenvariante angezeigt. Mit dieser Option kann man erreichen, daß alle Züge angezeigt werden."
     },
     "Bfp_trainfilename": {
         "ParName": "Bfp_trainfilename",
