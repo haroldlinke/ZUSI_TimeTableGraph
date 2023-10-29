@@ -34,6 +34,8 @@
 
 import tkinter as tk
 from tkinter import ttk,messagebox
+from tk_html_widgets import HTMLLabel
+import urllib
 #from timetablepages.configfile import ConfigFile
 from locale import getdefaultlocale
 import os
@@ -46,12 +48,38 @@ LARGE_FONT= ("Verdana", 12)
 VERY_LARGE_FONT = ("Verdana", 14)
 SMALL_FONT= ("Verdana", 8)
 
+def check_for_existing_messages(mode=""):
+    try:
+        currURL = "http://www.hlinke.de/files/ZUSIBildFahrplanMessage.html"
+        # Assign the open file to a variable
+        webFile = urllib.request.urlopen(currURL)
+        html_message = str(webFile.read())
+    except:
+        html_message = ""
+    
+    if mode !="":
+        # check if there is a mode specific message available
+        try:
+            currURL = "http://www.hlinke.de/files/ZUSIBildFahrplanMessage_"+ mode+".html"
+            # Assign the open file to a variable
+            webFile = urllib.request.urlopen(currURL)
+            # Read the file contents to a variable
+            html_message = str(webFile.read())
+        except:
+            pass
+        
+    html_message = html_message[2:len(html_message)-1]
+    return html_message
+
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         self.tabClassName = "StartPage"
         logging.debug("Init Page %s ",self.tabClassName)
         self.controller = controller
         macrodata = self.controller.MacroDef.data.get(self.tabClassName,{})
+        if macrodata=={}:
+            int_tabname = self.tabClassName+"_"+self.controller.arg_mode
+            macrodata = self.controller.MacroDef.data.get(int_tabname,{})
         self.tabname = macrodata.get("MTabName",self.tabClassName)
         self.title = macrodata.get("Title",self.tabClassName)
         tk.Frame.__init__(self, parent)
@@ -63,8 +91,11 @@ class StartPage(tk.Frame):
         title_frame = ttk.Frame(self.main_frame, relief="ridge", borderwidth=1)
         label = ttk.Label(title_frame, text=self.title, font=LARGE_FONT)
         label.pack(padx=5,pady=(5,5))
-        #config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=4,startrow=1,style="CONFIGPage")        
+        #config_frame = self.controller.create_macroparam_frame(self.main_frame,self.tabClassName, maxcolumns=4,startrow=1,style="CONFIGPage")
+
         text_frame = ttk.Frame(self.main_frame,relief="ridge", borderwidth=2)
+        html_message=check_for_existing_messages(mode=controller.arg_mode_orig)
+        html_label = HTMLLabel(text_frame,html=html_message,height=4,width=200,borderwidth=2,relief="ridge",)
         #text = macrodata.get("Ausführliche Beschreibung","")
         photo_filename = macrodata.get("Photo","")
         if photo_filename != "":
@@ -123,13 +154,10 @@ class StartPage(tk.Frame):
         text_frame.grid(row=2,column=0,padx=10, pady=0,sticky="nesw")
         text_frame.grid_columnconfigure(1,weight=1)
         text_frame.grid_rowconfigure(1,weight=1)
-        # place widgets in text_frame => text1,text:widget, text_scroll
-        #text1.pack(side=tk.LEFT,expand=0)
-        #text_widget.pack(side=tk.LEFT,fill=tk.BOTH,padx=10,pady=(10,0))
-        #text_scroll.pack(side=tk.LEFT,fill=tk.Y)
-        text1.grid(row=0,column=0,sticky="nesw")
-        text_widget.grid(row=1,column=0,sticky=("nesw"),padx=10,pady=10)
-        text_scroll.grid(row=1,column=1,sticky=("ns"))                
+        html_label.grid(row=0, column=0, pady=0, padx=10,sticky=("nesw"))
+        text1.grid(row=1,column=0,sticky="nesw")
+        text_widget.grid(row=2,column=0,sticky=("nesw"),padx=10,pady=10)
+        text_scroll.grid(row=2,column=1,sticky=("ns"))                
        
     def cancel(self,_event=None):
         pass

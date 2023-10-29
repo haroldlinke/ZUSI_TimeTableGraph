@@ -74,8 +74,11 @@ import requests
 # ------------------------------
 
 tabClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,SpecialConfigurationPage,TCPConfigPage,TrainNamePosConfigPage)
+tabNoExpertClassList = ( StartPage,TimeTablePage,StationsConfigurationPage,ConfigurationPage,TCPConfigPage)
 
-configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage","TCPConfigPage","TrainNamePosConfigPage")
+#configpage_list = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage","TCPConfigPage","TrainNamePosConfigPage")
+configpage_list_all = ("StationsConfigurationPage","ConfigurationPage","SpecialConfigurationPage","TCPConfigPage","TrainNamePosConfigPage")
+configpage_list_easy = ("StationsConfigurationPage","ConfigurationPage","TCPConfigPage")
 
 defaultStartPage = "StartPage"
 
@@ -180,19 +183,29 @@ class TimeTableGraphMain(tk.Tk):
     # ----------------------------------------------------------------
     def __init__(self, mainfiledir, logfilename, execfile_pathname, *args, **kwargs):
         self.exefile_dir = mainfiledir # directory of the .exe file
-        self.userfile_dir = get_userfiledir(mainfiledir)
+        self.userfile_dir = get_ZUSI_userfiledir(mainfiledir)
         self.execfile_pathname = execfile_pathname
         self.logfilename = logfilename
         self.localfile_dir = os.path.dirname(os.path.realpath(__file__)) # location of timetablepages directory
         self.start_ok = True
         self.usetrain_starttime = False
+        self.xml_filename_updated_flag = False
+        self.arg_mode = COMMAND_LINE_ARG_DICT.get("arg_mode","FPL")
+        self.arg_mode_orig = COMMAND_LINE_ARG_DICT.get("arg_mode_orig","")
         if not self.readConfigData():
             self.start_ok = False
             return
         self.zusi_official_path = self.getConfigData("Bfp_ZUSI_Dir_official")
+        self.zusi_private_path = self.getConfigData("Bfp_ZUSI_Dir_privat")
+        
+        if self.arg_mode!="FPL":
+            self.configpage_list = configpage_list_easy
+        else:
+            self.configpage_list = configpage_list_all
+
         self.arg_fpn = COMMAND_LINE_ARG_DICT.get("arg_fpn","")
         if self.arg_fpn.startswith("_"):
-            self.arg_fpn = self.arg_fpn[1:]        
+            self.arg_fpn = self.arg_fpn[1:]
         if self.arg_fpn.startswith("fpn="):
             self.arg_fpn = self.arg_fpn[4:]
             #self.arg_fpn = self.arg_fpn.replace("\\\\","\\")
@@ -212,15 +225,16 @@ class TimeTableGraphMain(tk.Tk):
             self.arg_zn = self.arg_zn[4:]
                         
         if self.arg_fpn!="":
-            self.arg_fpn = self.zusi_official_path + "\\" + self.arg_fpn
+            self.arg_fpn = self.determine_zusi_path_for_file(self.arg_fpn) # self.zusi_official_path + "\\" + self.arg_fpn
             self.setConfigData("Bfp_filename", self.arg_fpn)
             if self.arg_trn != "":
-                self.arg_trn = self.zusi_official_path + "\\" + self.arg_trn
+                self.arg_trn = self.determine_zusi_path_for_file(self.arg_trn)  #self.zusi_official_path + "\\" + self.arg_trn
                 timetable_filename = self.arg_trn[:-3]+"timetable.xml"
                 self.setConfigData("Bfp_trainfilename", timetable_filename)
                 COMMAND_LINE_ARG_DICT["startpagename"] = "TimeTablePage"
                 self.usetrain_starttime = True
-        
+                self.xml_filename_updated_flag = True
+
         self.macroparams_value = {}
         self.macroparams_var = {"dummy": {}}
         self.persistent_param_dict = {}
@@ -235,6 +249,7 @@ class TimeTableGraphMain(tk.Tk):
         self.simu_timetable_dict = {}
         
         self.allow_TRN_files = self.getConfigData("SCP_AllowTRN",default=False)
+        self.showalltrains = self.getConfigData("Bfp_Showalltrains",default=False)
         
         self.fontlabel = self.get_font("FontLabel")
         self.fontspinbox = self.get_font("FontSpinbox")
@@ -311,35 +326,38 @@ class TimeTableGraphMain(tk.Tk):
         filemenu1.add_separator()
         filemenu1.add_command(label="Beenden und Daten speichern", command=self.ExitProg_with_save)
         filemenu1.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
-        filemenu2 = tk.Menu(menu)
-        menu.add_cascade(label="Bildfahrplan", menu=filemenu2)
-        filemenu2.add_command(label="Speichern als EPS", command=self.Save_Bfp_as_EPS)
-        filemenu2.add_command(label="Speichern als PDF", command=self.Save_Bfp_as_PDF)
-        filemenu2.add_command(label="Speichern als Bild", command=self.Save_Bfp_as_Image)
-        filemenu2.add_separator()
-        filemenu2.add_command(label="Refresh Bildfahrplan (F5)", command=self.refresh_Bfp)
-        #filemenu2.add_checkbutton(label="Bearbeiten", onvalue=1, offvalue=0, variable=self.editFlag)
-        filemenu2.add_separator()
-        filemenu2.add_command(label="Alle Änderungen in .trn speichern", command=self.export_all_changes_to_trnfiles)
+        if self.arg_mode=="FPL":
+            filemenu2 = tk.Menu(menu)
+            menu.add_cascade(label="Bildfahrplan", menu=filemenu2)
+            filemenu2.add_command(label="Speichern als EPS", command=self.Save_Bfp_as_EPS)
+            filemenu2.add_command(label="Speichern als PDF", command=self.Save_Bfp_as_PDF)
+            filemenu2.add_command(label="Speichern als Bild", command=self.Save_Bfp_as_Image)
+            filemenu2.add_separator()
+            filemenu2.add_command(label="Refresh Bildfahrplan (F5)", command=self.refresh_Bfp)
+            #filemenu2.add_checkbutton(label="Bearbeiten", onvalue=1, offvalue=0, variable=self.editFlag)
+            filemenu2.add_separator()
+            filemenu2.add_command(label="Alle Änderungen in .trn speichern", command=self.export_all_changes_to_trnfiles)
         filemenu3 = tk.Menu(menu)
         menu.add_cascade(label="ZUSI Server", menu=filemenu3)
         filemenu3.add_command(label="Verbinden", command=self.Connect_ZUSI_server)
         filemenu3.add_command(label="Trennen", command=self.Disconnect_ZUSI_server)
         filemenu4 = tk.Menu(menu)
-        menu.add_cascade(label="Fahrtenschreiber", menu=filemenu4)
-        filemenu4.add_command(label="importieren", command=self.import_Fahrtenschreiber)
-        #filemenu.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
-        #colormenu = tk.Menu(menu)
-        #menu.add_cascade(label="Farbpalette", menu=colormenu)
-        #colormenu.add_command(label="letzte Änderung Rückgängig machen [CTRL-Z]", command=self.MenuUndo)
-        #filemenu.add_command(label="Einstellungen von Datei lesen", command=self.OpenConfigFile)
+        if self.arg_mode=="FPL":
+            menu.add_cascade(label="Fahrtenschreiber", menu=filemenu4)
+            filemenu4.add_command(label="importieren", command=self.import_Fahrtenschreiber)
+            #filemenu.add_command(label="Beenden ohne Daten zu speichern", command=self.ExitProg)
+            #colormenu = tk.Menu(menu)
+            #menu.add_cascade(label="Farbpalette", menu=colormenu)
+            #colormenu.add_command(label="letzte Änderung Rückgängig machen [CTRL-Z]", command=self.MenuUndo)
+            #filemenu.add_command(label="Einstellungen von Datei lesen", command=self.OpenConfigFile)
         #filemenu.add_command(label="Einstellungen speichern als ...", command=self.SaveConfigFileas)
         helpmenu = tk.Menu(menu)
         menu.add_cascade(label="Hilfe", menu=helpmenu)
         helpmenu.add_command(label="Hilfe öffnen", command=self.OpenHelp)
         helpmenu.add_command(label="Logfile öffnen", command=self.OpenLogFile)
         #helpmenu.add_command(label="Update TimetableGraph Programm", command=self.Updateprogram)
-        helpmenu.add_command(label="XML_Error-Logfile öffnen", command=self.OpenXMLErrorLogFile)
+        if self.arg_mode=="FPL":
+            helpmenu.add_command(label="XML_Error-Logfile öffnen", command=self.OpenXMLErrorLogFile)
         helpmenu.add_command(label="Über...", command=self.About)
 
         # --- define container for tabs
@@ -380,6 +398,11 @@ class TimeTableGraphMain(tk.Tk):
 
         self.tabdict = dict()
         
+        if self.arg_mode!="FPL":
+            tablist = tabNoExpertClassList
+        else:
+            tablist = tabClassList
+            
         for tabClass in tabClassList:
             logging.debug("TabClass: %s ",repr(tabClass))
             frame = tabClass(self.container,self)
@@ -387,6 +410,8 @@ class TimeTableGraphMain(tk.Tk):
             logging.debug("Create Tab: %s",tabClassName)
             self.tabdict[tabClassName] = frame
             self.container.add(frame, text=frame.tabname)
+            if not tabClass in tablist:
+                self.container.hide(frame)            
         
         self.container.bind("<<NotebookTabChanged>>",self.TabChanged)
         
@@ -402,6 +427,9 @@ class TimeTableGraphMain(tk.Tk):
         
         self.focus_set()
         #self.wait_visibility()
+        
+        if self.xml_filename_updated_flag:
+            self.xml_filename_updated()
 
         self.lift()
         self.grab_set()
@@ -409,6 +437,16 @@ class TimeTableGraphMain(tk.Tk):
         self.edit_active = False
         self.popup_active = False
         self.timetable_activ = False
+        
+    def xml_filename_updated(self, *args):
+        #self.update_tree()
+        self.get_stationlist_for_station_chooser()
+        xml_filename = self.get_macroparam_val("StationsConfigurationPage","Bfp_trainfilename")
+        self.xml_filename = xml_filename
+        if not os.path.isfile(xml_filename):
+            self.set_statusmessage("ZUSI Buchfahrplan <"+ xml_filename + "> nicht gefunden. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> richtig einstellen")
+            return              
+        pass    
         
     def set_statusmessage(self,status_text,fg="black"):
         #logging.debug("set_statusmessage: %s",status_text)
@@ -477,7 +515,7 @@ class TimeTableGraphMain(tk.Tk):
             
 
     def About(self):
-        tk.messagebox.showinfo("ZUSI Timetablegraph by Harold Linke")
+        tk.messagebox.showinfo("Über...","ZUSI Timetablegraph\nby Harold Linke\nVersion: "+PROG_VERSION)
 
     def OpenHelp(self):
         self.call_helppage()
@@ -544,6 +582,29 @@ class TimeTableGraphMain(tk.Tk):
             errors.extend((src, dst, str(why)))
         if errors:
             raise Error(errors)
+        
+    def determine_zusi_path_for_file(self,filename):
+        # first check for file in ZUSI private Path
+        zusi_private_path = self.getConfigData("Bfp_ZUSI_Dir_privat")
+        if zusi_private_path==None:
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\\WOW6432Node\\Zusi3", 0, winreg.KEY_READ)#
+            # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
+            zusi_private_path = winreg.QueryValueEx(key, "DatenverzeichnisOffiziell")[0]
+        if zusi_private_path!="":
+            file_and_path_pr = os.path.join(zusi_private_path,filename)
+            if os.path.isfile(file_and_path_pr):
+                return file_and_path_pr
+        # check in official ZUSI directory
+        zusi_official_path = self.getConfigData("Bfp_ZUSI_Dir_official")
+        if zusi_official_path==None:
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\\WOW6432Node\\Zusi3", 0, winreg.KEY_READ)#
+            # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
+            zusi_official_path = winreg.QueryValueEx(key, "Datenverzeichnis")[0]            
+        if zusi_official_path=="":
+            file_and_path_of = os.path.join(zusi_official_path,filename)
+            if os.path.isfile(file_and_path_of):
+                return file_and_path_of
+        return filename
 
     def Updateprogram(self):
         
@@ -642,7 +703,7 @@ class TimeTableGraphMain(tk.Tk):
         if filepathname:
             #filepath,filename=os.path.split(filepathname)
             self.ConfigData.readConfigData(filepathname)
-            for confpage in configpage_list:
+            for confpage in self.configpage_list:
                 self.update_variables_with_config_data(confpage)
             self.get_stationlist_for_station_chooser()
             self.SaveConfigData()
@@ -658,7 +719,7 @@ class TimeTableGraphMain(tk.Tk):
         if filepathname:
             #filepath,filename=os.path.split(filepathname)
             self.ConfigData.readConfigData(filepathname)
-            for confpage in configpage_list:
+            for confpage in self.configpage_list:
                 self.update_variables_with_config_data(confpage)
             self.get_stationlist_for_station_chooser()
             self.SaveConfigData()    
@@ -779,9 +840,12 @@ class TimeTableGraphMain(tk.Tk):
 
     def call_helppage(self,event=None):
         macrodata = self.MacroDef.data.get("StartPage",{})
+        if macrodata=={}:
+            int_tabname = "StartPage_"+self.arg_mode
+            macrodata = self.MacroDef.data.get(int_tabname,{})        
         helppageurl = macrodata.get("HelpPageURL","")
         if helppageurl == "":
-            tk.messagebox.showinfo("ZUSI Timetablegraph by Harold Linke\nHelp not available yet")
+            tk.messagebox.showinfo("Hilfe","ZUSI Timetablegraph \nby Harold Linke\nHelp not available yet")
         else:
             webbrowser.open_new_tab(helppageurl)
 
@@ -810,12 +874,22 @@ class TimeTableGraphMain(tk.Tk):
         self.set_macroparam_val(mp_macro, configdatakey, value)        
             
     def readConfigData(self):
-        logging.debug("readConfigData: read default config %s %s",self.exefile_dir, DEFAULT_CONFIG_FILENAME)
+        
         # first read the default config
-        self.DEFAULT_CONFIG = ConfigFile(DEFAULT_CONFIG, DEFAULT_CONFIG_FILENAME,filedir=self.exefile_dir)
+        if self.arg_mode == "FPL":
+            default_config_filename = DEFAULT_CONFIG_FILENAME
+        else:
+            default_config_filename = DEFAULT_CONFIG_FILENAME[:-5] + "_"+self.arg_mode + ".json"
+        logging.debug("readConfigData: read default config %s %s",self.exefile_dir, default_config_filename)
+        self.DEFAULT_CONFIG = ConfigFile(DEFAULT_CONFIG, default_config_filename,filedir=self.exefile_dir)
         # then read the user config
-        logging.debug("readConfigData: read user config %s %s",self.userfile_dir, CONFIG_FILENAME, )
-        self.ConfigData = ConfigFile(self.DEFAULT_CONFIG.data, CONFIG_FILENAME,filedir=self.userfile_dir)
+        
+        if self.arg_mode == "FPL":
+            config_filename = CONFIG_FILENAME
+        else:
+            config_filename = CONFIG_FILENAME[:-5] + "_"+self.arg_mode + ".json"        
+        logging.debug("readConfigData: read user config %s %s",self.userfile_dir, config_filename, )
+        self.ConfigData = ConfigFile(self.DEFAULT_CONFIG.data, config_filename,filedir=self.userfile_dir)
         self.ConfigData.data.update(COMMAND_LINE_ARG_DICT) # overwrite configdata mit commandline args
         logging.debug("ReadConfig: %s",repr(self.ConfigData.data))
         try:
@@ -948,7 +1022,10 @@ class TimeTableGraphMain(tk.Tk):
             param_configname = paramconfig_dict.get("ConfigName",var.key)
             valuedict[param_configname] = value        
         elif param_type in ["Checkbutton"]:
-            value = var.get()
+            try:
+                value = var.get()
+            except:
+                value=0
             param_configname = paramconfig_dict.get("ConfigName",var.key)
             if value==0:
                 valuedict[param_configname] = False
@@ -1503,6 +1580,9 @@ class TimeTableGraphMain(tk.Tk):
         self.macroparam_frame_dict[macro] = macroparam_frame
     
         macrodata = self.MacroDef.data.get(macro,{})
+        if macrodata=={}:
+            int_tabname = macro+"_"+self.arg_mode
+            macrodata = self.MacroDef.data.get(int_tabname,{})        
         Macrotitle = macro
         
         Macrolongdescription = macrodata.get("Ausführliche Beschreibung","")
@@ -1726,7 +1806,7 @@ class TimeTableGraphMain(tk.Tk):
             self.set_configDataChanged(value=False)
             return True
         config_changed = False
-        for configpagename in configpage_list:
+        for configpagename in self.configpage_list:
             configpageframe=self.getFramebyName(configpagename)
             if configpageframe.check_if_config_data_changed():
                 config_changed = True
@@ -1735,6 +1815,8 @@ class TimeTableGraphMain(tk.Tk):
     
     def update_variables_with_config_data(self,tabClassName):
         macrodata = self.MacroDef.data.get(tabClassName,{})
+        if macrodata == {}:
+            macrodata = self.MacroDef.data.get(tabClassName+"_"+self.arg_mode,{})
         macroparams = macrodata.get("Params",[])
         for paramkey in macroparams:
             paramconfig_dict = self.MacroParamDef.data.get(paramkey,{})
@@ -1791,6 +1873,43 @@ class TimeTableGraphMain(tk.Tk):
         return shortCutDict["Key"].get(action,None)
     
 ############################################################################################################    
+Update_Version = ""
+
+def check_for_existing_updates():
+    currURL = "http://www.hlinke.de/files/ZUSIBildFahrplanVersion.htm"
+    # Assign the open file to a variable
+    webFile = urllib.request.urlopen(currURL)
+    
+    # Read the file contents to a variable
+    curr_version = webFile.read()
+    
+    if COMMAND_LINE_ARG_DICT["arg_mode"]!="":
+        # check if there is a mode specific update available
+        try:
+            currURL = "http://www.hlinke.de/files/ZUSIBildFahrplanVersion_"+COMMAND_LINE_ARG_DICT["arg_mode"]+".txt"
+            # Assign the open file to a variable
+            webFile = urllib.request.urlopen(currURL)
+            
+            # Read the file contents to a variable
+            version_str = webFile.read()
+            
+            search_string = "Bildfahrplan Version:"
+            found_idx = version_str.find(search_string)
+            if found_idx > 0:
+                found_idx += len(search_string)
+                curr_version = version_str[found_idx:found_idx+5]
+        except:
+            pass
+    
+    if curr_version != PROG_VERSION:
+        Update_Version = curr_version
+    else:
+        Update_Version = ""
+        
+    if Update_Version !="":
+        logging.info("Updateversion found:"+Update_Version)
+
+
 
 def img_resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -1800,6 +1919,36 @@ def img_resource_path(relative_path):
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
+
+def ZUSI_write_ext_menuval_to_Regkey(keyVal,EntryIdx=0,BezeichnerSprache="Deutsch",Bezeichnertext="",Vatermenu="",MenuIndex=5,Datei="",Parameter=""):
+    
+    try:
+        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+        logging.info("create_ZUSI_menu_entry key %s found",keyVal)
+    except:
+        logging.info("create_ZUSI_menu_entry key %s NOT found",keyVal)
+        try:
+            key = winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, keyVal,0,(winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
+            logging.info("create_ZUSI_menu_entry key %s created",keyVal)
+        except Exception as e:
+            logging.info("Error in create_ZUSI_menu_entry %s",e)
+            logging.exception("create_ZUSI_menu_entry")
+            return
+    
+    try:
+        winreg.SetValueEx(key, "BezeichnerSprache"+str(EntryIdx), 0, winreg.REG_SZ, BezeichnerSprache)
+        winreg.SetValueEx(key, "BezeichnerText"+str(EntryIdx), 0, winreg.REG_SZ, Bezeichnertext)
+        winreg.SetValueEx(key, "Vatermenu", 0, winreg.REG_SZ, Vatermenu)
+        winreg.SetValueEx(key, "MenuIndex", 0, winreg.REG_DWORD, MenuIndex)
+        winreg.SetValueEx(key, "Datei", 0, winreg.REG_SZ, Datei)
+        winreg.SetValueEx(key, "Parameter", 0, winreg.REG_SZ, Parameter)
+        logging.info("create_ZUSI_menu_entry added key data for Fahrplanerstellung %s",keyVal)
+    except Exception as e:
+        logging.info("Error in create_ZUSI_menu_entry_2 %s",e)
+        logging.exception("create_ZUSI_menu_entry_2")
+    winreg.CloseKey(key)
+    winreg.EnableReflectionKey(winreg.HKEY_CURRENT_USER)    
+
 
 def create_ZUSI_menu_entry(exec_filepathname):
     if no_winreg: # no windows
@@ -1831,55 +1980,61 @@ def create_ZUSI_menu_entry(exec_filepathname):
         winreg.CloseKey(key)
         logging.info("create_ZUSI_menu_entry no ZUSI entry found")
         return
+
     zusi_key_ok = True
     if zusi_steam:
-        keyVal = 'Software\\Zusi3\\Fahrsimsteam\\Einstellungen\\MenuBildfahrplan'
+        keyVal0 = 'Software\\Zusi3\\Fahrsimsteam\\Einstellungen\\MenuBildfahrplanFPL'
+        keyVal1 = 'Software\\Zusi3\\Fahrsimsteam\\Einstellungen\\MenuBildfahrplanSIMU'
     else:
-        keyVal = 'Software\\Zusi3\\Fahrsim\\Einstellungen\\MenuBildfahrplan'
-    try:
-        key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, keyVal, 0, (winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
-        logging.info("create_ZUSI_menu_entry key %s found",keyVal)
-    except:
-        logging.info("create_ZUSI_menu_entry key %s NOT found",keyVal)
-        try:
-            key = winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, keyVal,0,(winreg.KEY_WOW64_64KEY | winreg.KEY_ALL_ACCESS))
-            logging.info("create_ZUSI_menu_entry key %s created",keyVal)
-        except Exception as e:
-            logging.info("Error in create_ZUSI_menu_entry %s",e)
-            logging.exception("create_ZUSI_menu_entry")
-            zusi_key_ok = False
-            
+        keyVal0 = 'Software\\Zusi3\\Fahrsim\\Einstellungen\\MenuBildfahrplanFPL'
+        keyVal1 = 'Software\\Zusi3\\Fahrsim\\Einstellungen\\MenuBildfahrplanSIMU'
+       
     if zusi_key_ok==True:
-        try:
-            winreg.SetValueEx(key, "BezeichnerSprache0", 0, winreg.REG_SZ, "Deutsch")
-            winreg.SetValueEx(key, "BezeichnerText0", 0, winreg.REG_SZ, "&Bildfahrplan")
-            winreg.SetValueEx(key, "Vatermenu", 0, winreg.REG_SZ, "SpTBXSubmenuItemFahrplanerstellung")
-            winreg.SetValueEx(key, "MenuIndex", 0, winreg.REG_DWORD, 5)
-            winreg.SetValueEx(key, "Datei", 0, winreg.REG_SZ, exec_filepathname+"/TimetableGraphProject.exe")
-            winreg.SetValueEx(key, "Parameter", 0, winreg.REG_SZ, "-fpn ""_fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@""")
-            logging.info("create_ZUSI_menu_entry added key data %s",keyVal)
-        except Exception as e:
-            logging.info("Error in create_ZUSI_menu_entry_2 %s",e)
-            logging.exception("create_ZUSI_menu_entry_2")    
-        winreg.CloseKey(key)
-        winreg.EnableReflectionKey(winreg.HKEY_CURRENT_USER)
+        ZUSI_write_ext_menuval_to_Regkey(keyVal0, EntryIdx=0,Bezeichnertext="&Bildfahrplan",             Vatermenu="SpTBXSubmenuItemFahrplanerstellung", MenuIndex=5, Datei=exec_filepathname, Parameter="-fpn ""_@@fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@"" -mode FPL")
+        ZUSI_write_ext_menuval_to_Regkey(keyVal1, EntryIdx=1,Bezeichnertext="&Zugstart via Bildfahrplan", Vatermenu="SpTBXSubmenuItemSimulation"        , MenuIndex=3, Datei=exec_filepathname, Parameter="-fpn ""_@@fpn@@"" -trn ""_@@trn@@"" -zn ""_@@#@@"" -mode SIMU")
 
-def get_userfiledir(default_filedir):
+        
+def get_windows_userdir():
+    import ctypes.wintypes
+    CSIDL_PERSONAL= 5       # My Documents
+    SHGFP_TYPE_CURRENT= 0   # Want current, not default value
+    buf= ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
+    ctypes.windll.shell32.SHGetFolderPathW(0, CSIDL_PERSONAL, 0, SHGFP_TYPE_CURRENT, buf)
+    return buf.value
+    
+
+def get_ZUSI_userfiledir(default_filedir):
     user_dir = ""
     try:
-        key_str = "HKEY_LOCAL_MACHINE:SOFTWARE\\WOW6432Node\\Zusi3:Datenverzeichnis"
+        key_str = "HKEY_LOCAL_MACHINE:SOFTWARE\\Zusi3:DatenverzeichnisSteam"
         key_list = key_str.split(":")
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ)#
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_32KEY)#
         # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
         user_dir = winreg.QueryValueEx(key, key_list[2])[0]
-        if user_dir == "":
-            user_dir = default_filedir
-        else:
-            user_dir = user_dir+"_Tools\\ZusiBildfahrplan"
-            os.makedirs(user_dir,exist_ok=True)
     except:
+        pass
+    if user_dir=="":
+        try:
+            key_str = "HKEY_LOCAL_MACHINE:SOFTWARE\\Zusi3:Datenverzeichnis"
+            key_list = key_str.split(":")
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_32KEY)#
+            # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
+            user_dir = winreg.QueryValueEx(key, key_list[2])[0]
+        except:
+            pass
+    user_dir=""
+    if user_dir =="":
+        try:
+            user_dir = get_windows_userdir()
+            user_dir = user_dir + "\\Zusi3\\_ZusiData\\"
+        except:
+            user_dir=""
+            
+    if user_dir == "":
         user_dir = default_filedir
-        
+    else:
+        user_dir = user_dir+"_Tools\\ZusiBildfahrplan"
+        os.makedirs(user_dir,exist_ok=True)        
     return user_dir
 
 #-------------------------------------------
@@ -1903,13 +2058,14 @@ def main(mainfiledir,execfile_pathname):
     parser.add_argument('-fpn',help="Fahrplanfilename")
     parser.add_argument('-trn',help="TRNfilename")
     parser.add_argument('-zn',help="Trainnumber")
+    parser.add_argument('-mode',choices=["SIMU","FPL","INST"],help="Mode timetablegraph is using: SIMU, FPL or INST")
     args = parser.parse_args()
     format = "%(asctime)s: %(message)s"
     filedir = os.path.dirname(os.path.realpath(__file__))
     if args.logfile:
         logfilename1=args.logfile
     else:
-        bildfahrplan_user_dir=get_userfiledir(mainfiledir)
+        bildfahrplan_user_dir=get_ZUSI_userfiledir(mainfiledir)
         logfilename1=os.path.join(bildfahrplan_user_dir,LOG_FILENAME)
     if logfilename1 == "stdout":
         logfilename=""
@@ -1948,27 +2104,42 @@ def main(mainfiledir,execfile_pathname):
     if args.trn:
         COMMAND_LINE_ARG_DICT["arg_trn"]=args.trn
     else:
-        COMMAND_LINE_ARG_DICT["arg_trn"]=""        
+        COMMAND_LINE_ARG_DICT["arg_trn"]=""
 
     if args.zn:
         COMMAND_LINE_ARG_DICT["arg_zn"]=args.zn
     else:
         COMMAND_LINE_ARG_DICT["arg_zn"]=""
+        
+    if args.mode:
+        COMMAND_LINE_ARG_DICT["arg_mode"]=args.mode
+        COMMAND_LINE_ARG_DICT["arg_mode_orig"]=args.mode
+    else:
+        COMMAND_LINE_ARG_DICT["arg_mode"]="FPL"
+        COMMAND_LINE_ARG_DICT["arg_mode_orig"]=""
     
-    print (repr(COMMAND_LINE_ARG_DICT))
+    #print (repr(COMMAND_LINE_ARG_DICT))
     logging.info("ARGS:" + repr(args))
     logging.info("Commandlineargs:" + repr(COMMAND_LINE_ARG_DICT))
     
     try:
-        create_ZUSI_menu_entry(execfile_pathname)
-        app = TimeTableGraphMain(mainfiledir,logfilename, execfile_pathname)
-        if app.start_ok:
-            tkversion = app.tk.call("info", "patchlevel")
-            logging.info("TK-Version: %s",tkversion)
-            app.setroot(app)
-            app.protocol("WM_DELETE_WINDOW", app.cancel)
-            app.startup_system()
-            app.mainloop()
+        check_for_existing_updates()
+    except:
+        pass
+    
+    try:
+        if args.mode == "INST":
+            create_ZUSI_menu_entry(execfile_pathname)
+            logging.info("Mode:Inst - only registry entries for ZUSI added")
+        else:
+            app = TimeTableGraphMain(mainfiledir,logfilename, execfile_pathname)
+            if app.start_ok:
+                tkversion = app.tk.call("info", "patchlevel")
+                logging.info("TK-Version: %s",tkversion)
+                app.setroot(app)
+                app.protocol("WM_DELETE_WINDOW", app.cancel)
+                app.startup_system()
+                app.mainloop()
     except Exception as e:
         logging.info("Error in Mainfile %s",e)
         logging.exception("Mainfile")

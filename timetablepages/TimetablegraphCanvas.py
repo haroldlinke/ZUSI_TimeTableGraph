@@ -229,6 +229,7 @@ class TimeTableGraphCommon():
         self.schedule_stations_list = []
         self.schedule_trains_dict = self.schedule_dict.get("Trains",{}) 
         self.FPL_starttime = -1
+        self.FPL_endtime = -1
         self.schedule_trainIdx_write_next = 0
         self.canvas_dimHeight = height
         self.canvas_dimWidth  = width
@@ -237,6 +238,7 @@ class TimeTableGraphCommon():
         self.stdFont = font.Font(family="SANS_SERIF", size=10)
         self.smallFont = font.Font(family="SANS_SERIF", size=8)
         self.controller.allow_TRN_files = self.controller.getConfigData("SCP_AllowTRN",default="")
+        self.controller.showalltrains = self.controller.getConfigData("Bfp_Showalltrains",default=False)
         self.trainLineStops = []
         # ------------ global variables ------------
         self.stationGrid = {0: 0.01 }
@@ -342,7 +344,11 @@ class TimeTableGraphCommon():
         stationName = station.get("StationName","")
         return stationName
 
-    def doPaint (self,canvas,starthour=12,duration=7):
+    def doPaint (self,canvas,starthour=12,duration=7,timeauto=False):
+        if timeauto==True:
+            starthour = self.FPL_starttime
+            duration = self.FPL_endtime-self.FPL_starttime+1
+
         if len(self.schedule_stations_dict) == 0:
             logging.debug("Error - no stations in list")
             return
@@ -1518,6 +1524,7 @@ class TimeTableGraphCommon():
     
     def enter_schedule_trainLine_starttime(self,trainidx,starttime):
         if self.controller.usetrain_starttime:
+            self.controller.usetrain_starttime=False
             if self.schedule_trains_dict[trainidx]["Starttime"] == -1:
                 self.schedule_trains_dict[trainidx]["Starttime"] = starttime
                 self.controller.setConfigData("Bfp_start",starttime)
@@ -1648,7 +1655,7 @@ class TimeTableGraphCommon():
             
             Buchfahrplan_dict = Buchfahrplan_dict[0]
             ZugNummer = Buchfahrplan_dict.get("@Nummer","")
-            
+
         Pendelzug_Flag = "_" in ZugNummer
         #if Pendelzug_Flag:
         #    print(ZugNummer,"Pendelzug")  
@@ -1731,15 +1738,21 @@ class TimeTableGraphCommon():
                 if FplAbf != "":
                     FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
                     FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
-                    if self.FPL_starttime == -1:
+                    if self.FPL_starttime == -1 or self.FPL_starttime>FplAbf_obj.hour:
                         self.FPL_starttime = FplAbf_obj.hour
-                        self.enter_schedule_trainLine_starttime(train_idx,FplAbf_obj.hour)
+                    if self.FPL_endtime<FplAbf_obj.hour:
+                        self.FPL_endtime = FplAbf_obj.hour
+                        #self.enter_schedule_trainLine_starttime(train_idx,FplAbf_obj.hour)
                 else:
                     FplAbf_min = -99999
                 FplAnk = self.get_fplZeile_entry(FplZeile_dict, "FplAnk","@Ank")
                 if FplAnk!="":
                     FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
+                    if self.FPL_starttime == -1 or self.FPL_starttime>FplAnk_obj.hour:
+                        self.FPL_starttime = FplAnk_obj.hour
+                    if self.FPL_endtime<FplAnk_obj.hour:
+                        self.FPL_endtime = FplAnk_obj.hour
                 else:
                     FplAnk_min = -99999
                 if FplAbf == "" and FplAnk=="" and FplSprung == "" and donotshowall:
@@ -1811,12 +1824,20 @@ class TimeTableGraphCommon():
                     continue # only use station with "Abf"-Entry
                 FplAbf_obj = datetime.strptime(FplAbf, '%Y-%m-%d %H:%M:%S')
                 FplAbf_min = FplAbf_obj.hour * 60 + FplAbf_obj.minute + FplAbf_obj.second/60
+                if self.FPL_starttime == -1 or self.FPL_starttime>FplAbf_obj.hour:
+                    self.FPL_starttime = FplAbf_obj.hour
+                if self.FPL_endtime<FplAbf_obj.hour:
+                    self.FPL_endtime = FplAbf_obj.hour
                 if FplAbfStartMin==0:
                     FplAbfStartMin=FplAbf_min
                 FplAnk = FplZeile_dict.get("@Ank","")
                 if FplAnk!="":
                     FplAnk_obj = datetime.strptime(FplAnk, '%Y-%m-%d %H:%M:%S')
                     FplAnk_min = FplAnk_obj.hour * 60 + FplAnk_obj.minute + FplAnk_obj.second/60
+                    if self.FPL_starttime == -1 or self.FPL_starttime>FplAnk_obj.hour:
+                        self.FPL_starttime = FplAnk_obj.hour
+                    if self.FPL_endtime<FplAnk_obj.hour:
+                        self.FPL_endtime = FplAnk_obj.hour
                 else:
                     FplAnk_min = -99999
                 FahrplanSignal = ""
@@ -2905,6 +2926,7 @@ class Timetable_main(Frame):
         self.xml_filename = self.controller.getConfigData("Bfp_trainfilename")
         self.starthour = self.controller.getConfigData("Bfp_start")
         self.duration = self.controller.getConfigData("Bfp_duration")
+        self.timeauto = self.controller.getConfigData("Bfp_TimeAuto")
         
         # xml_error_logger logger
         xml_logfilename = os.path.join(self.controller.userfile_dir, XML_ERROR_LOG_FILENAME)
@@ -3191,13 +3213,16 @@ class Timetable_main(Frame):
         if zusi_fahrplan_gruppe_dict == {}:
             self.zusi_zuglist_dict[fahrplan_gruppe] = {zugGattung+zugNummer: station_list_str}
         else:
-            station_found=False
-            for key,value in zusi_fahrplan_gruppe_dict.items():
-                if value == station_list_str:
-                    station_found=True
-                    break
-            if not station_found:
+            if self.controller.showalltrains:
                 self.zusi_zuglist_dict[fahrplan_gruppe][zugGattung+zugNummer] = station_list_str
+            else: # check if a similar train is already in fahrplan_gruppe
+                station_found=False
+                for key,value in zusi_fahrplan_gruppe_dict.items():
+                    if value == station_list_str:
+                        station_found=True
+                        break
+                if not station_found:
+                    self.zusi_zuglist_dict[fahrplan_gruppe][zugGattung+zugNummer] = station_list_str
         self.zusi_zuglist_xmlfilename_dict[zugGattung+zugNummer]=Bfpl_filepathname
         return
 
@@ -3324,7 +3349,8 @@ class Timetable_main(Frame):
         self.editflag = self.controller.getConfigData("Edit_Permission",default="") in ("Edit_allowed","Fast_Edit_allowed")
         self.fast_editflag = self.controller.getConfigData("Edit_Permission",default="") == "Fast_Edit_allowed"
         self.starthour = self.controller.getConfigData("Bfp_start")
-        self.timetable.doPaint(self.canvas,starthour=self.starthour,duration=self.duration)
+        self.timeauto = self.controller.getConfigData("Bfp_TimeAuto")
+        self.timetable.doPaint(self.canvas,starthour=self.starthour,duration=self.duration,timeauto=self.timeauto)
         if self.controller.ZUSI_monitoring_started:
             self.edit_connect_ZUSI(0)
         if self.editflag:

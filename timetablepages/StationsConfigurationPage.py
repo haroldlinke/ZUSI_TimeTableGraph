@@ -71,6 +71,7 @@ class StationsConfigurationPage(ConfigPagetemplate):
     
     def bfpl_filename_updated(self, *args):
         fpl_filename = self.controller.get_macroparam_val("StationsConfigurationPage","Bfp_filename")
+        self.controller.showalltrains = self.controller.getConfigData("Bfp_Showalltrains",default=False)
         if not os.path.isfile(fpl_filename):
             self.controller.set_statusmessage("ZUSI Fahrplan <"+ fpl_filename + "> nicht gefunden. Bitte auf der Seite <Fahrplan und Strecke-Einstellungen> richtig einstellen")
             return

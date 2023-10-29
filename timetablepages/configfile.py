@@ -71,6 +71,7 @@ class ConfigFile():
             with open(filenamepath, "r", encoding='utf8') as read_file:
                 file_not_found=False
                 jsondata = json.load(read_file)
+                logging.info ("Config File %s read",filenamepath)
         except ValueError as err:
             logging.error ("ERROR: JSON Error in Config File %s",filenamepath)
             logging.error(err)
@@ -96,5 +97,6 @@ class ConfigFile():
             filepathname = self.filepath
         with open(filepathname, 'w', encoding='utf8') as outfile:
             json.dump(self.data, outfile, ensure_ascii=False, indent=4)
+            logging.info ("Config File %s saved",filepathname)
 
         
