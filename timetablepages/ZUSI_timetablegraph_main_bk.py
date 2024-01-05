@@ -2051,7 +2051,7 @@ def main(mainfiledir,execfile_pathname):
     if sys.hexversion < 0x30700F0:
         tk.messagebox.showerror("Wrong Python Version","You need Python Version > 3.7 to run this Program")
         exit()
-    #tk.messagebox.showinfo("Parameters",sys.argv)
+    #tk.messagebox.showinfo("Parameters",repr(sys.argv))
     parser = argparse.ArgumentParser(description='Generate a Timetablegraph for ZUSI timetables',exit_on_error=False)
     parser.add_argument('--loglevel',choices=["DEBUG","INFO","WARNING","ERROR","CRITICAL"],help="Logginglevel to be printed inot the logfile")
     parser.add_argument('--logfile',help="Logfilename")
@@ -2079,7 +2079,7 @@ def main(mainfiledir,execfile_pathname):
     else:
         logfilename = os.path.join(mainfiledir, logfilename1)
     
-    if args!=None and args.loglevel:
+    if args != None and args.loglevel:
         logging_level = args.loglevel.upper()
         if logging_level=="DEBUG":
             logging.basicConfig(format=format, filename=logfilename,filemode="w",level=logging.DEBUG,datefmt="%H:%M:%S")
@@ -2098,27 +2098,27 @@ def main(mainfiledir,execfile_pathname):
     logging.debug("Localfolder %s",filedir)
     logging.debug("Callfolder %s",mainfiledir)
     
-    if args!=None and args.startpage:
+    if args != None and args.startpage:
         COMMAND_LINE_ARG_DICT["startpagename"]=args.startpage
     else:
         COMMAND_LINE_ARG_DICT["startpagename"]="StartPage"
         
-    if args!=None and args.fpn:
+    if args != None and args.fpn:
         COMMAND_LINE_ARG_DICT["arg_fpn"]=args.fpn
     else:
         COMMAND_LINE_ARG_DICT["arg_fpn"]=""
         
-    if args!=None and args.trn:
+    if args != None and args.trn:
         COMMAND_LINE_ARG_DICT["arg_trn"]=args.trn
     else:
         COMMAND_LINE_ARG_DICT["arg_trn"]=""
 
-    if args!=None and args.zn:
+    if args != None and args.zn:
         COMMAND_LINE_ARG_DICT["arg_zn"]=args.zn
     else:
         COMMAND_LINE_ARG_DICT["arg_zn"]=""
         
-    if args!=None and args.mode:
+    if args != None and args.mode:
         COMMAND_LINE_ARG_DICT["arg_mode"]=args.mode
         COMMAND_LINE_ARG_DICT["arg_mode_orig"]=args.mode
     elif args != None:
@@ -2141,7 +2141,6 @@ def main(mainfiledir,execfile_pathname):
         if COMMAND_LINE_ARG_DICT["arg_mode"] == "INST":
             create_ZUSI_menu_entry(execfile_pathname)
             logging.info("Mode:Inst - only registry entries for ZUSI added")
-            #tk.messagebox.showinfo("Parameters","Mode:Inst - only registry entries for ZUSI added:"+logfilename)
         else:
             app = TimeTableGraphMain(mainfiledir,logfilename, execfile_pathname)
             if app.start_ok:

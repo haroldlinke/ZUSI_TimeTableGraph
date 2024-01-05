@@ -145,7 +145,7 @@ class TCPConfigPage(ConfigPagetemplate):
             else:
                 self.monitor_conn_status = "Connected"
             self.monitor_zusi_life_status = False
-            self.after(3000,self.check_ZUSI_connection_alife)    
+            self.after(10000,self.check_ZUSI_connection_alife)    
     
     def set_monitor_zusi_life_status(self):
         self.monitor_zusi_life_status = True

@@ -1,0 +1,39 @@
+====== ZUSI Software ======
+
+
+===== Bildfahrplanprogramm für ZUSI =====
+
+Zusi ist eine stark vorbildorientierte, PC-basierte 3D-Eisenbahnfahrsimulation, mit dem Schwerpunkt auf dem virtuellen Fahren eines Zuges. Bei Zusi gibt es komplette Fahrplanszenarien mit u.U. mehreren 100 Zügen. Der Benutzer kann sich einen der Züge aussuchen und diesen manuell fahren oder auch vom Autopiloten fahren lassen und aus Lokführersicht zusehen. Details findet man unter [[http://www.zusi.de]].
+
+Ein Bildfahrplan ist eine grafische Darstellung eines Zugfahrplans für eine Strecke mit definierten Bahnhöfen in einem bestimmten Zeitraum.
+Das Programm ZUSI_TimeTableGraph kann ZUSI-Fahrplanszenarien als grafischen Bildfahrplan darstellen und ermöglicht die Bearbeitung der Fahrpläne und das Monitoring des aktuell simulierten Zuges im Bildfahrplan.
+
+Inhalt:
+
+  - [[de:Versionshistorie|Versionshistorie]]
+  - [[de:Ueberblick|Überblick über das Programm]]
+  - [[de:Installation|Installation]]
+  - [[de:Bildfahrplan-Seite|Bildfahrplan-Seite]]
+  - [[de:Fahrplan|Fahrplan und Strecke]]
+  - [[de:zusi_sw:Bildfahrplan:Ansicht Einstellungen|Ansicht Einstellungen]]
+  - [[de:Experten Einstellungen|Experten Einstellungen]]
+  - [[de:Bearbeitungsfunktion|Bearbeitungsfunktion]]
+  - [[de:Monitoring|Monitoring]]
+  - [[de:zusi_sw:Bildfahrplan:FahrtenschreiberImport|Fahrtenschreiber Import]]
+  - [[de:ZugNamenPosition|Konfiguration der Zugnamen Position]]
+  - [[de:Lizenz|Lizenz]]
+
+Schnellstart:
+
+Zur Erstellung eines Bildfahrplans geht man folgendermassen vor:
+
+  - Auf die Seite <Fahrplan und Strecke> wechseln
+  - Mit Hilfe des Buttons <ZUSI Fahrplandatei> einen ZUSI Fahrplan auswählen (Erweiterung .fpl).
+  - Um die Strecke und die Bahnhöfe zu definieren, wird ein ZUSI-Buchfahrplan verwendet. Dieser enthält für eine Strecke alle notwendigen Angaben.
+  - Der ZUSI-Buchfahrplan kann aus der Streckenliste ausgewählt werden oder direkt als ZUSI Buchfahrplan-Datei (Erweiterung .timeline.xml)
+  - Auf der Seite <Ansicht Einstellungen> kann die Grösse des Bildfahrplans in Pixel, die Ausrichtung (horizontal oder vertikal) und der Zeitraum angegeben werden. Ausserdem ist es möglich beliebigen Zuggattungen eine Linen Farbe zuzuordnen.
+  - Sind alle Angaben gemacht, kann auf der Seite <Bildfahrplan> der Bildfahrplan angezeigt werden. Je nach Komplexität des Fahrplans, kann die Anzeige etwas dauern.
+
+
+
+
