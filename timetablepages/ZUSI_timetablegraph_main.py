@@ -68,7 +68,7 @@ from timetablepages.ZUSI_TCP_class import ZUSI_TCP
 import zipfile
 import urllib
 import shutil
-import requests
+#import requests
 
 
 # ------------------------------
@@ -221,12 +221,13 @@ class TimeTableGraphMain(tk.Tk):
         self.arg_zn = COMMAND_LINE_ARG_DICT.get("arg_zn","")
         if self.arg_zn.startswith("_"):
             self.arg_zn = self.arg_zn[1:]
-        if self.arg_zn.startswith("#="):
+        if self.arg_zn.startswith("zn="):
             self.arg_zn = self.arg_zn[4:]
                         
         if self.arg_fpn!="":
             self.arg_fpn = self.determine_zusi_path_for_file(self.arg_fpn) # self.zusi_official_path + "\\" + self.arg_fpn
             self.setConfigData("Bfp_filename", self.arg_fpn)
+            self.setConfigData("Bfp_TimeAuto", True)
             if self.arg_trn != "":
                 self.arg_trn = self.determine_zusi_path_for_file(self.arg_trn)  #self.zusi_official_path + "\\" + self.arg_trn
                 timetable_filename = self.arg_trn[:-3]+"timetable.xml"
@@ -234,7 +235,6 @@ class TimeTableGraphMain(tk.Tk):
                 COMMAND_LINE_ARG_DICT["startpagename"] = "TimeTablePage"
                 self.usetrain_starttime = True
                 self.xml_filename_updated_flag = True
-
         self.macroparams_value = {}
         self.macroparams_var = {"dummy": {}}
         self.persistent_param_dict = {}
@@ -600,7 +600,7 @@ class TimeTableGraphMain(tk.Tk):
             key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, "SOFTWARE\\WOW6432Node\\Zusi3", 0, winreg.KEY_READ)#
             # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
             zusi_official_path = winreg.QueryValueEx(key, "Datenverzeichnis")[0]            
-        if zusi_official_path=="":
+        if zusi_official_path !="":
             file_and_path_of = os.path.join(zusi_official_path,filename)
             if os.path.isfile(file_and_path_of):
                 return file_and_path_of
@@ -2001,27 +2001,120 @@ def get_windows_userdir():
     buf= ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
     ctypes.windll.shell32.SHGetFolderPathW(0, CSIDL_PERSONAL, 0, SHGFP_TYPE_CURRENT, buf)
     return buf.value
-    
+
+""" get userfile Dir in C++
+https://github.com/zusitools/parser/commit/60b79332374be042f035feec64a4a76a2be22c06
+static inline std::string bestimmeZusiDatenpfad() {
+  std::string result;
+#ifdef _WIN32
+  HKEY key;
+  char buffer[MAX_PATH];
+  DWORD len = MAX_PATH;
+  if (((RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\Zusi3", 0, KEY_READ | KEY_WOW64_64KEY, &key) == ERROR_SUCCESS) ||
+      (RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\Zusi3", 0, KEY_READ | KEY_WOW64_32KEY, &key) == ERROR_SUCCESS)) &&
+       (RegGetValueA(key, nullptr, "DatenVerzeichnis", RRF_RT_REG_SZ, nullptr, (LPBYTE)buffer, &len) == ERROR_SUCCESS ||
+        RegGetValueA(key, nullptr, "DatenVerzeichnisSteam", RRF_RT_REG_SZ, nullptr, (LPBYTE)buffer, &len) == ERROR_SUCCESS)) {
+    result = std::string(buffer, len - 1);  // buffer ist nullterminiert
+    RegCloseKey(key);
+  }
+#else
+  const char* const datapath = getenv("ZUSI3_DATAPATH");
+  if (datapath != nullptr) {
+    result = std::string(datapath);
+  }
+#endif
+  return result;
+}
+tatic inline std::string bestimmeZusiDatenpfadOffiziell() {
+  std::string result;
+#ifdef _WIN32
+  HKEY key;
+  char buffer[MAX_PATH];
+  DWORD len = MAX_PATH;
+   if (((RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\Zusi3", 0, KEY_READ | KEY_WOW64_64KEY, &key) == ERROR_SUCCESS) ||
+      (RegOpenKeyExA(HKEY_LOCAL_MACHINE, "Software\\Zusi3", 0, KEY_READ | KEY_WOW64_32KEY, &key) == ERROR_SUCCESS)) &&
+       (RegGetValueA(key, nullptr, "DatenVerzeichnisOffiziell", RRF_RT_REG_SZ, nullptr, (LPBYTE)buffer, &len) == ERROR_SUCCESS ||
+        RegGetValueA(key, nullptr, "DatenVerzeichnisOffiziellSteam", RRF_RT_REG_SZ, nullptr, (LPBYTE)buffer, &len) == ERROR_SUCCESS)) {
+    result = std::string(buffer, len - 1);  // buffer ist nullterminiert
+    RegCloseKey(key);
+  }
+#else
+  const char* datapath = getenv("ZUSI3_DATAPATH_OFFICIAL");
+  if (datapath == nullptr) {
+    datapath = getenv("ZUSI3_DATAPATH");
+  }
+  if (datapath != nullptr) {
+    result = std::string(datapath);
+  }
+#endif
+  return result;
+}
+std::string alsOsPfad() const {
+    // Pruefe, ob in eigenem Datenverzeichnis existiert.
+    // Wenn nein -> gib Pfad in offiziellem Datenverzeichnis zurueck (unabhaengig davon, ob er existiert)
+    std::string resultEigenes = getZusiDatenpfad();
+    if constexpr (osSep != zusiSep) {
+      std::replace_copy(m_pfad.begin(), m_pfad.end(), std::back_inserter(resultEigenes), zusiSep, osSep);
+    } else {
+      resultEigenes += m_pfad;
+    }
+#ifdef _WIN32
+    WIN32_FIND_DATAW findData;
+#endif
+    if (
+#ifdef _WIN32
+      FindFirstFileW(boost::nowide::widen(resultEigenes).c_str(), &findData) != INVALID_HANDLE_VALUE
+#else
+      euidaccess(resultEigenes.c_str(), F_OK) == 0
+#endif
+      ) {
+      return resultEigenes;
+    }
+    std::string resultOffiziell = getZusiDatenpfadOffiziell();
+    if constexpr (osSep != zusiSep) {
+      std::replace_copy(m_pfad.begin(), m_pfad.end(), std::back_inserter(resultOffiziell), zusiSep, osSep);
+    } else {
+      resultOffiziell += m_pfad;
+    }
+    return resultOffiziell;
+  }
+private:
+  // Pfad relativ zum Zusi-Datenverzeichnis; Separator: Backslash; kein fuehrender Backslash
+  std::string m_pfad;
+  explicit ZusiPfad(std::string pfad) : m_pfad(std::move(pfad)) {}
+};
+
+"""
 
 def get_ZUSI_userfiledir(default_filedir):
     user_dir = ""
     try:
         key_str = "HKEY_LOCAL_MACHINE:SOFTWARE\\Zusi3:DatenverzeichnisSteam"
         key_list = key_str.split(":")
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_32KEY)#
-        # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_64KEY)#
         user_dir = winreg.QueryValueEx(key, key_list[2])[0]
     except:
         pass
+    if user_dir == "":
+        try:
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_32KEY)#
+            user_dir = winreg.QueryValueEx(key, key_list[2])[0]
+        except:
+            pass
     if user_dir=="":
         try:
             key_str = "HKEY_LOCAL_MACHINE:SOFTWARE\\Zusi3:Datenverzeichnis"
             key_list = key_str.split(":")
-            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_32KEY)#
-            # print(winreg.QueryValueEx(key, 'Datenverzeichnis')[0])
+            key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_64KEY)#
             user_dir = winreg.QueryValueEx(key, key_list[2])[0]
         except:
             pass
+        if user_dir=="":
+            try:
+                key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_list[1], 0, winreg.KEY_READ | winreg.KEY_WOW64_32KEY)#
+                user_dir = winreg.QueryValueEx(key, key_list[2])[0]
+            except:
+                pass            
     user_dir=""
     if user_dir =="":
         try:

@@ -72,6 +72,7 @@ class TCPConfigPage(ConfigPagetemplate):
             self.check_ZUSI_connection_alife()
             return True
         else:
+            self.after(5000, self.connect_to_ZUSI_server)
             return False
         
     def disconnect_from_ZUSI_server(self):
@@ -145,7 +146,7 @@ class TCPConfigPage(ConfigPagetemplate):
             else:
                 self.monitor_conn_status = "Connected"
             self.monitor_zusi_life_status = False
-            self.after(10000,self.check_ZUSI_connection_alife)    
+            self.after(20000,self.check_ZUSI_connection_alife)    
     
     def set_monitor_zusi_life_status(self):
         self.monitor_zusi_life_status = True

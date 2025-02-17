@@ -284,6 +284,7 @@ class TimeTableGraphCommon():
         self.monitor_curr_train_distance_to_first_station = 0
         self.monitor_curr_train_direction_of_travel = ""
         self.monitor_tooltiptext = ""
+        self.pendelstations = []
         
         # xml_error_logger logger
         xml_logfilename = os.path.join(self.controller.userfile_dir, XML_ERROR_LOG_FILENAME)
@@ -942,6 +943,8 @@ class TimeTableGraphCommon():
         #self.trainLineProp = self.canvas_traintype_prop_dict.get(self.trainType,self.default_trainprop)
         self.trainColor = self.trainLineProp.get("Bfp_TrainTypeColor","Black")
         self.trainLineWidth = int(self.trainLineProp.get("Bfp_TrainTypeWidth","2"))
+        if self.trainNumber == self.controller.arg_zn:
+            self.trainLineWidth *= 2
         self.TrainLabelPos = self.trainLineProp.get("Bfp_TrainTypeLabel_No","")
         self.TrainLabelSize = self.trainLineProp.get("Bfp_TrainTypeLabelSize","10")
         self.TrainLineDashed = self.trainLineProp.get("Bfp_TrainTypeLineDashed",False)
@@ -3350,6 +3353,12 @@ class Timetable_main(Frame):
         self.fast_editflag = self.controller.getConfigData("Edit_Permission",default="") == "Fast_Edit_allowed"
         self.starthour = self.controller.getConfigData("Bfp_start")
         self.timeauto = self.controller.getConfigData("Bfp_TimeAuto")
+        if self.timeauto:
+            duration = self.timetable.FPL_endtime - self.timetable.FPL_starttime
+            if self.canvas_height <= duration * 300:
+                self.canvas_height = duration * 300
+                self.canvas.config(width=self.canvas_width,height=self.canvas_height,scrollregion=(0,0,self.canvas_width,self.canvas_height))
+            
         self.timetable.doPaint(self.canvas,starthour=self.starthour,duration=self.duration,timeauto=self.timeauto)
         if self.controller.ZUSI_monitoring_started:
             self.edit_connect_ZUSI(0)
