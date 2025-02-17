@@ -404,7 +404,7 @@ class ZUSIThread(threading.Thread):
         if self._socket:
             #now keep talking with the client
             while not ThreadEvent_ZUSI.is_set() and self._socket:
-                self._socket.settimeout(1)
+                self._socket.settimeout(3)
                 try:
                     data = self._socket.recv(1024)
                 except (socket.timeout,ConnectionResetError):
